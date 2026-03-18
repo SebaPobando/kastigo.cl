@@ -205,6 +205,17 @@ button {
   font-family: 'DM Sans', sans-serif;
 }
 
+.modal-footnote {
+  font-size: 0.8rem;
+  /* Letra más pequeña */
+  color: var(--text-muted, #666);
+  /* Un gris suave */
+  font-style: italic;
+  margin-top: 1rem;
+  line-height: 1.2;
+  opacity: 0.8;
+}
+
 /* ============================================================
    5. DISCLAIMER BAR
    ============================================================ */
