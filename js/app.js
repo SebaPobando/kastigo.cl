@@ -92,7 +92,7 @@ const Theme = {
    * @returns {'light' | 'dark' | 'auto'}
    */
   getCurrent() {
-    return localStorage.getItem(this.STORAGE_KEY) || 'light';
+    return localStorage.getItem(this.STORAGE_KEY) || 'auto';
   },
 
   /**
@@ -443,85 +443,147 @@ const Modal = {
 const Compartir = {
 
   /**
-   * Intenta usar la Web Share API del navegador.
-   * Si no está disponible (ej: Chrome en desktop), copia al portapapeles.
-   * @param {number} eventoId — ID del evento a compartir
-   * @param {string} titulo   — Título para el mensaje compartido
+   * Punto de entrada principal.
+   * En móvil usa la Web Share API nativa (panel del sistema).
+   * En desktop muestra un mini panel con botones de redes sociales.
+   * @param {number} eventoId
+   * @param {string} titulo
    */
   async compartir(eventoId, titulo) {
-    // Construir el URL con el hash del ID (deep link)
     const url = `${window.location.origin}${window.location.pathname}#${eventoId}`;
     const text = `📌 ${titulo}`;
 
-    // Web Share API: disponible en móviles modernos y Safari
+    // Web Share API — disponible en móvil (Android/iOS) y Safari desktop
     if (navigator.share) {
       try {
         await navigator.share({
           title: 'Kastigo · Monitor Ciudadano',
-          text: text,
-          url: url,
+          text,
+          url,
         });
-        // Si el usuario completó el share, éxito silencioso
-        return;
+        return; // éxito — el sistema operativo manejó el panel
       } catch (err) {
-        // El usuario canceló el share — no mostrar error
-        if (err.name === 'AbortError') return;
-        // Otro error: caer al fallback
+        if (err.name === 'AbortError') return; // usuario canceló
+        // Otro error: mostrar panel manual
       }
     }
 
-    // Fallback: copiar al portapapeles (para escritorio o browsers sin Web Share)
-    await this._copyToClipboard(url);
+    // Fallback desktop: mostrar panel de botones de redes sociales
+    this._mostrarPanel(url, titulo);
   },
 
   /**
-   * Copia un texto al portapapeles usando la API moderna.
-   * Con fallback al método antiguo para navegadores viejos.
+   * Muestra un panel inline con botones de WhatsApp, X, Facebook
+   * y copiar link. Se inserta dentro del share-toast existente.
+   * @param {string} url
+   * @param {string} titulo
+   */
+  _mostrarPanel(url, titulo) {
+    const toast = document.getElementById('share-toast');
+    if (!toast) return;
+
+    // Limpiar contenido anterior
+    toast.innerHTML = '';
+    toast.classList.remove('hidden');
+    toast.classList.add('share-panel-active');
+
+    const encodedUrl = encodeURIComponent(url);
+    const encodedText = encodeURIComponent(`📌 ${titulo} — Kastigo Monitor Ciudadano`);
+
+    // Links de cada red social
+    const redes = [
+      {
+        nombre: 'WhatsApp',
+        color: '#25D366',
+        href: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
+        svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.103 1.523 5.826L0 24l6.336-1.498A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.964-1.347l-.356-.211-3.764.889.952-3.664-.232-.376A9.783 9.783 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>`
+      },
+      {
+        nombre: 'X / Twitter',
+        color: '#000000',
+        href: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+        svg: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`
+      },
+      {
+        nombre: 'Facebook',
+        color: '#1877F2',
+        href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+        svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`
+      },
+    ];
+
+    // Título del panel
+    const label = document.createElement('p');
+    label.className = 'share-panel-label';
+    label.textContent = 'Compartir en:';
+    toast.appendChild(label);
+
+    // Botones de redes
+    const btnRow = document.createElement('div');
+    btnRow.className = 'share-panel-btns';
+
+    redes.forEach(red => {
+      const a = document.createElement('a');
+      a.href = red.href;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.className = 'share-panel-btn';
+      a.style.setProperty('--red-color', red.color);
+      a.setAttribute('aria-label', `Compartir en ${red.nombre}`);
+      a.innerHTML = red.svg;
+
+      const span = document.createElement('span');
+      span.textContent = red.nombre;
+      a.appendChild(span);
+      btnRow.appendChild(a);
+    });
+
+    // Botón copiar link
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'share-panel-btn share-panel-copy';
+    copyBtn.setAttribute('aria-label', 'Copiar link');
+    copyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><span>Copiar link</span>`;
+    copyBtn.addEventListener('click', async () => {
+      await this._copyToClipboard(url);
+      const span = copyBtn.querySelector('span');
+      if (span) span.textContent = '¡Copiado!';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        if (span) span.textContent = 'Copiar link';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    });
+    btnRow.appendChild(copyBtn);
+    toast.appendChild(btnRow);
+
+    // Botón cerrar el panel
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'share-panel-close';
+    closeBtn.setAttribute('aria-label', 'Cerrar panel de compartir');
+    closeBtn.textContent = '✕';
+    closeBtn.addEventListener('click', () => {
+      toast.classList.add('hidden');
+      toast.classList.remove('share-panel-active');
+      toast.innerHTML = '';
+    });
+    toast.appendChild(closeBtn);
+  },
+
+  /**
+   * Copia texto al portapapeles (API moderna + fallback).
    * @param {string} text
    */
   async _copyToClipboard(text) {
     try {
-      // API moderna (requiere HTTPS o localhost)
       await navigator.clipboard.writeText(text);
     } catch {
-      // Fallback: crear un input temporal y copiar
       const input = document.createElement('textarea');
       input.value = text;
-      input.style.position = 'fixed';
-      input.style.opacity = '0';
+      input.style.cssText = 'position:fixed;opacity:0';
       document.body.appendChild(input);
       input.select();
-      document.execCommand('copy'); // método antiguo, deprecated pero funcional
+      document.execCommand('copy');
       document.body.removeChild(input);
-    }
-
-    // Mostrar confirmación visual
-    this._showCopiedFeedback();
-  },
-
-  /**
-   * Muestra feedback visual cuando se copia al portapapeles.
-   * Cambia el botón a "¡Copiado!" y muestra un toast.
-   */
-  _showCopiedFeedback() {
-    const btn = document.getElementById('btn-compartir');
-    const btnText = document.getElementById('btn-compartir-text');
-    const toast = document.getElementById('share-toast');
-
-    if (btn && btnText) {
-      btn.classList.add('copied');
-      btnText.textContent = '¡Copiado!';
-
-      // Restaurar después de 2.5 segundos
-      setTimeout(() => {
-        btn.classList.remove('copied');
-        btnText.textContent = 'Compartir';
-      }, 2500);
-    }
-
-    if (toast) {
-      toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 2500);
     }
   }
 };
@@ -539,15 +601,16 @@ const ChartModule = {
 
   // Paleta de colores alineada con la identidad visual de Kastigo
   COLORES: [
-    '#1A7A4A', // Medio Ambiente — verde
-    '#D4620A', // Laboral — naranja
-    '#1F5BA3', // Economía — azul
-    '#C8001E', // Corporativo — rojo
-    '#5E3A9E', // Seguridad — morado
-    '#3949AB', // Política — índigo
-    '#C62828', // Social — rojo oscuro
-    '#00695C', // Vivienda — teal
-    '#8A9AB5', // Otros — gris
+    '#1A7A4A', // Medio Ambiente
+    '#D4620A', // Laboral
+    '#1F5BA3', // Economía
+    '#C8001E', // Corporativo
+    '#5E3A9E', // Seguridad
+    '#3949AB', // Política
+    '#C62828', // Social
+    '#00695C', // Vivienda
+    '#6B21A8', // Cultura  ← agregar
+    '#8A9AB5', // Otros
   ],
 
   /**

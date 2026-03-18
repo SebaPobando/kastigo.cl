@@ -641,14 +641,21 @@ button {
   color: #B03A00;
 }
 
+[data-theme="dark"] .tipo-declaracion-polemica {
+  background: rgba(176, 58, 0, 0.2);
+  color: #FB923C;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .tipo-declaracion-polemica {
+    background: rgba(176, 58, 0, 0.2);
+    color: #FB923C;
+  }
+}
+
 .tipo-proyecto {
   background: #F0EBF8;
   color: #5E3A9E;
-}
-
-.cat-cultura {
-  background: #F3E8FF;
-  color: #6B21A8;
 }
 
 [data-theme="dark"] .tipo-ley {
@@ -1263,6 +1270,23 @@ button {
   color: #00695C;
 }
 
+.cat-cultura {
+  background: #F3E8FF;
+  color: #6B21A8;
+}
+
+[data-theme="dark"] .cat-cultura {
+  background: rgba(107, 33, 168, 0.2);
+  color: #C084FC;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .cat-cultura {
+    background: rgba(107, 33, 168, 0.2);
+    color: #C084FC;
+  }
+}
+
 .cat-default {
   background: #F0F0F5;
   color: #555;
@@ -1732,6 +1756,84 @@ button {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Panel de compartir (desktop fallback) */
+.share-panel-active {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  padding: 0.85rem 1rem !important;
+  position: relative;
+}
+
+.share-panel-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.65rem;
+}
+
+.share-panel-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.share-panel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radio);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: var(--trans);
+}
+
+.share-panel-btn:hover {
+  background: var(--red-color, var(--azul));
+  color: #FFFFFF;
+  border-color: var(--red-color, var(--azul));
+  transform: translateY(-1px);
+}
+
+.share-panel-copy {
+  background: var(--bg-input);
+}
+
+.share-panel-copy.copied {
+  background: var(--verde);
+  color: #FFFFFF;
+  border-color: var(--verde);
+}
+
+.share-panel-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: var(--trans);
+  line-height: 1;
+}
+
+.share-panel-close:hover {
+  color: var(--rojo);
+  background: var(--rojo-suave);
 }
 
 /* Botones café en modal */
