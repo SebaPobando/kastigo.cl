@@ -92,7 +92,7 @@ const Theme = {
    * @returns {'light' | 'dark' | 'auto'}
    */
   getCurrent() {
-    return localStorage.getItem(this.STORAGE_KEY) || 'light';
+    return localStorage.getItem(this.STORAGE_KEY) || 'auto';
   },
 
   /**
@@ -168,6 +168,9 @@ const Utils = {
       'Economía': 'cat-economia',
       'Corporativo': 'cat-corporativo',
       'Seguridad': 'cat-seguridad',
+      'Política': 'cat-politica',   // categorías nuevas del data.js
+      'Social': 'cat-social',
+      'Vivienda': 'cat-vivienda',
     };
     return map[cat] || 'cat-default';
   },
@@ -178,7 +181,8 @@ const Utils = {
       'Ley': 'tipo-ley',
       'Decreto': 'tipo-decreto',
       'Declaración': 'tipo-declaracion',
-      'Proyecto': 'tipo-proyecto'
+      'Proyecto': 'tipo-proyecto',
+      'Administrativo': 'tipo-decreto',  // reutiliza estilo decreto
     };
     return map[tipo] || 'tipo-decreto';
   },
@@ -538,6 +542,9 @@ const ChartModule = {
     '#1F5BA3', // Economía — azul
     '#C8001E', // Corporativo — rojo
     '#5E3A9E', // Seguridad — morado
+    '#3949AB', // Política — índigo
+    '#C62828', // Social — rojo oscuro
+    '#00695C', // Vivienda — teal
     '#8A9AB5', // Otros — gris
   ],
 
