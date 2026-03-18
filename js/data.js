@@ -22,7 +22,7 @@ const eventosGubernamentales = [
         certeza: "Confirmado",
         fuente: {
             medio: "Cooperativa",
-            url: "https://www.cooperativa.cl/noticias/pais/presidente-kast/primer-discurso-de-kast-recibimos-el-pais-en-peores-condiciones-de-lo/2026-03-11/203754.html"
+            url: "https://www.latercera.com/politica/noticia/kast-asume-la-presidencia-de-la-republica-llama-a-la-unidad-y-se-compromete-a-recuperar-el-pais/"
         }
     },
     {
@@ -232,7 +232,7 @@ const eventosGubernamentales = [
         certeza: "Confirmado",
         fuente: {
             medio: "El Mostrador",
-            url: "https://www.elmostrador.cl/noticias/pais/2026/03/16/presidente-kast-lanza-escudo-fronterizo-en-el-norte-con-la-retroexcavadora-como-simbolo/"
+            url: "https://www.emol.com/noticias/Nacional/2026/03/16/1194455/kast-retroexcavadora-escudo-fronterizo.html"
         }
     },
     {
@@ -344,7 +344,7 @@ const eventosGubernamentales = [
         certeza: "En Desarrollo",
         fuente: {
             medio: "BioBioChile",
-            url: "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/18/gobierno-da-suma-urgencia-a-control-identidad-desde-14-anos.shtml"
+            url: "https://www.t13.cl/noticia/politica/los-detalles-primeros-proyectos-seguridad-kast-puso-urgencia-congreso-16-3-2026"
         }
     }
 ];
