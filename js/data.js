@@ -248,5 +248,49 @@ const eventosGubernamentales = [
         tipo: "Declaración Polémica",
         certeza: "Confirmado",
         fuente: { medio: "T13", url: "https://www.t13.cl" }
+    },
+    {
+        id: 23,
+        fecha: "2026-03-12",
+        titulo: "Instrucción para reducir dotación del sector público en 10%",
+        descripcion: "El Ministerio de Hacienda instruyó a las reparticiones del Estado reducir el personal a contrata y honorarios en un 10% durante el trimestre.",
+        interpretacion: "La ANEF y sindicatos del sector público advierten despidos masivos por razones políticas y una precarización inminente de los servicios de atención ciudadana.",
+        categoria: "Laboral",
+        tipo: "Administrativo",
+        certeza: "Confirmado",
+        fuente: { medio: "Diario Financiero", url: "https://www.df.cl" }
+    },
+    {
+        id: 24,
+        fecha: "2026-03-14",
+        titulo: "Ministra vincula beneficios estatales al rol maternal tradicional",
+        descripcion: "\"El verdadero apoyo del Estado debe priorizar a las mujeres que deciden formar familia y quedarse en el hogar\", declaró la ministra de la Mujer.",
+        interpretacion: "Colectivos feministas acusan un intento de frenar la inserción laboral femenina y de imponer desde el Estado un modelo familiar conservador.",
+        categoria: "Social",
+        tipo: "Declaración Polémica",
+        certeza: "Confirmado",
+        fuente: { medio: "El Desconcierto", url: "https://www.eldesconcierto.cl" }
+    },
+    {
+        id: 25,
+        fecha: "2026-03-15",
+        titulo: "Anuncio de retiro de Chile del Acuerdo de Escazú",
+        descripcion: "El Ejecutivo informó que enviará un mensaje al Congreso para retirar a Chile del tratado medioambiental de Escazú, argumentando protección de soberanía económica.",
+        interpretacion: "Organizaciones ecológicas señalan que esto dejará en la indefensión a defensores de la naturaleza y afectará la imagen internacional del país en materia ambiental.",
+        categoria: "Medio Ambiente",
+        tipo: "Declaración",
+        certeza: "En Desarrollo",
+        fuente: { medio: "El Mostrador", url: "https://www.elmostrador.cl" }
+    },
+    {
+        id: 26,
+        fecha: "2026-03-17",
+        titulo: "Proyecto de inmunidad y fuero especial para Carabineros",
+        descripcion: "El Gobierno ingresó un proyecto de ley que establece presunción legal absoluta a favor de Carabineros y Fuerzas Armadas que utilicen armas letales.",
+        interpretacion: "El INDH y abogados de derechos humanos alertan que la norma consagraría la impunidad ante casos de gatillo fácil y abusos policiales.",
+        categoria: "Seguridad",
+        tipo: "Proyecto",
+        certeza: "Confirmado",
+        fuente: { medio: "CIPER", url: "https://www.ciperchile.cl" }
     }
 ];

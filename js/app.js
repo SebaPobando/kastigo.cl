@@ -92,7 +92,7 @@ const Theme = {
    * @returns {'light' | 'dark' | 'auto'}
    */
   getCurrent() {
-    return localStorage.getItem(this.STORAGE_KEY) || 'auto';
+    return localStorage.getItem(this.STORAGE_KEY) || 'light';
   },
 
   /**
