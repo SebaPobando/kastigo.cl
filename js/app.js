@@ -1,77 +1,96 @@
-/**
- * KASTIGO · Monitor Ciudadano
- * js/app.js — Vanilla JS ES6+ modular, sin eval(), con sanitización XSS
- */
-
 'use strict';
 
 /* ============================================================
-   BASE DE DATOS LOCAL
+   BASE DE DATOS
    ============================================================ */
 const eventosGubernamentales = [
   {
     id: 1,
     fecha: "2026-03-17",
-    titulo: "Retiro masivo de 43 decretos de protección ambiental",
-    descripcion: "El gobierno retira de Contraloría 43 decretos ambientales y el plan de DD.HH. heredados. Una señal de luz verde al extractivismo.",
+    titulo: "Retiro de 43 decretos de protección ambiental",
+    descripcion: "El Ejecutivo retiró de Contraloría un conjunto de 43 decretos de protección ambiental y el plan de DD.HH. para su revisión.",
+    interpretacion: "Críticos y organizaciones ambientales señalan que esto da luz verde al extractivismo y debilita la fiscalización ambiental del Estado.",
     categoria: "Medio Ambiente",
-    enlace_fuente: "https://www.elmostrador.cl"
+    tipo: "Decreto",
+    certeza: "Confirmado",
+    fuente: { medio: "El Mostrador", url: "https://www.elmostrador.cl" }
   },
   {
     id: 2,
     fecha: "2026-03-17",
     titulo: "Freno definitivo a la negociación ramal",
-    descripcion: "Confirmación de que no se avanzará con la negociación multinivel, debilitando el poder de negociación sindical.",
+    descripcion: "El Ejecutivo confirmó que no impulsará la negociación colectiva multinivel, manteniendo la negociación solo a nivel de empresa.",
+    interpretacion: "Organizaciones sindicales advierten que esto debilita estructuralmente el poder de negociación de los trabajadores frente a grandes grupos empresariales.",
     categoria: "Laboral",
-    enlace_fuente: "https://www.ciperchile.cl"
+    tipo: "Declaración",
+    certeza: "Confirmado",
+    fuente: { medio: "CIPER Chile", url: "https://www.ciperchile.cl" }
   },
   {
     id: 3,
     fecha: "2026-03-17",
     titulo: "Apertura para eliminar los feriados irrenunciables",
-    descripcion: "El Ejecutivo se abre a eliminar el derecho al descanso irrenunciable tras presión de grandes gremios empresariales.",
+    descripcion: "El Ejecutivo señaló estar abierto a revisar la legislación de feriados irrenunciables tras presión de gremios empresariales como la CPC.",
+    interpretacion: "Trabajadores del comercio y asociaciones de empleados califican la medida como un retroceso en derechos laborales conquistados.",
     categoria: "Laboral",
-    enlace_fuente: "https://www.interferencia.cl"
+    tipo: "Declaración",
+    certeza: "Reportado",
+    fuente: { medio: "Interferencia", url: "https://www.interferencia.cl" }
   },
   {
     id: 4,
     fecha: "2026-03-17",
-    titulo: "Fin al mecanismo de estabilización de combustibles",
-    descripcion: "Eliminación del fondo que frena el alza de bencinas, traspasando el costo total de la inflación al transporte.",
+    titulo: "Fin al mecanismo de estabilización de combustibles (MEPCO)",
+    descripcion: "El gobierno eliminó el fondo MEPCO que amortiguaba las alzas del precio de las bencinas, dejando el precio de los combustibles expuesto al mercado internacional.",
+    interpretacion: "Economistas críticos señalan que esto impacta directamente al transporte y clase media, transfiriendo el costo de la inflación energética a los hogares.",
     categoria: "Economía",
-    enlace_fuente: "https://www.eldesconcierto.cl"
+    tipo: "Decreto",
+    certeza: "Confirmado",
+    fuente: { medio: "El Desconcierto", url: "https://www.eldesconcierto.cl" }
   },
   {
     id: 5,
     fecha: "2026-03-16",
-    titulo: "Rebaja de impuestos a las grandes empresas (IDPC al 23%)",
-    descripcion: "Reducción del impuesto corporativo del 27% al 23% para aumentar utilidades de grandes capitales.",
+    titulo: "Rebaja del impuesto a grandes empresas (IDPC del 27% al 23%)",
+    descripcion: "El proyecto de reforma tributaria contempla reducir el Impuesto de Primera Categoría para empresas del 27% al 23% en un período de cuatro años.",
+    interpretacion: "Analistas de centroizquierda señalan que la medida beneficia principalmente a grandes conglomerados mientras reduce la recaudación fiscal disponible para políticas sociales.",
     categoria: "Corporativo",
-    enlace_fuente: "https://www.df.cl"
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "Diario Financiero", url: "https://www.df.cl" }
   },
   {
     id: 6,
     fecha: "2026-03-16",
-    titulo: "Perdonazo tributario a las Inmobiliarias (IVA 0%)",
-    descripcion: "Exención temporal del IVA a viviendas nuevas para liquidar stock de grandes empresas inmobiliarias.",
+    titulo: "Exención temporal de IVA a viviendas nuevas (inmobiliarias)",
+    descripcion: "El Ejecutivo propone eximir temporalmente del IVA a la compraventa de viviendas nuevas para reactivar el mercado inmobiliario.",
+    interpretacion: "Críticos argumentan que el beneficio fiscal opera como un subsidio encubierto a las empresas constructoras con stock sin vender, sin garantizar acceso real a vivienda para sectores medios.",
     categoria: "Corporativo",
-    enlace_fuente: "https://www.latercera.com"
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "La Tercera", url: "https://www.latercera.com" }
   },
   {
     id: 7,
     fecha: "2026-03-16",
-    titulo: "Subsidio público a cotizaciones empresariales",
-    descripcion: "El Estado pagará parte de las cotizaciones previsionales, usando impuestos públicos para aliviar costos de empleadores.",
+    titulo: "Subsidio estatal a cotizaciones previsionales de empleadores",
+    descripcion: "El proyecto contempla que el Estado cubra parte de las cotizaciones previsionales que deben pagar los empleadores durante el período de transición al nuevo sistema.",
+    interpretacion: "Analistas laborales cuestionan el uso de fondos públicos para aliviar costos de empresas, argumentando que el ahorro patronal no tiene garantía de traducirse en más empleo.",
     categoria: "Economía",
-    enlace_fuente: "https://www.biobiochile.cl"
+    tipo: "Proyecto",
+    certeza: "Reportado",
+    fuente: { medio: "Biobío Chile", url: "https://www.biobiochile.cl" }
   },
   {
     id: 8,
     fecha: "2026-03-11",
-    titulo: "Plan Escudo Fronterizo: Militarización y Zanjas",
-    descripcion: "Despliegue de Ejército y excavaciones en la frontera norte como medida de control migratorio y seguridad física.",
+    titulo: "Plan Escudo Fronterizo: militarización y construcción de zanjas",
+    descripcion: "El gobierno lanzó el Plan Escudo Fronterizo con despliegue del Ejército en la frontera norte y el inicio de obras de excavación para construir una zanja en la zona de Colchane.",
+    interpretacion: "Organizaciones de derechos humanos advierten que la militarización de la frontera vulnera los derechos de solicitantes de asilo y migrantes en situación de vulnerabilidad.",
     categoria: "Seguridad",
-    enlace_fuente: "https://www.cooperativa.cl"
+    tipo: "Decreto",
+    certeza: "Confirmado",
+    fuente: { medio: "Cooperativa", url: "https://www.cooperativa.cl" }
   }
 ];
 
@@ -79,21 +98,16 @@ const eventosGubernamentales = [
    ESTADO
    ============================================================ */
 const state = {
-  filtroActivo: 'Todos',
+  filtroCategoria: 'Todos',
+  filtroTipo: 'Todos',
+  filtroCerteza: 'Todos',
   busqueda: '',
 };
 
 /* ============================================================
    MÓDULO: SANITIZACIÓN (Anti-XSS)
-   Convierte cualquier string en texto plano seguro para el DOM.
-   No usa eval() ni innerHTML con datos del usuario.
    ============================================================ */
 const Sanitize = {
-  /**
-   * Escapa caracteres HTML especiales usando textContent (método seguro).
-   * @param {string} input
-   * @returns {string}
-   */
   text(input) {
     if (typeof input !== 'string') return '';
     const node = document.createTextNode(input);
@@ -101,41 +115,19 @@ const Sanitize = {
     div.appendChild(node);
     return div.innerHTML;
   },
-
-  /**
-   * Limpia y valida una URL, retorna '#' si es sospechosa.
-   * Solo permite http y https para prevenir javascript: URIs.
-   * @param {string} url
-   * @returns {string}
-   */
   url(url) {
     if (typeof url !== 'string') return '#';
     const trimmed = url.trim();
     if (trimmed === '#') return '#';
     try {
-      const parsed = new URL(trimmed);
-      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
-        return parsed.href;
-      }
-    } catch {
-      // URL inválida
-    }
+      const p = new URL(trimmed);
+      if (p.protocol === 'http:' || p.protocol === 'https:') return p.href;
+    } catch { /* invalid */ }
     return '#';
   },
-
-  /**
-   * Sanitiza texto de input: recorta espacios, limita longitud y elimina
-   * caracteres de control invisibles. No altera el contenido legítimo.
-   * @param {string} input
-   * @param {number} maxLen
-   * @returns {string}
-   */
-  searchInput(input, maxLen = 200) {
+  searchInput(input, max = 200) {
     if (typeof input !== 'string') return '';
-    return input
-      .slice(0, maxLen)
-      .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
-      .trim();
+    return input.slice(0, max).replace(/[\u0000-\u001F\u007F-\u009F]/g, '').trim();
   }
 };
 
@@ -143,71 +135,57 @@ const Sanitize = {
    MÓDULO: UTILIDADES
    ============================================================ */
 const Utils = {
-  /**
-   * Formatea fecha ISO (YYYY-MM-DD) a texto en español.
-   * @param {string} fechaISO
-   * @returns {string}
-   */
-  formatearFecha(fechaISO) {
-    const [y, m, d] = fechaISO.split('-').map(Number);
-    return new Date(y, m - 1, d).toLocaleDateString('es-CL', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
+  formatFecha(iso) {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' });
   },
 
-  /**
-   * Normaliza un nombre de categoría a clase CSS.
-   * @param {string} cat
-   * @returns {string}
-   */
-  badgeClass(cat) {
-    const mapa = {
-      'Medio Ambiente': 'badge-medio-ambiente',
-      'Laboral':        'badge-laboral',
-      'Economía':       'badge-economia',
-      'Corporativo':    'badge-corporativo',
-      'Seguridad':      'badge-seguridad',
+  catClass(cat) {
+    const map = {
+      'Medio Ambiente': 'cat-medio-ambiente',
+      'Laboral': 'cat-laboral',
+      'Economía': 'cat-economia',
+      'Corporativo': 'cat-corporativo',
+      'Seguridad': 'cat-seguridad',
     };
-    return mapa[cat] || 'badge-default';
+    return map[cat] || 'cat-default';
   },
 
-  /**
-   * Obtiene categorías únicas del array de eventos.
-   * @returns {string[]}
-   */
-  getCategorias() {
-    return [...new Set(eventosGubernamentales.map(e => e.categoria))];
+  tipoClass(tipo) {
+    const map = { 'Ley': 'tipo-ley', 'Decreto': 'tipo-decreto', 'Declaración': 'tipo-declaracion', 'Proyecto': 'tipo-proyecto' };
+    return map[tipo] || 'tipo-decreto';
   },
 
-  /**
-   * Calcula conteo por categoría.
-   * @returns {Object.<string, number>}
-   */
-  getEstadisticas() {
+  certezaClass(cert) {
+    const map = { 'Confirmado': 'certeza-confirmado', 'Reportado': 'certeza-reportado', 'En Desarrollo': 'certeza-desarrollo' };
+    return map[cert] || 'certeza-reportado';
+  },
+
+  unique(key) {
+    return [...new Set(eventosGubernamentales.map(e => e[key]))];
+  },
+
+  countBy(key) {
     return eventosGubernamentales.reduce((acc, e) => {
-      acc[e.categoria] = (acc[e.categoria] || 0) + 1;
+      acc[e[key]] = (acc[e[key]] || 0) + 1;
       return acc;
     }, {});
-  },
+  }
 };
 
 /* ============================================================
    MÓDULO: FILTRADO
    ============================================================ */
 const Filtrado = {
-  /**
-   * Retorna eventos filtrados y ordenados (más reciente primero).
-   * @returns {Array}
-   */
-  getEventosFiltrados() {
-    const query = state.busqueda.toLowerCase();
+  get() {
+    const q = state.busqueda.toLowerCase();
     return eventosGubernamentales
       .filter(e => {
-        const porCategoria = state.filtroActivo === 'Todos' || e.categoria === state.filtroActivo;
-        const porTexto = !query ||
-          e.titulo.toLowerCase().includes(query) ||
-          e.descripcion.toLowerCase().includes(query);
-        return porCategoria && porTexto;
+        const cat = state.filtroCategoria === 'Todos' || e.categoria === state.filtroCategoria;
+        const tipo = state.filtroTipo === 'Todos' || e.tipo === state.filtroTipo;
+        const cert = state.filtroCerteza === 'Todos' || e.certeza === state.filtroCerteza;
+        const txt = !q || e.titulo.toLowerCase().includes(q) || e.descripcion.toLowerCase().includes(q);
+        return cat && tipo && cert && txt;
       })
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
   }
@@ -218,65 +196,47 @@ const Filtrado = {
    ============================================================ */
 const Modal = {
   _stack: [],
-
-  /**
-   * Abre un modal por su id. Apila para soporte de múltiples modales.
-   * @param {string} id
-   */
   open(id) {
-    const overlay = document.getElementById(id);
-    if (!overlay) return;
-    overlay.classList.remove('hidden');
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     this._stack.push(id);
-    requestAnimationFrame(() => {
-      const closeBtn = overlay.querySelector('.modal-close');
-      if (closeBtn) closeBtn.focus();
-    });
+    requestAnimationFrame(() => el.querySelector('.modal-close')?.focus());
   },
-
-  /**
-   * Cierra un modal por su id.
-   * @param {string} id
-   */
   close(id) {
-    const overlay = document.getElementById(id);
-    if (!overlay) return;
-    overlay.classList.add('hidden');
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('hidden');
     this._stack = this._stack.filter(i => i !== id);
-    if (this._stack.length === 0) {
-      document.body.style.overflow = '';
-    }
+    if (!this._stack.length) document.body.style.overflow = '';
   },
-
-  /**
-   * Cierra el modal más reciente de la pila (para tecla Escape).
-   */
   closeLast() {
-    if (this._stack.length > 0) {
-      this.close(this._stack[this._stack.length - 1]);
-    }
+    if (this._stack.length) this.close(this._stack[this._stack.length - 1]);
   },
+  openDetalle(ev) {
+    // Usar textContent para todos los datos — nunca innerHTML con datos del usuario
+    const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
-  /**
-   * Rellena y abre el modal de detalle de una medida.
-   * Usa textContent para insertar datos (no innerHTML), previniendo XSS.
-   * @param {Object} evento
-   */
-  openDetalle(evento) {
-    const badge = document.getElementById('modal-det-badge');
-    const fecha = document.getElementById('modal-det-fecha');
-    const titulo = document.getElementById('modal-detalle-title');
-    const desc = document.getElementById('modal-det-desc');
-    const fuente = document.getElementById('modal-det-fuente');
+    const badge = document.getElementById('md-tipo');
+    if (badge) { badge.className = `modal-tipo-badge ${Utils.tipoClass(ev.tipo)}`; badge.textContent = ev.tipo; }
 
-    badge.className = `modal-category-badge ${Utils.badgeClass(evento.categoria)}`;
-    badge.textContent = evento.categoria;
-    fecha.textContent = Utils.formatearFecha(evento.fecha);
-    fecha.setAttribute('datetime', evento.fecha);
-    titulo.textContent = evento.titulo;
-    desc.textContent = evento.descripcion;
-    fuente.href = Sanitize.url(evento.enlace_fuente);
+    const cbadge = document.getElementById('md-certeza');
+    if (cbadge) { cbadge.className = `modal-certeza-badge ${Utils.certezaClass(ev.certeza)}`; cbadge.textContent = ev.certeza; }
+
+    const catbadge = document.getElementById('md-cat');
+    if (catbadge) { catbadge.className = `modal-cat-badge ${Utils.catClass(ev.categoria)}`; catbadge.textContent = ev.categoria; }
+
+    const fechaEl = document.getElementById('md-fecha');
+    if (fechaEl) { fechaEl.textContent = Utils.formatFecha(ev.fecha); fechaEl.setAttribute('datetime', ev.fecha); }
+
+    setTxt('md-title', ev.titulo);
+    setTxt('md-desc', ev.descripcion);
+    setTxt('md-interpretacion', ev.interpretacion);
+    setTxt('md-fuente-medio', `Fuente: ${ev.fuente.medio}`);
+
+    const fuenteLink = document.getElementById('md-fuente');
+    if (fuenteLink) fuenteLink.href = Sanitize.url(ev.fuente.url);
 
     this.open('modal-detalle');
   }
@@ -287,177 +247,133 @@ const Modal = {
    ============================================================ */
 const Render = {
 
-  /**
-   * Renderiza el contador del hero.
-   */
-  heroCounter() {
-    const el = document.getElementById('hero-counter');
-    if (el) el.textContent = eventosGubernamentales.length;
+  heroStats() {
+    const confirmados = eventosGubernamentales.filter(e => e.certeza === 'Confirmado').length;
+    const cats = Utils.unique('categoria').length;
+    const setNum = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+    setNum('hero-total', eventosGubernamentales.length);
+    setNum('hero-confirmados', confirmados);
+    setNum('hero-categorias', cats);
   },
 
-  /**
-   * Renderiza estadísticas por categoría usando textContent (seguro).
-   */
   estadisticas() {
     const grid = document.getElementById('stats-grid');
     const total = document.getElementById('stats-total');
     if (!grid || !total) return;
-
-    const stats = Utils.getEstadisticas();
     total.textContent = eventosGubernamentales.length;
-
-    // Limpiar y reconstruir usando nodos DOM
+    const stats = Utils.countBy('categoria');
     grid.innerHTML = '';
-    Object.entries(stats)
-      .sort((a, b) => b[1] - a[1])
-      .forEach(([cat, count]) => {
-        const row = document.createElement('div');
-        row.className = 'stat-row';
-        row.setAttribute('role', 'listitem');
-
-        const nameEl = document.createElement('span');
-        nameEl.className = 'stat-cat';
-        nameEl.textContent = cat;
-
-        const countEl = document.createElement('span');
-        countEl.className = 'stat-count';
-        countEl.textContent = count;
-
-        row.appendChild(nameEl);
-        row.appendChild(countEl);
-        grid.appendChild(row);
-      });
+    Object.entries(stats).sort((a, b) => b[1] - a[1]).forEach(([cat, count]) => {
+      const row = document.createElement('div');
+      row.className = 'stat-row'; row.setAttribute('role', 'listitem');
+      const n = document.createElement('span'); n.className = 'stat-cat'; n.textContent = cat;
+      const c = document.createElement('span'); c.className = 'stat-count'; c.textContent = count;
+      row.appendChild(n); row.appendChild(c); grid.appendChild(row);
+    });
   },
 
-  /**
-   * Renderiza botones de filtro por categoría.
-   */
-  filtros() {
-    const container = document.getElementById('filter-buttons');
+  _buildFilterGroup(containerId, values, stateKey, countFn, labelAll = 'Todos') {
+    const container = document.getElementById(containerId);
     if (!container) return;
-    const stats = Utils.getEstadisticas();
-    const categorias = ['Todos', ...Utils.getCategorias()];
-
     container.innerHTML = '';
-    categorias.forEach(cat => {
-      const count = cat === 'Todos' ? eventosGubernamentales.length : (stats[cat] || 0);
+    const all = [labelAll, ...values];
+    all.forEach(val => {
+      const count = val === labelAll ? eventosGubernamentales.length : (countFn[val] || 0);
       const btn = document.createElement('button');
-      btn.className = `filter-btn${state.filtroActivo === cat ? ' active' : ''}`;
-      btn.setAttribute('aria-pressed', state.filtroActivo === cat ? 'true' : 'false');
-      btn.dataset.categoria = cat;
+      btn.className = `filter-btn${state[stateKey] === val ? ' active' : ''}`;
+      btn.setAttribute('aria-pressed', state[stateKey] === val ? 'true' : 'false');
 
-      const nameSpan = document.createElement('span');
-      nameSpan.textContent = cat;
-
-      const countSpan = document.createElement('span');
-      countSpan.className = 'filter-count';
-      countSpan.textContent = count;
-
-      btn.appendChild(nameSpan);
-      btn.appendChild(countSpan);
+      const nameEl = document.createElement('span'); nameEl.textContent = val;
+      const countEl = document.createElement('span'); countEl.className = 'filter-count'; countEl.textContent = count;
+      btn.appendChild(nameEl); btn.appendChild(countEl);
 
       btn.addEventListener('click', () => {
-        state.filtroActivo = cat;
-        this.filtros();
+        state[stateKey] = val;
+        this.allFilters();
         this.timeline();
       });
-
       container.appendChild(btn);
     });
   },
 
-  /**
-   * Renderiza la línea de tiempo con nodos DOM (sin innerHTML con datos de usuario).
-   */
+  allFilters() {
+    this._buildFilterGroup('filter-cat', Utils.unique('categoria'), 'filtroCategoria', Utils.countBy('categoria'));
+    this._buildFilterGroup('filter-tipo', Utils.unique('tipo'), 'filtroTipo', Utils.countBy('tipo'));
+    this._buildFilterGroup('filter-certeza', Utils.unique('certeza'), 'filtroCerteza', Utils.countBy('certeza'));
+  },
+
   timeline() {
     const track = document.getElementById('timeline-track');
     const empty = document.getElementById('empty-state');
-    const countEl = document.getElementById('search-count');
+    const count = document.getElementById('search-count');
     if (!track || !empty) return;
 
-    const eventos = Filtrado.getEventosFiltrados();
+    const eventos = Filtrado.get();
 
-    if (eventos.length === 0) {
+    if (!eventos.length) {
       track.innerHTML = '';
       empty.classList.remove('hidden');
-      if (countEl) countEl.textContent = 'Sin resultados';
+      if (count) count.textContent = 'Sin resultados';
       return;
     }
 
     empty.classList.add('hidden');
-    if (countEl) {
-      countEl.textContent = state.busqueda
-        ? `${eventos.length} resultado${eventos.length !== 1 ? 's' : ''}`
-        : '';
-    }
+    if (count) count.textContent = state.busqueda ? `${eventos.length} resultado${eventos.length !== 1 ? 's' : ''}` : '';
 
     track.innerHTML = '';
-
-    eventos.forEach((evento, index) => {
+    eventos.forEach((ev, i) => {
       const li = document.createElement('li');
       li.className = 'timeline-card';
       li.setAttribute('role', 'button');
       li.setAttribute('tabindex', '0');
-      li.setAttribute('aria-label', `Ver detalle: ${evento.titulo}`);
-      li.style.animationDelay = `${index * 0.06}s`;
+      li.setAttribute('aria-label', `Ver detalle: ${ev.titulo}`);
+      li.style.animationDelay = `${i * 0.055}s`;
 
-      // Top row
-      const topDiv = document.createElement('div');
-      topDiv.className = 'card-top';
+      // Top row: tipo + certeza + fecha
+      const top = document.createElement('div'); top.className = 'card-top';
 
-      const badge = document.createElement('span');
-      badge.className = `card-badge ${Utils.badgeClass(evento.categoria)}`;
-      badge.textContent = evento.categoria;
+      const tipoBadge = document.createElement('span');
+      tipoBadge.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
+      tipoBadge.textContent = ev.tipo;
+
+      const certBadge = document.createElement('span');
+      certBadge.className = `certeza-badge ${Utils.certezaClass(ev.certeza)}`;
+      certBadge.textContent = ev.certeza;
 
       const dateEl = document.createElement('time');
       dateEl.className = 'card-date';
-      dateEl.setAttribute('datetime', evento.fecha);
-      dateEl.textContent = Utils.formatearFecha(evento.fecha);
+      dateEl.setAttribute('datetime', ev.fecha);
+      dateEl.textContent = Utils.formatFecha(ev.fecha);
 
-      topDiv.appendChild(badge);
-      topDiv.appendChild(dateEl);
+      top.appendChild(tipoBadge);
+      top.appendChild(certBadge);
+      top.appendChild(dateEl);
 
       // Title
-      const titleEl = document.createElement('h3');
-      titleEl.className = 'card-title';
-      titleEl.textContent = evento.titulo;
+      const h3 = document.createElement('h3'); h3.className = 'card-title'; h3.textContent = ev.titulo;
 
-      // Description (truncated visually via CSS)
-      const descEl = document.createElement('p');
-      descEl.className = 'card-desc';
-      descEl.textContent = evento.descripcion;
+      // Desc
+      const p = document.createElement('p'); p.className = 'card-desc'; p.textContent = ev.descripcion;
 
       // Footer
-      const footerDiv = document.createElement('div');
-      footerDiv.className = 'card-footer';
+      const footer = document.createElement('div'); footer.className = 'card-footer';
+      const catBadge = document.createElement('span');
+      catBadge.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
+      catBadge.textContent = ev.categoria;
 
-      const cta = document.createElement('span');
-      cta.className = 'card-cta';
+      const cta = document.createElement('span'); cta.className = 'card-cta';
       cta.textContent = 'Ver detalle ';
-      const arrow = document.createElement('span');
-      arrow.className = 'card-arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = '→';
+      const arrow = document.createElement('span'); arrow.className = 'card-arrow'; arrow.textContent = '→';
       cta.appendChild(arrow);
 
-      const idEl = document.createElement('span');
-      idEl.className = 'card-id';
-      idEl.textContent = `#${String(evento.id).padStart(3, '0')}`;
+      footer.appendChild(catBadge);
+      footer.appendChild(cta);
 
-      footerDiv.appendChild(cta);
-      footerDiv.appendChild(idEl);
+      li.appendChild(top); li.appendChild(h3); li.appendChild(p); li.appendChild(footer);
 
-      li.appendChild(topDiv);
-      li.appendChild(titleEl);
-      li.appendChild(descEl);
-      li.appendChild(footerDiv);
-
-      // Eventos
-      const handler = () => Modal.openDetalle(evento);
-      li.addEventListener('click', handler);
-      li.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); }
-      });
+      const open = () => Modal.openDetalle(ev);
+      li.addEventListener('click', open);
+      li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 
       track.appendChild(li);
     });
@@ -467,68 +383,324 @@ const Render = {
 /* ============================================================
    MÓDULO: EVENTOS GLOBALES
    ============================================================ */
-const EventBus = {
+const Events = {
   init() {
-    // --- Disclaimer bar ---
+    // Disclaimer
     document.getElementById('disclaimer-close')?.addEventListener('click', () => {
-      const bar = document.querySelector('.disclaimer-bar');
-      if (bar) bar.style.display = 'none';
+      document.getElementById('disclaimer-bar')?.remove();
     });
 
-    // --- Buscador ---
-    const searchInput = document.getElementById('search-input');
-    const searchClear = document.getElementById('search-clear');
-
-    searchInput?.addEventListener('input', () => {
-      state.busqueda = Sanitize.searchInput(searchInput.value);
-      if (searchClear) {
-        searchClear.classList.toggle('visible', state.busqueda.length > 0);
-      }
+    // Buscador
+    const input = document.getElementById('search-input');
+    const clear = document.getElementById('search-clear');
+    input?.addEventListener('input', () => {
+      state.busqueda = Sanitize.searchInput(input.value);
+      clear?.classList.toggle('visible', state.busqueda.length > 0);
       Render.timeline();
     });
-
-    searchClear?.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
+    clear?.addEventListener('click', () => {
+      if (input) input.value = '';
       state.busqueda = '';
-      searchClear.classList.remove('visible');
-      searchInput?.focus();
+      clear.classList.remove('visible');
+      input?.focus();
       Render.timeline();
     });
 
-    // --- Botones de modal ---
-    document.getElementById('btn-quienes-somos')?.addEventListener('click', () => Modal.open('modal-quienes'));
+    // Modales abrir
+    document.getElementById('btn-quienes')?.addEventListener('click', () => Modal.open('modal-quienes'));
     document.getElementById('btn-quienes-footer')?.addEventListener('click', () => Modal.open('modal-quienes'));
     document.getElementById('btn-terminos')?.addEventListener('click', () => Modal.open('modal-terminos'));
 
-    // --- Cerrar modales: botón ✕ ---
+    // Modales cerrar — botones ✕
     document.querySelectorAll('.modal-close').forEach(btn => {
-      const modalId = btn.dataset.modal;
-      if (modalId) btn.addEventListener('click', () => Modal.close(modalId));
+      const id = btn.dataset.modal;
+      if (id) btn.addEventListener('click', () => Modal.close(id));
     });
 
-    // --- Cerrar modales: clic en overlay ---
+    // Modales cerrar — clic en overlay
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', e => {
-        if (e.target === overlay) Modal.close(overlay.id);
-      });
+      overlay.addEventListener('click', e => { if (e.target === overlay) Modal.close(overlay.id); });
     });
 
-    // --- Cerrar modales: tecla Escape ---
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') Modal.closeLast();
+    // Modales cerrar — Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') Modal.closeLast(); });
+  }
+};
+
+/* ============================================================
+   MÓDULO: CALENDARIO
+   ============================================================ */
+const Calendario = {
+
+  // Estado interno del calendario
+  _year: null,
+  _month: null,    // 0-based
+  _selectedDate: null,  // "YYYY-MM-DD" | null
+
+  /**
+   * Construye un mapa { "YYYY-MM-DD": [eventos] } para acceso O(1)
+   */
+  _buildEventMap() {
+    return eventosGubernamentales.reduce((map, ev) => {
+      if (!map[ev.fecha]) map[ev.fecha] = [];
+      map[ev.fecha].push(ev);
+      return map;
+    }, {});
+  },
+
+  /**
+   * Renderiza la grilla del mes actual en el DOM.
+   */
+  render() {
+    const grid = document.getElementById('cal-grid');
+    const label = document.getElementById('cal-month-label');
+    const resetBtn = document.getElementById('cal-reset');
+    if (!grid || !label) return;
+
+    const eventMap = this._buildEventMap();
+    const today = new Date();
+    const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    // Label del mes
+    const monthName = new Date(this._year, this._month, 1)
+      .toLocaleDateString('es-CL', { month: 'long', year: 'numeric' });
+    label.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+    grid.innerHTML = '';
+
+    // Cabecera días de la semana (L M M J V S D)
+    const dayNames = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'];
+    dayNames.forEach(d => {
+      const span = document.createElement('span');
+      span.className = 'cal-day-name';
+      span.textContent = d;
+      grid.appendChild(span);
+    });
+
+    // Primer día del mes (ajustado a lunes = 0)
+    const firstDay = new Date(this._year, this._month, 1).getDay();
+    const offset = (firstDay === 0) ? 6 : firstDay - 1; // lunes primero
+    const daysInMonth = new Date(this._year, this._month + 1, 0).getDate();
+
+    // Celdas vacías iniciales
+    for (let i = 0; i < offset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-day cal-empty';
+      empty.setAttribute('aria-hidden', 'true');
+      grid.appendChild(empty);
+    }
+
+    // Días del mes
+    for (let d = 1; d <= daysInMonth; d++) {
+      const iso = `${this._year}-${String(this._month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const eventos = eventMap[iso] || [];
+      const hasEvents = eventos.length > 0;
+
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+      cell.setAttribute('role', hasEvents ? 'button' : 'gridcell');
+      cell.setAttribute('aria-label', hasEvents
+        ? `${d} — ${eventos.length} medida${eventos.length > 1 ? 's' : ''}`
+        : String(d));
+
+      if (hasEvents) {
+        cell.classList.add('cal-has-events');
+        if (eventos.length >= 3) cell.classList.add('cal-many-events');
+        cell.setAttribute('tabindex', '0');
+      }
+      if (iso === todayISO) cell.classList.add('cal-today');
+      if (iso === this._selectedDate) cell.classList.add('cal-selected');
+
+      cell.textContent = d;
+
+      if (hasEvents) {
+        const openDay = () => {
+          this._selectedDate = iso;
+          this.render();                 // re-render para mostrar selección
+          this._openDayModal(iso, eventos);
+          if (resetBtn) resetBtn.classList.remove('hidden');
+        };
+        cell.addEventListener('click', openDay);
+        cell.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDay(); }
+        });
+      }
+
+      grid.appendChild(cell);
+    }
+
+    // Botón reset
+    if (resetBtn) {
+      resetBtn.classList.toggle('hidden', !this._selectedDate);
+    }
+  },
+
+  /**
+   * Abre el modal con los eventos de un día específico.
+   * Construye el DOM con textContent (nunca innerHTML con datos externos).
+   */
+  _openDayModal(iso, eventos) {
+    const fechaEl = document.getElementById('mdia-fecha');
+    const countEl = document.getElementById('mdia-count');
+    const list = document.getElementById('mdia-list');
+    const title = document.getElementById('mdia-title');
+    if (!fechaEl || !list) return;
+
+    // Fecha legible
+    const [y, m, d] = iso.split('-').map(Number);
+    const fechaStr = new Date(y, m - 1, d).toLocaleDateString('es-CL', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+    fechaEl.textContent = fechaStr.charAt(0).toUpperCase() + fechaStr.slice(1);
+    fechaEl.setAttribute('datetime', iso);
+
+    countEl.textContent = `${eventos.length} medida${eventos.length > 1 ? 's' : ''}`;
+    title.textContent = 'Medidas del día';
+
+    list.innerHTML = '';
+
+    eventos.forEach(ev => {
+      const li = document.createElement('li');
+      li.className = 'modal-dia-item';
+
+      // Badges top
+      const topRow = document.createElement('div');
+      topRow.className = 'modal-dia-item-top';
+
+      const tipoBadge = document.createElement('span');
+      tipoBadge.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
+      tipoBadge.textContent = ev.tipo;
+
+      const certBadge = document.createElement('span');
+      certBadge.className = `certeza-badge ${Utils.certezaClass(ev.certeza)}`;
+      certBadge.textContent = ev.certeza;
+
+      const catBadge = document.createElement('span');
+      catBadge.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
+      catBadge.textContent = ev.categoria;
+
+      topRow.appendChild(tipoBadge);
+      topRow.appendChild(certBadge);
+      topRow.appendChild(catBadge);
+
+      // Título
+      const h3 = document.createElement('p');
+      h3.className = 'modal-dia-titulo';
+      h3.textContent = ev.titulo;
+
+      // Descripción
+      const p = document.createElement('p');
+      p.className = 'modal-dia-desc';
+      p.textContent = ev.descripcion;
+
+      // Footer: fuente + ver detalle
+      const footer = document.createElement('div');
+      footer.className = 'modal-dia-footer';
+
+      const fuenteLink = document.createElement('a');
+      fuenteLink.className = 'modal-dia-fuente';
+      fuenteLink.href = Sanitize.url(ev.fuente.url);
+      fuenteLink.target = '_blank';
+      fuenteLink.rel = 'noopener noreferrer';
+
+      // Ícono externo
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', '11'); svg.setAttribute('height', '11');
+      svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '2');
+      svg.setAttribute('aria-hidden', 'true');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', 'M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6');
+      const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+      poly.setAttribute('points', '15 3 21 3 21 9');
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', '10'); line.setAttribute('y1', '14');
+      line.setAttribute('x2', '21'); line.setAttribute('y2', '3');
+      svg.appendChild(path); svg.appendChild(poly); svg.appendChild(line);
+
+      fuenteLink.appendChild(svg);
+      fuenteLink.appendChild(document.createTextNode(ev.fuente.medio));
+
+      const verBtn = document.createElement('button');
+      verBtn.className = 'modal-dia-ver';
+      verBtn.textContent = 'Ver análisis →';
+      verBtn.addEventListener('click', () => {
+        Modal.close('modal-dia');
+        Modal.openDetalle(ev);
+      });
+
+      footer.appendChild(fuenteLink);
+      footer.appendChild(verBtn);
+
+      li.appendChild(topRow);
+      li.appendChild(h3);
+      li.appendChild(p);
+      li.appendChild(footer);
+      list.appendChild(li);
+    });
+
+    Modal.open('modal-dia');
+  },
+
+  /**
+   * Inicializa el calendario en el mes con más eventos,
+   * o en el mes actual si no hay datos.
+   */
+  init() {
+    // Detectar el mes con más eventos
+    const monthCount = eventosGubernamentales.reduce((acc, ev) => {
+      const key = ev.fecha.slice(0, 7); // "YYYY-MM"
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {});
+
+    const topMonth = Object.entries(monthCount).sort((a, b) => b[1] - a[1])[0];
+
+    if (topMonth) {
+      const [y, m] = topMonth[0].split('-').map(Number);
+      this._year = y;
+      this._month = m - 1;
+    } else {
+      const now = new Date();
+      this._year = now.getFullYear();
+      this._month = now.getMonth();
+    }
+
+    this.render();
+
+    // Navegación mes anterior / siguiente
+    document.getElementById('cal-prev')?.addEventListener('click', () => {
+      this._month--;
+      if (this._month < 0) { this._month = 11; this._year--; }
+      this._selectedDate = null;
+      this.render();
+    });
+
+    document.getElementById('cal-next')?.addEventListener('click', () => {
+      this._month++;
+      if (this._month > 11) { this._month = 0; this._year++; }
+      this._selectedDate = null;
+      this.render();
+    });
+
+    // Reset selección de día
+    document.getElementById('cal-reset')?.addEventListener('click', () => {
+      this._selectedDate = null;
+      this.render();
     });
   }
 };
 
 /* ============================================================
-   INICIALIZACIÓN
+   INIT
    ============================================================ */
 function init() {
-  Render.heroCounter();
+  Render.heroStats();
   Render.estadisticas();
-  Render.filtros();
+  Render.allFilters();
   Render.timeline();
-  EventBus.init();
+  Calendario.init();
+  Events.init();
 }
 
 document.addEventListener('DOMContentLoaded', init);

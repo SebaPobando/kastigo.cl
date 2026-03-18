@@ -5,24 +5,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO TÉCNICO -->
   <title>Kastigo · Monitor Ciudadano de Medidas Gubernamentales Chile 2026</title>
   <meta name="description"
-    content="Plataforma independiente de tecnología cívica que registra, categoriza y fiscaliza las medidas del gobierno de Chile. Datos públicos, transparencia ciudadana." />
+    content="Plataforma independiente de tecnología cívica que registra, categoriza y fiscaliza las medidas del gobierno de Chile. Hechos verificados e interpretación ciudadana." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Colectivo Kastigo" />
   <meta name="keywords"
-    content="monitor ciudadano chile, fiscalización gobierno, transparencia chile, medidas gobierno 2026, tecnología cívica" />
+    content="monitor ciudadano chile, fiscalización gobierno, transparencia chile, medidas gobierno 2026, tecnología cívica, hechos verificados" />
   <link rel="canonical" href="https://kastigo.cl/" />
-  <link rel="icon" href="assets/img/logo.png">
+  <link rel="icon" href="assets/img/logo.png" type="image/png" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kastigo.cl/" />
   <meta property="og:title" content="Kastigo · Monitor Ciudadano de Chile" />
   <meta property="og:description"
-    content="Registramos, categorizamos y fiscalizamos las medidas del gobierno. Datos públicos para trabajadores de Chile." />
-  <meta property="og:image" content="assets/img/og-image.jpg" />
+    content="Hechos verificados e interpretación ciudadana sobre las medidas del gobierno. Datos públicos para trabajadores de Chile." />
+  <meta property="og:image" content="https://kastigo.cl/assets/img/og-image.jpg" />
   <meta property="og:locale" content="es_CL" />
   <meta property="og:site_name" content="Kastigo" />
 
@@ -30,68 +29,51 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@kastigo_cl" />
   <meta name="twitter:title" content="Kastigo · Monitor Ciudadano Chile 2026" />
-  <meta name="twitter:description"
-    content="Plataforma cívica independiente. Fiscalizamos el poder con datos públicos." />
-  <meta name="twitter:image" content="assets/img/og-image.jpg" />
+  <meta name="twitter:description" content="Plataforma cívica independiente. Hechos y análisis sobre el poder." />
+  <meta name="twitter:image" content="https://kastigo.cl/assets/img/og-image.jpg" />
 
-  <!-- JSON-LD: DataFeed para AIO (SearchGPT, Perplexity) -->
+  <!-- JSON-LD: DataFeed AIO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "DataFeed",
-    "name": "Kastigo — Base de Datos de Medidas Gubernamentales Chile 2026",
-    "description": "Registro cronológico y categorizado de medidas, decretos, leyes y políticas públicas del gobierno de Chile, elaborado por el colectivo ciudadano Kastigo.",
+    "name": "Kastigo — Registro de Medidas Gubernamentales Chile 2026",
+    "description": "Base de datos ciudadana con hechos verificados e interpretaciones sobre decretos, leyes y políticas del gobierno de Chile.",
     "url": "https://kastigo.cl/",
     "dateModified": "2026-03-17",
     "inLanguage": "es-CL",
     "license": "https://creativecommons.org/licenses/by-nc/4.0/",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Colectivo Kastigo",
-      "url": "https://kastigo.cl"
-    },
-    "dataFeedElement": [
-      {
-        "@type": "DataFeedItem",
-        "item": {
-          "@type": "NewsArticle",
-          "headline": "Retiro masivo de 43 decretos de protección ambiental",
-          "datePublished": "2026-03-17",
-          "about": "Medio Ambiente"
-        }
-      }
-    ]
+    "publisher": { "@type": "Organization", "name": "Colectivo Kastigo", "url": "https://kastigo.cl" }
   }
   </script>
 
-  <!-- BREADCRUMB JSON-LD -->
+  <!-- JSON-LD: NewsArticle Sample -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Inicio",
-      "item": "https://kastigo.cl/"
-    }]
+    "@type": "NewsArticle",
+    "headline": "Retiro de 43 decretos de protección ambiental por el gobierno de Chile",
+    "datePublished": "2026-03-17",
+    "description": "El Ejecutivo retiró de Contraloría 43 decretos ambientales y el plan de DD.HH.",
+    "author": { "@type": "Organization", "name": "Colectivo Kastigo" },
+    "publisher": { "@type": "Organization", "name": "Kastigo", "url": "https://kastigo.cl" },
+    "about": { "@type": "Thing", "name": "Política ambiental Chile 2026" }
   }
   </script>
 
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
 </head>
 
 <body>
 
-  <!-- AVISO DE NO OFICIALIDAD -->
-  <div class="disclaimer-bar" role="alert" aria-live="polite">
-    <span class="disclaimer-icon">⚠️</span>
-    <span>Sitio <strong>NO oficial</strong> del gobierno · Plataforma ciudadana independiente de fiscalización · No
-      somos afiliados al Estado</span>
+  <!-- AVISO NO OFICIAL -->
+  <div class="disclaimer-bar" role="alert" id="disclaimer-bar">
+    <span>⚠️ Sitio <strong>NO oficial</strong> del gobierno · Plataforma ciudadana independiente · No somos afiliados al
+      Estado</span>
     <button class="disclaimer-close" id="disclaimer-close" aria-label="Cerrar aviso">✕</button>
   </div>
 
@@ -99,19 +81,19 @@
   <header class="site-header" role="banner">
     <div class="header-inner">
       <div class="header-brand">
-        <a href="/" class="brand-link" aria-label="Kastigo - Inicio">
-          <img src="assets/img/logo.png" alt="Kastigo Monitor Ciudadano" class="brand-logo" width="48" height="48" />
+        <a href="/" class="brand-link" aria-label="Kastigo inicio">
+          <img src="assets/img/logo.png" alt="Kastigo" class="brand-logo" width="44" height="44" />
           <div class="brand-text">
             <span class="brand-name">KASTIGO</span>
             <span class="brand-tagline">Monitor Ciudadano · Chile</span>
           </div>
         </a>
-        <span class="independent-badge" title="Plataforma independiente, no oficial">INDEPENDIENTE</span>
+        <span class="independent-badge">INDEPENDIENTE</span>
       </div>
       <nav class="header-nav" aria-label="Navegación principal">
-        <button class="nav-btn" id="btn-quienes-somos">Quiénes Somos</button>
-        <a href="https://ko-fi.com/kastigo" class="nav-btn nav-btn-cafe" target="_blank" rel="noopener noreferrer"
-          id="btn-cafe-nav" aria-label="Apoyar el proyecto">☕ Apoyar</a>
+        <button class="nav-btn" id="btn-quienes">Quiénes Somos</button>
+        <a href="https://ko-fi.com/kastigo" class="nav-btn nav-btn-cafe" target="_blank" rel="noopener noreferrer">☕
+          Apoyar</a>
       </nav>
     </div>
   </header>
@@ -121,94 +103,146 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span>Actualizado en tiempo real · <time datetime="2026-03-17">Marzo 2026</time></span>
+        <span>Actualizado · <time datetime="2026-03-17">Marzo 2026</time></span>
       </div>
-      <h1 class="hero-title" id="hero-title">
-        Cada medida.<br />
-        <em>Registrada.</em>
-      </h1>
-      <p class="hero-subtitle">Fiscalizamos el poder con datos públicos. Sin filtros corporativos. Sin agenda oculta.
-      </p>
-      <div class="hero-counter" aria-live="polite">
-        <span class="counter-num" id="hero-counter">0</span>
-        <span class="counter-label">medidas documentadas</span>
+      <h1 class="hero-title" id="hero-title">Cada medida.<br /><em>Registrada.</em></h1>
+      <p class="hero-subtitle">Hechos verificados e interpretación ciudadana. Sin filtros corporativos.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="hero-total">0</span>
+          <span class="hero-stat-label">medidas</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="hero-confirmados">0</span>
+          <span class="hero-stat-label">confirmadas</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="hero-categorias">0</span>
+          <span class="hero-stat-label">categorías</span>
+        </div>
       </div>
     </div>
-    <div class="hero-stripe" aria-hidden="true"></div>
+    <div class="hero-flag-stripe" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
   </section>
 
-  <!-- MAIN LAYOUT -->
+  <!-- LEYENDA DE CERTEZA -->
+  <div class="leyenda-bar" role="note" aria-label="Leyenda de indicadores">
+    <span class="leyenda-title">Indicadores:</span>
+    <span class="certeza-badge certeza-confirmado">● Confirmado</span>
+    <span class="certeza-badge certeza-reportado">● Reportado</span>
+    <span class="certeza-badge certeza-desarrollo">● En Desarrollo</span>
+    <span class="tipo-badge tipo-ley">Ley</span>
+    <span class="tipo-badge tipo-decreto">Decreto</span>
+    <span class="tipo-badge tipo-declaracion">Declaración</span>
+    <span class="tipo-badge tipo-proyecto">Proyecto</span>
+  </div>
+
+  <!-- MAIN -->
   <main class="main-layout" id="main-content">
 
     <!-- SIDEBAR -->
     <aside class="sidebar" aria-label="Filtros y estadísticas">
 
-      <!-- Stats -->
-      <section class="panel stats-panel" aria-labelledby="stats-heading">
-        <h2 class="panel-title" id="stats-heading">Medidas por Categoría</h2>
-        <div class="stats-total-row">
-          <span class="stats-big-num" id="stats-total" aria-label="Total de medidas">0</span>
-          <span class="stats-big-label">total</span>
+      <!-- CALENDARIO -->
+      <section class="panel panel-calendario" aria-labelledby="cal-h">
+        <h2 class="panel-title" id="cal-h">Calendario</h2>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" id="cal-prev" aria-label="Mes anterior">‹</button>
+          <span class="cal-month-label" id="cal-month-label"></span>
+          <button class="cal-nav-btn" id="cal-next" aria-label="Mes siguiente">›</button>
         </div>
-        <div id="stats-grid" role="list" aria-label="Estadísticas por categoría"></div>
+        <div class="cal-grid" id="cal-grid" role="grid" aria-label="Calendario de medidas"></div>
+        <button class="cal-reset-btn hidden" id="cal-reset">✕ Limpiar fecha</button>
       </section>
 
-      <!-- Buscador -->
-      <section class="panel search-panel" aria-labelledby="search-heading">
-        <h2 class="panel-title" id="search-heading">Buscar</h2>
+      <section class="panel" aria-labelledby="stats-h">
+        <h2 class="panel-title" id="stats-h">Estadísticas</h2>
+        <div class="stats-total-row">
+          <span class="stats-big-num" id="stats-total">0</span>
+          <span class="stats-big-label">total</span>
+        </div>
+        <div id="stats-grid" role="list"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="search-h">
+        <h2 class="panel-title" id="search-h">Buscar</h2>
         <div class="search-wrapper" role="search">
-          <label for="search-input" class="sr-only">Buscar medidas por texto</label>
+          <label for="search-input" class="sr-only">Buscar medidas</label>
           <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            aria-hidden="true" focusable="false">
+            aria-hidden="true">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          <input type="search" id="search-input" class="search-input" placeholder="Buscar por título o descripción…"
-            maxlength="200" autocomplete="off" spellcheck="false" />
-          <button class="search-clear" id="search-clear" aria-label="Limpiar búsqueda">✕</button>
+          <input type="search" id="search-input" class="search-input" placeholder="Buscar…" maxlength="200"
+            autocomplete="off" spellcheck="false" />
+          <button class="search-clear" id="search-clear" aria-label="Limpiar">✕</button>
         </div>
-        <p class="search-count" id="search-count" aria-live="polite" aria-atomic="true"></p>
+        <p class="search-count" id="search-count" aria-live="polite"></p>
       </section>
 
-      <!-- Filtros -->
-      <section class="panel filter-panel" aria-labelledby="filter-heading">
-        <h2 class="panel-title" id="filter-heading">Filtrar</h2>
-        <div class="filter-buttons" id="filter-buttons" role="group" aria-label="Filtros por categoría"></div>
+      <section class="panel" aria-labelledby="filter-h">
+        <h2 class="panel-title" id="filter-h">Categoría</h2>
+        <div class="filter-buttons" id="filter-cat" role="group" aria-label="Filtro categoría"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="filter-tipo-h">
+        <h2 class="panel-title" id="filter-tipo-h">Tipo</h2>
+        <div class="filter-buttons" id="filter-tipo" role="group" aria-label="Filtro tipo"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="filter-certeza-h">
+        <h2 class="panel-title" id="filter-certeza-h">Certeza</h2>
+        <div class="filter-buttons" id="filter-certeza" role="group" aria-label="Filtro certeza"></div>
       </section>
 
     </aside>
 
     <!-- TIMELINE -->
-    <section class="timeline-section" aria-labelledby="timeline-heading">
+    <section class="timeline-section" aria-labelledby="timeline-h">
       <div class="timeline-header">
-        <h2 class="timeline-title" id="timeline-heading">Línea de Tiempo</h2>
-        <span class="timeline-order" aria-label="Orden: más reciente primero">↓ Más reciente</span>
+        <h2 class="timeline-title" id="timeline-h">Línea de Tiempo</h2>
+        <span class="timeline-order">↓ Más reciente primero</span>
       </div>
-      <ol class="timeline-track" id="timeline-track" aria-label="Lista de medidas gubernamentales">
-        <!-- Generado por JS -->
-      </ol>
+      <ol class="timeline-track" id="timeline-track" aria-label="Medidas gubernamentales"></ol>
       <div class="empty-state hidden" id="empty-state" role="status" aria-live="polite">
-        <span class="empty-icon" aria-hidden="true">🔍</span>
+        <span aria-hidden="true">🔍</span>
         <p>No se encontraron medidas con ese criterio.</p>
       </div>
     </section>
 
   </main>
 
-  <!-- BOTÓN FLOTANTE CAFÉ -->
-  <a href="https://ko-fi.com/kastigo" class="fab-cafe" target="_blank" rel="noopener noreferrer" id="btn-cafe-fab"
-    aria-label="Invítame un café — apoya el proyecto">
+  <!-- MODAL: DÍA DEL CALENDARIO -->
+  <div class="modal-overlay hidden" id="modal-dia" role="dialog" aria-modal="true" aria-labelledby="mdia-title">
+    <div class="modal-box modal-dia-box">
+      <button class="modal-close" data-modal="modal-dia" aria-label="Cerrar">✕</button>
+      <div class="modal-accent-bar accent-gradient"></div>
+      <div class="modal-dia-header">
+        <time class="modal-dia-fecha" id="mdia-fecha"></time>
+        <span class="modal-dia-count" id="mdia-count"></span>
+      </div>
+      <h2 class="modal-title" id="mdia-title">Medidas del día</h2>
+      <ol class="modal-dia-list" id="mdia-list" aria-label="Lista de medidas del día"></ol>
+    </div>
+  </div>
+
+  <!-- FAB CAFÉ -->
+  <a href="https://ko-fi.com/kastigo" class="fab-cafe" target="_blank" rel="noopener noreferrer"
+    aria-label="Apoyar con un café">
     ☕ <span>Invítame un café</span>
   </a>
 
   <!-- MODAL: QUIÉNES SOMOS -->
-  <div class="modal-overlay hidden" id="modal-quienes" role="dialog" aria-modal="true"
-    aria-labelledby="modal-quienes-title">
-    <div class="modal-box modal-quienes-box">
+  <div class="modal-overlay hidden" id="modal-quienes" role="dialog" aria-modal="true" aria-labelledby="mq-title">
+    <div class="modal-box">
       <button class="modal-close" data-modal="modal-quienes" aria-label="Cerrar">✕</button>
-      <div class="modal-header-accent quienes-accent"></div>
-      <h2 class="modal-title" id="modal-quienes-title">Quiénes Somos</h2>
-      <p class="modal-body-text">
+      <div class="modal-accent-bar accent-gradient"></div>
+      <h2 class="modal-title" id="mq-title">Quiénes Somos</h2>
+      <p class="modal-text">
         Somos un colectivo ciudadano de profesionales y estudiantes de ingeniería dedicados a la transparencia
         gubernamental.
         <strong>Kastigo</strong> nace como una herramienta de fiscalización basada en datos públicos para garantizar el
@@ -217,90 +251,107 @@
         comunidad.
       </p>
       <div class="modal-divider"></div>
-      <p class="modal-disclaimer-text">
-        <strong>⚠️ Aviso importante:</strong> Este sitio <strong>no es oficial</strong> del Gobierno de Chile ni de
-        ninguna
-        institución del Estado. Es un ejercicio legítimo de libertad de expresión y derecho de acceso a la información
-        pública,
-        garantizados por la Constitución y la Ley N° 20.285 de Transparencia.
-      </p>
-      <a href="https://ko-fi.com/kastigo" class="modal-cafe-btn" target="_blank" rel="noopener noreferrer"
-        aria-label="Apoyar el proyecto con un café">☕ Apoyar el
+      <div class="modal-disclaimer-box">
+        <strong>⚠️ Aviso:</strong> Este sitio <strong>no es oficial</strong> del Gobierno de Chile ni de ninguna
+        institución del Estado.
+        Es un ejercicio legítimo de libertad de expresión y acceso a la información pública (Art. 19 N°12 CPR · Ley N°
+        20.285).
+      </div>
+      <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal" target="_blank" rel="noopener noreferrer">☕ Apoyar el
         proyecto</a>
     </div>
   </div>
 
-  <!-- MODAL: DETALLE DE MEDIDA -->
-  <div class="modal-overlay hidden" id="modal-detalle" role="dialog" aria-modal="true"
-    aria-labelledby="modal-detalle-title">
+  <!-- MODAL: DETALLE MEDIDA -->
+  <div class="modal-overlay hidden" id="modal-detalle" role="dialog" aria-modal="true" aria-labelledby="md-title">
     <div class="modal-box modal-detalle-box">
       <button class="modal-close" data-modal="modal-detalle" aria-label="Cerrar">✕</button>
-      <div class="modal-category-badge" id="modal-det-badge"></div>
-      <time class="modal-date" id="modal-det-fecha"></time>
-      <h2 class="modal-title" id="modal-detalle-title"></h2>
-      <p class="modal-body-text" id="modal-det-desc"></p>
-      <div class="modal-actions">
-        <a class="modal-source-btn" id="modal-det-fuente" href="#" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"
+
+      <div class="modal-meta-row">
+        <span class="modal-tipo-badge" id="md-tipo"></span>
+        <span class="modal-certeza-badge" id="md-certeza"></span>
+        <span class="modal-cat-badge" id="md-cat"></span>
+      </div>
+
+      <time class="modal-fecha" id="md-fecha"></time>
+      <h2 class="modal-title" id="md-title"></h2>
+
+      <!-- BLOQUE HECHOS -->
+      <div class="modal-block modal-block-hechos">
+        <div class="modal-block-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            aria-hidden="true">
+            <path d="M9 12l2 2 4-4" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+          Descripción · Hechos verificados
+        </div>
+        <p class="modal-text" id="md-desc"></p>
+        <a class="modal-source-link" id="md-fuente" href="#" target="_blank" rel="noopener noreferrer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             aria-hidden="true">
             <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
             <polyline points="15 3 21 3 21 9" />
             <line x1="10" y1="14" x2="21" y2="3" />
           </svg>
-          Ver fuente original
-        </a>
-        <a href="https://ko-fi.com/kastigo" class="modal-cafe-btn modal-cafe-small" target="_blank"
-          rel="noopener noreferrer" aria-label="Apoyar con un café">
-          ☕ ¿Te es útil esta info? Apoya el proyecto invitándome un café
+          <span id="md-fuente-medio">Ver fuente</span>
         </a>
       </div>
+
+      <!-- BLOQUE ANÁLISIS -->
+      <div class="modal-block modal-block-analisis">
+        <div class="modal-block-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          Análisis Crítico · Interpretación ciudadana
+        </div>
+        <p class="modal-text modal-text-analisis" id="md-interpretacion"></p>
+        <p class="modal-analisis-disclaimer">Esta sección refleja opiniones de sectores de la sociedad civil, no hechos
+          verificados.</p>
+      </div>
+
+      <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal btn-cafe-modal-sm" target="_blank"
+        rel="noopener noreferrer">
+        ☕ ¿Te es útil esta info? Apoya el proyecto invitándome un café
+      </a>
     </div>
   </div>
 
-  <!-- MODAL: TÉRMINOS Y CONDICIONES -->
-  <div class="modal-overlay hidden" id="modal-terminos" role="dialog" aria-modal="true"
-    aria-labelledby="modal-terminos-title">
+  <!-- MODAL: TÉRMINOS -->
+  <div class="modal-overlay hidden" id="modal-terminos" role="dialog" aria-modal="true" aria-labelledby="mt-title">
     <div class="modal-box modal-terminos-box">
       <button class="modal-close" data-modal="modal-terminos" aria-label="Cerrar">✕</button>
-      <h2 class="modal-title" id="modal-terminos-title">Términos y Condiciones</h2>
+      <h2 class="modal-title" id="mt-title">Términos y Condiciones</h2>
 
-      <h3 class="modal-section-title">1. Exención de Responsabilidad</h3>
-      <p class="modal-body-text">
-        Kastigo es un sitio <strong>no oficial</strong> operado por ciudadanos particulares en ejercicio de la libertad
-        de expresión
-        (Art. 19 N°12 CPR) y el derecho de acceso a la información pública (Ley N° 20.285). La información publicada
-        proviene de
-        medios de prensa verificados y fuentes de acceso público. No garantizamos exhaustividad ni asumimos
-        responsabilidad por
-        errores en las fuentes citadas.
-      </p>
+      <h3 class="modal-section-h">1. Exención de Responsabilidad</h3>
+      <p class="modal-text">Kastigo es un sitio <strong>no oficial</strong> operado por ciudadanos particulares en
+        ejercicio de la libertad de expresión (Art. 19 N°12 CPR) y el derecho de acceso a la información pública (Ley N°
+        20.285). La información publicada proviene de medios verificados y fuentes públicas. No garantizamos
+        exhaustividad ni asumimos responsabilidad por errores en las fuentes citadas.</p>
 
-      <h3 class="modal-section-title">2. No Afiliación Gubernamental</h3>
-      <p class="modal-body-text">
-        Este sitio <strong>no tiene ningún tipo de afiliación, relación ni respaldo</strong> del Gobierno de Chile, La
-        Moneda,
-        ningún ministerio, servicio público, partido político ni organización estatal. El uso del nombre "Kastigo" y su
-        contenido
-        son de exclusiva responsabilidad del colectivo ciudadano que lo opera.
-      </p>
+      <h3 class="modal-section-h">2. Hechos e Interpretaciones</h3>
+      <p class="modal-text">La Plataforma distingue claramente entre <strong>Hechos</strong> (información pública
+        verificable) e <strong>Interpretaciones</strong> (análisis y opiniones de sectores de la sociedad civil y
+        autores). <strong>El usuario es responsable del uso que haga de esta información.</strong></p>
 
-      <h3 class="modal-section-title">3. Política de Datos y Privacidad</h3>
-      <p class="modal-body-text">
-        Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics, tiempo de sesión) mediante
-        herramientas
-        de analítica web. <strong>Estos datos son agregados, anonimizados y no permiten identificar a usuarios
-          individuales.</strong>
-        Los datos agregados podrán ser utilizados para análisis interno y eventualmente comercializados a terceros para
-        financiar la
-        operación del sitio. Al navegar este sitio, aceptas esta política.
-      </p>
+      <h3 class="modal-section-h">3. No Afiliación Gubernamental</h3>
+      <p class="modal-text">Este sitio <strong>no tiene ningún tipo de afiliación, relación ni respaldo</strong> del
+        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político ni organización estatal.</p>
 
-      <h3 class="modal-section-title">4. Propiedad Intelectual</h3>
-      <p class="modal-body-text">
-        El contenido editorial propio de Kastigo se publica bajo licencia
-        <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"
-          class="text-link">Creative Commons BY-NC 4.0</a>.
-        Las fuentes citadas son propiedad de sus respectivos medios.
+      <h3 class="modal-section-h">4. Política de Datos</h3>
+      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics, tiempo de
+        sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
+          individuales.</strong> Podrán ser utilizados para análisis interno y eventualmente comercializados a terceros
+        para financiar la operación. Al navegar este sitio, aceptas esta política.</p>
+
+      <h3 class="modal-section-h">5. Propiedad Intelectual</h3>
+      <p class="modal-text">Contenido editorial propio publicado bajo <a
+          href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"
+          class="text-link">Creative Commons BY-NC 4.0</a>. Las fuentes citadas son propiedad de sus respectivos medios.
       </p>
     </div>
   </div>
@@ -309,13 +360,12 @@
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="assets/img/logo.png" alt="Kastigo" class="footer-logo" width="36" height="36" loading="lazy" />
+        <img src="assets/img/logo.png" alt="Kastigo" class="footer-logo" width="34" height="34" loading="lazy" />
         <span class="footer-name">KASTIGO</span>
       </div>
-      <p class="footer-disclaimer">
-        Sitio <strong>no oficial</strong> · Plataforma ciudadana independiente · No somos el gobierno de Chile
-      </p>
-      <nav class="footer-nav" aria-label="Navegación de pie de página">
+      <p class="footer-disclaimer">Sitio <strong>no oficial</strong> · Plataforma ciudadana independiente · No somos el
+        gobierno de Chile</p>
+      <nav class="footer-nav" aria-label="Pie de página">
         <button class="footer-link" id="btn-terminos">Términos y Condiciones</button>
         <button class="footer-link" id="btn-quienes-footer">Quiénes Somos</button>
       </nav>
