@@ -1,9 +1,19 @@
 /* ============================================================
-   KASTIGO v2 · MONITOR CIUDADANO
-   Estética: Periodismo de investigación — denso, preciso, cívico
+   KASTIGO v3 · MONITOR CIUDADANO
+   css/styles.css
+   Novedades v3:
+   - Variables CSS para modo oscuro automático
+   - Estilos para Chart.js (gráfico dona)
+   - Botón compartir + toast de confirmación
+   - Toggle de tema manual
    ============================================================ */
 
+/* ============================================================
+   1. VARIABLES: MODO CLARO (default)
+   Todas las variables de color aquí para fácil mantenimiento.
+   ============================================================ */
 :root {
+  /* Paleta principal */
   --azul: #0B1F3A;
   --azul-medio: #163660;
   --azul-claro: #1F5BA3;
@@ -20,28 +30,132 @@
   --amarillo: #F5A623;
   --verde: #1A7A4A;
   --naranja: #D4620A;
-  --morado: #5E3A9E;
   --negro: #060D1A;
+
+  /* Superficies UI (las que cambian en dark mode) */
+  --bg-page: #F2F3F6;
+  --bg-panel: #FFFFFF;
+  --bg-header: #0B1F3A;
+  --bg-modal: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-input: #F2F3F6;
+
+  /* Textos */
+  --text-primary: #0B1F3A;
+  --text-secondary: #526075;
+  --text-muted: #8A9AB5;
+  --text-inverse: #FFFFFF;
+
+  /* Bordes */
+  --border-color: #D4DAE8;
+  --border-focus: #1F5BA3;
 
   /* Certeza */
   --cert-conf: #1A7A4A;
   --cert-rep: #D4620A;
   --cert-dev: #5E3A9E;
 
-  /* Tipo */
-  --tipo-ley: #1F5BA3;
-  --tipo-dec: #526075;
-  --tipo-decl: #D4620A;
-  --tipo-proy: #5E3A9E;
-
+  /* Sombras */
   --sombra-sm: 0 2px 8px rgba(11, 31, 58, 0.07);
   --sombra-md: 0 6px 24px rgba(11, 31, 58, 0.11);
   --sombra-lg: 0 20px 60px rgba(11, 31, 58, 0.18);
+
+  /* Misc */
   --radio: 8px;
   --radio-lg: 14px;
   --trans: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ============================================================
+   2. VARIABLES: MODO OSCURO AUTOMÁTICO
+   Se activa cuando el sistema operativo del usuario tiene
+   activado el modo oscuro (prefers-color-scheme: dark).
+   Solo sobreescribimos las variables que cambian.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page: #0A0F1C;
+    --bg-panel: #111827;
+    --bg-header: #060D1A;
+    --bg-modal: #111827;
+    --bg-card: #111827;
+    --bg-input: #1A2235;
+
+    --text-primary: #E8EEF8;
+    --text-secondary: #8A9AB5;
+    --text-muted: #526075;
+
+    --border-color: #1E2D45;
+    --border-focus: #3B7DD8;
+
+    --azul-suave: #1A2640;
+    --gris-fondo: #0A0F1C;
+    --gris-borde: #1E2D45;
+    --gris-texto: #8A9AB5;
+    --crema: #1A1810;
+    --crema-borde: #2E2A1E;
+
+    --sombra-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --sombra-md: 0 6px 24px rgba(0, 0, 0, 0.4);
+    --sombra-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ============================================================
+   3. MODO OSCURO MANUAL (toggle en el header)
+   El atributo data-theme="dark" en <html> fuerza el modo oscuro
+   independientemente de la preferencia del sistema.
+   ============================================================ */
+[data-theme="dark"] {
+  --bg-page: #0A0F1C;
+  --bg-panel: #111827;
+  --bg-header: #060D1A;
+  --bg-modal: #111827;
+  --bg-card: #111827;
+  --bg-input: #1A2235;
+  --text-primary: #E8EEF8;
+  --text-secondary: #8A9AB5;
+  --text-muted: #526075;
+  --border-color: #1E2D45;
+  --border-focus: #3B7DD8;
+  --azul-suave: #1A2640;
+  --gris-fondo: #0A0F1C;
+  --gris-borde: #1E2D45;
+  --gris-texto: #8A9AB5;
+  --crema: #1A1810;
+  --crema-borde: #2E2A1E;
+  --sombra-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --sombra-md: 0 6px 24px rgba(0, 0, 0, 0.4);
+  --sombra-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] {
+  /* Valores explícitos de modo claro (por si el sistema está en dark) */
+  --bg-page: #F2F3F6;
+  --bg-panel: #FFFFFF;
+  --bg-header: #0B1F3A;
+  --bg-modal: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-input: #F2F3F6;
+  --text-primary: #0B1F3A;
+  --text-secondary: #526075;
+  --text-muted: #8A9AB5;
+  --border-color: #D4DAE8;
+  --border-focus: #1F5BA3;
+  --azul-suave: #E4EDF8;
+  --gris-fondo: #F2F3F6;
+  --gris-borde: #D4DAE8;
+  --gris-texto: #526075;
+  --crema: #F9F7F2;
+  --crema-borde: #E8E2D4;
+  --sombra-sm: 0 2px 8px rgba(11, 31, 58, 0.07);
+  --sombra-md: 0 6px 24px rgba(11, 31, 58, 0.11);
+  --sombra-lg: 0 20px 60px rgba(11, 31, 58, 0.18);
+}
+
+/* ============================================================
+   4. RESET Y BASE
+   ============================================================ */
 *,
 *::before,
 *::after {
@@ -56,12 +170,13 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--gris-fondo);
-  color: var(--azul);
+  background: var(--bg-page);
+  color: var(--text-primary);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .hidden {
@@ -90,7 +205,9 @@ button {
   font-family: 'DM Sans', sans-serif;
 }
 
-/* ---- DISCLAIMER ---- */
+/* ============================================================
+   5. DISCLAIMER BAR
+   ============================================================ */
 .disclaimer-bar {
   background: var(--amarillo);
   color: var(--negro);
@@ -121,14 +238,17 @@ button {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* ---- HEADER ---- */
+/* ============================================================
+   6. HEADER
+   ============================================================ */
 .site-header {
-  background: var(--azul);
+  background: var(--bg-header);
   border-bottom: 3px solid var(--rojo);
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: var(--sombra-md);
+  transition: background 0.3s ease;
 }
 
 .header-inner {
@@ -168,7 +288,7 @@ button {
   font-family: 'Bebas Neue', serif;
   font-size: 1.55rem;
   letter-spacing: 0.08em;
-  color: var(--blanco);
+  color: #FFFFFF;
 }
 
 .brand-tagline {
@@ -216,13 +336,13 @@ button {
 
 .nav-btn:hover {
   border-color: rgba(255, 255, 255, 0.55);
-  color: var(--blanco);
+  color: #FFFFFF;
 }
 
 .nav-btn-cafe {
   background: var(--rojo);
   border-color: var(--rojo);
-  color: var(--blanco);
+  color: #FFFFFF;
   font-weight: 600;
 }
 
@@ -232,12 +352,47 @@ button {
   box-shadow: 0 4px 12px rgba(200, 0, 30, 0.35);
 }
 
-/* ---- HERO ---- */
+/* Toggle de tema */
+.btn-theme-toggle {
+  padding: 0.42rem 0.65rem;
+  font-size: 0.9rem;
+}
+
+.btn-theme-toggle .theme-icon-sun {
+  display: inline;
+}
+
+.btn-theme-toggle .theme-icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .btn-theme-toggle .theme-icon-sun {
+  display: none;
+}
+
+[data-theme="dark"] .btn-theme-toggle .theme-icon-moon {
+  display: inline;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .btn-theme-toggle .theme-icon-sun {
+    display: none;
+  }
+
+  html:not([data-theme="light"]) .btn-theme-toggle .theme-icon-moon {
+    display: inline;
+  }
+}
+
+/* ============================================================
+   7. HERO
+   ============================================================ */
 .hero {
-  background: var(--azul);
+  background: var(--bg-header);
   padding: 3.5rem 2rem 4.5rem;
   position: relative;
   overflow: hidden;
+  transition: background 0.3s ease;
 }
 
 .hero::before {
@@ -292,7 +447,7 @@ button {
   font-family: 'Bebas Neue', serif;
   font-size: clamp(3.2rem, 7vw, 6.5rem);
   letter-spacing: 0.04em;
-  color: var(--blanco);
+  color: #FFFFFF;
   line-height: 0.95;
   margin-bottom: 1rem;
 }
@@ -372,35 +527,40 @@ button {
 }
 
 .hero-flag-stripe span:nth-child(2) {
-  background: var(--blanco);
+  background: #FFFFFF;
 }
 
 .hero-flag-stripe span:nth-child(3) {
   background: var(--rojo);
 }
 
-/* ---- LEYENDA ---- */
+/* ============================================================
+   8. LEYENDA BAR
+   ============================================================ */
 .leyenda-bar {
-  background: var(--blanco);
-  border-bottom: 1px solid var(--gris-borde);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
   padding: 0.55rem 2rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.6rem;
   font-size: 0.72rem;
+  transition: background 0.3s ease;
 }
 
 .leyenda-title {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-right: 0.25rem;
 }
 
-/* ---- BADGES CERTEZA ---- */
+/* ============================================================
+   9. BADGES (Certeza y Tipo)
+   ============================================================ */
 .certeza-badge {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
@@ -425,7 +585,32 @@ button {
   background: #F0EBF8;
 }
 
-/* ---- BADGES TIPO ---- */
+[data-theme="dark"] .certeza-confirmado {
+  background: rgba(26, 122, 74, 0.2);
+}
+
+[data-theme="dark"] .certeza-reportado {
+  background: rgba(212, 98, 10, 0.2);
+}
+
+[data-theme="dark"] .certeza-desarrollo {
+  background: rgba(94, 58, 158, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .certeza-confirmado {
+    background: rgba(26, 122, 74, 0.2);
+  }
+
+  html:not([data-theme="light"]) .certeza-reportado {
+    background: rgba(212, 98, 10, 0.2);
+  }
+
+  html:not([data-theme="light"]) .certeza-desarrollo {
+    background: rgba(94, 58, 158, 0.2);
+  }
+}
+
 .tipo-badge {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
@@ -438,25 +623,69 @@ button {
 
 .tipo-ley {
   background: #DDE9F8;
-  color: var(--tipo-ley);
+  color: #1F5BA3;
 }
 
 .tipo-decreto {
   background: #E8EAED;
-  color: var(--tipo-dec);
+  color: #526075;
 }
 
 .tipo-declaracion {
   background: #FFF0E4;
-  color: var(--tipo-decl);
+  color: #D4620A;
 }
 
 .tipo-proyecto {
   background: #F0EBF8;
-  color: var(--tipo-proy);
+  color: #5E3A9E;
 }
 
-/* ---- MAIN LAYOUT ---- */
+[data-theme="dark"] .tipo-ley {
+  background: rgba(31, 91, 163, 0.25);
+  color: #7BAEE8;
+}
+
+[data-theme="dark"] .tipo-decreto {
+  background: rgba(82, 96, 117, 0.25);
+  color: #8A9AB5;
+}
+
+[data-theme="dark"] .tipo-declaracion {
+  background: rgba(212, 98, 10, 0.25);
+  color: #E8913A;
+}
+
+[data-theme="dark"] .tipo-proyecto {
+  background: rgba(94, 58, 158, 0.25);
+  color: #A07ED4;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .tipo-ley {
+    background: rgba(31, 91, 163, 0.25);
+    color: #7BAEE8;
+  }
+
+  html:not([data-theme="light"]) .tipo-decreto {
+    background: rgba(82, 96, 117, 0.25);
+    color: #8A9AB5;
+  }
+
+  html:not([data-theme="light"]) .tipo-declaracion {
+    background: rgba(212, 98, 10, 0.25);
+    color: #E8913A;
+  }
+
+  html:not([data-theme="light"]) .tipo-proyecto {
+    background: rgba(94, 58, 158, 0.25);
+    color: #A07ED4;
+  }
+}
+
+/* ============================================================
+   10. MAIN LAYOUT
+   ============================================================ */
 .main-layout {
   max-width: 1320px;
   margin: 0 auto;
@@ -468,14 +697,17 @@ button {
   width: 100%;
 }
 
-/* ---- PANEL ---- */
+/* ============================================================
+   11. PANELS
+   ============================================================ */
 .panel {
-  background: var(--blanco);
+  background: var(--bg-panel);
   border-radius: var(--radio-lg);
   padding: 1.3rem;
   box-shadow: var(--sombra-sm);
-  border: 1px solid var(--gris-borde);
+  border: 1px solid var(--border-color);
   margin-bottom: 1.1rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .panel:last-child {
@@ -491,7 +723,7 @@ button {
   color: var(--azul-claro);
   margin-bottom: 0.9rem;
   padding-bottom: 0.55rem;
-  border-bottom: 1px solid var(--gris-borde);
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Stats */
@@ -513,18 +745,30 @@ button {
 .stats-big-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
+/* ============================================================
+   12. GRÁFICO DE DONA (Chart.js)
+   ============================================================ */
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 1rem;
+  /* El canvas de Chart.js necesita un contenedor con dimensiones */
+}
+
+/* Stat rows debajo del gráfico */
 .stat-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.45rem 0.65rem;
   border-radius: var(--radio);
-  background: var(--gris-fondo);
+  background: var(--bg-input);
   border-left: 3px solid transparent;
   transition: var(--trans);
   margin-bottom: 0.4rem;
@@ -539,6 +783,7 @@ button {
 .stat-cat {
   font-size: 0.78rem;
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 .stat-count {
@@ -549,7 +794,9 @@ button {
   line-height: 1;
 }
 
-/* Search */
+/* ============================================================
+   13. BUSCADOR
+   ============================================================ */
 .search-wrapper {
   position: relative;
   display: flex;
@@ -561,31 +808,31 @@ button {
   left: 9px;
   width: 14px;
   height: 14px;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   pointer-events: none;
 }
 
 .search-input {
   width: 100%;
   padding: 0.58rem 2rem 0.58rem 2rem;
-  border: 1.5px solid var(--gris-borde);
+  border: 1.5px solid var(--border-color);
   border-radius: var(--radio);
   font-family: 'DM Sans', sans-serif;
   font-size: 0.83rem;
-  color: var(--azul);
-  background: var(--gris-fondo);
+  color: var(--text-primary);
+  background: var(--bg-input);
   outline: none;
   transition: var(--trans);
 }
 
 .search-input:focus {
-  border-color: var(--azul-claro);
-  background: var(--blanco);
-  box-shadow: 0 0 0 3px rgba(31, 91, 163, 0.1);
+  border-color: var(--border-focus);
+  background: var(--bg-panel);
+  box-shadow: 0 0 0 3px rgba(31, 91, 163, 0.12);
 }
 
 .search-input::placeholder {
-  color: var(--gris-texto);
+  color: var(--text-muted);
 }
 
 .search-clear {
@@ -594,7 +841,7 @@ button {
   background: none;
   border: none;
   font-size: 0.68rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   padding: 3px 5px;
   border-radius: 3px;
   opacity: 0;
@@ -614,11 +861,13 @@ button {
   margin-top: 0.45rem;
   font-family: 'DM Mono', monospace;
   font-size: 0.7rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   min-height: 1rem;
 }
 
-/* Filter Buttons */
+/* ============================================================
+   14. FILTROS
+   ============================================================ */
 .filter-buttons {
   display: flex;
   flex-direction: column;
@@ -630,10 +879,10 @@ button {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
-  border: 1.5px solid var(--gris-borde);
+  border: 1.5px solid var(--border-color);
   border-radius: var(--radio);
-  background: var(--gris-fondo);
-  color: var(--azul);
+  background: var(--bg-input);
+  color: var(--text-primary);
   font-size: 0.79rem;
   font-weight: 500;
   transition: var(--trans);
@@ -647,12 +896,12 @@ button {
 .filter-btn.active {
   background: var(--azul);
   border-color: var(--azul);
-  color: var(--blanco);
+  color: #FFFFFF;
 }
 
 .filter-btn.active .filter-count {
   background: rgba(255, 255, 255, 0.15);
-  color: var(--blanco);
+  color: #FFFFFF;
 }
 
 .filter-count {
@@ -666,7 +915,154 @@ button {
   transition: var(--trans);
 }
 
-/* ---- TIMELINE ---- */
+/* ============================================================
+   15. CALENDARIO
+   ============================================================ */
+.panel-calendario {
+  padding-bottom: 1rem;
+}
+
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.cal-nav-btn {
+  background: none;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radio);
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--trans);
+}
+
+.cal-nav-btn:hover {
+  background: var(--azul);
+  color: #FFFFFF;
+  border-color: var(--azul);
+}
+
+.cal-month-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-day-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px 0;
+  color: var(--text-secondary);
+}
+
+.cal-day {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: var(--trans);
+  cursor: default;
+}
+
+.cal-day.cal-empty {
+  background: none;
+}
+
+.cal-day.cal-has-events {
+  background: var(--azul-suave);
+  color: var(--azul-medio);
+  cursor: pointer;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+}
+
+.cal-day.cal-has-events:hover {
+  background: var(--azul);
+  color: #FFFFFF;
+  border-color: var(--azul);
+  transform: scale(1.08);
+  z-index: 1;
+}
+
+.cal-day.cal-has-events::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--rojo);
+}
+
+.cal-day.cal-selected {
+  background: var(--rojo) !important;
+  color: #FFFFFF !important;
+  border-color: var(--rojo) !important;
+}
+
+.cal-day.cal-selected::after {
+  background: #FFFFFF;
+}
+
+.cal-day.cal-many-events::after {
+  width: 6px;
+  height: 6px;
+}
+
+.cal-day.cal-today {
+  border: 1.5px solid var(--azul-claro);
+}
+
+.cal-reset-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.65rem;
+  background: var(--rojo-suave);
+  border: 1px solid rgba(200, 0, 30, 0.2);
+  color: var(--rojo);
+  border-radius: var(--radio);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem;
+  transition: var(--trans);
+}
+
+.cal-reset-btn:hover {
+  background: var(--rojo);
+  color: #FFFFFF;
+}
+
+/* ============================================================
+   16. TIMELINE
+   ============================================================ */
 .timeline-section {
   min-width: 0;
 }
@@ -684,12 +1080,13 @@ button {
   font-family: 'Bebas Neue', serif;
   font-size: 1.75rem;
   letter-spacing: 0.05em;
+  color: var(--text-primary);
 }
 
 .timeline-order {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
 }
 
 .timeline-track {
@@ -708,18 +1105,20 @@ button {
   top: 14px;
   bottom: 14px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--rojo), var(--gris-borde));
+  background: linear-gradient(to bottom, var(--rojo), var(--border-color));
   border-radius: 2px;
 }
 
-/* ---- CARD ---- */
+/* ============================================================
+   17. CARDS
+   ============================================================ */
 .timeline-card {
   position: relative;
-  background: var(--blanco);
+  background: var(--bg-card);
   border-radius: var(--radio-lg);
   padding: 1.2rem 1.3rem;
   box-shadow: var(--sombra-sm);
-  border: 1px solid var(--gris-borde);
+  border: 1px solid var(--border-color);
   cursor: pointer;
   transition: var(--trans);
   animation: cardIn 0.3s ease-out both;
@@ -746,7 +1145,7 @@ button {
   height: 10px;
   border-radius: 50%;
   background: var(--azul-claro);
-  border: 2px solid var(--gris-fondo);
+  border: 2px solid var(--bg-page);
   box-shadow: 0 0 0 2px var(--azul-claro);
   transition: var(--trans);
 }
@@ -773,7 +1172,7 @@ button {
 .card-date {
   font-family: 'DM Mono', monospace;
   font-size: 0.68rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   margin-left: auto;
   white-space: nowrap;
 }
@@ -782,14 +1181,14 @@ button {
   font-family: 'Fraunces', serif;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--azul);
+  color: var(--text-primary);
   margin-bottom: 0.4rem;
   line-height: 1.4;
 }
 
 .card-desc {
   font-size: 0.81rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -803,7 +1202,7 @@ button {
   justify-content: space-between;
   margin-top: 0.85rem;
   padding-top: 0.65rem;
-  border-top: 1px solid var(--gris-borde);
+  border-top: 1px solid var(--border-color);
 }
 
 .card-cat-badge {
@@ -814,7 +1213,6 @@ button {
   border-radius: 20px;
 }
 
-/* Categorías */
 .cat-medio-ambiente {
   background: #E8F5EE;
   color: #1B6B40;
@@ -845,6 +1243,48 @@ button {
   color: #555;
 }
 
+[data-theme="dark"] .cat-medio-ambiente {
+  background: rgba(27, 107, 64, 0.2);
+  color: #4ACA8A;
+}
+
+[data-theme="dark"] .cat-laboral {
+  background: rgba(178, 106, 0, 0.2);
+  color: #E8A830;
+}
+
+[data-theme="dark"] .cat-corporativo {
+  background: rgba(200, 0, 30, 0.2);
+  color: #FF6B7A;
+}
+
+[data-theme="dark"] .cat-seguridad {
+  background: rgba(94, 58, 158, 0.2);
+  color: #A07ED4;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .cat-medio-ambiente {
+    background: rgba(27, 107, 64, 0.2);
+    color: #4ACA8A;
+  }
+
+  html:not([data-theme="light"]) .cat-laboral {
+    background: rgba(178, 106, 0, 0.2);
+    color: #E8A830;
+  }
+
+  html:not([data-theme="light"]) .cat-corporativo {
+    background: rgba(200, 0, 30, 0.2);
+    color: #FF6B7A;
+  }
+
+  html:not([data-theme="light"]) .cat-seguridad {
+    background: rgba(94, 58, 158, 0.2);
+    color: #A07ED4;
+  }
+}
+
 .card-cta {
   font-size: 0.72rem;
   font-weight: 600;
@@ -867,11 +1307,13 @@ button {
   transform: translateX(3px);
 }
 
-/* ---- EMPTY STATE ---- */
+/* ============================================================
+   18. EMPTY STATE
+   ============================================================ */
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
 }
 
 .empty-state span {
@@ -884,14 +1326,16 @@ button {
   font-size: 0.88rem;
 }
 
-/* ---- FAB ---- */
+/* ============================================================
+   19. FAB CAFÉ
+   ============================================================ */
 .fab-cafe {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   z-index: 90;
   background: var(--rojo);
-  color: var(--blanco);
+  color: #FFFFFF;
   border-radius: 50px;
   padding: 0.7rem 1.3rem;
   font-size: 0.82rem;
@@ -910,11 +1354,13 @@ button {
   box-shadow: 0 10px 32px rgba(200, 0, 30, 0.5);
 }
 
-/* ---- MODALS ---- */
+/* ============================================================
+   20. MODALES (base)
+   ============================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(6, 13, 26, 0.78);
+  background: rgba(6, 13, 26, 0.82);
   backdrop-filter: blur(5px);
   z-index: 500;
   display: flex;
@@ -935,7 +1381,7 @@ button {
 }
 
 .modal-box {
-  background: var(--blanco);
+  background: var(--bg-modal);
   border-radius: var(--radio-lg);
   padding: 2.2rem 2.2rem 1.75rem;
   max-width: 620px;
@@ -944,7 +1390,9 @@ button {
   overflow-y: auto;
   position: relative;
   box-shadow: var(--sombra-lg);
+  border: 1px solid var(--border-color);
   animation: boxIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background 0.3s ease;
 }
 
 @keyframes boxIn {
@@ -967,17 +1415,21 @@ button {
   max-width: 660px;
 }
 
+.modal-dia-box {
+  max-width: 560px;
+}
+
 .modal-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: var(--gris-fondo);
-  border: 1px solid var(--gris-borde);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
   border-radius: 50%;
   width: 30px;
   height: 30px;
   font-size: 0.7rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -987,7 +1439,7 @@ button {
 
 .modal-close:hover {
   background: var(--rojo);
-  color: var(--blanco);
+  color: #FFFFFF;
   border-color: var(--rojo);
   transform: rotate(90deg);
 }
@@ -1006,20 +1458,20 @@ button {
   font-family: 'Fraunces', serif;
   font-size: 1.45rem;
   font-weight: 700;
-  color: var(--azul);
+  color: var(--text-primary);
   margin-bottom: 0.9rem;
   line-height: 1.3;
 }
 
 .modal-text {
   font-size: 0.875rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   line-height: 1.75;
 }
 
 .modal-divider {
   height: 1px;
-  background: var(--gris-borde);
+  background: var(--border-color);
   margin: 1.1rem 0;
 }
 
@@ -1030,15 +1482,25 @@ button {
   border-radius: var(--radio);
   padding: 0.8rem 1rem;
   line-height: 1.65;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   margin-bottom: 1.2rem;
 }
 
-.modal-disclaimer-box strong {
-  color: var(--negro);
+[data-theme="dark"] .modal-disclaimer-box {
+  background: rgba(245, 166, 35, 0.1);
 }
 
-/* Modal Detalle */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .modal-disclaimer-box {
+    background: rgba(245, 166, 35, 0.1);
+  }
+}
+
+.modal-disclaimer-box strong {
+  color: var(--text-primary);
+}
+
+/* Detalle medida */
 .modal-meta-row {
   display: flex;
   align-items: center;
@@ -1074,12 +1536,12 @@ button {
 .modal-fecha {
   font-family: 'DM Mono', monospace;
   font-size: 0.72rem;
-  color: var(--gris-texto);
+  color: var(--text-secondary);
   display: block;
   margin-bottom: 0.6rem;
 }
 
-/* Bloques Hechos / Análisis */
+/* Bloques hechos / análisis */
 .modal-block {
   border-radius: var(--radio);
   padding: 1rem 1.1rem;
@@ -1103,23 +1565,18 @@ button {
 
 .modal-block-hechos {
   background: var(--azul-suave);
-  border: 1px solid #C8D8EE;
+  border: 1px solid rgba(31, 91, 163, 0.2);
   color: var(--azul-medio);
-}
-
-.modal-block-hechos .modal-block-label {
-  color: var(--azul-medio);
-  border-color: rgba(31, 91, 163, 0.25);
 }
 
 .modal-block-hechos .modal-text {
-  color: var(--azul);
+  color: var(--text-primary);
 }
 
 .modal-block-analisis {
   background: var(--crema);
   border: 1px solid var(--crema-borde);
-  color: var(--gris-texto);
+  color: var(--text-secondary);
 }
 
 .modal-block-analisis .modal-block-label {
@@ -1128,12 +1585,12 @@ button {
 }
 
 .modal-text-analisis {
-  color: #4A3B2A;
+  color: var(--text-secondary);
 }
 
 .modal-analisis-disclaimer {
   font-size: 0.72rem;
-  color: #9A8060;
+  color: var(--text-muted);
   margin-top: 0.6rem;
   font-style: italic;
 }
@@ -1154,10 +1611,107 @@ button {
   color: var(--rojo);
 }
 
+/* ============================================================
+   21. ACCIONES DEL MODAL (Compartir + Café)
+   ============================================================ */
+.modal-action-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Botón Compartir */
+.btn-compartir {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.62rem 1.1rem;
+  background: var(--azul-suave);
+  color: var(--azul-claro);
+  border: 1.5px solid rgba(31, 91, 163, 0.25);
+  border-radius: var(--radio);
+  font-size: 0.81rem;
+  font-weight: 600;
+  transition: var(--trans);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+
+.btn-compartir:hover {
+  background: var(--azul);
+  color: #FFFFFF;
+  border-color: var(--azul);
+  transform: translateY(-1px);
+}
+
+/* Estado "copiado" */
+.btn-compartir.copied {
+  background: var(--verde);
+  color: #FFFFFF;
+  border-color: var(--verde);
+}
+
+/* Toast de confirmación */
+.share-toast {
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.9rem;
+  background: rgba(26, 122, 74, 0.12);
+  border: 1px solid rgba(26, 122, 74, 0.3);
+  border-radius: var(--radio);
+  font-size: 0.78rem;
+  color: var(--verde);
+  font-family: 'DM Mono', monospace;
+  animation: toastIn 0.2s ease;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botones café en modal */
+.btn-cafe-modal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.62rem 1.1rem;
+  background: var(--rojo-suave);
+  color: var(--rojo);
+  border: 1.5px solid rgba(200, 0, 30, 0.2);
+  border-radius: var(--radio);
+  font-size: 0.81rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--trans);
+  flex: 1;
+  justify-content: center;
+}
+
+.btn-cafe-modal:hover {
+  background: var(--rojo);
+  color: #FFFFFF;
+  border-color: var(--rojo);
+}
+
+.btn-cafe-modal-sm {
+  font-size: 0.76rem;
+}
+
+/* Modal términos */
 .modal-section-h {
   font-size: 0.84rem;
   font-weight: 600;
-  color: var(--azul);
+  color: var(--text-primary);
   margin: 1.2rem 0 0.45rem;
   padding-left: 0.7rem;
   border-left: 3px solid var(--rojo);
@@ -1172,43 +1726,127 @@ button {
   color: var(--rojo);
 }
 
-/* Botones café en modal */
-.btn-cafe-modal {
+/* Modal día del calendario */
+.modal-dia-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.modal-dia-fecha {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.modal-dia-count {
+  font-family: 'Bebas Neue', serif;
+  font-size: 1.3rem;
+  color: var(--rojo);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.modal-dia-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.75rem;
+}
+
+.modal-dia-item {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radio);
+  padding: 0.85rem 1rem;
+  background: var(--bg-input);
+  transition: var(--trans);
+  cursor: pointer;
+}
+
+.modal-dia-item:hover {
+  border-color: var(--azul-claro);
+  background: var(--azul-suave);
+  transform: translateX(3px);
+}
+
+.modal-dia-item-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+
+.modal-dia-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+  line-height: 1.35;
+}
+
+.modal-dia-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.modal-dia-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.modal-dia-fuente {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 0.62rem 1.25rem;
-  background: var(--rojo-suave);
-  color: var(--rojo);
-  border: 1.5px solid rgba(200, 0, 30, 0.2);
-  border-radius: var(--radio);
-  font-size: 0.81rem;
-  font-weight: 600;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--azul-claro);
   text-decoration: none;
   transition: var(--trans);
-  margin-top: 0.5rem;
 }
 
-.btn-cafe-modal:hover {
-  background: var(--rojo);
-  color: var(--blanco);
-  border-color: var(--rojo);
+.modal-dia-fuente:hover {
+  color: var(--rojo);
 }
 
-.btn-cafe-modal-sm {
-  font-size: 0.76rem;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  margin-top: 1rem;
+.modal-dia-ver {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--trans);
+  font-family: 'DM Sans', sans-serif;
 }
 
-/* ---- FOOTER ---- */
+.modal-dia-ver:hover {
+  color: var(--rojo);
+}
+
+/* ============================================================
+   22. FOOTER
+   ============================================================ */
 .site-footer {
-  background: var(--azul);
+  background: var(--bg-header);
   border-top: 3px solid var(--rojo);
   padding: 1.75rem 2rem;
+  transition: background 0.3s ease;
 }
 
 .footer-inner {
@@ -1267,7 +1905,7 @@ button {
 }
 
 .footer-link:hover {
-  color: var(--blanco);
+  color: #FFFFFF;
 }
 
 .footer-copy {
@@ -1277,272 +1915,9 @@ button {
   color: rgba(255, 255, 255, 0.22);
 }
 
-/* ---- CALENDARIO ---- */
-.panel-calendario {
-  padding-bottom: 1rem;
-}
-
-.cal-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-}
-
-.cal-nav-btn {
-  background: none;
-  border: 1.5px solid var(--gris-borde);
-  border-radius: var(--radio);
-  width: 28px;
-  height: 28px;
-  font-size: 1rem;
-  color: var(--azul);
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--trans);
-  cursor: pointer;
-}
-
-.cal-nav-btn:hover {
-  background: var(--azul);
-  color: var(--blanco);
-  border-color: var(--azul);
-}
-
-.cal-month-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--azul);
-}
-
-.cal-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-}
-
-.cal-day-name {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 4px 0;
-  color: var(--gris-texto);
-}
-
-.cal-day {
-  position: relative;
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--azul);
-  transition: var(--trans);
-  cursor: default;
-}
-
-.cal-day.cal-empty {
-  background: none;
-  cursor: default;
-}
-
-.cal-day.cal-has-events {
-  background: var(--azul-suave);
-  color: var(--azul-medio);
-  cursor: pointer;
-  font-weight: 600;
-  border: 1.5px solid transparent;
-}
-
-.cal-day.cal-has-events:hover {
-  background: var(--azul);
-  color: var(--blanco);
-  border-color: var(--azul);
-  transform: scale(1.08);
-  z-index: 1;
-}
-
-.cal-day.cal-has-events::after {
-  content: '';
-  position: absolute;
-  bottom: 3px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--rojo);
-}
-
-.cal-day.cal-selected {
-  background: var(--rojo) !important;
-  color: var(--blanco) !important;
-  border-color: var(--rojo) !important;
-}
-
-.cal-day.cal-selected::after {
-  background: var(--blanco);
-}
-
-/* Días con muchos eventos: dot más grande */
-.cal-day.cal-many-events::after {
-  width: 6px;
-  height: 6px;
-}
-
-.cal-day.cal-today {
-  border: 1.5px solid var(--azul-claro);
-}
-
-.cal-reset-btn {
-  display: block;
-  width: 100%;
-  margin-top: 0.65rem;
-  background: var(--rojo-suave);
-  border: 1px solid rgba(200, 0, 30, 0.2);
-  color: var(--rojo);
-  border-radius: var(--radio);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.4rem;
-  transition: var(--trans);
-  cursor: pointer;
-}
-
-.cal-reset-btn:hover {
-  background: var(--rojo);
-  color: var(--blanco);
-}
-
-/* Modal Día */
-.modal-dia-box {
-  max-width: 560px;
-}
-
-.modal-dia-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 0.4rem;
-}
-
-.modal-dia-fecha {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.78rem;
-  color: var(--gris-texto);
-  text-transform: capitalize;
-}
-
-.modal-dia-count {
-  font-family: 'Bebas Neue', serif;
-  font-size: 1.3rem;
-  color: var(--rojo);
-  letter-spacing: 0.05em;
-  line-height: 1;
-}
-
-.modal-dia-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  margin-top: 0.75rem;
-}
-
-.modal-dia-item {
-  border: 1px solid var(--gris-borde);
-  border-radius: var(--radio);
-  padding: 0.85rem 1rem;
-  background: var(--gris-fondo);
-  transition: var(--trans);
-  cursor: pointer;
-}
-
-.modal-dia-item:hover {
-  border-color: var(--azul-claro);
-  background: var(--azul-suave);
-  transform: translateX(3px);
-}
-
-.modal-dia-item-top {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-bottom: 0.45rem;
-}
-
-.modal-dia-titulo {
-  font-family: 'Fraunces', serif;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--azul);
-  margin-bottom: 0.3rem;
-  line-height: 1.35;
-}
-
-.modal-dia-desc {
-  font-size: 0.78rem;
-  color: var(--gris-texto);
-  line-height: 1.55;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.modal-dia-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0.6rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--gris-borde);
-}
-
-.modal-dia-fuente {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--azul-claro);
-  text-decoration: none;
-  transition: var(--trans);
-}
-
-.modal-dia-fuente:hover {
-  color: var(--rojo);
-}
-
-.modal-dia-ver {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--gris-texto);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: var(--trans);
-  font-family: 'DM Sans', sans-serif;
-}
-
-.modal-dia-ver:hover {
-  color: var(--rojo);
-}
-
-
-/* ---- TABLET (≤ 980px) ---- */
+/* ============================================================
+   23. RESPONSIVE — TABLET (≤ 980px)
+   ============================================================ */
 @media (max-width: 980px) {
   .main-layout {
     grid-template-columns: 1fr;
@@ -1564,6 +1939,14 @@ button {
     grid-column: 1 / -1;
   }
 
+  .panel-stats {
+    grid-column: 1 / -1;
+  }
+
+  .chart-wrapper {
+    max-width: 160px;
+  }
+
   .timeline-track {
     padding-left: 1.4rem;
   }
@@ -1573,10 +1956,10 @@ button {
   }
 }
 
-/* ---- MOBILE (≤ 620px) ---- */
+/* ============================================================
+   24. RESPONSIVE — MOBILE (≤ 620px)
+   ============================================================ */
 @media (max-width: 620px) {
-
-  /* Header */
   .header-inner {
     padding: 0 1rem;
     height: 58px;
@@ -1594,7 +1977,7 @@ button {
     display: none;
   }
 
-  .nav-btn:not(.nav-btn-cafe) {
+  .nav-btn:not(.nav-btn-cafe):not(.btn-theme-toggle) {
     display: none;
   }
 
@@ -1603,13 +1986,15 @@ button {
     font-size: 0.78rem;
   }
 
-  /* Disclaimer */
+  .btn-theme-toggle {
+    padding: 0.4rem 0.6rem;
+  }
+
   .disclaimer-bar {
     font-size: 0.72rem;
     padding: 0.5rem 2.5rem 0.5rem 1rem;
   }
 
-  /* Hero */
   .hero {
     padding: 2rem 1.25rem 3rem;
   }
@@ -1623,7 +2008,6 @@ button {
     max-width: 100%;
   }
 
-  /* Hero stats: 3 columnas iguales en una fila, sin desborde */
   .hero-stats {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -1650,7 +2034,6 @@ button {
     height: 28px;
   }
 
-  /* Leyenda bar: scroll horizontal en lugar de wrapping desordenado */
   .leyenda-bar {
     padding: 0.5rem 1rem;
     gap: 0.45rem;
@@ -1664,23 +2047,18 @@ button {
     display: none;
   }
 
-  .leyenda-title {
-    flex-shrink: 0;
-  }
-
+  .leyenda-title,
   .certeza-badge,
   .tipo-badge {
     flex-shrink: 0;
     white-space: nowrap;
   }
 
-  /* Main layout */
   .main-layout {
     padding: 1rem;
     gap: 1.25rem;
   }
 
-  /* Sidebar: columna única en mobile */
   .sidebar {
     grid-template-columns: 1fr;
   }
@@ -1689,18 +2067,16 @@ button {
     grid-column: auto;
   }
 
-  /* Calendario */
-  .cal-day {
-    font-size: 0.7rem;
+  .chart-wrapper {
+    max-width: 140px;
   }
 
-  /* Cards timeline */
   .timeline-track {
     padding-left: 1.2rem;
   }
 
   .timeline-card {
-    padding: 1rem 1rem;
+    padding: 1rem;
   }
 
   .timeline-card::before {
@@ -1712,13 +2088,8 @@ button {
     font-size: 0.95rem;
   }
 
-  .card-top {
-    gap: 0.3rem;
-  }
-
-  /* Modals */
   .modal-overlay {
-    padding: 1rem;
+    padding: 0;
     align-items: flex-end;
   }
 
@@ -1757,7 +2128,10 @@ button {
     padding: 0.85rem;
   }
 
-  /* FAB — solo ícono en mobile */
+  .modal-action-row {
+    flex-direction: column;
+  }
+
   .fab-cafe {
     bottom: 1.25rem;
     right: 1.25rem;
@@ -1773,7 +2147,6 @@ button {
     display: none;
   }
 
-  /* Footer */
   .footer-inner {
     gap: 0.6rem;
   }

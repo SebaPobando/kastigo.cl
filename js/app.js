@@ -1,202 +1,38 @@
+/**
+ * js/app.js — Kastigo v3 · Monitor Ciudadano
+ * ============================================================
+ * Módulos implementados:
+ *  1. Sanitize      — Prevención de ataques XSS
+ *  2. Theme         — Modo oscuro manual + detección automática
+ *  3. Utils         — Funciones auxiliares reutilizables
+ *  4. Filtrado      — Lógica de filtros combinados
+ *  5. DeepLink      — Deep linking por hash en la URL (#id)
+ *  6. Modal         — Manejo de modales con pila (stack)
+ *  7. Compartir     — Web Share API + fallback portapapeles
+ *  8. Chart         — Gráfico de dona con Chart.js
+ *  9. Calendario    — Calendario interactivo por mes
+ * 10. Render        — Renderizado del DOM
+ * 11. Events        — Listeners globales
+ * 12. init()        — Punto de entrada
+ * ============================================================
+ * Los datos viven en js/data.js (cargado antes que este archivo)
+ */
+
 'use strict';
 
 /* ============================================================
-   BASE DE DATOS
-   ============================================================ */
-
-const eventosGubernamentales = [
-  {
-    id: 1,
-    fecha: '2026-03-17',
-    titulo: 'Retiro de 43 decretos de protección ambiental',
-    descripcion: 'El Ministerio del Medio Ambiente retiró de Contraloría 43 decretos supremos que protegían parques nacionales, especies en peligro y establecían normas de emisión.',
-    interpretacion: 'Organizaciones como Greenpeace denuncian que esto desmantela años de avance en protección de biodiversidad para favorecer proyectos industriales sin contrapesos.',
-    categoria: 'Medio Ambiente',
-    tipo: 'Decreto',
-    certeza: 'Confirmado',
-    fuente: { medio: 'La Tercera', url: 'https://www.latercera.com/pulso/noticia/medio-ambiente-retira-de-tramitacion-43-decretos-presentados-por-gobierno-de-boric-entre-ellos-proteccion-a-salar-pedernales-y-pinguino-de-humboldt/' }
-  },
-  {
-    id: 2,
-    fecha: '2026-03-17',
-    titulo: 'Freno definitivo a la negociación ramal',
-    descripcion: 'El Ejecutivo confirmó el retiro de tramitación legislativa del proyecto que buscaba implementar la negociación colectiva por sector o multinivel.',
-    interpretacion: 'Se interpreta como un debilitamiento estructural de la fuerza sindical, limitando la capacidad de los trabajadores para negociar frente a grandes gremios.',
-    categoria: 'Laboral',
-    tipo: 'Declaración',
-    certeza: 'Confirmado',
-    fuente: { medio: 'Cooperativa', url: 'https://www.cooperativa.cl/noticias/pais/presidente-kast/gobierno-de-kast-retiro-proyecto-de-negociacion-ramal-del-congreso/2026-03-17/114124.html' }
-  },
-  {
-    id: 3,
-    fecha: '2026-03-17',
-    titulo: 'Retiro del Plan Nacional de Derechos Humanos',
-    descripcion: 'El Ministerio de Justicia confirmó el retiro del plan nacional de DD.HH. desde la Contraloría para someterlo a una revisión de contenidos.',
-    interpretacion: 'Sectores de oposición alertan sobre un posible retroceso en garantías fundamentales y una revisión ideológica de la memoria histórica y la justicia en Chile.',
-    categoria: 'Política',
-    tipo: 'Administrativo',
-    certeza: 'Confirmado',
-    fuente: { medio: 'CIPER Chile', url: 'https://www.ciperchile.cl/2026/03/17/radar-17-03-2025/' }
-  },
-  {
-    id: 4,
-    fecha: '2026-03-17',
-    titulo: 'Fin al mecanismo de estabilización de combustibles (MEPCO)',
-    descripcion: 'Hacienda anunció que dejará de inyectar recursos al fondo MEPCO, permitiendo que el precio de las bencinas se ajuste totalmente al mercado internacional.',
-    interpretacion: 'Esta medida traspasa el riesgo inflacionario de la energía directamente al transporte y bolsillo de las familias, presionando el costo de la canasta básica.',
-    categoria: 'Economía',
-    tipo: 'Decreto',
-    certeza: 'Confirmado',
-    fuente: { medio: 'CIPER Chile', url: 'https://www.ciperchile.cl/2026/03/17/radar-17-03-2025/' }
-  },
-  {
-    id: 5,
-    fecha: '2026-03-16',
-    titulo: 'Plan Escudo Fronterizo: Zanjas y militares en el norte',
-    descripcion: 'Inicio de obras de excavación y despliegue del Ejército en la frontera norte (Colchane y Chacalluta) bajo el Plan Escudo Fronterizo.',
-    interpretacion: 'La retroexcavadora se vuelve el símbolo de una política de seguridad basada en barreras físicas y militarización de zonas con alta vulnerabilidad migratoria.',
-    categoria: 'Seguridad',
-    tipo: 'Decreto',
-    certeza: 'Confirmado',
-    fuente: { medio: 'El Mostrador', url: 'https://www.elmostrador.cl/noticias/pais/2026/03/16/presidente-kast-lanza-escudo-fronterizo-con-la-retroexcavadora-como-simbolo-de-su-plan-en-el-norte/' }
-  },
-  {
-    id: 6,
-    fecha: '2026-03-15',
-    titulo: 'Uso de DFL para acelerar reformas económicas',
-    descripcion: 'El gobierno anunció el uso de Decretos con Fuerza de Ley para modificar el sistema de concesiones y licitaciones sin pasar por debate parlamentario extenso.',
-    interpretacion: 'Se critica como un bypass a la democracia deliberativa, otorgando mayor discrecionalidad al Ejecutivo para favorecer alianzas público-privadas.',
-    categoria: 'Política',
-    tipo: 'Administrativo',
-    certeza: 'Confirmado',
-    fuente: { medio: 'El Mostrador', url: 'https://www.elmostrador.cl/noticias/pais/2026/03/15/el-regreso-de-los-dfl-la-estrategia-de-kast-para-acelerar-su-agenda-economica/' }
-  },
-  {
-    id: 7,
-    fecha: '2026-03-14',
-    titulo: 'Rebaja del Impuesto de Primera Categoría (IDPC)',
-    descripcion: 'El proyecto de Ley de Reconstrucción Nacional propone reducir gradualmente el impuesto corporativo a las grandes empresas del 27% al 23%.',
-    interpretacion: 'Bajo la premisa de fomentar la inversión, se reduce la recaudación fiscal necesaria para financiar derechos sociales y salud pública.',
-    categoria: 'Corporativo',
-    tipo: 'Proyecto',
-    certeza: 'En Desarrollo',
-    fuente: { medio: 'EFE News', url: 'https://efe.com/mundo/2026-03-14/chile-proyecto-presidente-kast-seguridad-vivienda-impuestos/' }
-  },
-  {
-    id: 8,
-    fecha: '2026-03-14',
-    titulo: 'IVA 0% temporal para venta de viviendas nuevas',
-    descripcion: 'Propuesta de exención del IVA a la venta de inmuebles nuevos por 12 meses para reactivar el mercado de la construcción.',
-    interpretacion: 'Analistas advierten que esto funciona como un subsidio directo para que las inmobiliarias liquiden su stock acumulado sin reducir los precios de mercado.',
-    categoria: 'Corporativo',
-    tipo: 'Proyecto',
-    certeza: 'En Desarrollo',
-    fuente: { medio: 'Hacienda Chile', url: 'https://www.hacienda.cl/noticias-y-eventos/comunicados/ministro-de-hacienda-detalla-medidas-economicas-del-proyecto-de-ley-de' }
-  },
-  {
-    id: 9,
-    fecha: '2026-03-13',
-    titulo: 'Reasignación de fondos: Salud vs Seguridad',
-    descripcion: 'Hacienda confirmó el traspaso de fondos originalmente destinados a listas de espera oncológicas hacia el presupuesto del Plan Escudo Fronterizo.',
-    interpretacion: 'Un dilema de prioridades: el gobierno decide financiar la barrera física migratoria por sobre la urgencia vital de los pacientes del sistema público.',
-    categoria: 'Social',
-    tipo: 'Decreto',
-    certeza: 'Reportado',
-    fuente: { medio: 'Radio U. de Chile', url: 'https://radio.uchile.cl/2026/03/13/prioridades-del-gobierno-reasignacion-de-fondos-de-salud-a-defensa-genera-criticas/' }
-  },
-  {
-    id: 10,
-    fecha: '2026-03-12',
-    titulo: 'Auditoría a textos escolares por "sesgo ideológico"',
-    descripcion: 'El Ministerio de Educación inició un proceso de revisión de los textos de Historia y Ciencias Sociales para modificar contenidos curriculares.',
-    interpretacion: 'Expertos alertan sobre un posible revisionismo histórico y censura de procesos sociales clave en la formación de las nuevas generaciones.',
-    categoria: 'Social',
-    tipo: 'Declaración',
-    certeza: 'Confirmado',
-    fuente: { medio: 'CIPER Chile', url: 'https://www.ciperchile.cl/2026/03/12/educacion-bajo-la-lupa-el-plan-para-intervenir-los-textos-escolares/' }
-  },
-  {
-    id: 11,
-    fecha: '2026-03-11',
-    titulo: 'Decreto de Auditoría General de Recursos Fiscales',
-    descripcion: 'Firma de decreto para establecer una línea base técnica y detectar presuntas irregularidades en el gasto público de la administración anterior.',
-    interpretacion: 'La oposición ve esto como un movimiento político para justificar recortes presupuestarios masivos apelando a una supuesta "limpieza" administrativa.',
-    categoria: 'Economía',
-    tipo: 'Decreto',
-    certeza: 'Confirmado',
-    fuente: { medio: 'La Tercera', url: 'https://www.latercera.com/nacional/noticia/kast-firma-primeros-decretos-emergencia-seguridad-y-auditoria-fiscal/H4Z3W2K/' }
-  },
-  {
-    id: 12,
-    fecha: "2026-03-18",
-    titulo: "Defensa del retiro de decretos ambientales",
-    descripcion: "El ministro de la Segpres defendió la revisión de 43 decretos ambientales, argumentando que la protección de especies no debe frenar la inversión vial.",
-    interpretacion: "Ambientalistas critican que el gobierno prioriza el avance de obras sobre la preservación de especies protegidas, debilitando la normativa de conservación.",
-    categoria: "Medio Ambiente",
-    tipo: "Declaración",
-    certeza: "Confirmado",
-    fuente: { medio: "ADN Radio", url: "https://www.adnradio.cl/2026/03/18/gobierno-defiende-retiro-de-decretos-ambientales-y-apunta-a-flexibilizar-normas/" }
-  },
-  {
-    id: 13,
-    fecha: "2026-03-18",
-    titulo: "Gobierno descarta eliminar feriados irrenunciables",
-    descripcion: "Tras una propuesta de la CPC para flexibilizar el calendario laboral, el Ejecutivo descartó oficialmente cualquier intención de modificar los feriados irrenunciables.",
-    interpretacion: "Analistas sugieren que el gobierno busca evitar un frente de conflicto masivo con los gremios del comercio en una semana marcada por tensiones laborales.",
-    categoria: "Laboral",
-    tipo: "Declaración",
-    certeza: "Confirmado",
-    fuente: { medio: "T13", url: "https://www.t13.cl/noticia/politica/gobierno-descarta-eliminar-feriados-irrenunciables-tras-propuesta-cpc-18-3-2026" }
-  },
-  {
-    id: 14,
-    fecha: "2026-03-16",
-    titulo: "Urgencia para penalizar ingreso clandestino",
-    descripcion: "El Ejecutivo otorgó 'Discusión Inmediata' al proyecto que establece penas de cárcel para quienes ingresen al país por pasos no habilitados.",
-    interpretacion: "Organizaciones de DD.HH. advierten sobre la criminalización de la migración vulnerable y la inminente sobrecarga del sistema penitenciario.",
-    categoria: "Seguridad",
-    tipo: "Proyecto",
-    certeza: "En Desarrollo",
-    fuente: { medio: "Radio Bío-Bío", url: "https://www.biobiochile.cl/noticias/nacional/region-del-bio-bio/2026/03/16/gobierno-da-urgencia-a-proyecto-que-castigaria-con-carcel-o-multa-el-ingreso-clandestino-a-chile.shtml" }
-  },
-  {
-    id: 15,
-    fecha: "2026-03-16",
-    titulo: "Reforma para integrar Gendarmería en Fuerzas de Seguridad",
-    descripcion: "Se ingresó una reforma constitucional para incorporar a Gendarmería de Chile dentro de las Fuerzas de Orden y Seguridad Pública.",
-    interpretacion: "Expertos advierten que este cambio jerárquico busca disolver de facto las asociaciones gremiales, asimilándola a una estructura militarizada.",
-    categoria: "Seguridad",
-    tipo: "Proyecto",
-    certeza: "En Desarrollo",
-    fuente: { medio: "Cooperativa", url: "https://m.cooperativa.cl/noticias/pais/politica/agenda-legislativa/ingreso-clandestino-como-delito-y-mas-seguridad-en-carceles-primeras/2026-03-16/232226.html" }
-  },
-  {
-    id: 16,
-    fecha: "2026-03-16",
-    titulo: "Exención de contribuciones para adultos mayores",
-    descripcion: "Propuesta de eliminación del pago de contribuciones para propietarios mayores de 65 años respecto de su primera vivienda habitacional.",
-    interpretacion: "Aunque es una medida popular, municipalidades alertan sobre la pérdida de financiamiento local si el Estado no compensa los ingresos del Fondo Común Municipal.",
-    categoria: "Vivienda",
-    tipo: "Proyecto",
-    certeza: "En Desarrollo",
-    fuente: { medio: "Gobierno de Chile", url: "https://www.gob.cl/noticias/plan-reconstruccion-nacional-disminucion-impuestos-subsidio-empleo-pymes/" }
-  }
-];
-
-/* ============================================================
-   ESTADO
-   ============================================================ */
-const state = {
-  filtroCategoria: 'Todos',
-  filtroTipo: 'Todos',
-  filtroCerteza: 'Todos',
-  busqueda: '',
-};
-
-/* ============================================================
-   MÓDULO: SANITIZACIÓN (Anti-XSS)
+   MÓDULO 1: SANITIZACIÓN
+   Protege contra ataques XSS al insertar datos en el DOM.
+   Principio: nunca usar innerHTML con datos del usuario.
    ============================================================ */
 const Sanitize = {
+
+  /**
+   * Convierte un string a texto plano seguro usando el DOM.
+   * Los caracteres especiales HTML (<, >, &, ", ') quedan escapados.
+   * @param {string} input — texto potencialmente peligroso
+   * @returns {string} — texto escapado, seguro para innerHTML si se necesita
+   */
   text(input) {
     if (typeof input !== 'string') return '';
     const node = document.createTextNode(input);
@@ -204,31 +40,127 @@ const Sanitize = {
     div.appendChild(node);
     return div.innerHTML;
   },
+
+  /**
+   * Valida que una URL sea http o https.
+   * Bloquea protocolos peligrosos como javascript: o data:
+   * @param {string} url
+   * @returns {string} — URL validada o '#' si es sospechosa
+   */
   url(url) {
     if (typeof url !== 'string') return '#';
     const trimmed = url.trim();
     if (trimmed === '#') return '#';
     try {
-      const p = new URL(trimmed);
-      if (p.protocol === 'http:' || p.protocol === 'https:') return p.href;
-    } catch { /* invalid */ }
+      const parsed = new URL(trimmed);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return parsed.href;
+      }
+    } catch { /* URL malformada, ignorar */ }
     return '#';
   },
-  searchInput(input, max = 200) {
+
+  /**
+   * Limpia el input del buscador: recorta espacios, limita largo
+   * y elimina caracteres de control invisibles.
+   * @param {string} input
+   * @param {number} maxLen — largo máximo permitido
+   * @returns {string}
+   */
+  searchInput(input, maxLen = 200) {
     if (typeof input !== 'string') return '';
-    return input.slice(0, max).replace(/[\u0000-\u001F\u007F-\u009F]/g, '').trim();
+    return input
+      .slice(0, maxLen)
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+      .trim();
   }
 };
 
+
 /* ============================================================
-   MÓDULO: UTILIDADES
+   MÓDULO 2: THEME (Modo Oscuro)
+   Maneja el toggle manual de tema claro/oscuro.
+   La detección automática vive en CSS con prefers-color-scheme.
    ============================================================ */
-const Utils = {
-  formatFecha(iso) {
-    const [y, m, d] = iso.split('-').map(Number);
-    return new Date(y, m - 1, d).toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' });
+const Theme = {
+
+  // Clave para guardar la preferencia manual en localStorage
+  STORAGE_KEY: 'kastigo-theme',
+
+  /**
+   * Lee el tema guardado o detecta la preferencia del sistema.
+   * @returns {'light' | 'dark' | 'auto'}
+   */
+  getCurrent() {
+    return localStorage.getItem(this.STORAGE_KEY) || 'light';
   },
 
+  /**
+   * Determina si el sistema prefiere modo oscuro.
+   * @returns {boolean}
+   */
+  systemPrefersDark() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  },
+
+  /**
+   * Aplica el tema al atributo data-theme del <html>.
+   * 'auto' deja que el CSS con prefers-color-scheme lo decida.
+   * @param {'light' | 'dark' | 'auto'} theme
+   */
+  apply(theme) {
+    const html = document.documentElement;
+    if (theme === 'auto') {
+      html.removeAttribute('data-theme');
+    } else {
+      html.setAttribute('data-theme', theme);
+    }
+  },
+
+  /**
+   * Alterna entre modo oscuro y claro.
+   * Si está en 'auto', pasa al opuesto de lo que detecta el sistema.
+   */
+  toggle() {
+    const current = this.getCurrent();
+    const isDark = current === 'dark' || (current === 'auto' && this.systemPrefersDark());
+    const next = isDark ? 'light' : 'dark';
+    localStorage.setItem(this.STORAGE_KEY, next);
+    this.apply(next);
+  },
+
+  /** Inicializa el tema al cargar la página. */
+  init() {
+    this.apply(this.getCurrent());
+
+    // Escucha cambios en la preferencia del sistema en tiempo real
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', () => {
+        // Solo actualizamos si el usuario no forzó un tema manual
+        if (this.getCurrent() === 'auto') this.apply('auto');
+      });
+  }
+};
+
+
+/* ============================================================
+   MÓDULO 3: UTILIDADES
+   Funciones pequeñas reutilizables en toda la app.
+   ============================================================ */
+const Utils = {
+
+  /**
+   * Formatea una fecha ISO "YYYY-MM-DD" a texto legible en español.
+   * Ejemplo: "2026-03-17" → "17 de marzo de 2026"
+   */
+  formatFecha(iso) {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('es-CL', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+  },
+
+  /** Devuelve la clase CSS de categoría para una tarjeta. */
   catClass(cat) {
     const map = {
       'Medio Ambiente': 'cat-medio-ambiente',
@@ -240,20 +172,33 @@ const Utils = {
     return map[cat] || 'cat-default';
   },
 
+  /** Devuelve la clase CSS de tipo de medida. */
   tipoClass(tipo) {
-    const map = { 'Ley': 'tipo-ley', 'Decreto': 'tipo-decreto', 'Declaración': 'tipo-declaracion', 'Proyecto': 'tipo-proyecto' };
+    const map = {
+      'Ley': 'tipo-ley',
+      'Decreto': 'tipo-decreto',
+      'Declaración': 'tipo-declaracion',
+      'Proyecto': 'tipo-proyecto'
+    };
     return map[tipo] || 'tipo-decreto';
   },
 
+  /** Devuelve la clase CSS de nivel de certeza. */
   certezaClass(cert) {
-    const map = { 'Confirmado': 'certeza-confirmado', 'Reportado': 'certeza-reportado', 'En Desarrollo': 'certeza-desarrollo' };
+    const map = {
+      'Confirmado': 'certeza-confirmado',
+      'Reportado': 'certeza-reportado',
+      'En Desarrollo': 'certeza-desarrollo'
+    };
     return map[cert] || 'certeza-reportado';
   },
 
+  /** Devuelve valores únicos de una propiedad del array global. */
   unique(key) {
     return [...new Set(eventosGubernamentales.map(e => e[key]))];
   },
 
+  /** Cuenta cuántos eventos hay por valor de una propiedad. */
   countBy(key) {
     return eventosGubernamentales.reduce((acc, e) => {
       acc[e[key]] = (acc[e[key]] || 0) + 1;
@@ -262,139 +207,783 @@ const Utils = {
   }
 };
 
+
 /* ============================================================
-   MÓDULO: FILTRADO
+   MÓDULO 4: FILTRADO
+   Combina todos los filtros activos y devuelve los eventos
+   que cumplen con todos ellos simultáneamente.
    ============================================================ */
 const Filtrado = {
+
+  // Estado compartido de todos los filtros activos
+  state: {
+    filtroCategoria: 'Todos',
+    filtroTipo: 'Todos',
+    filtroCerteza: 'Todos',
+    busqueda: '',
+  },
+
+  /**
+   * Devuelve el array filtrado y ordenado de más reciente a más antiguo.
+   * @returns {Array}
+   */
   get() {
-    const q = state.busqueda.toLowerCase();
+    const { filtroCategoria, filtroTipo, filtroCerteza, busqueda } = this.state;
+    const q = busqueda.toLowerCase();
+
     return eventosGubernamentales
       .filter(e => {
-        const cat = state.filtroCategoria === 'Todos' || e.categoria === state.filtroCategoria;
-        const tipo = state.filtroTipo === 'Todos' || e.tipo === state.filtroTipo;
-        const cert = state.filtroCerteza === 'Todos' || e.certeza === state.filtroCerteza;
-        const txt = !q || e.titulo.toLowerCase().includes(q) || e.descripcion.toLowerCase().includes(q);
-        return cat && tipo && cert && txt;
+        const porCat = filtroCategoria === 'Todos' || e.categoria === filtroCategoria;
+        const porTipo = filtroTipo === 'Todos' || e.tipo === filtroTipo;
+        const porCert = filtroCerteza === 'Todos' || e.certeza === filtroCerteza;
+        // Busca en título y descripción (sanitizado)
+        const porTexto = !q ||
+          e.titulo.toLowerCase().includes(q) ||
+          e.descripcion.toLowerCase().includes(q);
+        return porCat && porTipo && porCert && porTexto;
       })
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
   }
 };
 
+
 /* ============================================================
-   MÓDULO: MODAL
+   MÓDULO 5: DEEP LINKING
+   Permite compartir URLs directas a una medida específica.
+   Ejemplo: kastigo.cl/#15 → abre el modal del evento con id 15
+   ============================================================ */
+const DeepLink = {
+
+  /**
+   * Lee el hash de la URL al cargar la página.
+   * Si encuentra un número válido, busca el evento y abre su modal.
+   * Debe llamarse DESPUÉS de que el DOM esté renderizado.
+   */
+  init() {
+    this._checkHash();
+
+    // Escucha cambios de hash (ej: cuando el usuario navega con el botón atrás)
+    window.addEventListener('hashchange', () => this._checkHash());
+  },
+
+  /**
+   * Parsea el hash actual y abre el modal si corresponde.
+   */
+  _checkHash() {
+    const hash = window.location.hash; // ej: "#15"
+    if (!hash || hash === '#') return;
+
+    const id = parseInt(hash.replace('#', ''), 10);
+    if (isNaN(id)) return;
+
+    // Buscar el evento por ID
+    const evento = eventosGubernamentales.find(e => e.id === id);
+    if (evento) {
+      // Pequeño delay para asegurar que el DOM esté listo
+      setTimeout(() => Modal.openDetalle(evento), 100);
+    }
+  },
+
+  /**
+   * Actualiza el hash de la URL cuando se abre una medida.
+   * Esto permite copiar el link de la barra de direcciones.
+   * Usamos history.replaceState para no agregar una entrada al historial.
+   * @param {number} id — ID del evento
+   */
+  setHash(id) {
+    history.replaceState(null, '', `#${id}`);
+  },
+
+  /**
+   * Limpia el hash de la URL cuando se cierra un modal.
+   */
+  clearHash() {
+    history.replaceState(null, '', window.location.pathname);
+  }
+};
+
+
+/* ============================================================
+   MÓDULO 6: MODAL
+   Maneja la apertura/cierre de modales con una pila (stack)
+   para soportar múltiples modales apilados correctamente.
    ============================================================ */
 const Modal = {
+
+  // Pila de IDs de modales abiertos
   _stack: [],
+
+  // ID del evento actualmente abierto en el modal de detalle
+  _currentEventoId: null,
+
+  /**
+   * Abre un modal por su ID HTML.
+   * @param {string} id — ej: 'modal-detalle'
+   */
   open(id) {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // bloquear scroll del fondo
     this._stack.push(id);
+    // Mover el foco al botón cerrar (accesibilidad)
     requestAnimationFrame(() => el.querySelector('.modal-close')?.focus());
   },
+
+  /**
+   * Cierra un modal por su ID HTML.
+   * @param {string} id
+   */
   close(id) {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.add('hidden');
     this._stack = this._stack.filter(i => i !== id);
-    if (!this._stack.length) document.body.style.overflow = '';
+
+    // Si era el modal de detalle, limpiar estado
+    if (id === 'modal-detalle') {
+      this._currentEventoId = null;
+      DeepLink.clearHash(); // limpiar el hash de la URL al cerrar
+    }
+
+    // Restaurar scroll solo cuando no quedan modales abiertos
+    if (this._stack.length === 0) {
+      document.body.style.overflow = '';
+    }
   },
+
+  /** Cierra el modal más reciente (para la tecla Escape). */
   closeLast() {
-    if (this._stack.length) this.close(this._stack[this._stack.length - 1]);
+    if (this._stack.length) {
+      this.close(this._stack[this._stack.length - 1]);
+    }
   },
-  openDetalle(ev) {
-    // Usar textContent para todos los datos — nunca innerHTML con datos del usuario
-    const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
-    const badge = document.getElementById('md-tipo');
-    if (badge) { badge.className = `modal-tipo-badge ${Utils.tipoClass(ev.tipo)}`; badge.textContent = ev.tipo; }
+  /**
+   * Rellena y abre el modal de detalle de una medida.
+   * IMPORTANTE: usa textContent para insertar datos (nunca innerHTML),
+   * lo que previene ataques XSS automáticamente.
+   * @param {Object} evento — objeto del array eventosGubernamentales
+   */
+  openDetalle(evento) {
+    this._currentEventoId = evento.id;
 
-    const cbadge = document.getElementById('md-certeza');
-    if (cbadge) { cbadge.className = `modal-certeza-badge ${Utils.certezaClass(ev.certeza)}`; cbadge.textContent = ev.certeza; }
+    // Helper para asignar texto de forma segura
+    const setText = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
 
-    const catbadge = document.getElementById('md-cat');
-    if (catbadge) { catbadge.className = `modal-cat-badge ${Utils.catClass(ev.categoria)}`; catbadge.textContent = ev.categoria; }
+    // Badge tipo
+    const tipoBadge = document.getElementById('md-tipo');
+    if (tipoBadge) {
+      tipoBadge.className = `modal-tipo-badge ${Utils.tipoClass(evento.tipo)}`;
+      tipoBadge.textContent = evento.tipo;
+    }
 
+    // Badge certeza
+    const certBadge = document.getElementById('md-certeza');
+    if (certBadge) {
+      certBadge.className = `modal-certeza-badge ${Utils.certezaClass(evento.certeza)}`;
+      certBadge.textContent = evento.certeza;
+    }
+
+    // Badge categoría
+    const catBadge = document.getElementById('md-cat');
+    if (catBadge) {
+      catBadge.className = `modal-cat-badge ${Utils.catClass(evento.categoria)}`;
+      catBadge.textContent = evento.categoria;
+    }
+
+    // Fecha
     const fechaEl = document.getElementById('md-fecha');
-    if (fechaEl) { fechaEl.textContent = Utils.formatFecha(ev.fecha); fechaEl.setAttribute('datetime', ev.fecha); }
+    if (fechaEl) {
+      fechaEl.textContent = Utils.formatFecha(evento.fecha);
+      fechaEl.setAttribute('datetime', evento.fecha);
+    }
 
-    setTxt('md-title', ev.titulo);
-    setTxt('md-desc', ev.descripcion);
-    setTxt('md-interpretacion', ev.interpretacion);
-    setTxt('md-fuente-medio', `Fuente: ${ev.fuente.medio}`);
+    // Textos principales
+    setText('md-title', evento.titulo);
+    setText('md-desc', evento.descripcion);
+    setText('md-interpretacion', evento.interpretacion);
+    setText('md-fuente-medio', `Fuente: ${evento.fuente.medio}`);
 
+    // URL de la fuente (validada)
     const fuenteLink = document.getElementById('md-fuente');
-    if (fuenteLink) fuenteLink.href = Sanitize.url(ev.fuente.url);
+    if (fuenteLink) fuenteLink.href = Sanitize.url(evento.fuente.url);
+
+    // Resetear el botón compartir
+    const btnCompartir = document.getElementById('btn-compartir');
+    const btnText = document.getElementById('btn-compartir-text');
+    if (btnCompartir && btnText) {
+      btnCompartir.classList.remove('copied');
+      btnText.textContent = 'Compartir';
+    }
+    document.getElementById('share-toast')?.classList.add('hidden');
+
+    // Actualizar hash de la URL (deep linking)
+    DeepLink.setHash(evento.id);
 
     this.open('modal-detalle');
   }
 };
 
+
 /* ============================================================
-   MÓDULO: RENDER
+   MÓDULO 7: COMPARTIR (Web Share API)
+   Permite compartir una medida directamente por WhatsApp,
+   Telegram, etc. Con fallback a copiar al portapapeles.
+   ============================================================ */
+const Compartir = {
+
+  /**
+   * Intenta usar la Web Share API del navegador.
+   * Si no está disponible (ej: Chrome en desktop), copia al portapapeles.
+   * @param {number} eventoId — ID del evento a compartir
+   * @param {string} titulo   — Título para el mensaje compartido
+   */
+  async compartir(eventoId, titulo) {
+    // Construir el URL con el hash del ID (deep link)
+    const url = `${window.location.origin}${window.location.pathname}#${eventoId}`;
+    const text = `📌 ${titulo}`;
+
+    // Web Share API: disponible en móviles modernos y Safari
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Kastigo · Monitor Ciudadano',
+          text: text,
+          url: url,
+        });
+        // Si el usuario completó el share, éxito silencioso
+        return;
+      } catch (err) {
+        // El usuario canceló el share — no mostrar error
+        if (err.name === 'AbortError') return;
+        // Otro error: caer al fallback
+      }
+    }
+
+    // Fallback: copiar al portapapeles (para escritorio o browsers sin Web Share)
+    await this._copyToClipboard(url);
+  },
+
+  /**
+   * Copia un texto al portapapeles usando la API moderna.
+   * Con fallback al método antiguo para navegadores viejos.
+   * @param {string} text
+   */
+  async _copyToClipboard(text) {
+    try {
+      // API moderna (requiere HTTPS o localhost)
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // Fallback: crear un input temporal y copiar
+      const input = document.createElement('textarea');
+      input.value = text;
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy'); // método antiguo, deprecated pero funcional
+      document.body.removeChild(input);
+    }
+
+    // Mostrar confirmación visual
+    this._showCopiedFeedback();
+  },
+
+  /**
+   * Muestra feedback visual cuando se copia al portapapeles.
+   * Cambia el botón a "¡Copiado!" y muestra un toast.
+   */
+  _showCopiedFeedback() {
+    const btn = document.getElementById('btn-compartir');
+    const btnText = document.getElementById('btn-compartir-text');
+    const toast = document.getElementById('share-toast');
+
+    if (btn && btnText) {
+      btn.classList.add('copied');
+      btnText.textContent = '¡Copiado!';
+
+      // Restaurar después de 2.5 segundos
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btnText.textContent = 'Compartir';
+      }, 2500);
+    }
+
+    if (toast) {
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
+  }
+};
+
+
+/* ============================================================
+   MÓDULO 8: CHART (Gráfico de Dona con Chart.js)
+   Visualiza la distribución de medidas por categoría.
+   Chart.js se carga desde CDN en index.html.
+   ============================================================ */
+const ChartModule = {
+
+  // Referencia a la instancia del gráfico (para destruirlo si hay que redibujar)
+  _instance: null,
+
+  // Paleta de colores alineada con la identidad visual de Kastigo
+  COLORES: [
+    '#1A7A4A', // Medio Ambiente — verde
+    '#D4620A', // Laboral — naranja
+    '#1F5BA3', // Economía — azul
+    '#C8001E', // Corporativo — rojo
+    '#5E3A9E', // Seguridad — morado
+    '#8A9AB5', // Otros — gris
+  ],
+
+  /**
+   * Crea o actualiza el gráfico de dona.
+   * Detecta automáticamente si el tema es oscuro para ajustar colores.
+   */
+  render() {
+    const canvas = document.getElementById('chart-categorias');
+    if (!canvas) return;
+
+    // Si Chart.js no cargó (sin internet), salir silenciosamente
+    if (typeof Chart === 'undefined') {
+      console.warn('Chart.js no disponible');
+      return;
+    }
+
+    // Detectar si estamos en modo oscuro
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (document.documentElement.getAttribute('data-theme') !== 'light' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    const stats = Utils.countBy('categoria');
+    const labels = Object.keys(stats);
+    const data = Object.values(stats);
+
+    // Destruir gráfico anterior si existe (para evitar memory leaks)
+    if (this._instance) {
+      this._instance.destroy();
+      this._instance = null;
+    }
+
+    this._instance = new Chart(canvas, {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [{
+          data,
+          backgroundColor: this.COLORES.slice(0, labels.length),
+          borderColor: isDark ? '#111827' : '#FFFFFF',
+          borderWidth: 3,
+          hoverBorderWidth: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '65%', // grosor del anillo
+        plugins: {
+          legend: {
+            display: false, // usamos nuestra propia leyenda de texto abajo
+          },
+          tooltip: {
+            backgroundColor: isDark ? '#1E2D45' : '#0B1F3A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#8A9AB5',
+            padding: 10,
+            cornerRadius: 8,
+            callbacks: {
+              // Personalizar el tooltip para mostrar porcentaje
+              label(ctx) {
+                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                const pct = Math.round((ctx.parsed / total) * 100);
+                return ` ${ctx.parsed} medidas (${pct}%)`;
+              }
+            }
+          }
+        },
+        animation: {
+          animateRotate: true,
+          duration: 800,
+          easing: 'easeInOutQuart'
+        }
+      }
+    });
+  }
+};
+
+
+/* ============================================================
+   MÓDULO 9: CALENDARIO
+   Calendario mensual interactivo que muestra qué días tienen
+   medidas registradas. Al hacer clic abre un modal con el listado.
+   ============================================================ */
+const Calendario = {
+
+  _year: null,
+  _month: null,      // 0-based (enero = 0)
+  _selectedDate: null, // "YYYY-MM-DD" | null
+
+  /**
+   * Construye un mapa de acceso rápido: { "YYYY-MM-DD": [eventos] }
+   * Complejidad O(n) en construcción, O(1) en lectura.
+   */
+  _buildEventMap() {
+    return eventosGubernamentales.reduce((map, ev) => {
+      if (!map[ev.fecha]) map[ev.fecha] = [];
+      map[ev.fecha].push(ev);
+      return map;
+    }, {});
+  },
+
+  /** Renderiza la grilla del mes actual en el DOM. */
+  render() {
+    const grid = document.getElementById('cal-grid');
+    const label = document.getElementById('cal-month-label');
+    const resetBtn = document.getElementById('cal-reset');
+    if (!grid || !label) return;
+
+    const eventMap = this._buildEventMap();
+    const today = new Date();
+    const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    // Label del mes en español
+    const monthName = new Date(this._year, this._month, 1)
+      .toLocaleDateString('es-CL', { month: 'long', year: 'numeric' });
+    label.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+    grid.innerHTML = '';
+
+    // Cabecera de días de la semana (lunes primero)
+    ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'].forEach(d => {
+      const span = document.createElement('span');
+      span.className = 'cal-day-name';
+      span.textContent = d;
+      grid.appendChild(span);
+    });
+
+    // Calcular offset: primer día del mes ajustado a lunes = 0
+    const firstDayOfWeek = new Date(this._year, this._month, 1).getDay();
+    const offset = (firstDayOfWeek === 0) ? 6 : firstDayOfWeek - 1;
+    const daysInMonth = new Date(this._year, this._month + 1, 0).getDate();
+
+    // Celdas vacías antes del día 1
+    for (let i = 0; i < offset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-day cal-empty';
+      empty.setAttribute('aria-hidden', 'true');
+      grid.appendChild(empty);
+    }
+
+    // Celdas de cada día del mes
+    for (let d = 1; d <= daysInMonth; d++) {
+      const iso = `${this._year}-${String(this._month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const eventos = eventMap[iso] || [];
+      const hasEvents = eventos.length > 0;
+
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+      cell.setAttribute('role', hasEvents ? 'button' : 'gridcell');
+      cell.setAttribute('aria-label', hasEvents
+        ? `${d}: ${eventos.length} medida${eventos.length > 1 ? 's' : ''}`
+        : String(d));
+
+      if (hasEvents) {
+        cell.classList.add('cal-has-events');
+        if (eventos.length >= 3) cell.classList.add('cal-many-events');
+        cell.setAttribute('tabindex', '0');
+      }
+      if (iso === todayISO) cell.classList.add('cal-today');
+      if (iso === this._selectedDate) cell.classList.add('cal-selected');
+
+      cell.textContent = d;
+
+      if (hasEvents) {
+        const openDay = () => {
+          this._selectedDate = iso;
+          this.render();
+          this._openDayModal(iso, eventos);
+          if (resetBtn) resetBtn.classList.remove('hidden');
+        };
+        cell.addEventListener('click', openDay);
+        cell.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDay(); }
+        });
+      }
+
+      grid.appendChild(cell);
+    }
+
+    if (resetBtn) {
+      resetBtn.classList.toggle('hidden', !this._selectedDate);
+    }
+  },
+
+  /**
+   * Abre el modal del día con la lista de medidas.
+   * Construye el DOM con textContent (anti-XSS).
+   */
+  _openDayModal(iso, eventos) {
+    const fechaEl = document.getElementById('mdia-fecha');
+    const countEl = document.getElementById('mdia-count');
+    const list = document.getElementById('mdia-list');
+    if (!fechaEl || !list) return;
+
+    const [y, m, d] = iso.split('-').map(Number);
+    const fechaStr = new Date(y, m - 1, d).toLocaleDateString('es-CL', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+    fechaEl.textContent = fechaStr.charAt(0).toUpperCase() + fechaStr.slice(1);
+    fechaEl.setAttribute('datetime', iso);
+    countEl.textContent = `${eventos.length} medida${eventos.length > 1 ? 's' : ''}`;
+
+    list.innerHTML = '';
+    eventos.forEach(ev => {
+      const li = document.createElement('li');
+      li.className = 'modal-dia-item';
+
+      // Badges
+      const topRow = document.createElement('div');
+      topRow.className = 'modal-dia-item-top';
+
+      const tipo = document.createElement('span');
+      tipo.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
+      tipo.textContent = ev.tipo;
+
+      const cert = document.createElement('span');
+      cert.className = `certeza-badge ${Utils.certezaClass(ev.certeza)}`;
+      cert.textContent = ev.certeza;
+
+      const cat = document.createElement('span');
+      cat.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
+      cat.textContent = ev.categoria;
+
+      topRow.appendChild(tipo); topRow.appendChild(cert); topRow.appendChild(cat);
+
+      // Título y descripción
+      const titulo = document.createElement('p');
+      titulo.className = 'modal-dia-titulo';
+      titulo.textContent = ev.titulo;
+
+      const desc = document.createElement('p');
+      desc.className = 'modal-dia-desc';
+      desc.textContent = ev.descripcion;
+
+      // Footer: link a fuente + botón ver análisis
+      const footer = document.createElement('div');
+      footer.className = 'modal-dia-footer';
+
+      const fuenteLink = document.createElement('a');
+      fuenteLink.className = 'modal-dia-fuente';
+      fuenteLink.href = Sanitize.url(ev.fuente.url);
+      fuenteLink.target = '_blank';
+      fuenteLink.rel = 'noopener noreferrer';
+
+      // Ícono externo SVG
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('width', '11'); svg.setAttribute('height', '11');
+      svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '2');
+      svg.setAttribute('aria-hidden', 'true');
+      const pathEl = document.createElementNS(ns, 'path');
+      pathEl.setAttribute('d', 'M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6');
+      const poly = document.createElementNS(ns, 'polyline');
+      poly.setAttribute('points', '15 3 21 3 21 9');
+      const lineEl = document.createElementNS(ns, 'line');
+      lineEl.setAttribute('x1', '10'); lineEl.setAttribute('y1', '14');
+      lineEl.setAttribute('x2', '21'); lineEl.setAttribute('y2', '3');
+      svg.appendChild(pathEl); svg.appendChild(poly); svg.appendChild(lineEl);
+      fuenteLink.appendChild(svg);
+      fuenteLink.appendChild(document.createTextNode(ev.fuente.medio));
+
+      const verBtn = document.createElement('button');
+      verBtn.className = 'modal-dia-ver';
+      verBtn.textContent = 'Ver análisis →';
+      verBtn.addEventListener('click', () => {
+        Modal.close('modal-dia');
+        Modal.openDetalle(ev);
+      });
+
+      footer.appendChild(fuenteLink);
+      footer.appendChild(verBtn);
+
+      li.appendChild(topRow); li.appendChild(titulo);
+      li.appendChild(desc); li.appendChild(footer);
+      list.appendChild(li);
+    });
+
+    Modal.open('modal-dia');
+  },
+
+  /**
+   * Inicializa el calendario en el mes con más eventos registrados.
+   * Si no hay datos, usa el mes actual.
+   */
+  init() {
+    // Encontrar el mes con más eventos para abrirlo por defecto
+    const monthCount = eventosGubernamentales.reduce((acc, ev) => {
+      const key = ev.fecha.slice(0, 7); // "YYYY-MM"
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {});
+
+    const topMonth = Object.entries(monthCount)
+      .sort((a, b) => b[1] - a[1])[0];
+
+    if (topMonth) {
+      const [y, m] = topMonth[0].split('-').map(Number);
+      this._year = y;
+      this._month = m - 1;
+    } else {
+      const now = new Date();
+      this._year = now.getFullYear();
+      this._month = now.getMonth();
+    }
+
+    this.render();
+
+    // Navegación mes anterior
+    document.getElementById('cal-prev')?.addEventListener('click', () => {
+      this._month--;
+      if (this._month < 0) { this._month = 11; this._year--; }
+      this._selectedDate = null;
+      this.render();
+    });
+
+    // Navegación mes siguiente
+    document.getElementById('cal-next')?.addEventListener('click', () => {
+      this._month++;
+      if (this._month > 11) { this._month = 0; this._year++; }
+      this._selectedDate = null;
+      this.render();
+    });
+
+    // Limpiar selección de día
+    document.getElementById('cal-reset')?.addEventListener('click', () => {
+      this._selectedDate = null;
+      this.render();
+    });
+  }
+};
+
+
+/* ============================================================
+   MÓDULO 10: RENDER
+   Construye el DOM dinámicamente desde los datos.
+   Principio: siempre textContent para datos del usuario (anti-XSS).
    ============================================================ */
 const Render = {
 
+  /** Actualiza los 3 contadores del hero. */
   heroStats() {
     const confirmados = eventosGubernamentales.filter(e => e.certeza === 'Confirmado').length;
     const cats = Utils.unique('categoria').length;
-    const setNum = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
-    setNum('hero-total', eventosGubernamentales.length);
-    setNum('hero-confirmados', confirmados);
-    setNum('hero-categorias', cats);
+    const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+    set('hero-total', eventosGubernamentales.length);
+    set('hero-confirmados', confirmados);
+    set('hero-categorias', cats);
   },
 
+  /** Renderiza el panel de estadísticas con el gráfico y la lista. */
   estadisticas() {
     const grid = document.getElementById('stats-grid');
     const total = document.getElementById('stats-total');
     if (!grid || !total) return;
+
     total.textContent = eventosGubernamentales.length;
     const stats = Utils.countBy('categoria');
+    const colores = ChartModule.COLORES;
+
     grid.innerHTML = '';
-    Object.entries(stats).sort((a, b) => b[1] - a[1]).forEach(([cat, count]) => {
-      const row = document.createElement('div');
-      row.className = 'stat-row'; row.setAttribute('role', 'listitem');
-      const n = document.createElement('span'); n.className = 'stat-cat'; n.textContent = cat;
-      const c = document.createElement('span'); c.className = 'stat-count'; c.textContent = count;
-      row.appendChild(n); row.appendChild(c); grid.appendChild(row);
-    });
+    Object.entries(stats)
+      .sort((a, b) => b[1] - a[1])
+      .forEach(([cat, count], i) => {
+        const row = document.createElement('div');
+        row.className = 'stat-row';
+        row.setAttribute('role', 'listitem');
+
+        // Punto de color que coincide con el gráfico
+        const dot = document.createElement('span');
+        dot.style.cssText = `display:inline-block;width:8px;height:8px;border-radius:50%;background:${colores[i % colores.length]};margin-right:6px;flex-shrink:0`;
+
+        const nameEl = document.createElement('span');
+        nameEl.className = 'stat-cat';
+
+        // Insertar el dot y el texto de forma segura
+        nameEl.appendChild(dot);
+        nameEl.appendChild(document.createTextNode(cat));
+
+        const countEl = document.createElement('span');
+        countEl.className = 'stat-count';
+        countEl.textContent = count;
+
+        row.appendChild(nameEl);
+        row.appendChild(countEl);
+        grid.appendChild(row);
+      });
+
+    // Renderizar el gráfico de dona
+    ChartModule.render();
   },
 
-  _buildFilterGroup(containerId, values, stateKey, countFn, labelAll = 'Todos') {
+  /**
+   * Construye los botones de filtro para un grupo (categoría, tipo, certeza).
+   * @param {string} containerId — ID del contenedor en el HTML
+   * @param {string[]} values    — valores únicos para mostrar
+   * @param {string} stateKey   — clave en Filtrado.state
+   * @param {Object} countMap   — { valor: cantidad }
+   */
+  _buildFilterGroup(containerId, values, stateKey, countMap) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = '';
-    const all = [labelAll, ...values];
-    all.forEach(val => {
-      const count = val === labelAll ? eventosGubernamentales.length : (countFn[val] || 0);
-      const btn = document.createElement('button');
-      btn.className = `filter-btn${state[stateKey] === val ? ' active' : ''}`;
-      btn.setAttribute('aria-pressed', state[stateKey] === val ? 'true' : 'false');
 
-      const nameEl = document.createElement('span'); nameEl.textContent = val;
-      const countEl = document.createElement('span'); countEl.className = 'filter-count'; countEl.textContent = count;
-      btn.appendChild(nameEl); btn.appendChild(countEl);
+    ['Todos', ...values].forEach(val => {
+      const count = val === 'Todos'
+        ? eventosGubernamentales.length
+        : (countMap[val] || 0);
+
+      const btn = document.createElement('button');
+      btn.className = `filter-btn${Filtrado.state[stateKey] === val ? ' active' : ''}`;
+      btn.setAttribute('aria-pressed', Filtrado.state[stateKey] === val ? 'true' : 'false');
+
+      const nameEl = document.createElement('span');
+      nameEl.textContent = val;
+
+      const countEl = document.createElement('span');
+      countEl.className = 'filter-count';
+      countEl.textContent = count;
+
+      btn.appendChild(nameEl);
+      btn.appendChild(countEl);
 
       btn.addEventListener('click', () => {
-        state[stateKey] = val;
-        this.allFilters();
+        Filtrado.state[stateKey] = val;
+        this.allFilters(); // re-renderizar todos los filtros
         this.timeline();
       });
+
       container.appendChild(btn);
     });
   },
 
+  /** Renderiza los 3 grupos de filtros. */
   allFilters() {
     this._buildFilterGroup('filter-cat', Utils.unique('categoria'), 'filtroCategoria', Utils.countBy('categoria'));
     this._buildFilterGroup('filter-tipo', Utils.unique('tipo'), 'filtroTipo', Utils.countBy('tipo'));
     this._buildFilterGroup('filter-certeza', Utils.unique('certeza'), 'filtroCerteza', Utils.countBy('certeza'));
   },
 
+  /** Renderiza la línea de tiempo con los eventos filtrados. */
   timeline() {
     const track = document.getElementById('timeline-track');
     const empty = document.getElementById('empty-state');
-    const count = document.getElementById('search-count');
+    const countEl = document.getElementById('search-count');
     if (!track || !empty) return;
 
     const eventos = Filtrado.get();
@@ -402,24 +991,30 @@ const Render = {
     if (!eventos.length) {
       track.innerHTML = '';
       empty.classList.remove('hidden');
-      if (count) count.textContent = 'Sin resultados';
+      if (countEl) countEl.textContent = 'Sin resultados';
       return;
     }
 
     empty.classList.add('hidden');
-    if (count) count.textContent = state.busqueda ? `${eventos.length} resultado${eventos.length !== 1 ? 's' : ''}` : '';
+    if (countEl) {
+      countEl.textContent = Filtrado.state.busqueda
+        ? `${eventos.length} resultado${eventos.length !== 1 ? 's' : ''}`
+        : '';
+    }
 
     track.innerHTML = '';
-    eventos.forEach((ev, i) => {
+
+    eventos.forEach((ev, index) => {
       const li = document.createElement('li');
       li.className = 'timeline-card';
       li.setAttribute('role', 'button');
       li.setAttribute('tabindex', '0');
       li.setAttribute('aria-label', `Ver detalle: ${ev.titulo}`);
-      li.style.animationDelay = `${i * 0.055}s`;
+      li.style.animationDelay = `${index * 0.055}s`;
 
-      // Top row: tipo + certeza + fecha
-      const top = document.createElement('div'); top.className = 'card-top';
+      // Row superior: tipo + certeza + fecha
+      const top = document.createElement('div');
+      top.className = 'card-top';
 
       const tipoBadge = document.createElement('span');
       tipoBadge.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
@@ -438,358 +1033,141 @@ const Render = {
       top.appendChild(certBadge);
       top.appendChild(dateEl);
 
-      // Title
-      const h3 = document.createElement('h3'); h3.className = 'card-title'; h3.textContent = ev.titulo;
+      // Título
+      const h3 = document.createElement('h3');
+      h3.className = 'card-title';
+      h3.textContent = ev.titulo;
 
-      // Desc
-      const p = document.createElement('p'); p.className = 'card-desc'; p.textContent = ev.descripcion;
+      // Descripción (truncada por CSS con -webkit-line-clamp)
+      const p = document.createElement('p');
+      p.className = 'card-desc';
+      p.textContent = ev.descripcion;
 
-      // Footer
-      const footer = document.createElement('div'); footer.className = 'card-footer';
+      // Footer: badge categoría + CTA
+      const footer = document.createElement('div');
+      footer.className = 'card-footer';
+
       const catBadge = document.createElement('span');
       catBadge.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
       catBadge.textContent = ev.categoria;
 
-      const cta = document.createElement('span'); cta.className = 'card-cta';
+      const cta = document.createElement('span');
+      cta.className = 'card-cta';
       cta.textContent = 'Ver detalle ';
-      const arrow = document.createElement('span'); arrow.className = 'card-arrow'; arrow.textContent = '→';
+      const arrow = document.createElement('span');
+      arrow.className = 'card-arrow';
+      arrow.textContent = '→';
       cta.appendChild(arrow);
 
       footer.appendChild(catBadge);
       footer.appendChild(cta);
 
-      li.appendChild(top); li.appendChild(h3); li.appendChild(p); li.appendChild(footer);
+      li.appendChild(top);
+      li.appendChild(h3);
+      li.appendChild(p);
+      li.appendChild(footer);
 
-      const open = () => Modal.openDetalle(ev);
-      li.addEventListener('click', open);
-      li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+      // Eventos: clic + teclado para accesibilidad
+      const openModal = () => Modal.openDetalle(ev);
+      li.addEventListener('click', openModal);
+      li.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
+      });
 
       track.appendChild(li);
     });
   }
 };
 
+
 /* ============================================================
-   MÓDULO: EVENTOS GLOBALES
+   MÓDULO 11: EVENTOS GLOBALES
+   Registra todos los event listeners de la app.
+   Separados de la lógica para facilitar el mantenimiento.
    ============================================================ */
 const Events = {
   init() {
-    // Disclaimer
+
+    // ---- Disclaimer bar ----
     document.getElementById('disclaimer-close')?.addEventListener('click', () => {
       document.getElementById('disclaimer-bar')?.remove();
     });
 
-    // Buscador
-    const input = document.getElementById('search-input');
-    const clear = document.getElementById('search-clear');
-    input?.addEventListener('input', () => {
-      state.busqueda = Sanitize.searchInput(input.value);
-      clear?.classList.toggle('visible', state.busqueda.length > 0);
-      Render.timeline();
+    // ---- Toggle de tema claro/oscuro ----
+    document.getElementById('btn-theme-toggle')?.addEventListener('click', () => {
+      Theme.toggle();
+      // Re-renderizar el gráfico con los nuevos colores del tema
+      ChartModule.render();
     });
-    clear?.addEventListener('click', () => {
-      if (input) input.value = '';
-      state.busqueda = '';
-      clear.classList.remove('visible');
-      input?.focus();
+
+    // ---- Buscador: filtrado en tiempo real ----
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+
+    searchInput?.addEventListener('input', () => {
+      // Sanitizar el input antes de usarlo como filtro
+      Filtrado.state.busqueda = Sanitize.searchInput(searchInput.value);
+      searchClear?.classList.toggle('visible', Filtrado.state.busqueda.length > 0);
       Render.timeline();
     });
 
-    // Modales abrir
+    searchClear?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      Filtrado.state.busqueda = '';
+      searchClear.classList.remove('visible');
+      searchInput?.focus();
+      Render.timeline();
+    });
+
+    // ---- Botón Compartir (Web Share API) ----
+    document.getElementById('btn-compartir')?.addEventListener('click', async () => {
+      const id = Modal._currentEventoId;
+      const titulo = document.getElementById('md-title')?.textContent || '';
+      if (id) await Compartir.compartir(id, titulo);
+    });
+
+    // ---- Modales: abrir ----
     document.getElementById('btn-quienes')?.addEventListener('click', () => Modal.open('modal-quienes'));
     document.getElementById('btn-quienes-footer')?.addEventListener('click', () => Modal.open('modal-quienes'));
     document.getElementById('btn-terminos')?.addEventListener('click', () => Modal.open('modal-terminos'));
 
-    // Modales cerrar — botones ✕
+    // ---- Modales: cerrar con botón ✕ ----
+    // Seleccionamos todos los botones que tengan data-modal
     document.querySelectorAll('.modal-close').forEach(btn => {
       const id = btn.dataset.modal;
       if (id) btn.addEventListener('click', () => Modal.close(id));
     });
 
-    // Modales cerrar — clic en overlay
+    // ---- Modales: cerrar al clic en el overlay (fondo oscuro) ----
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', e => { if (e.target === overlay) Modal.close(overlay.id); });
-    });
-
-    // Modales cerrar — Escape
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') Modal.closeLast(); });
-  }
-};
-
-/* ============================================================
-   MÓDULO: CALENDARIO
-   ============================================================ */
-const Calendario = {
-
-  // Estado interno del calendario
-  _year: null,
-  _month: null,    // 0-based
-  _selectedDate: null,  // "YYYY-MM-DD" | null
-
-  /**
-   * Construye un mapa { "YYYY-MM-DD": [eventos] } para acceso O(1)
-   */
-  _buildEventMap() {
-    return eventosGubernamentales.reduce((map, ev) => {
-      if (!map[ev.fecha]) map[ev.fecha] = [];
-      map[ev.fecha].push(ev);
-      return map;
-    }, {});
-  },
-
-  /**
-   * Renderiza la grilla del mes actual en el DOM.
-   */
-  render() {
-    const grid = document.getElementById('cal-grid');
-    const label = document.getElementById('cal-month-label');
-    const resetBtn = document.getElementById('cal-reset');
-    if (!grid || !label) return;
-
-    const eventMap = this._buildEventMap();
-    const today = new Date();
-    const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
-    // Label del mes
-    const monthName = new Date(this._year, this._month, 1)
-      .toLocaleDateString('es-CL', { month: 'long', year: 'numeric' });
-    label.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
-
-    grid.innerHTML = '';
-
-    // Cabecera días de la semana (L M M J V S D)
-    const dayNames = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'];
-    dayNames.forEach(d => {
-      const span = document.createElement('span');
-      span.className = 'cal-day-name';
-      span.textContent = d;
-      grid.appendChild(span);
-    });
-
-    // Primer día del mes (ajustado a lunes = 0)
-    const firstDay = new Date(this._year, this._month, 1).getDay();
-    const offset = (firstDay === 0) ? 6 : firstDay - 1; // lunes primero
-    const daysInMonth = new Date(this._year, this._month + 1, 0).getDate();
-
-    // Celdas vacías iniciales
-    for (let i = 0; i < offset; i++) {
-      const empty = document.createElement('div');
-      empty.className = 'cal-day cal-empty';
-      empty.setAttribute('aria-hidden', 'true');
-      grid.appendChild(empty);
-    }
-
-    // Días del mes
-    for (let d = 1; d <= daysInMonth; d++) {
-      const iso = `${this._year}-${String(this._month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-      const eventos = eventMap[iso] || [];
-      const hasEvents = eventos.length > 0;
-
-      const cell = document.createElement('div');
-      cell.className = 'cal-day';
-      cell.setAttribute('role', hasEvents ? 'button' : 'gridcell');
-      cell.setAttribute('aria-label', hasEvents
-        ? `${d} — ${eventos.length} medida${eventos.length > 1 ? 's' : ''}`
-        : String(d));
-
-      if (hasEvents) {
-        cell.classList.add('cal-has-events');
-        if (eventos.length >= 3) cell.classList.add('cal-many-events');
-        cell.setAttribute('tabindex', '0');
-      }
-      if (iso === todayISO) cell.classList.add('cal-today');
-      if (iso === this._selectedDate) cell.classList.add('cal-selected');
-
-      cell.textContent = d;
-
-      if (hasEvents) {
-        const openDay = () => {
-          this._selectedDate = iso;
-          this.render();                 // re-render para mostrar selección
-          this._openDayModal(iso, eventos);
-          if (resetBtn) resetBtn.classList.remove('hidden');
-        };
-        cell.addEventListener('click', openDay);
-        cell.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDay(); }
-        });
-      }
-
-      grid.appendChild(cell);
-    }
-
-    // Botón reset
-    if (resetBtn) {
-      resetBtn.classList.toggle('hidden', !this._selectedDate);
-    }
-  },
-
-  /**
-   * Abre el modal con los eventos de un día específico.
-   * Construye el DOM con textContent (nunca innerHTML con datos externos).
-   */
-  _openDayModal(iso, eventos) {
-    const fechaEl = document.getElementById('mdia-fecha');
-    const countEl = document.getElementById('mdia-count');
-    const list = document.getElementById('mdia-list');
-    const title = document.getElementById('mdia-title');
-    if (!fechaEl || !list) return;
-
-    // Fecha legible
-    const [y, m, d] = iso.split('-').map(Number);
-    const fechaStr = new Date(y, m - 1, d).toLocaleDateString('es-CL', {
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-    });
-    fechaEl.textContent = fechaStr.charAt(0).toUpperCase() + fechaStr.slice(1);
-    fechaEl.setAttribute('datetime', iso);
-
-    countEl.textContent = `${eventos.length} medida${eventos.length > 1 ? 's' : ''}`;
-    title.textContent = 'Medidas del día';
-
-    list.innerHTML = '';
-
-    eventos.forEach(ev => {
-      const li = document.createElement('li');
-      li.className = 'modal-dia-item';
-
-      // Badges top
-      const topRow = document.createElement('div');
-      topRow.className = 'modal-dia-item-top';
-
-      const tipoBadge = document.createElement('span');
-      tipoBadge.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
-      tipoBadge.textContent = ev.tipo;
-
-      const certBadge = document.createElement('span');
-      certBadge.className = `certeza-badge ${Utils.certezaClass(ev.certeza)}`;
-      certBadge.textContent = ev.certeza;
-
-      const catBadge = document.createElement('span');
-      catBadge.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
-      catBadge.textContent = ev.categoria;
-
-      topRow.appendChild(tipoBadge);
-      topRow.appendChild(certBadge);
-      topRow.appendChild(catBadge);
-
-      // Título
-      const h3 = document.createElement('p');
-      h3.className = 'modal-dia-titulo';
-      h3.textContent = ev.titulo;
-
-      // Descripción
-      const p = document.createElement('p');
-      p.className = 'modal-dia-desc';
-      p.textContent = ev.descripcion;
-
-      // Footer: fuente + ver detalle
-      const footer = document.createElement('div');
-      footer.className = 'modal-dia-footer';
-
-      const fuenteLink = document.createElement('a');
-      fuenteLink.className = 'modal-dia-fuente';
-      fuenteLink.href = Sanitize.url(ev.fuente.url);
-      fuenteLink.target = '_blank';
-      fuenteLink.rel = 'noopener noreferrer';
-
-      // Ícono externo
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('width', '11'); svg.setAttribute('height', '11');
-      svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
-      svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '2');
-      svg.setAttribute('aria-hidden', 'true');
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', 'M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6');
-      const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-      poly.setAttribute('points', '15 3 21 3 21 9');
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', '10'); line.setAttribute('y1', '14');
-      line.setAttribute('x2', '21'); line.setAttribute('y2', '3');
-      svg.appendChild(path); svg.appendChild(poly); svg.appendChild(line);
-
-      fuenteLink.appendChild(svg);
-      fuenteLink.appendChild(document.createTextNode(ev.fuente.medio));
-
-      const verBtn = document.createElement('button');
-      verBtn.className = 'modal-dia-ver';
-      verBtn.textContent = 'Ver análisis →';
-      verBtn.addEventListener('click', () => {
-        Modal.close('modal-dia');
-        Modal.openDetalle(ev);
+      overlay.addEventListener('click', e => {
+        if (e.target === overlay) Modal.close(overlay.id);
       });
-
-      footer.appendChild(fuenteLink);
-      footer.appendChild(verBtn);
-
-      li.appendChild(topRow);
-      li.appendChild(h3);
-      li.appendChild(p);
-      li.appendChild(footer);
-      list.appendChild(li);
     });
 
-    Modal.open('modal-dia');
-  },
-
-  /**
-   * Inicializa el calendario en el mes con más eventos,
-   * o en el mes actual si no hay datos.
-   */
-  init() {
-    // Detectar el mes con más eventos
-    const monthCount = eventosGubernamentales.reduce((acc, ev) => {
-      const key = ev.fecha.slice(0, 7); // "YYYY-MM"
-      acc[key] = (acc[key] || 0) + 1;
-      return acc;
-    }, {});
-
-    const topMonth = Object.entries(monthCount).sort((a, b) => b[1] - a[1])[0];
-
-    if (topMonth) {
-      const [y, m] = topMonth[0].split('-').map(Number);
-      this._year = y;
-      this._month = m - 1;
-    } else {
-      const now = new Date();
-      this._year = now.getFullYear();
-      this._month = now.getMonth();
-    }
-
-    this.render();
-
-    // Navegación mes anterior / siguiente
-    document.getElementById('cal-prev')?.addEventListener('click', () => {
-      this._month--;
-      if (this._month < 0) { this._month = 11; this._year--; }
-      this._selectedDate = null;
-      this.render();
-    });
-
-    document.getElementById('cal-next')?.addEventListener('click', () => {
-      this._month++;
-      if (this._month > 11) { this._month = 0; this._year++; }
-      this._selectedDate = null;
-      this.render();
-    });
-
-    // Reset selección de día
-    document.getElementById('cal-reset')?.addEventListener('click', () => {
-      this._selectedDate = null;
-      this.render();
+    // ---- Modales: cerrar con tecla Escape ----
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') Modal.closeLast();
     });
   }
 };
 
+
 /* ============================================================
-   INIT
+   PUNTO DE ENTRADA: init()
+   Se ejecuta cuando el DOM está completamente cargado.
+   El orden importa: primero datos, luego UI, luego deep links.
    ============================================================ */
 function init() {
-  Render.heroStats();
-  Render.estadisticas();
-  Render.allFilters();
-  Render.timeline();
-  Calendario.init();
-  Events.init();
+  Theme.init();          // 1. Aplicar tema antes de renderizar (evita flash)
+  Render.heroStats();    // 2. Contadores del hero
+  Render.estadisticas(); // 3. Panel de stats + gráfico de dona
+  Render.allFilters();   // 4. Botones de filtro
+  Render.timeline();     // 5. Línea de tiempo
+  Calendario.init();     // 6. Calendario interactivo
+  Events.init();         // 7. Todos los event listeners
+  DeepLink.init();       // 8. Último: procesar hash de la URL (requiere que el DOM esté listo)
 }
 
+// Esperar a que el DOM esté completamente cargado antes de ejecutar
 document.addEventListener('DOMContentLoaded', init);

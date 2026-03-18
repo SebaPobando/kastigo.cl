@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es-CL">
+<html lang="es-CL" data-theme="auto">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
 
   <title>Kastigo · Monitor Ciudadano de Medidas Gubernamentales Chile 2026</title>
   <meta name="description"
@@ -51,7 +52,7 @@
   }
   </script>
 
-  <!-- JSON-LD: NewsArticle Sample -->
+  <!-- JSON-LD: NewsArticle -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,6 +65,9 @@
     "about": { "@type": "Thing", "name": "Política ambiental Chile 2026" }
   }
   </script>
+
+  <!-- Chart.js desde CDN (para el gráfico de dona) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -95,6 +99,11 @@
         <span class="independent-badge">INDEPENDIENTE</span>
       </div>
       <nav class="header-nav" aria-label="Navegación principal">
+        <!-- Botón de toggle tema claro/oscuro -->
+        <button class="nav-btn btn-theme-toggle" id="btn-theme-toggle" aria-label="Cambiar tema">
+          <span class="theme-icon-sun" aria-hidden="true">☀️</span>
+          <span class="theme-icon-moon" aria-hidden="true">🌙</span>
+        </button>
         <button class="nav-btn" id="btn-quienes">Quiénes Somos</button>
         <a href="https://ko-fi.com/kastigo" class="nav-btn nav-btn-cafe" target="_blank" rel="noopener noreferrer">☕
           Apoyar</a>
@@ -133,7 +142,7 @@
     </div>
   </section>
 
-  <!-- LEYENDA DE CERTEZA -->
+  <!-- LEYENDA -->
   <div class="leyenda-bar" role="note" aria-label="Leyenda de indicadores">
     <span class="leyenda-title">Indicadores:</span>
     <span class="certeza-badge certeza-confirmado">● Confirmado</span>
@@ -163,15 +172,22 @@
         <button class="cal-reset-btn hidden" id="cal-reset">✕ Limpiar fecha</button>
       </section>
 
-      <section class="panel" aria-labelledby="stats-h">
+      <!-- ESTADÍSTICAS + GRÁFICO -->
+      <section class="panel panel-stats" aria-labelledby="stats-h">
         <h2 class="panel-title" id="stats-h">Estadísticas</h2>
         <div class="stats-total-row">
           <span class="stats-big-num" id="stats-total">0</span>
           <span class="stats-big-label">total</span>
         </div>
-        <div id="stats-grid" role="list"></div>
+        <!-- Canvas para Chart.js — el gráfico de dona -->
+        <div class="chart-wrapper" aria-label="Gráfico de distribución por categoría">
+          <canvas id="chart-categorias" role="img" aria-label="Distribución de medidas por categoría"></canvas>
+        </div>
+        <!-- Leyenda del gráfico generada por JS -->
+        <div id="stats-grid" role="list" aria-label="Lista de estadísticas por categoría"></div>
       </section>
 
+      <!-- BUSCADOR -->
       <section class="panel" aria-labelledby="search-h">
         <h2 class="panel-title" id="search-h">Buscar</h2>
         <div class="search-wrapper" role="search">
@@ -188,6 +204,7 @@
         <p class="search-count" id="search-count" aria-live="polite"></p>
       </section>
 
+      <!-- FILTROS -->
       <section class="panel" aria-labelledby="filter-h">
         <h2 class="panel-title" id="filter-h">Categoría</h2>
         <div class="filter-buttons" id="filter-cat" role="group" aria-label="Filtro categoría"></div>
@@ -220,6 +237,12 @@
 
   </main>
 
+  <!-- FAB CAFÉ -->
+  <a href="https://ko-fi.com/kastigo" class="fab-cafe" target="_blank" rel="noopener noreferrer"
+    aria-label="Apoyar con un café">
+    ☕ <span>Invítame un café</span>
+  </a>
+
   <!-- MODAL: DÍA DEL CALENDARIO -->
   <div class="modal-overlay hidden" id="modal-dia" role="dialog" aria-modal="true" aria-labelledby="mdia-title">
     <div class="modal-box modal-dia-box">
@@ -233,12 +256,6 @@
       <ol class="modal-dia-list" id="mdia-list" aria-label="Lista de medidas del día"></ol>
     </div>
   </div>
-
-  <!-- FAB CAFÉ -->
-  <a href="https://ko-fi.com/kastigo" class="fab-cafe" target="_blank" rel="noopener noreferrer"
-    aria-label="Apoyar con un café">
-    ☕ <span>Invítame un café</span>
-  </a>
 
   <!-- MODAL: QUIÉNES SOMOS -->
   <div class="modal-overlay hidden" id="modal-quienes" role="dialog" aria-modal="true" aria-labelledby="mq-title">
@@ -318,10 +335,31 @@
           verificados.</p>
       </div>
 
-      <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal btn-cafe-modal-sm" target="_blank"
-        rel="noopener noreferrer">
-        ☕ ¿Te es útil esta info? Apoya el proyecto invitándome un café
-      </a>
+      <!-- ACCIONES DEL MODAL: Compartir + Café -->
+      <div class="modal-action-row">
+        <!-- Botón Compartir (Web Share API) -->
+        <button class="btn-compartir" id="btn-compartir" aria-label="Compartir esta medida">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            aria-hidden="true">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>
+          <span id="btn-compartir-text">Compartir</span>
+        </button>
+
+        <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal btn-cafe-modal-sm" target="_blank"
+          rel="noopener noreferrer">
+          ☕ ¿Te es útil esta info? Apoya el proyecto
+        </a>
+      </div>
+
+      <!-- Notificación de "Copiado al portapapeles" (fallback desktop) -->
+      <div class="share-toast hidden" id="share-toast" role="status" aria-live="polite">
+        ✅ ¡Link copiado al portapapeles!
+      </div>
     </div>
   </div>
 
@@ -377,6 +415,8 @@
     </div>
   </footer>
 
+  <!-- Datos primero, luego lógica -->
+  <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>
 
