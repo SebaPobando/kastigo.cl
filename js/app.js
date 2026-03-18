@@ -171,6 +171,7 @@ const Utils = {
       'Política': 'cat-politica',   // categorías nuevas del data.js
       'Social': 'cat-social',
       'Vivienda': 'cat-vivienda',
+      'Cultura': 'cat-cultura',
     };
     return map[cat] || 'cat-default';
   },
@@ -183,6 +184,7 @@ const Utils = {
       'Declaración': 'tipo-declaracion',
       'Proyecto': 'tipo-proyecto',
       'Administrativo': 'tipo-decreto',  // reutiliza estilo decreto
+      'Declaración Polémica': 'tipo-declaracion-polemica',
     };
     return map[tipo] || 'tipo-decreto';
   },

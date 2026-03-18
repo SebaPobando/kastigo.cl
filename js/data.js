@@ -2,11 +2,8 @@
 
 /**
  * js/data.js — Base de datos de medidas gubernamentales
- * Para agregar nuevas medidas, copia la estructura de cualquier
- * objeto del array y aumenta el id en 1.
- * Categorías disponibles: Medio Ambiente, Laboral, Economía,
- * Corporativo, Seguridad, Política, Social, Vivienda
- * Tipos disponibles: Decreto, Ley, Declaración, Proyecto, Administrativo
+ * Categorías: Medio Ambiente, Laboral, Economía, Corporativo, Seguridad, Política, Social, Vivienda, Cultura
+ * Tipos: Decreto, Ley, Declaración, Proyecto, Administrativo, Declaración Polémica
  * Certeza: Confirmado, Reportado, En Desarrollo
  */
 const eventosGubernamentales = [
@@ -185,5 +182,71 @@ const eventosGubernamentales = [
         tipo: "Proyecto",
         certeza: "En Desarrollo",
         fuente: { medio: "Gobierno de Chile", url: "https://www.gob.cl/noticias/plan-reconstruccion-nacional-disminucion-impuestos-subsidio-empleo-pymes/" }
+    },
+    {
+        id: 17,
+        fecha: "2026-03-12",
+        titulo: "Polémica por dichos de Ministra de Cultura sobre gasto",
+        descripcion: "\"Hay demasiado gasto en cultura que no llega a la gente, solo a nichos ideológicos\", afirmó la ministra al anunciar revisión de fondos.",
+        interpretacion: "Gremios artísticos acusan un intento de censura y desconocimiento del rol social de la cultura, temiendo recortes masivos bajo criterios políticos.",
+        categoria: "Cultura",
+        tipo: "Declaración Polémica",
+        certeza: "Confirmado",
+        fuente: { medio: "El Mostrador", url: "https://www.elmostrador.cl" }
+    },
+    {
+        id: 18,
+        fecha: "2026-03-13",
+        titulo: "Decreto de expulsión inmediata de extranjeros con antecedentes",
+        descripcion: "Publicación de decreto que mandata la expulsión administrativa expedita de extranjeros que cometan delitos, sin esperar condena firme.",
+        interpretacion: "Organizaciones de derechos humanos advierten que vulnera el debido proceso y el principio de no devolución, permitiendo expulsiones arbitrarias.",
+        categoria: "Seguridad",
+        tipo: "Decreto",
+        certeza: "Confirmado",
+        fuente: { medio: "CIPER Chile", url: "https://www.ciperchile.cl" }
+    },
+    {
+        id: 19,
+        fecha: "2026-03-15",
+        titulo: "Proyecto de ley para derogar aborto en tres causales",
+        descripcion: "Ingreso de iniciativa parlamentaria con respaldo del Ejecutivo para eliminar la normativa que permite el aborto en causales específicas.",
+        interpretacion: "Movimientos feministas califican la medida como un grave retroceso en derechos reproductivos conquistados tras años de debate legislativo.",
+        categoria: "Social",
+        tipo: "Proyecto",
+        certeza: "Confirmado",
+        fuente: { medio: "La Tercera", url: "https://www.latercera.com" }
+    },
+    {
+        id: 20,
+        fecha: "2026-03-16",
+        titulo: "Polémica frase de Subsecretario sobre ahorro y pobreza",
+        descripcion: "\"Los problemas de la pobreza se solucionan con trabajo, no con bonos, pero también con ahorro, y lamentablemente los pobres no ahorran\".",
+        interpretacion: "Fundaciones contra la pobreza critican la frase por estigmatizadora, señalando que ignora las barreras estructurales que impiden el ahorro en familias vulnerables.",
+        categoria: "Social",
+        tipo: "Declaración Polémica",
+        certeza: "Confirmado",
+        fuente: { medio: "Biobío", url: "https://www.biobiochile.cl" }
+    },
+    {
+        id: 21,
+        fecha: "2026-03-17",
+        titulo: "Aceleración de permisos para proyectos de inversión",
+        descripcion: "Modificaciones administrativas para reducir los plazos de tramitación de permisos ambientales y sectoriales en proyectos de alto impacto económico.",
+        interpretacion: "Ecologistas advierten que la simplificación de trámites debilita la fiscalización ambiental profunda, priorizando el capital sobre la sustentabilidad del territorio.",
+        categoria: "Medio Ambiente",
+        tipo: "Administrativo",
+        certeza: "Confirmado",
+        fuente: { medio: "Diario Financiero", url: "https://www.df.cl" }
+    },
+    {
+        id: 22,
+        fecha: "2026-03-18",
+        titulo: "Crítica del Ministro del Interior al sistema judicial",
+        descripcion: "\"El sistema judicial chileno ha fracasado en dar seguridad; necesitamos jueces que apliquen la ley con mano dura y no con criterios garantistas\".",
+        interpretacion: "La Asociación de Magistrados expresa preocupación por la presión del Ejecutivo sobre el Poder Judicial, alertando un riesgo para la independencia de los jueces.",
+        categoria: "Política",
+        tipo: "Declaración Polémica",
+        certeza: "Confirmado",
+        fuente: { medio: "T13", url: "https://www.t13.cl" }
     }
 ];

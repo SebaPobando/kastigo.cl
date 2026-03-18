@@ -636,9 +636,19 @@ button {
   color: #D4620A;
 }
 
+.tipo-declaracion-polemica {
+  background: #FFF0E4;
+  color: #B03A00;
+}
+
 .tipo-proyecto {
   background: #F0EBF8;
   color: #5E3A9E;
+}
+
+.cat-cultura {
+  background: #F3E8FF;
+  color: #6B21A8;
 }
 
 [data-theme="dark"] .tipo-ley {

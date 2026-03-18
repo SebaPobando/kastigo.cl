@@ -19,6 +19,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="css/widgets.css" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
@@ -142,6 +143,40 @@
     </div>
   </section>
 
+  <div class="countdown-section" id="countdown-widget" aria-label="Contador regresivo del mandato presidencial">
+    <div class="countdown-inner">
+      <p class="countdown-label">Tiempo restante del mandato · Termina el 11 de marzo de 2030</p>
+      <div class="countdown-units" role="timer" aria-live="off">
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-dias" aria-label="días restantes">00</span>
+          <span class="countdown-unit-label">días</span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-horas" aria-label="horas restantes">00</span>
+          <span class="countdown-unit-label">horas</span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-minutos" aria-label="minutos restantes">00</span>
+          <span class="countdown-unit-label">min</span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-segundos" aria-label="segundos restantes">00</span>
+          <span class="countdown-unit-label">seg</span>
+        </div>
+      </div>
+      <div class="countdown-progress-wrap">
+        <div class="countdown-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+          aria-label="Porcentaje del mandato transcurrido">
+          <div class="countdown-progress-fill" id="cd-progress-bar" style="width: 0%"></div>
+        </div>
+        <p class="countdown-pct-label" id="cd-porcentaje">Calculando…</p>
+      </div>
+    </div>
+  </div>
+
   <!-- LEYENDA -->
   <div class="leyenda-bar" role="note" aria-label="Leyenda de indicadores">
     <span class="leyenda-title">Indicadores:</span>
@@ -152,7 +187,29 @@
     <span class="tipo-badge tipo-decreto">Decreto</span>
     <span class="tipo-badge tipo-declaracion">Declaración</span>
     <span class="tipo-badge tipo-proyecto">Proyecto</span>
+    <span class="tipo-badge tipo-declaracion-polemica">Declaración Polémica</span>
   </div>
+
+  <section class="promesas-section" aria-labelledby="promesas-heading" id="promesas-container">
+    <div class="promesas-inner">
+      <div class="promesas-header">
+        <h2 class="promesas-title" id="promesas-heading">Medidómetro de Promesas</h2>
+        <span class="promesas-subtitle">Promesas de campaña · Estado actual</span>
+      </div>
+
+      <!-- Resumen de estadísticas (generado por JS) -->
+      <div class="promesas-summary" id="promesas-summary" role="list" aria-label="Resumen de promesas por estado"></div>
+
+      <!-- Barra segmentada (generada por JS) -->
+      <div class="promesas-barra-container">
+        <p class="promesas-barra-label">Distribución del total de promesas</p>
+        <div class="promesas-barra" id="promesas-barra" role="img" aria-label="Barra de progreso de promesas"></div>
+      </div>
+
+      <!-- Lista completa (generada por JS) -->
+      <ol class="promesas-lista" id="promesas-lista" aria-label="Lista de promesas de campaña"></ol>
+    </div>
+  </section>
 
   <!-- MAIN -->
   <main class="main-layout" id="main-content">
@@ -335,6 +392,8 @@
           verificados.</p>
       </div>
 
+      <div id="impactometro-widget" aria-label="¿Te afecta esta medida?"></div>
+
       <!-- ACCIONES DEL MODAL: Compartir + Café -->
       <div class="modal-action-row">
         <!-- Botón Compartir (Web Share API) -->
@@ -418,6 +477,7 @@
   <!-- Datos primero, luego lógica -->
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/widgets.js"></script>
 </body>
 
 </html>
