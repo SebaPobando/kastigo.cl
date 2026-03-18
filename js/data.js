@@ -7,7 +7,7 @@
  * POLÍTICA DE URLs: cada URL fue verificada apareciendo literalmente
  * en resultados de búsqueda reales durante la elaboración de este archivo.
  * Ningún evento con URL no verificable fue incluido.
- * Total de eventos: 24
+ * Total de eventos: 24 — campo estado_seguimiento opcional disponible
  */
 
 const eventosGubernamentales = [
@@ -266,6 +266,7 @@ const eventosGubernamentales = [
     {
         id: 19,
         fecha: "2026-03-17",
+        estado_seguimiento: "bloqueada",
         titulo: "Corte restablece temporalmente el permiso ambiental de Dominga",
         descripcion: "La Corte de Apelaciones de Santiago restableció provisoriamente el permiso ambiental del proyecto minero-portuario Dominga, paralizando la resolución del CIUDEN que lo había rechazado en 2021.",
         interpretacion: "Organizaciones de La Higuera anuncian movilizaciones, acusando que el fallo favorece un proyecto que amenaza el ecosistema marino donde habita el 80% de la población mundial del pingüino de Humboldt.",

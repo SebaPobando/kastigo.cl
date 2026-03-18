@@ -46,7 +46,7 @@
     "name": "Kastigo — Registro de Medidas Gubernamentales Chile 2026",
     "description": "Base de datos ciudadana con hechos del día a día e interpretaciones sobre decretos, leyes y políticas del gobierno de Chile.",
     "url": "https://kastigo.cl/",
-    "dateModified": "2026-03-17",
+    "dateModified": "2026-03-18",
     "inLanguage": "es-CL",
     "license": "https://creativecommons.org/licenses/by-nc/4.0/",
     "publisher": { "@type": "Organization", "name": "Colectivo Kastigo", "url": "https://kastigo.cl" }
@@ -60,7 +60,7 @@
     "@type": "NewsArticle",
     "headline": "Retiro de 43 decretos de protección ambiental por el gobierno de Chile",
     "datePublished": "2026-03-17",
-    "description": "El Ejecutivo retiró de Contraloría 43 decretos ambientales y el plan de DD.HH.",
+    "description": "El Ejecutivo retiró de Contraloría 43 decretos ambientales.",
     "author": { "@type": "Organization", "name": "Colectivo Kastigo" },
     "publisher": { "@type": "Organization", "name": "Kastigo", "url": "https://kastigo.cl" },
     "about": { "@type": "Thing", "name": "Política ambiental Chile 2026" }
@@ -100,7 +100,6 @@
         <span class="independent-badge">INDEPENDIENTE</span>
       </div>
       <nav class="header-nav" aria-label="Navegación principal">
-        <!-- Botón de toggle tema claro/oscuro -->
         <button class="nav-btn btn-theme-toggle" id="btn-theme-toggle" aria-label="Cambiar tema">
           <span class="theme-icon-sun" aria-hidden="true">☀️</span>
           <span class="theme-icon-moon" aria-hidden="true">🌙</span>
@@ -117,7 +116,7 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span>Actualizado · <time datetime="2026-03-17">Marzo 2026</time></span>
+        <span>Actualizado · <time datetime="2026-03-18">Marzo 2026</time></span>
       </div>
       <h1 class="hero-title" id="hero-title">Cada medida.<br /><em>Registrada.</em></h1>
       <p class="hero-subtitle">Hechos del día a día e interpretación ciudadana. Sin filtros corporativos.</p>
@@ -143,6 +142,7 @@
     </div>
   </section>
 
+  <!-- COUNTDOWN -->
   <div class="countdown-section" id="countdown-widget" aria-label="Contador regresivo del mandato presidencial">
     <div class="countdown-inner">
       <p class="countdown-label">Tiempo restante del mandato · Termina el 11 de marzo de 2030</p>
@@ -190,24 +190,41 @@
     <span class="tipo-badge tipo-declaracion-polemica">Declaración Polémica</span>
   </div>
 
+  <!-- ============================================================
+       SEGUIMIENTO DE MEDIDAS
+       Reemplaza el antiguo "Medidómetro de Promesas".
+       Los datos se leen desde eventosGubernamentales (data.js).
+       El estado se deduce automáticamente de certeza, o puede
+       sobreescribirse con estado_seguimiento en cada evento.
+       ============================================================ -->
   <section class="promesas-section" aria-labelledby="promesas-heading" id="promesas-container">
     <div class="promesas-inner">
+
       <div class="promesas-header">
-        <h2 class="promesas-title" id="promesas-heading">Medidómetro de Promesas</h2>
-        <span class="promesas-subtitle">Promesas de campaña · Estado actual</span>
+        <h2 class="promesas-title" id="promesas-heading">Seguimiento de Medidas</h2>
+        <span class="promesas-subtitle">Medidas del gobierno · Estado de ejecución</span>
       </div>
 
-      <!-- Resumen de estadísticas (generado por JS) -->
-      <div class="promesas-summary" id="promesas-summary" role="list" aria-label="Resumen de promesas por estado"></div>
+      <!-- Aviso editorial de neutralidad -->
+      <p class="seg-disclaimer">
+        ℹ️ Este panel muestra el estado de ejecución de cada medida registrada en esta plataforma.
+        El estado se determina a partir de fuentes periodísticas verificadas, no refleja una valoración política.
+        <strong>Ejecutada</strong> significa que la medida fue implementada según las fuentes.
+        <strong>En Proceso</strong> significa que aún está en tramitación o desarrollo.
+      </p>
+
+      <!-- Resumen estadístico (generado por JS) -->
+      <div class="promesas-summary" id="promesas-summary" role="list" aria-label="Resumen de medidas por estado"></div>
 
       <!-- Barra segmentada (generada por JS) -->
       <div class="promesas-barra-container">
-        <p class="promesas-barra-label">Distribución del total de promesas</p>
-        <div class="promesas-barra" id="promesas-barra" role="img" aria-label="Barra de progreso de promesas"></div>
+        <p class="promesas-barra-label">Distribución del total de medidas</p>
+        <div class="promesas-barra" id="promesas-barra" role="img" aria-label="Barra de distribución de medidas"></div>
       </div>
 
       <!-- Lista completa (generada por JS) -->
-      <ol class="promesas-lista" id="promesas-lista" aria-label="Lista de promesas de campaña"></ol>
+      <ol class="promesas-lista" id="promesas-lista" aria-label="Lista de medidas del gobierno"></ol>
+
     </div>
   </section>
 
@@ -236,11 +253,9 @@
           <span class="stats-big-num" id="stats-total">0</span>
           <span class="stats-big-label">total</span>
         </div>
-        <!-- Canvas para Chart.js — el gráfico de dona -->
         <div class="chart-wrapper" aria-label="Gráfico de distribución por categoría">
           <canvas id="chart-categorias" role="img" aria-label="Distribución de medidas por categoría"></canvas>
         </div>
-        <!-- Leyenda del gráfico generada por JS -->
         <div id="stats-grid" role="list" aria-label="Lista de estadísticas por categoría"></div>
       </section>
 
@@ -319,30 +334,23 @@
     <div class="modal-box">
       <button class="modal-close" data-modal="modal-quienes" aria-label="Cerrar">✕</button>
       <div class="modal-accent-bar accent-gradient"></div>
-
       <h2 class="modal-title" id="mq-title">Quiénes Somos</h2>
-
       <p class="modal-text">
         Somos un colectivo ciudadano de profesionales y estudiantes de ingeniería dedicados a la transparencia
-        gubernamental.
-        <strong>Kastigo</strong> nace como una herramienta de fiscalización basada en datos públicos para garantizar el
-        derecho a la información de las y los trabajadores de Chile. Operamos de forma autónoma y autofinanciada por la
-        comunidad.
+        gubernamental. <strong>Kastigo</strong> nace como una herramienta de fiscalización basada en datos públicos
+        para garantizar el derecho a la información de las y los trabajadores de Chile. Operamos de forma autónoma
+        y autofinanciada por la comunidad.
       </p>
-
       <p class="modal-footnote">
-        *Este es un apoyo voluntario para mantener los servidores de kastigo.cl y no constituye el pago por un servicio
-        profesional.
+        *Este es un apoyo voluntario para mantener los servidores de kastigo.cl y no constituye el pago por un
+        servicio profesional.
       </p>
-
       <div class="modal-divider"></div>
-
       <div class="modal-disclaimer-box">
         <strong>⚠️ Aviso:</strong> Este sitio <strong>no es oficial</strong> del Gobierno de Chile ni de ninguna
         institución del Estado. Es un ejercicio legítimo de libertad de expresión y acceso a la información pública
         (Art. 19 N°12 CPR · Ley N° 20.285).
       </div>
-
       <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal" target="_blank" rel="noopener noreferrer">
         ☕ Apoyar el proyecto
       </a>
@@ -397,15 +405,14 @@
           Análisis Crítico · Interpretación ciudadana
         </div>
         <p class="modal-text modal-text-analisis" id="md-interpretacion"></p>
-        <p class="modal-analisis-disclaimer">Esta sección refleja opiniones de sectores de la sociedad civil, no hechos
-          verificados.</p>
+        <p class="modal-analisis-disclaimer">Esta sección refleja opiniones de sectores de la sociedad civil,
+          no hechos verificados.</p>
       </div>
 
       <div id="impactometro-widget" aria-label="¿Te afecta esta medida?"></div>
 
-      <!-- ACCIONES DEL MODAL: Compartir + Café -->
+      <!-- ACCIONES DEL MODAL -->
       <div class="modal-action-row">
-        <!-- Botón Compartir (Web Share API) -->
         <button class="btn-compartir" id="btn-compartir" aria-label="Compartir esta medida">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             aria-hidden="true">
@@ -417,7 +424,6 @@
           </svg>
           <span id="btn-compartir-text">Compartir</span>
         </button>
-
         <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal btn-cafe-modal-sm" target="_blank"
           rel="noopener noreferrer">
           ☕ ¿Te es útil esta info? Apoya el proyecto
@@ -427,7 +433,6 @@
         Contribución voluntaria para mantenimiento de servidores. No es pago por servicios.
       </p>
 
-      <!-- Notificación de "Copiado al portapapeles" (fallback desktop) -->
       <div class="share-toast hidden" id="share-toast" role="status" aria-live="polite">
         ✅ ¡Link copiado al portapapeles!
       </div>
@@ -442,8 +447,8 @@
 
       <h3 class="modal-section-h">1. Exención de Responsabilidad</h3>
       <p class="modal-text">Kastigo es un sitio <strong>no oficial</strong> operado por ciudadanos particulares en
-        ejercicio de la libertad de expresión (Art. 19 N°12 CPR) y el derecho de acceso a la información pública (Ley N°
-        20.285). La información publicada proviene de medios verificados y fuentes públicas. No garantizamos
+        ejercicio de la libertad de expresión (Art. 19 N°12 CPR) y el derecho de acceso a la información pública
+        (Ley N° 20.285). La información publicada proviene de medios verificados y fuentes públicas. No garantizamos
         exhaustividad ni asumimos responsabilidad por errores en las fuentes citadas.</p>
 
       <h3 class="modal-section-h">2. Hechos e Interpretaciones</h3>
@@ -453,27 +458,27 @@
 
       <h3 class="modal-section-h">3. No Afiliación Gubernamental</h3>
       <p class="modal-text">Este sitio <strong>no tiene ningún tipo de afiliación, relación ni respaldo</strong> del
-        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político ni organización estatal.</p>
+        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político ni organización
+        estatal.</p>
 
       <h3 class="modal-section-h">4. Política de Datos</h3>
-      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics, tiempo de
-        sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
-          individuales.</strong> Podrán ser utilizados para análisis interno y eventualmente comercializados a terceros
-        para financiar la operación. Al navegar este sitio, aceptas esta política.</p>
+      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics, tiempo
+        de sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
+          individuales.</strong> Podrán ser utilizados para análisis interno y eventualmente comercializados a
+        terceros para financiar la operación. Al navegar este sitio, aceptas esta política.</p>
 
       <h3 class="modal-section-h">5. Propiedad Intelectual</h3>
       <p class="modal-text">Contenido editorial propio publicado bajo <a
           href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"
-          class="text-link">Creative Commons BY-NC 4.0</a>. Las fuentes citadas son propiedad de sus respectivos medios.
-      </p>
+          class="text-link">Creative Commons BY-NC 4.0</a>. Las fuentes citadas son propiedad de sus respectivos
+        medios.</p>
 
       <h3 class="modal-section-h">6. Financiamiento y Donaciones</h3>
       <p class="modal-text">Las donaciones recibidas a través de plataformas externas (como Ko-fi) representan un
         <strong>apoyo voluntario</strong> destinado exclusivamente a la manutención técnica y operativa de los
-        servidores de kastigo.cl. Estas contribuciones no constituyen el pago por servicios profesionales, asesorías ni
-        garantizan la publicación de contenidos específicos.
+        servidores de kastigo.cl. Estas contribuciones no constituyen el pago por servicios profesionales,
+        asesorías ni garantizan la publicación de contenidos específicos.
       </p>
-
     </div>
   </div>
 
@@ -484,8 +489,8 @@
         <img src="assets/img/logo.png" alt="Kastigo" class="footer-logo" width="34" height="34" loading="lazy" />
         <span class="footer-name">KASTIGO</span>
       </div>
-      <p class="footer-disclaimer">Sitio <strong>no oficial</strong> · Plataforma ciudadana independiente · No somos el
-        gobierno de Chile</p>
+      <p class="footer-disclaimer">Sitio <strong>no oficial</strong> · Plataforma ciudadana independiente · No somos
+        el gobierno de Chile</p>
       <nav class="footer-nav" aria-label="Pie de página">
         <button class="footer-link" id="btn-terminos">Términos y Condiciones</button>
         <button class="footer-link" id="btn-quienes-footer">Quiénes Somos</button>

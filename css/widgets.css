@@ -1,6 +1,6 @@
 /* ============================================================
    KASTIGO · widgets.css
-   Estilos para: Countdown, Medidómetro de Promesas, Impactómetro
+   Estilos para: Countdown, Seguimiento de Medidas, Impactómetro
    Importar en index.html después de styles.css
    ============================================================ */
 
@@ -73,7 +73,6 @@
     letter-spacing: 0.04em;
     line-height: 1;
     font-variant-numeric: tabular-nums;
-    /* Animación sutil al cambiar */
     transition: color 0.15s ease;
 }
 
@@ -122,13 +121,12 @@
     letter-spacing: 0.06em;
 }
 
-/* Estado: mandato terminado */
 .mandato-terminado .countdown-num {
     color: var(--rojo-medio);
 }
 
 /* ============================================================
-   2. PROMESAS — Medidómetro de promesas de campaña
+   2. SEGUIMIENTO — Estado de ejecución de medidas
    ============================================================ */
 .promesas-section {
     background: var(--bg-page);
@@ -164,6 +162,19 @@
     font-size: 0.65rem;
     color: var(--text-secondary);
     letter-spacing: 0.06em;
+}
+
+/* Aviso de neutralidad editorial */
+.seg-disclaimer {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radio);
+    padding: 0.5rem 0.85rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
 }
 
 /* Resumen de stats */
@@ -203,6 +214,7 @@
     color: var(--text-secondary);
 }
 
+/* Colores por estado — reutilizamos clases existentes */
 .prom-stat-cumplida {
     border-left: 4px solid #1A7A4A;
 }
@@ -220,19 +232,19 @@
 }
 
 .prom-stat-incumplida {
-    border-left: 4px solid var(--rojo);
-}
-
-.prom-stat-incumplida .prom-stat-num {
-    color: var(--rojo);
-}
-
-.prom-stat-revertida {
     border-left: 4px solid #526075;
 }
 
-.prom-stat-revertida .prom-stat-num {
+.prom-stat-incumplida .prom-stat-num {
     color: #526075;
+}
+
+.prom-stat-revertida {
+    border-left: 4px solid #8A9AB5;
+}
+
+.prom-stat-revertida .prom-stat-num {
+    color: #8A9AB5;
 }
 
 /* Barra segmentada */
@@ -272,19 +284,19 @@
 }
 
 .barra-incumplida {
-    background: var(--rojo);
-}
-
-.barra-revertida {
     background: #526075;
 }
 
-/* Lista de promesas */
+.barra-revertida {
+    background: #8A9AB5;
+}
+
+/* Lista de medidas */
 .promesas-lista {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.5rem;
 }
 
 .promesa-item {
@@ -301,30 +313,49 @@
 .promesa-item:hover {
     box-shadow: var(--sombra-sm);
     transform: translateX(3px);
+    border-color: var(--azul-claro);
 }
 
-/* Colores de fondo sutil por estado */
-.estado-cumplida {
+/* Bordes de color por estado */
+.seg-item-ejecutada {
     border-left: 3px solid #1A7A4A;
 }
 
-.estado-en-proceso {
+.seg-item-en-proceso {
     border-left: 3px solid #D4620A;
 }
 
-.estado-incumplida {
-    border-left: 3px solid var(--rojo);
-}
-
-.estado-revertida {
+.seg-item-bloqueada {
     border-left: 3px solid #526075;
 }
 
+.seg-item-revertida {
+    border-left: 3px solid #8A9AB5;
+}
+
+/* Íconos por estado */
 .promesa-icono {
-    font-size: 1.1rem;
+    font-size: 1rem;
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
     line-height: 1;
+    font-family: 'DM Mono', monospace;
+}
+
+.seg-icono-ejecutada {
+    color: #1A7A4A;
+}
+
+.seg-icono-en-proceso {
+    color: #D4620A;
+}
+
+.seg-icono-bloqueada {
+    color: #526075;
+}
+
+.seg-icono-revertida {
+    color: #8A9AB5;
 }
 
 .promesa-content {
@@ -334,11 +365,11 @@
 
 .promesa-texto {
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 500;
     color: var(--text-primary);
     line-height: 1.45;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.4rem;
 }
 
 .promesa-meta {
@@ -358,6 +389,7 @@
     border: 1px solid var(--border-color);
 }
 
+/* Badges de estado — neutrales, sin connotación política */
 .promesa-estado-badge {
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
@@ -368,24 +400,32 @@
     border-radius: 20px;
 }
 
-.estado-cumplida-badge {
+.seg-badge-ejecutada {
     background: #E8F5EE;
     color: #1A7A4A;
 }
 
-.estado-en-proceso-badge {
+.seg-badge-en-proceso {
     background: #FFF3E0;
     color: #D4620A;
 }
 
-.estado-incumplida-badge {
-    background: var(--rojo-suave);
-    color: var(--rojo);
-}
-
-.estado-revertida-badge {
+.seg-badge-bloqueada {
     background: #F0F0F5;
     color: #526075;
+}
+
+.seg-badge-revertida {
+    background: #F5F5F8;
+    color: #8A9AB5;
+}
+
+/* Fecha de la medida */
+.seg-fecha {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    padding: 2px 0;
 }
 
 .promesa-fuente {
@@ -401,45 +441,45 @@
     color: var(--rojo);
 }
 
-/* Dark mode ajustes promesas */
-[data-theme="dark"] .estado-cumplida-badge {
+/* Dark mode */
+[data-theme="dark"] .seg-badge-ejecutada {
     background: rgba(26, 122, 74, 0.2);
     color: #4ACA8A;
 }
 
-[data-theme="dark"] .estado-en-proceso-badge {
+[data-theme="dark"] .seg-badge-en-proceso {
     background: rgba(212, 98, 10, 0.2);
     color: #E8913A;
 }
 
-[data-theme="dark"] .estado-incumplida-badge {
-    background: rgba(200, 0, 30, 0.2);
-    color: #FF6B7A;
-}
-
-[data-theme="dark"] .estado-revertida-badge {
+[data-theme="dark"] .seg-badge-bloqueada {
     background: rgba(82, 96, 117, 0.2);
     color: #8A9AB5;
 }
 
+[data-theme="dark"] .seg-badge-revertida {
+    background: rgba(138, 154, 181, 0.15);
+    color: #8A9AB5;
+}
+
 @media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) .estado-cumplida-badge {
+    html:not([data-theme="light"]) .seg-badge-ejecutada {
         background: rgba(26, 122, 74, 0.2);
         color: #4ACA8A;
     }
 
-    html:not([data-theme="light"]) .estado-en-proceso-badge {
+    html:not([data-theme="light"]) .seg-badge-en-proceso {
         background: rgba(212, 98, 10, 0.2);
         color: #E8913A;
     }
 
-    html:not([data-theme="light"]) .estado-incumplida-badge {
-        background: rgba(200, 0, 30, 0.2);
-        color: #FF6B7A;
+    html:not([data-theme="light"]) .seg-badge-bloqueada {
+        background: rgba(82, 96, 117, 0.2);
+        color: #8A9AB5;
     }
 
-    html:not([data-theme="light"]) .estado-revertida-badge {
-        background: rgba(82, 96, 117, 0.2);
+    html:not([data-theme="light"]) .seg-badge-revertida {
+        background: rgba(138, 154, 181, 0.15);
         color: #8A9AB5;
     }
 }
@@ -508,7 +548,6 @@
     transform: translateY(-1px);
 }
 
-/* Resultado de votación */
 .impacto-gracias {
     font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
@@ -644,5 +683,9 @@
 
     .impacto-btns {
         flex-direction: column;
+    }
+
+    .promesa-fuente {
+        margin-left: 0;
     }
 }
