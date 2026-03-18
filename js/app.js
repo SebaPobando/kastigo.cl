@@ -1231,6 +1231,9 @@ const Events = {
    El orden importa: primero datos, luego UI, luego deep links.
    ============================================================ */
 function init() {
+  if (localStorage.getItem('kastigo-theme') === 'auto') {
+    localStorage.removeItem('kastigo-theme');
+  }
   Theme.init();          // 1. Aplicar tema antes de renderizar (evita flash)
   Render.heroStats();    // 2. Contadores del hero
   Render.estadisticas(); // 3. Panel de stats + gráfico de dona
