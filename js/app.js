@@ -125,6 +125,61 @@ const eventosGubernamentales = [
     tipo: 'Decreto',
     certeza: 'Confirmado',
     fuente: { medio: 'La Tercera', url: 'https://www.latercera.com/nacional/noticia/kast-firma-primeros-decretos-emergencia-seguridad-y-auditoria-fiscal/H4Z3W2K/' }
+  },
+  {
+    id: 12,
+    fecha: "2026-03-18",
+    titulo: "Defensa del retiro de decretos ambientales",
+    descripcion: "El ministro de la Segpres defendió la revisión de 43 decretos ambientales, argumentando que la protección de especies no debe frenar la inversión vial.",
+    interpretacion: "Ambientalistas critican que el gobierno prioriza el avance de obras sobre la preservación de especies protegidas, debilitando la normativa de conservación.",
+    categoria: "Medio Ambiente",
+    tipo: "Declaración",
+    certeza: "Confirmado",
+    fuente: { medio: "ADN Radio", url: "https://www.adnradio.cl/2026/03/18/gobierno-defiende-retiro-de-decretos-ambientales-y-apunta-a-flexibilizar-normas/" }
+  },
+  {
+    id: 13,
+    fecha: "2026-03-18",
+    titulo: "Gobierno descarta eliminar feriados irrenunciables",
+    descripcion: "Tras una propuesta de la CPC para flexibilizar el calendario laboral, el Ejecutivo descartó oficialmente cualquier intención de modificar los feriados irrenunciables.",
+    interpretacion: "Analistas sugieren que el gobierno busca evitar un frente de conflicto masivo con los gremios del comercio en una semana marcada por tensiones laborales.",
+    categoria: "Laboral",
+    tipo: "Declaración",
+    certeza: "Confirmado",
+    fuente: { medio: "T13", url: "https://www.t13.cl/noticia/politica/gobierno-descarta-eliminar-feriados-irrenunciables-tras-propuesta-cpc-18-3-2026" }
+  },
+  {
+    id: 14,
+    fecha: "2026-03-16",
+    titulo: "Urgencia para penalizar ingreso clandestino",
+    descripcion: "El Ejecutivo otorgó 'Discusión Inmediata' al proyecto que establece penas de cárcel para quienes ingresen al país por pasos no habilitados.",
+    interpretacion: "Organizaciones de DD.HH. advierten sobre la criminalización de la migración vulnerable y la inminente sobrecarga del sistema penitenciario.",
+    categoria: "Seguridad",
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "Radio Bío-Bío", url: "https://www.biobiochile.cl/noticias/nacional/region-del-bio-bio/2026/03/16/gobierno-da-urgencia-a-proyecto-que-castigaria-con-carcel-o-multa-el-ingreso-clandestino-a-chile.shtml" }
+  },
+  {
+    id: 15,
+    fecha: "2026-03-16",
+    titulo: "Reforma para integrar Gendarmería en Fuerzas de Seguridad",
+    descripcion: "Se ingresó una reforma constitucional para incorporar a Gendarmería de Chile dentro de las Fuerzas de Orden y Seguridad Pública.",
+    interpretacion: "Expertos advierten que este cambio jerárquico busca disolver de facto las asociaciones gremiales, asimilándola a una estructura militarizada.",
+    categoria: "Seguridad",
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "Cooperativa", url: "https://m.cooperativa.cl/noticias/pais/politica/agenda-legislativa/ingreso-clandestino-como-delito-y-mas-seguridad-en-carceles-primeras/2026-03-16/232226.html" }
+  },
+  {
+    id: 16,
+    fecha: "2026-03-16",
+    titulo: "Exención de contribuciones para adultos mayores",
+    descripcion: "Propuesta de eliminación del pago de contribuciones para propietarios mayores de 65 años respecto de su primera vivienda habitacional.",
+    interpretacion: "Aunque es una medida popular, municipalidades alertan sobre la pérdida de financiamiento local si el Estado no compensa los ingresos del Fondo Común Municipal.",
+    categoria: "Vivienda",
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "Gobierno de Chile", url: "https://www.gob.cl/noticias/plan-reconstruccion-nacional-disminucion-impuestos-subsidio-empleo-pymes/" }
   }
 ];
 
