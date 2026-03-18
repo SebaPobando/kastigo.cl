@@ -3,94 +3,95 @@
 /* ============================================================
    BASE DE DATOS
    ============================================================ */
+
 const eventosGubernamentales = [
   {
     id: 1,
     fecha: "2026-03-17",
     titulo: "Retiro de 43 decretos de protección ambiental",
-    descripcion: "El Ejecutivo retiró de Contraloría un conjunto de 43 decretos de protección ambiental y el plan de DD.HH. para su revisión.",
-    interpretacion: "Críticos y organizaciones ambientales señalan que esto da luz verde al extractivismo y debilita la fiscalización ambiental del Estado.",
+    descripcion: "El Ministerio del Medio Ambiente retiró de Contraloría 43 decretos supremos que protegían parques nacionales, especies en peligro y establecían normas de emisión.",
+    interpretacion: "Organizaciones como Greenpeace denuncian que esto desmantela años de avance en protección de biodiversidad (como el pingüino de Humboldt) para favorecer proyectos industriales.",
     categoria: "Medio Ambiente",
     tipo: "Decreto",
     certeza: "Confirmado",
-    fuente: { medio: "El Mostrador", url: "https://www.elmostrador.cl" }
+    fuente: { medio: "La Tercera", url: "https://www.latercera.com/pulso/noticia/medio-ambiente-retira-de-tramitacion-43-decretos-presentados-por-gobierno-de-boric-entre-ellos-proteccion-a-salar-pedernales-y-pinguino-de-humboldt/" }
   },
   {
     id: 2,
     fecha: "2026-03-17",
     titulo: "Freno definitivo a la negociación ramal",
-    descripcion: "El Ejecutivo confirmó que no impulsará la negociación colectiva multinivel, manteniendo la negociación solo a nivel de empresa.",
-    interpretacion: "Organizaciones sindicales advierten que esto debilita estructuralmente el poder de negociación de los trabajadores frente a grandes grupos empresariales.",
+    descripcion: "El Ejecutivo retiró de tramitación legislativa el proyecto que buscaba implementar la negociación colectiva por sector (multinivel).",
+    interpretacion: "Se interpreta como un golpe directo al corazón de la agenda sindical, limitando la fuerza de los trabajadores frente a los grandes gremios corporativos.",
     categoria: "Laboral",
     tipo: "Declaración",
     certeza: "Confirmado",
-    fuente: { medio: "CIPER Chile", url: "https://www.ciperchile.cl" }
+    fuente: { medio: "Cooperativa", url: "https://www.cooperativa.cl/noticias/pais/presidente-kast/gobierno-de-kast-retiro-proyecto-de-negociacion-ramal-del-congreso/2026-03-17/114124.html" }
   },
   {
     id: 3,
     fecha: "2026-03-17",
-    titulo: "Apertura para eliminar los feriados irrenunciables",
-    descripcion: "El Ejecutivo señaló estar abierto a revisar la legislación de feriados irrenunciables tras presión de gremios empresariales como la CPC.",
-    interpretacion: "Trabajadores del comercio y asociaciones de empleados califican la medida como un retroceso en derechos laborales conquistados.",
-    categoria: "Laboral",
-    tipo: "Declaración",
-    certeza: "Reportado",
-    fuente: { medio: "Interferencia", url: "https://www.interferencia.cl" }
+    titulo: "Retiro del Plan Nacional de Derechos Humanos",
+    descripcion: "El ministro de Justicia, Fernando Rabat, confirmó el retiro del plan nacional de DD.HH. desde la Contraloría para una 'revisión exhaustiva'.",
+    interpretacion: "Sectores de oposición alertan sobre un posible retroceso en garantías fundamentales y una revisión ideológica de la memoria histórica y la justicia.",
+    categoria: "Política",
+    tipo: "Administrativo",
+    certeza: "Confirmado",
+    fuente: { medio: "CIPER Chile", url: "https://www.ciperchile.cl/2026/03/17/radar-17-03-2025/" }
   },
   {
     id: 4,
     fecha: "2026-03-17",
     titulo: "Fin al mecanismo de estabilización de combustibles (MEPCO)",
-    descripcion: "El gobierno eliminó el fondo MEPCO que amortiguaba las alzas del precio de las bencinas, dejando el precio de los combustibles expuesto al mercado internacional.",
-    interpretacion: "Economistas críticos señalan que esto impacta directamente al transporte y clase media, transfiriendo el costo de la inflación energética a los hogares.",
+    descripcion: "Hacienda anunció que no se inyectarán más recursos al fondo MEPCO, permitiendo que el precio de las bencinas fluctúe según el mercado internacional.",
+    interpretacion: "Esta medida traspasa el riesgo inflacionario directamente al costo de transporte de las familias, aumentando la presión sobre la canasta básica.",
     categoria: "Economía",
     tipo: "Decreto",
     certeza: "Confirmado",
-    fuente: { medio: "El Desconcierto", url: "https://www.eldesconcierto.cl" }
+    fuente: { medio: "CIPER Chile", url: "https://www.ciperchile.cl/2026/03/17/radar-17-03-2025/" }
   },
   {
     id: 5,
     fecha: "2026-03-16",
-    titulo: "Rebaja del impuesto a grandes empresas (IDPC del 27% al 23%)",
-    descripcion: "El proyecto de reforma tributaria contempla reducir el Impuesto de Primera Categoría para empresas del 27% al 23% en un período de cuatro años.",
-    interpretacion: "Analistas de centroizquierda señalan que la medida beneficia principalmente a grandes conglomerados mientras reduce la recaudación fiscal disponible para políticas sociales.",
-    categoria: "Corporativo",
-    tipo: "Proyecto",
-    certeza: "En Desarrollo",
-    fuente: { medio: "Diario Financiero", url: "https://www.df.cl" }
-  },
-  {
-    id: 6,
-    fecha: "2026-03-16",
-    titulo: "Exención temporal de IVA a viviendas nuevas (inmobiliarias)",
-    descripcion: "El Ejecutivo propone eximir temporalmente del IVA a la compraventa de viviendas nuevas para reactivar el mercado inmobiliario.",
-    interpretacion: "Críticos argumentan que el beneficio fiscal opera como un subsidio encubierto a las empresas constructoras con stock sin vender, sin garantizar acceso real a vivienda para sectores medios.",
-    categoria: "Corporativo",
-    tipo: "Proyecto",
-    certeza: "En Desarrollo",
-    fuente: { medio: "La Tercera", url: "https://www.latercera.com" }
-  },
-  {
-    id: 7,
-    fecha: "2026-03-16",
-    titulo: "Subsidio estatal a cotizaciones previsionales de empleadores",
-    descripcion: "El proyecto contempla que el Estado cubra parte de las cotizaciones previsionales que deben pagar los empleadores durante el período de transición al nuevo sistema.",
-    interpretacion: "Analistas laborales cuestionan el uso de fondos públicos para aliviar costos de empresas, argumentando que el ahorro patronal no tiene garantía de traducirse en más empleo.",
-    categoria: "Economía",
-    tipo: "Proyecto",
-    certeza: "Reportado",
-    fuente: { medio: "Biobío Chile", url: "https://www.biobiochile.cl" }
-  },
-  {
-    id: 8,
-    fecha: "2026-03-11",
-    titulo: "Plan Escudo Fronterizo: militarización y construcción de zanjas",
-    descripcion: "El gobierno lanzó el Plan Escudo Fronterizo con despliegue del Ejército en la frontera norte y el inicio de obras de excavación para construir una zanja en la zona de Colchane.",
-    interpretacion: "Organizaciones de derechos humanos advierten que la militarización de la frontera vulnera los derechos de solicitantes de asilo y migrantes en situación de vulnerabilidad.",
+    titulo: "Plan Escudo Fronterizo: militarización y zanjas en el norte",
+    descripcion: "Inicio oficial de obras de excavación y despliegue militar en la frontera norte (Arica y Colchane) para el control migratorio.",
+    interpretacion: "La 'retroexcavadora' se convierte en el símbolo de una política de seguridad centrada en barreras físicas y despliegue bélico en zonas vulnerables.",
     categoria: "Seguridad",
     tipo: "Decreto",
     certeza: "Confirmado",
-    fuente: { medio: "Cooperativa", url: "https://www.cooperativa.cl" }
+    fuente: { medio: "El Mostrador", url: "https://www.elmostrador.cl/noticias/pais/2026/03/16/presidente-kast-lanza-escudo-fronterizo-con-la-retroexcavadora-como-simbolo-de-su-plan-en-el-norte/" }
+  },
+  {
+    id: 6,
+    fecha: "2026-03-14",
+    titulo: "Anuncio de rebaja del IDPC (Impuesto a empresas)",
+    descripcion: "Dentro de la Ley de Reconstrucción Nacional, se anunció la reducción del Impuesto de Primera Categoría (IDPC) del 27% al 23%.",
+    interpretacion: "Una medida que favorece las utilidades de las grandes empresas bajo la premisa de atraer inversión, pero que recorta el presupuesto para políticas sociales.",
+    categoria: "Corporativo",
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "EFE", url: "https://efe.com/mundo/2026-03-14/chile-proyecto-presidente-kast-seguridad-vivienda-impuestos/" }
+  },
+  {
+    id: 7,
+    fecha: "2026-03-14",
+    titulo: "Exención temporal de IVA a viviendas e inmobiliarias",
+    descripcion: "Propuesta para eliminar por 12 meses el IVA a la venta de viviendas nuevas con el fin de reactivar el sector construcción.",
+    interpretacion: "Críticos lo ven como un salvavidas millonario del Estado para que las inmobiliarias liquiden su stock acumulado sin bajar los precios reales.",
+    categoria: "Corporativo",
+    tipo: "Proyecto",
+    certeza: "En Desarrollo",
+    fuente: { medio: "Ministerio de Hacienda", url: "https://www.hacienda.cl/noticias-y-eventos/comunicados/ministro-de-hacienda-detalla-medidas-economicas-del-proyecto-de-ley-de" }
+  },
+  {
+    id: 8,
+    fecha: "2026-03-14",
+    titulo: "Subsidio estatal a cotizaciones previsionales de empleadores",
+    descripcion: "Creación de un subsidio para que el Estado cubra parte de las cotizaciones laborales que pagan los empleadores.",
+    interpretacion: "Se cuestiona el uso de fondos de todos los contribuyentes para subsidiar directamente los costos operacionales del sector privado.",
+    categoria: "Economía",
+    tipo: "Proyecto",
+    certeza: "Reportado",
+    fuente: { medio: "Ministerio de Hacienda", url: "https://www.hacienda.cl/noticias-y-eventos/comunicados/ministro-de-hacienda-detalla-medidas-economicas-del-proyecto-de-ley-de" }
   }
 ];
 
