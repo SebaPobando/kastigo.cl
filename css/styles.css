@@ -350,19 +350,6 @@ button {
   color: #FFFFFF;
 }
 
-.nav-btn-cafe {
-  background: var(--rojo);
-  border-color: var(--rojo);
-  color: #FFFFFF;
-  font-weight: 600;
-}
-
-.nav-btn-cafe:hover {
-  background: var(--rojo-medio);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(200, 0, 30, 0.35);
-}
-
 /* Toggle de tema */
 .btn-theme-toggle {
   padding: 0.42rem 0.65rem;
