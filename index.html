@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
-  <link rel="stylesheet" href="css/widgets.css" />
+  <link rel="stylesheet" href="css/widgets.css?v=2.0" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
@@ -71,7 +71,7 @@
   <!-- Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=2.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -384,29 +384,47 @@
       <button class="modal-close" data-modal="modal-terminos" aria-label="Cerrar">✕</button>
       <h2 class="modal-title" id="mt-title">Términos y Condiciones</h2>
 
-      <h3 class="modal-section-h">1. Exención de Responsabilidad</h3>
+      <h3 class="modal-section-h">1. Naturaleza del Sitio y Exención de Responsabilidad</h3>
       <p class="modal-text">Kastigo es un sitio <strong>no oficial</strong> operado por ciudadanos particulares en
         ejercicio de la libertad de expresión (Art. 19 N°12 CPR) y el derecho de acceso a la información pública
-        (Ley N° 20.285). La información publicada proviene de medios verificados y fuentes públicas. No garantizamos
-        exhaustividad ni asumimos responsabilidad por errores en las fuentes citadas.</p>
+        (Ley N° 20.285).</p>
+      <p class="modal-text" style="margin-top:0.6rem">La información publicada <strong>reproduce hechos reportados
+          por medios periodísticos independientes</strong>, con sus respectivas fuentes citadas. Kastigo no es el autor
+        original de los hechos descritos ni de las declaraciones de terceros aquí referenciadas. La responsabilidad
+        primaria sobre el contenido recae en los medios de comunicación originales.</p>
+      <p class="modal-text" style="margin-top:0.6rem">No garantizamos exhaustividad ni asumimos responsabilidad
+        por errores contenidos en las fuentes citadas.</p>
 
-      <h3 class="modal-section-h">2. Hechos e Interpretaciones</h3>
-      <p class="modal-text">La plataforma distingue entre <strong>Hechos</strong> (información pública verificable)
-        y <strong>Perspectivas</strong> (posiciones de distintos sectores sobre cada medida).
+      <h3 class="modal-section-h">2. Hechos y Perspectivas</h3>
+      <p class="modal-text">La plataforma distingue entre <strong>Hechos</strong> (información pública verificable
+        con fuente citada) y <strong>Perspectivas</strong> (posiciones de distintos sectores documentadas en medios
+        de comunicación). La sección Perspectivas <strong>no constituye opinión editorial de Kastigo</strong> ni
+        implica adhesión a ninguna de las posturas presentadas.
         <strong>El usuario es responsable del uso que haga de esta información.</strong>
       </p>
 
-      <h3 class="modal-section-h">3. No Afiliación Gubernamental</h3>
+      <h3 class="modal-section-h">3. No Afiliación Gubernamental ni Partidaria</h3>
       <p class="modal-text">Este sitio <strong>no tiene ningún tipo de afiliación, relación ni respaldo</strong> del
-        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político ni organización estatal.</p>
+        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político, organización estatal
+        ni grupo de interés privado. Opera de forma completamente independiente.</p>
 
-      <h3 class="modal-section-h">4. Política de Datos</h3>
-      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics, tiempo
-        de sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
-          individuales.</strong>
-        Al navegar este sitio, aceptas esta política.</p>
+      <h3 class="modal-section-h">4. Personas Mencionadas</h3>
+      <p class="modal-text">Las personas nombradas en este sitio son <strong>funcionarios públicos actuando en el
+          ejercicio de sus cargos</strong>. Su mención se enmarca en el legítimo ejercicio del derecho a la información
+        sobre actos de la función pública, protegido por la Ley N° 20.285 y el Art. 8° de la Constitución.</p>
 
-      <h3 class="modal-section-h">5. Propiedad Intelectual</h3>
+      <h3 class="modal-section-h">5. Rectificaciones y Contacto</h3>
+      <p class="modal-text">Kastigo se compromete a corregir errores factuales verificables. Para solicitudes de
+        corrección, rectificación o eliminación de contenido, escribir a:
+        <strong>kastigocl@gmail.com</strong>. Las solicitudes serán evaluadas dentro de un plazo de 5 días hábiles.
+      </p>
+
+      <h3 class="modal-section-h">6. Política de Datos</h3>
+      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics,
+        tiempo de sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
+          individuales.</strong> Al navegar este sitio, aceptas esta política.</p>
+
+      <h3 class="modal-section-h">7. Propiedad Intelectual</h3>
       <p class="modal-text">Contenido editorial propio publicado bajo <a
           href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"
           class="text-link">Creative Commons BY-NC 4.0</a>. Las fuentes citadas son propiedad de sus respectivos medios.
@@ -432,9 +450,9 @@
   </footer>
 
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/widgets.js"></script>
+  <script src="js/data.js?v=2.0"></script>
+  <script src="js/app.js?v=2.0"></script>
+  <script src="js/widgets.js?v=2.0"></script>
 </body>
 
 </html>
