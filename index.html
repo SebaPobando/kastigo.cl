@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
-  <link rel="stylesheet" href="css/widgets.css?v=2.0" />
+  <link rel="stylesheet" href="css/widgets.css" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
@@ -71,7 +71,7 @@
   <!-- Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=2.0" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -127,11 +127,6 @@
         </div>
         <div class="hero-stat-divider" aria-hidden="true"></div>
         <div class="hero-stat">
-          <span class="hero-stat-num" id="hero-confirmados">0</span>
-          <span class="hero-stat-label">confirmadas</span>
-        </div>
-        <div class="hero-stat-divider" aria-hidden="true"></div>
-        <div class="hero-stat">
           <span class="hero-stat-num" id="hero-categorias">0</span>
           <span class="hero-stat-label">categorías</span>
         </div>
@@ -144,10 +139,7 @@
 
   <!-- LEYENDA -->
   <div class="leyenda-bar" role="note" aria-label="Leyenda de indicadores">
-    <span class="leyenda-title">Indicadores:</span>
-    <span class="certeza-badge certeza-confirmado">● Confirmado</span>
-    <span class="certeza-badge certeza-reportado">● Reportado</span>
-    <span class="certeza-badge certeza-desarrollo">● En Desarrollo</span>
+    <span class="leyenda-title">Tipos de medida:</span>
     <span class="tipo-badge tipo-ley">Ley</span>
     <span class="tipo-badge tipo-decreto">Decreto</span>
     <span class="tipo-badge tipo-declaracion">Declaración</span>
@@ -246,11 +238,6 @@
         <div class="filter-buttons" id="filter-tipo" role="group" aria-label="Filtro tipo"></div>
       </section>
 
-      <section class="panel" aria-labelledby="filter-certeza-h">
-        <h2 class="panel-title" id="filter-certeza-h">Certeza</h2>
-        <div class="filter-buttons" id="filter-certeza" role="group" aria-label="Filtro certeza"></div>
-      </section>
-
     </aside>
 
     <!-- TIMELINE -->
@@ -312,7 +299,6 @@
 
       <div class="modal-meta-row">
         <span class="modal-tipo-badge" id="md-tipo"></span>
-        <span class="modal-certeza-badge" id="md-certeza"></span>
         <span class="modal-cat-badge" id="md-cat"></span>
       </div>
 
@@ -416,7 +402,9 @@
       <h3 class="modal-section-h">5. Rectificaciones y Contacto</h3>
       <p class="modal-text">Kastigo se compromete a corregir errores factuales verificables. Para solicitudes de
         corrección, rectificación o eliminación de contenido, escribir a:
-        <strong>kastigocl@gmail.com</strong>. Las solicitudes serán evaluadas dentro de un plazo de 5 días hábiles.
+        <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+            data-cfemail="adcec2c3d9ccced9c2edc6ccded9c4cac283cec1">[email&#160;protected]</a></strong>. Las solicitudes
+        serán evaluadas dentro de un plazo de 5 días hábiles.
       </p>
 
       <h3 class="modal-section-h">6. Política de Datos</h3>
@@ -450,9 +438,9 @@
   </footer>
 
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js?v=2.0"></script>
-  <script src="js/app.js?v=2.0"></script>
-  <script src="js/widgets.js?v=2.0"></script>
+  <script src="js/data.js?v=3.0"></script>
+  <script src="js/app.js?v=3.0"></script>
+  <script src="js/widgets.js?v=3.0"></script>
 </body>
 
 </html>

@@ -189,16 +189,6 @@ const Utils = {
     return map[tipo] || 'tipo-decreto';
   },
 
-  /** Devuelve la clase CSS de nivel de certeza. */
-  certezaClass(cert) {
-    const map = {
-      'Confirmado': 'certeza-confirmado',
-      'Reportado': 'certeza-reportado',
-      'En Desarrollo': 'certeza-desarrollo'
-    };
-    return map[cert] || 'certeza-reportado';
-  },
-
   /** Devuelve valores únicos de una propiedad del array global. */
   unique(key) {
     return [...new Set(eventosGubernamentales.map(e => e[key]))];
@@ -225,7 +215,6 @@ const Filtrado = {
   state: {
     filtroCategoria: 'Todos',
     filtroTipo: 'Todos',
-    filtroCerteza: 'Todos',
     busqueda: '',
   },
 
@@ -234,19 +223,18 @@ const Filtrado = {
    * @returns {Array}
    */
   get() {
-    const { filtroCategoria, filtroTipo, filtroCerteza, busqueda } = this.state;
+    const { filtroCategoria, filtroTipo, busqueda } = this.state;
     const q = busqueda.toLowerCase();
 
     return eventosGubernamentales
       .filter(e => {
         const porCat = filtroCategoria === 'Todos' || e.categoria === filtroCategoria;
         const porTipo = filtroTipo === 'Todos' || e.tipo === filtroTipo;
-        const porCert = filtroCerteza === 'Todos' || e.certeza === filtroCerteza;
         // Busca en título y descripción (sanitizado)
         const porTexto = !q ||
           e.titulo.toLowerCase().includes(q) ||
           e.descripcion.toLowerCase().includes(q);
-        return porCat && porTipo && porCert && porTexto;
+        return porCat && porTipo && porTexto;
       })
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
   }
@@ -385,13 +373,6 @@ const Modal = {
     if (tipoBadge) {
       tipoBadge.className = `modal-tipo-badge ${Utils.tipoClass(evento.tipo)}`;
       tipoBadge.textContent = evento.tipo;
-    }
-
-    // Badge certeza
-    const certBadge = document.getElementById('md-certeza');
-    if (certBadge) {
-      certBadge.className = `modal-certeza-badge ${Utils.certezaClass(evento.certeza)}`;
-      certBadge.textContent = evento.certeza;
     }
 
     // Badge categoría
@@ -826,10 +807,6 @@ const Calendario = {
       tipo.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
       tipo.textContent = ev.tipo;
 
-      const cert = document.createElement('span');
-      cert.className = `certeza-badge ${Utils.certezaClass(ev.certeza)}`;
-      cert.textContent = ev.certeza;
-
       const cat = document.createElement('span');
       cat.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
       cat.textContent = ev.categoria;
@@ -953,11 +930,9 @@ const Render = {
 
   /** Actualiza los 3 contadores del hero. */
   heroStats() {
-    const confirmados = eventosGubernamentales.filter(e => e.certeza === 'Confirmado').length;
     const cats = Utils.unique('categoria').length;
     const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
     set('hero-total', eventosGubernamentales.length);
-    set('hero-confirmados', confirmados);
     set('hero-categorias', cats);
   },
 
@@ -1004,7 +979,7 @@ const Render = {
   },
 
   /**
-   * Construye los botones de filtro para un grupo (categoría, tipo, certeza).
+   * Construye los botones de filtro para un grupo (categoría, tipo).
    * @param {string} containerId — ID del contenedor en el HTML
    * @param {string[]} values    — valores únicos para mostrar
    * @param {string} stateKey   — clave en Filtrado.state
@@ -1048,7 +1023,7 @@ const Render = {
   allFilters() {
     this._buildFilterGroup('filter-cat', Utils.unique('categoria'), 'filtroCategoria', Utils.countBy('categoria'));
     this._buildFilterGroup('filter-tipo', Utils.unique('tipo'), 'filtroTipo', Utils.countBy('tipo'));
-    this._buildFilterGroup('filter-certeza', Utils.unique('certeza'), 'filtroCerteza', Utils.countBy('certeza'));
+
   },
 
   /** Renderiza la línea de tiempo con los eventos filtrados. */
@@ -1084,7 +1059,7 @@ const Render = {
       li.setAttribute('aria-label', `Ver detalle: ${ev.titulo}`);
       li.style.animationDelay = `${index * 0.055}s`;
 
-      // Row superior: tipo + certeza + fecha
+      // Row superior: tipo + fecha
       const top = document.createElement('div');
       top.className = 'card-top';
 
@@ -1092,17 +1067,12 @@ const Render = {
       tipoBadge.className = `tipo-badge ${Utils.tipoClass(ev.tipo)}`;
       tipoBadge.textContent = ev.tipo;
 
-      const certBadge = document.createElement('span');
-      certBadge.className = `certeza-badge ${Utils.certezaClass(ev.certeza)}`;
-      certBadge.textContent = ev.certeza;
-
       const dateEl = document.createElement('time');
       dateEl.className = 'card-date';
       dateEl.setAttribute('datetime', ev.fecha);
       dateEl.textContent = Utils.formatFecha(ev.fecha);
 
       top.appendChild(tipoBadge);
-      top.appendChild(certBadge);
       top.appendChild(dateEl);
 
       // Título
