@@ -811,7 +811,7 @@ const Calendario = {
       cat.className = `card-cat-badge ${Utils.catClass(ev.categoria)}`;
       cat.textContent = ev.categoria;
 
-      topRow.appendChild(tipo); topRow.appendChild(cert); topRow.appendChild(cat);
+      topRow.appendChild(tipo); topRow.appendChild(cat);
 
       // Título y descripción
       const titulo = document.createElement('p');

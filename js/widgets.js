@@ -14,14 +14,14 @@
    Estado de ejecución de las medidas registradas en data.js.
 
    ESTADOS POSIBLES:
-   - "ejecutada"  → La medida fue implementada (certeza: Confirmado)
-   - "en-proceso" → En tramitación o desarrollo (certeza: En Desarrollo / Reportado)
+   - "en-proceso" → Estado por defecto (en tramitación o desarrollo)
+   - "ejecutada"  → La medida fue implementada
    - "bloqueada"  → Frenada judicialmente o por el Congreso
    - "revertida"  → Fue dejada sin efecto posteriormente
 
    SOBREESCRITURA MANUAL:
    Si un evento en data.js tiene el campo estado_seguimiento,
-   ese valor prevalece sobre la deducción automática.
+   ese valor prevalece sobre el estado por defecto.
    Ejemplo: { ..., estado_seguimiento: "bloqueada" }
    ============================================================ */
 const Seguimiento = {
@@ -37,12 +37,7 @@ const Seguimiento = {
         if (evento.estado_seguimiento && this.ESTADOS[evento.estado_seguimiento]) {
             return evento.estado_seguimiento;
         }
-        const mapa = {
-            'Confirmado': 'ejecutada',
-            'En Desarrollo': 'en-proceso',
-            'Reportado': 'en-proceso',
-        };
-        return mapa[evento.certeza] || 'en-proceso';
+        return 'en-proceso';
     },
 
     _calcStats() {
