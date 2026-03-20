@@ -238,7 +238,7 @@ const Filtrado = {
       const porMinistro = !qm ||
         e.titulo.toLowerCase().includes(qm) ||
         e.descripcion.toLowerCase().includes(qm) ||
-        e.interpretacion.toLowerCase().includes(qm);
+        false;
       return porCat && porTipo && porTexto && porMinistro;
     });
 
@@ -407,7 +407,6 @@ const Modal = {
     // Textos principales
     setText('md-title', evento.titulo);
     setText('md-desc', evento.descripcion);
-    setText('md-interpretacion', evento.interpretacion);
     setText('md-fuente-medio', `Fuente: ${evento.fuente.medio}`);
 
     // URL de la fuente (validada)
