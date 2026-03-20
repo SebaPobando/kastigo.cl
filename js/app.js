@@ -216,27 +216,42 @@ const Filtrado = {
     filtroCategoria: 'Todos',
     filtroTipo: 'Todos',
     busqueda: '',
+    filtroMinistroBusqueda: '',  // búsqueda rápida por nombre de actor
+    orden: 'fecha',              // 'fecha' | 'categoria'
   },
 
   /**
-   * Devuelve el array filtrado y ordenado de más reciente a más antiguo.
+   * Devuelve el array filtrado y ordenado.
    * @returns {Array}
    */
   get() {
-    const { filtroCategoria, filtroTipo, busqueda } = this.state;
+    const { filtroCategoria, filtroTipo, busqueda, filtroMinistroBusqueda, orden } = this.state;
     const q = busqueda.toLowerCase();
+    const qm = filtroMinistroBusqueda.toLowerCase();
 
-    return eventosGubernamentales
-      .filter(e => {
-        const porCat = filtroCategoria === 'Todos' || e.categoria === filtroCategoria;
-        const porTipo = filtroTipo === 'Todos' || e.tipo === filtroTipo;
-        // Busca en título y descripción (sanitizado)
-        const porTexto = !q ||
-          e.titulo.toLowerCase().includes(q) ||
-          e.descripcion.toLowerCase().includes(q);
-        return porCat && porTipo && porTexto;
-      })
-      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    const filtered = eventosGubernamentales.filter(e => {
+      const porCat = filtroCategoria === 'Todos' || e.categoria === filtroCategoria;
+      const porTipo = filtroTipo === 'Todos' || e.tipo === filtroTipo;
+      const porTexto = !q ||
+        e.titulo.toLowerCase().includes(q) ||
+        e.descripcion.toLowerCase().includes(q);
+      const porMinistro = !qm ||
+        e.titulo.toLowerCase().includes(qm) ||
+        e.descripcion.toLowerCase().includes(qm) ||
+        e.interpretacion.toLowerCase().includes(qm);
+      return porCat && porTipo && porTexto && porMinistro;
+    });
+
+    if (orden === 'categoria') {
+      return filtered.sort((a, b) =>
+        a.categoria.localeCompare(b.categoria, 'es') ||
+        new Date(b.fecha) - new Date(a.fecha)
+      );
+    }
+    if (orden === 'fecha-asc') {
+      return filtered.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+    }
+    return filtered.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
   }
 };
 
@@ -410,6 +425,14 @@ const Modal = {
 
     // Actualizar hash de la URL (deep linking)
     DeepLink.setHash(evento.id);
+
+    // Meta tags dinámicos para compartir por WhatsApp / redes
+    const url = `${window.location.origin}${window.location.pathname}#${evento.id}`;
+    document.querySelectorAll('meta[property="og:title"]').forEach(m => m.content = `${evento.titulo} · Kastigo`);
+    document.querySelectorAll('meta[property="og:description"]').forEach(m => m.content = evento.descripcion);
+    document.querySelectorAll('meta[property="og:url"]').forEach(m => m.content = url);
+    document.querySelectorAll('meta[name="twitter:title"]').forEach(m => m.content = `${evento.titulo} · Kastigo`);
+    document.querySelectorAll('meta[name="twitter:description"]').forEach(m => m.content = evento.descripcion);
 
     this.open('modal-detalle');
   }
@@ -693,11 +716,13 @@ const Calendario = {
     }, {});
   },
 
-  /** Renderiza la grilla del mes actual en el DOM. */
-  render() {
-    const grid = document.getElementById('cal-grid');
-    const label = document.getElementById('cal-month-label');
-    const resetBtn = document.getElementById('cal-reset');
+  /** Renderiza la grilla del mes actual en el DOM.
+   * @param {string} prefix — 'cal' para sidebar, 'd-cal' para drawer
+   */
+  render(prefix = 'cal') {
+    const grid = document.getElementById(`${prefix}-grid`);
+    const label = document.getElementById(`${prefix}-month-label`);
+    const resetBtn = document.getElementById(`${prefix}-reset`);
     if (!grid || !label) return;
 
     const eventMap = this._buildEventMap();
@@ -758,7 +783,8 @@ const Calendario = {
       if (hasEvents) {
         const openDay = () => {
           this._selectedDate = iso;
-          this.render();
+          this.render('cal');
+          this.render('d-cal');
           this._openDayModal(iso, eventos);
           if (resetBtn) resetBtn.classList.remove('hidden');
         };
@@ -894,28 +920,53 @@ const Calendario = {
       this._month = now.getMonth();
     }
 
-    this.render();
+    this.render('cal');
+    this.render('d-cal');
 
-    // Navegación mes anterior
+    const rerender = () => { this.render('cal'); this.render('d-cal'); };
+
+    // Navegación mes anterior — sidebar
     document.getElementById('cal-prev')?.addEventListener('click', () => {
       this._month--;
       if (this._month < 0) { this._month = 11; this._year--; }
       this._selectedDate = null;
-      this.render();
+      rerender();
     });
 
-    // Navegación mes siguiente
+    // Navegación mes siguiente — sidebar
     document.getElementById('cal-next')?.addEventListener('click', () => {
       this._month++;
       if (this._month > 11) { this._month = 0; this._year++; }
       this._selectedDate = null;
-      this.render();
+      rerender();
     });
 
-    // Limpiar selección de día
+    // Limpiar selección de día — sidebar
     document.getElementById('cal-reset')?.addEventListener('click', () => {
       this._selectedDate = null;
-      this.render();
+      rerender();
+    });
+
+    // Navegación mes anterior — drawer
+    document.getElementById('d-cal-prev')?.addEventListener('click', () => {
+      this._month--;
+      if (this._month < 0) { this._month = 11; this._year--; }
+      this._selectedDate = null;
+      rerender();
+    });
+
+    // Navegación mes siguiente — drawer
+    document.getElementById('d-cal-next')?.addEventListener('click', () => {
+      this._month++;
+      if (this._month > 11) { this._month = 0; this._year++; }
+      this._selectedDate = null;
+      rerender();
+    });
+
+    // Limpiar selección de día — drawer
+    document.getElementById('d-cal-reset')?.addEventListener('click', () => {
+      this._selectedDate = null;
+      rerender();
     });
   }
 };
@@ -928,12 +979,15 @@ const Calendario = {
    ============================================================ */
 const Render = {
 
-  /** Actualiza los 3 contadores del hero. */
+  /** Actualiza contadores del hero incluido día de gobierno. */
   heroStats() {
     const cats = Utils.unique('categoria').length;
     const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
     set('hero-total', eventosGubernamentales.length);
     set('hero-categorias', cats);
+    const inicio = new Date(2026, 2, 11);
+    const dias = Math.floor((new Date() - inicio) / (1000 * 60 * 60 * 24)) + 1;
+    set('hero-dias', dias);
   },
 
   /** Renderiza el panel de estadísticas con el gráfico y la lista. */
@@ -1011,7 +1065,8 @@ const Render = {
 
       btn.addEventListener('click', () => {
         Filtrado.state[stateKey] = val;
-        this.allFilters(); // re-renderizar todos los filtros
+        this.allFilters();    // re-renderizar sidebar filters
+        this.drawerFilters(); // re-renderizar drawer filters
         this.timeline();
       });
 
@@ -1019,11 +1074,16 @@ const Render = {
     });
   },
 
-  /** Renderiza los 3 grupos de filtros. */
+  /** Renderiza los grupos de filtros del sidebar. */
   allFilters() {
     this._buildFilterGroup('filter-cat', Utils.unique('categoria'), 'filtroCategoria', Utils.countBy('categoria'));
     this._buildFilterGroup('filter-tipo', Utils.unique('tipo'), 'filtroTipo', Utils.countBy('tipo'));
+  },
 
+  /** Renderiza los grupos de filtros del drawer (hamburguesa). */
+  drawerFilters() {
+    this._buildFilterGroup('d-filter-cat', Utils.unique('categoria'), 'filtroCategoria', Utils.countBy('categoria'));
+    this._buildFilterGroup('d-filter-tipo', Utils.unique('tipo'), 'filtroTipo', Utils.countBy('tipo'));
   },
 
   /** Renderiza la línea de tiempo con los eventos filtrados. */
@@ -1034,6 +1094,12 @@ const Render = {
     if (!track || !empty) return;
 
     const eventos = Filtrado.get();
+    const compact = document.body.classList.contains('timeline-compact');
+    const orden = Filtrado.state.orden;
+
+    const ordenLabel = document.getElementById('orden-label');
+    const labelMap = { 'fecha': '↓ Más reciente', 'fecha-asc': '↑ Más antiguo', 'categoria': 'Por categoría' };
+    if (ordenLabel) ordenLabel.textContent = labelMap[orden] || '↓ Más reciente';
 
     if (!eventos.length) {
       track.innerHTML = '';
@@ -1044,22 +1110,65 @@ const Render = {
 
     empty.classList.add('hidden');
     if (countEl) {
-      countEl.textContent = Filtrado.state.busqueda
+      countEl.textContent = (Filtrado.state.busqueda || Filtrado.state.filtroMinistroBusqueda)
         ? `${eventos.length} resultado${eventos.length !== 1 ? 's' : ''}`
         : '';
     }
 
     track.innerHTML = '';
 
+    // Update hamburger badge count
+    const activeFilters = [
+      Filtrado.state.filtroCategoria !== 'Todos',
+      Filtrado.state.filtroTipo !== 'Todos',
+      Filtrado.state.busqueda.length > 0,
+      Filtrado.state.filtroMinistroBusqueda.length > 0,
+    ].filter(Boolean).length;
+    const badge = document.getElementById('filtros-badge');
+    if (badge) {
+      badge.textContent = activeFilters;
+      badge.style.display = activeFilters > 0 ? 'inline-flex' : 'none';
+    }
+
+    const getWeekKey = (fechaISO) => {
+      const [y, m, d] = fechaISO.split('-').map(Number);
+      const date = new Date(y, m - 1, d);
+      const day = date.getDay() || 7;
+      const lunes = new Date(date);
+      lunes.setDate(date.getDate() - day + 1);
+      return lunes.toISOString().slice(0, 10);
+    };
+
+    const getWeekLabel = (weekKey) => {
+      const [y, m, d] = weekKey.split('-').map(Number);
+      const lunes = new Date(y, m - 1, d);
+      const domingo = new Date(lunes);
+      domingo.setDate(lunes.getDate() + 6);
+      const fmt = (dt) => dt.toLocaleDateString('es-CL', { day: 'numeric', month: 'short' });
+      return `Semana del ${fmt(lunes)} al ${fmt(domingo)}`;
+    };
+
+    let lastGroup = null;
+
     eventos.forEach((ev, index) => {
+      const groupKey = orden === 'categoria' ? ev.categoria : getWeekKey(ev.fecha);
+      if (groupKey !== lastGroup) {
+        lastGroup = groupKey;
+        const sep = document.createElement('li');
+        sep.className = 'timeline-week-sep';
+        sep.setAttribute('aria-hidden', 'true');
+        sep.textContent = orden === 'categoria' ? ev.categoria : getWeekLabel(groupKey);
+        track.appendChild(sep);
+      }
+
+
       const li = document.createElement('li');
-      li.className = 'timeline-card';
+      li.className = `timeline-card${compact ? ' timeline-card-compact' : ''}`;
       li.setAttribute('role', 'button');
       li.setAttribute('tabindex', '0');
       li.setAttribute('aria-label', `Ver detalle: ${ev.titulo}`);
-      li.style.animationDelay = `${index * 0.055}s`;
+      li.style.animationDelay = `${index * 0.04}s`;
 
-      // Row superior: tipo + fecha
       const top = document.createElement('div');
       top.className = 'card-top';
 
@@ -1075,17 +1184,10 @@ const Render = {
       top.appendChild(tipoBadge);
       top.appendChild(dateEl);
 
-      // Título
       const h3 = document.createElement('h3');
       h3.className = 'card-title';
       h3.textContent = ev.titulo;
 
-      // Descripción (truncada por CSS con -webkit-line-clamp)
-      const p = document.createElement('p');
-      p.className = 'card-desc';
-      p.textContent = ev.descripcion;
-
-      // Footer: badge categoría + CTA
       const footer = document.createElement('div');
       footer.className = 'card-footer';
 
@@ -1106,10 +1208,16 @@ const Render = {
 
       li.appendChild(top);
       li.appendChild(h3);
-      li.appendChild(p);
+
+      if (!compact) {
+        const p = document.createElement('p');
+        p.className = 'card-desc';
+        p.textContent = ev.descripcion;
+        li.appendChild(p);
+      }
+
       li.appendChild(footer);
 
-      // Eventos: clic + teclado para accesibilidad
       const openModal = () => Modal.openDetalle(ev);
       li.addEventListener('click', openModal);
       li.addEventListener('keydown', e => {
@@ -1191,6 +1299,94 @@ const Events = {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') Modal.closeLast();
     });
+
+    // ---- Toggle vista compacta/expandida ----
+    document.getElementById('btn-compact')?.addEventListener('click', () => {
+      const btn = document.getElementById('btn-compact');
+      const isCompact = document.body.classList.toggle('timeline-compact');
+      if (btn) btn.textContent = isCompact ? '⊞ Expandir' : '⊟ Compactar';
+      Render.timeline();
+    });
+
+    // ---- Toggle orden: fecha-desc → fecha-asc → categoria → fecha-desc ----
+    document.getElementById('btn-orden')?.addEventListener('click', () => {
+      const ciclo = { 'fecha': 'fecha-asc', 'fecha-asc': 'categoria', 'categoria': 'fecha' };
+      Filtrado.state.orden = ciclo[Filtrado.state.orden] || 'fecha';
+      Render.timeline();
+    });
+
+    // ---- Chips de ministros/actores ----
+    document.querySelectorAll('.ministro-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const nombre = chip.dataset.nombre;
+        const yaActivo = chip.classList.contains('active');
+        document.querySelectorAll('.ministro-chip').forEach(c => c.classList.remove('active'));
+        if (yaActivo) {
+          Filtrado.state.filtroMinistroBusqueda = '';
+        } else {
+          chip.classList.add('active');
+          Filtrado.state.filtroMinistroBusqueda = nombre;
+        }
+        Render.timeline();
+      });
+    });
+
+    // ---- Meta tags dinámicos por medida al compartir ----
+    // Se actualizan en Modal.openDetalle, no necesitan listener adicional
+
+    // ---- Drawer filtros (hamburguesa) ----
+    const drawerOpen = () => {
+      document.getElementById('drawer-filtros')?.classList.remove('hidden');
+      document.getElementById('drawer-overlay')?.classList.remove('hidden');
+      document.getElementById('btn-filtros')?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+
+      // Sync drawer filter buttons with current state
+      Render.drawerFilters();
+    };
+    const drawerClose = () => {
+      document.getElementById('drawer-filtros')?.classList.add('hidden');
+      document.getElementById('drawer-overlay')?.classList.add('hidden');
+      document.getElementById('btn-filtros')?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    document.getElementById('btn-filtros')?.addEventListener('click', drawerOpen);
+    document.getElementById('drawer-close')?.addEventListener('click', drawerClose);
+    document.getElementById('drawer-overlay')?.addEventListener('click', drawerClose);
+
+
+
+    // Drawer actor chips
+    document.querySelectorAll('#d-actor-chips .ministro-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const nombre = chip.dataset.nombre;
+        const yaActivo = chip.classList.contains('active');
+        document.querySelectorAll('.ministro-chip').forEach(c => c.classList.remove('active'));
+        Filtrado.state.filtroMinistroBusqueda = yaActivo ? '' : nombre;
+        if (!yaActivo) {
+          document.querySelectorAll(`.ministro-chip[data-nombre="${nombre}"]`).forEach(c => c.classList.add('active'));
+        }
+        Render.timeline();
+      });
+    });
+
+    // Drawer reset all
+    document.getElementById('drawer-reset')?.addEventListener('click', () => {
+      Filtrado.state.filtroCategoria = 'Todos';
+      Filtrado.state.filtroTipo = 'Todos';
+      Filtrado.state.busqueda = '';
+      Filtrado.state.filtroMinistroBusqueda = '';
+      Calendario._selectedDate = null;
+      document.querySelectorAll('.ministro-chip').forEach(c => c.classList.remove('active'));
+      const si = document.getElementById('search-input');
+      if (si) si.value = '';
+      Render.allFilters();
+      Render.drawerFilters();
+      Calendario.render('cal');
+      Calendario.render('d-cal');
+      Render.timeline();
+    });
   }
 };
 
@@ -1207,9 +1403,10 @@ function init() {
   Theme.init();          // 1. Aplicar tema antes de renderizar (evita flash)
   Render.heroStats();    // 2. Contadores del hero
   Render.estadisticas(); // 3. Panel de stats + gráfico de dona
-  Render.allFilters();   // 4. Botones de filtro
+  Render.allFilters();   // 4. Botones de filtro sidebar
+  Render.drawerFilters();// 4b. Botones de filtro drawer
   Render.timeline();     // 5. Línea de tiempo
-  Calendario.init();     // 6. Calendario interactivo
+  Calendario.init();     // 6. Calendario interactivo (sidebar + drawer)
   Events.init();         // 7. Todos los event listeners
   DeepLink.init();       // 8. Último: procesar hash de la URL (requiere que el DOM esté listo)
 }

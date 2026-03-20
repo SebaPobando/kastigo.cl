@@ -106,6 +106,14 @@
           <span class="theme-icon-moon" aria-hidden="true">🌙</span>
         </button>
         <button class="nav-btn" id="btn-quienes">Quiénes Somos</button>
+        <button class="nav-btn btn-hamburger" id="btn-filtros" aria-label="Abrir filtros" aria-expanded="false"
+          aria-controls="drawer-filtros">
+          <span class="hamburger-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="hamburger-label">Filtros</span>
+          <span class="btn-filtros-badge" id="filtros-badge" style="display:none">0</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -129,6 +137,11 @@
         <div class="hero-stat">
           <span class="hero-stat-num" id="hero-categorias">0</span>
           <span class="hero-stat-label">categorías</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="hero-dias">0</span>
+          <span class="hero-stat-label">días</span>
         </div>
       </div>
     </div>
@@ -210,21 +223,21 @@
         <div id="stats-grid" role="list" aria-label="Lista de estadísticas por categoría"></div>
       </section>
 
-      <!-- BUSCADOR -->
-      <section class="panel" aria-labelledby="search-h">
-        <h2 class="panel-title" id="search-h">Buscar</h2>
-        <div class="search-wrapper" role="search">
-          <label for="search-input" class="sr-only">Buscar medidas</label>
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            aria-hidden="true">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input type="search" id="search-input" class="search-input" placeholder="Buscar…" maxlength="200"
-            autocomplete="off" spellcheck="false" />
-          <button class="search-clear" id="search-clear" aria-label="Limpiar">✕</button>
+
+
+      <!-- ACTORES / MINISTROS -->
+      <section class="panel" aria-labelledby="ministros-h">
+        <h2 class="panel-title" id="ministros-h">Actores</h2>
+        <p class="panel-hint">Filtra medidas por actor principal</p>
+        <div class="ministros-chips" role="group" aria-label="Filtro por actor">
+          <button class="ministro-chip" data-nombre="Kast">Kast</button>
+          <button class="ministro-chip" data-nombre="Quiroz">Quiroz</button>
+          <button class="ministro-chip" data-nombre="Mas">D. Mas</button>
+          <button class="ministro-chip" data-nombre="Toledo">Toledo</button>
+          <button class="ministro-chip" data-nombre="García Ruminot">García R.</button>
+          <button class="ministro-chip" data-nombre="Ejército">Ejército</button>
+          <button class="ministro-chip" data-nombre="Congreso">Congreso</button>
         </div>
-        <p class="search-count" id="search-count" aria-live="polite"></p>
       </section>
 
       <!-- FILTROS -->
@@ -244,8 +257,28 @@
     <section class="timeline-section" aria-labelledby="timeline-h">
       <div class="timeline-header">
         <h2 class="timeline-title" id="timeline-h">Línea de Tiempo</h2>
-        <span class="timeline-order">↓ Más reciente primero</span>
+        <div class="timeline-controls">
+          <span class="timeline-order" id="orden-label">↓ Más reciente primero</span>
+          <button class="tl-ctrl-btn" id="btn-orden" aria-label="Cambiar orden" title="Ordenar por categoría / fecha">⇅
+            Ordenar</button>
+          <button class="tl-ctrl-btn" id="btn-compact" aria-label="Vista compacta" title="Vista compacta / expandida">⊟
+            Compactar</button>
+        </div>
       </div>
+      <!-- BUSCADOR INLINE — visible en móvil sobre las medidas -->
+      <div class="timeline-search-bar" role="search">
+        <label for="search-input" class="sr-only">Buscar medidas</label>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="search" id="search-input" class="search-input" placeholder="Buscar medidas…" maxlength="200"
+          autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Limpiar">✕</button>
+      </div>
+      <p class="search-count" id="search-count" aria-live="polite"></p>
+
       <ol class="timeline-track" id="timeline-track" aria-label="Medidas gubernamentales"></ol>
       <div class="empty-state hidden" id="empty-state" role="status" aria-live="polite">
         <span aria-hidden="true">🔍</span>
@@ -437,10 +470,63 @@
     </div>
   </footer>
 
+  <!-- DRAWER: FILTROS (hamburguesa) -->
+  <div class="drawer-overlay hidden" id="drawer-overlay" aria-hidden="true"></div>
+  <aside class="drawer-filtros hidden" id="drawer-filtros" role="dialog" aria-modal="true"
+    aria-labelledby="drawer-title">
+    <div class="drawer-header">
+      <h2 class="drawer-title" id="drawer-title">Filtros</h2>
+      <button class="drawer-close" id="drawer-close" aria-label="Cerrar filtros">✕</button>
+    </div>
+    <div class="drawer-body">
+
+      <!-- ACTORES -->
+      <section class="drawer-section" aria-labelledby="d-actores-h">
+        <h3 class="drawer-section-title" id="d-actores-h">Actor</h3>
+        <div class="ministros-chips" role="group" aria-label="Filtro por actor" id="d-actor-chips">
+          <button class="ministro-chip" data-nombre="Kast">Kast</button>
+          <button class="ministro-chip" data-nombre="Quiroz">Quiroz</button>
+          <button class="ministro-chip" data-nombre="Mas">D. Mas</button>
+          <button class="ministro-chip" data-nombre="Toledo">Toledo</button>
+          <button class="ministro-chip" data-nombre="García Ruminot">García R.</button>
+          <button class="ministro-chip" data-nombre="Ejército">Ejército</button>
+          <button class="ministro-chip" data-nombre="Congreso">Congreso</button>
+        </div>
+      </section>
+
+      <!-- CATEGORÍA -->
+      <section class="drawer-section" aria-labelledby="d-cat-h">
+        <h3 class="drawer-section-title" id="d-cat-h">Categoría</h3>
+        <div class="filter-buttons" id="d-filter-cat" role="group" aria-label="Filtro categoría"></div>
+      </section>
+
+      <!-- TIPO -->
+      <section class="drawer-section" aria-labelledby="d-tipo-h">
+        <h3 class="drawer-section-title" id="d-tipo-h">Tipo</h3>
+        <div class="filter-buttons" id="d-filter-tipo" role="group" aria-label="Filtro tipo"></div>
+      </section>
+
+      <!-- CALENDARIO -->
+      <section class="drawer-section" aria-labelledby="d-cal-h">
+        <h3 class="drawer-section-title" id="d-cal-h">Calendario</h3>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" id="d-cal-prev" aria-label="Mes anterior">‹</button>
+          <span class="cal-month-label" id="d-cal-month-label"></span>
+          <button class="cal-nav-btn" id="d-cal-next" aria-label="Mes siguiente">›</button>
+        </div>
+        <div class="cal-grid" id="d-cal-grid" role="grid" aria-label="Calendario de medidas"></div>
+        <button class="cal-reset-btn hidden" id="d-cal-reset">✕ Limpiar fecha</button>
+      </section>
+
+      <!-- LIMPIAR TODO -->
+      <button class="drawer-reset-btn" id="drawer-reset">✕ Limpiar todos los filtros</button>
+    </div>
+  </aside>
+
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js?v=3.0"></script>
-  <script src="js/app.js?v=3.0"></script>
-  <script src="js/widgets.js?v=3.0"></script>
+  <script src="js/data.js?v=5.0"></script>
+  <script src="js/app.js?v=5.0"></script>
+  <script src="js/widgets.js?v=5.0"></script>
 </body>
 
 </html>
