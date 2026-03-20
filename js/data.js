@@ -295,5 +295,16 @@ const eventosGubernamentales = [
         categoria: "Medio Ambiente",
         tipo: "Administrativo",
         fuente: { medio: "Emol", url: "https://www.emol.com/noticias/Nacional/2026/03/18/1194616/revision-proyectos-retiro-gobierno-kast.html" }
+    },
+    {
+        id: 29,
+        fecha: "2026-03-18",
+        titulo: "Gobierno reingresa decreto de conservación de Ranitas de Darwin",
+        descripcion: "El Ministerio del Medio Ambiente reingresó el Decreto N°38 que aprueba el Plan RECOGE de recuperación y conservación de las Ranitas de Darwin (Rhinoderma darwinii y Rhinoderma rufum), un día después de haberlo retirado junto a otros 42 decretos ambientales. La Contraloría tomó razón el mismo 18 de marzo.",
+        interpretacion: "La ministra Francisca Toledo señaló que el reingreso se realizó tras una revisión técnica exhaustiva, y que seguirán trabajando para proteger estas especies en peligro crítico. Organizaciones ambientales valoraron la medida pero advirtieron que los 42 decretos restantes siguen retirados sin plazo definido para su reingreso.",
+        categoria: "Medio Ambiente",
+        tipo: "Decreto",
+        estado_seguimiento: "ejecutada",
+        fuente: { medio: "BioBioChile", url: "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/19/gobierno-reingresa-decreto-y-contraloria-da-luz-verde-a-la-proteccion-de-la-ranita-de-darwin.shtml" }
     }
 ]

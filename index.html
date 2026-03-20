@@ -68,6 +68,14 @@
   }
   </script>
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B1F3A" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Kastigo" />
+
   <!-- Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
@@ -149,6 +157,13 @@
       <span></span><span></span><span></span>
     </div>
   </section>
+
+  <!-- ÚLTIMA MEDIDA DESTACADA -->
+  <div class="ultima-medida-bar" id="ultima-medida-bar" role="note" aria-label="Última medida registrada">
+    <span class="ultima-medida-label">Última medida:</span>
+    <button class="ultima-medida-titulo" id="ultima-medida-titulo" aria-label="Ver última medida">—</button>
+    <span class="ultima-medida-fecha" id="ultima-medida-fecha"></span>
+  </div>
 
   <!-- LEYENDA -->
   <div class="leyenda-bar" role="note" aria-label="Leyenda de indicadores">
@@ -265,6 +280,13 @@
             Compactar</button>
         </div>
       </div>
+      <!-- BANNER FILTROS ACTIVOS -->
+      <div class="filtros-activos-bar hidden" id="filtros-activos-bar" role="status" aria-live="polite">
+        <span class="filtros-activos-texto" id="filtros-activos-texto"></span>
+        <button class="filtros-activos-limpiar" id="filtros-activos-limpiar" aria-label="Limpiar filtros">✕
+          Limpiar</button>
+      </div>
+
       <!-- BUSCADOR INLINE — visible en móvil sobre las medidas -->
       <div class="timeline-search-bar" role="search">
         <label for="search-input" class="sr-only">Buscar medidas</label>
@@ -309,12 +331,17 @@
       <div class="modal-accent-bar accent-gradient"></div>
       <h2 class="modal-title" id="mq-title">Quiénes Somos</h2>
       <p class="modal-text">
-        Somos un colectivo ciudadano independiente dedicado al registro y seguimiento de las medidas del gobierno de
-        Chile.
-        <strong>Kastigo</strong> es una herramienta de transparencia basada en datos públicos y fuentes periodísticas
-        verificadas.
-        Presentamos los hechos y las perspectivas de distintos sectores sin tomar partido.
-        Operamos de forma autónoma y sin financiamiento externo.
+        <strong>Kastigo</strong> es un sitio independiente que centraliza y organiza información sobre las medidas
+        del gobierno de Chile publicadas en medios periodísticos verificados.
+      </p>
+      <p class="modal-text" style="margin-top:0.6rem">
+        No somos un medio de comunicación ni un colectivo político. No generamos contenido propio: reproducimos
+        hechos ya publicados y presentamos las posiciones de distintos sectores tal como aparecen en las fuentes
+        citadas.
+      </p>
+      <p class="modal-text" style="margin-top:0.6rem">
+        Nuestro objetivo es facilitar el acceso a información pública dispersa en distintos medios,
+        en un solo lugar y de forma organizada.
       </p>
       <div class="modal-divider"></div>
       <div class="modal-disclaimer-box">
@@ -523,10 +550,22 @@
     </div>
   </aside>
 
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top-btn hidden" id="scroll-top-btn" aria-label="Volver arriba">↑</button>
+
+  <!-- SERVICE WORKER -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => { });
+      });
+    }
+  </script>
+
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js?v=5.0"></script>
-  <script src="js/app.js?v=5.0"></script>
-  <script src="js/widgets.js?v=5.0"></script>
+  <script src="js/data.js?v=6.0"></script>
+  <script src="js/app.js?v=6.0"></script>
+  <script src="js/widgets.js?v=6.0"></script>
 </body>
 
 </html>
