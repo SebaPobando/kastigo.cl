@@ -4,7 +4,7 @@
  *             Network-first para data.js (siempre fresco).
  */
 
-const CACHE_NAME = 'kastigo-v6';
+const CACHE_NAME = 'kastigo-v7';
 const CACHE_STATIC = [
   '/',
   '/index.html',
@@ -24,7 +24,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return Promise.allSettled(
-        CACHE_STATIC.map(url => cache.add(url).catch(() => {}))
+        CACHE_STATIC.map(url => cache.add(url).catch(() => { }))
       );
     }).then(() => self.skipWaiting())
   );
@@ -55,19 +55,19 @@ self.addEventListener('fetch', event => {
         .catch(() => caches.match(event.request))
     );
     return;
-    }
-    // Todo lo demás: cache-first
+  }
+  // Todo lo demás: cache-first
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
         if (!response || response.status !== 200 || response.type === 'opaque') {
           return response;
-            }
+        }
         const clone = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
-        }).catch(() => caches.match('/index.html'));
+      }).catch(() => caches.match('/index.html'));
     })
   );
 });
