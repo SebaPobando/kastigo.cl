@@ -979,6 +979,24 @@ const Calendario = {
    ============================================================ */
 const Render = {
 
+  /** Renderiza el banner de última medida. */
+  ultimaMedida() {
+    const sorted = [...eventosGubernamentales].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    const last = sorted[0];
+    if (!last) return;
+    const btn = document.getElementById('ultima-medida-titulo');
+    const fecha = document.getElementById('ultima-medida-fecha');
+    if (btn) {
+      btn.textContent = last.titulo;
+      btn.addEventListener('click', () => Modal.openDetalle(last));
+    }
+    if (fecha) {
+      const [y, m, d] = last.fecha.split('-').map(Number);
+      const diff = Math.floor((new Date() - new Date(y, m - 1, d)) / 86400000);
+      fecha.textContent = diff === 0 ? 'Hoy' : diff === 1 ? 'Ayer' : `Hace ${diff} días`;
+    }
+  },
+
   /** Actualiza contadores del hero incluido día de gobierno. */
   heroStats() {
     const cats = Utils.unique('categoria').length;
@@ -1118,16 +1136,29 @@ const Render = {
     track.innerHTML = '';
 
     // Update hamburger badge count
-    const activeFilters = [
-      Filtrado.state.filtroCategoria !== 'Todos',
-      Filtrado.state.filtroTipo !== 'Todos',
-      Filtrado.state.busqueda.length > 0,
-      Filtrado.state.filtroMinistroBusqueda.length > 0,
-    ].filter(Boolean).length;
+    const activeFiltersArr = [
+      Filtrado.state.filtroCategoria !== 'Todos' ? `Categoría: ${Filtrado.state.filtroCategoria}` : null,
+      Filtrado.state.filtroTipo !== 'Todos' ? `Tipo: ${Filtrado.state.filtroTipo}` : null,
+      Filtrado.state.busqueda.length > 0 ? `"${Filtrado.state.busqueda}"` : null,
+      Filtrado.state.filtroMinistroBusqueda.length > 0 ? `Actor: ${Filtrado.state.filtroMinistroBusqueda}` : null,
+    ].filter(Boolean);
+    const activeFilters = activeFiltersArr.length;
     const badge = document.getElementById('filtros-badge');
     if (badge) {
       badge.textContent = activeFilters;
       badge.style.display = activeFilters > 0 ? 'inline-flex' : 'none';
+    }
+
+    // Banner de filtros activos
+    const bar = document.getElementById('filtros-activos-bar');
+    const txt = document.getElementById('filtros-activos-texto');
+    if (bar && txt) {
+      if (activeFilters > 0) {
+        txt.textContent = `${eventos.length} de ${eventosGubernamentales.length} medidas · ${activeFiltersArr.join(' · ')}`;
+        bar.classList.remove('hidden');
+      } else {
+        bar.classList.add('hidden');
+      }
     }
 
     const getWeekKey = (fechaISO) => {
@@ -1331,6 +1362,34 @@ const Events = {
       });
     });
 
+    // ---- Scroll to top ----
+    const scrollBtn = document.getElementById('scroll-top-btn');
+    if (scrollBtn) {
+      window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('hidden', window.scrollY < 400);
+      }, { passive: true });
+      scrollBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // ---- Limpiar filtros desde banner ----
+    document.getElementById('filtros-activos-limpiar')?.addEventListener('click', () => {
+      Filtrado.state.filtroCategoria = 'Todos';
+      Filtrado.state.filtroTipo = 'Todos';
+      Filtrado.state.busqueda = '';
+      Filtrado.state.filtroMinistroBusqueda = '';
+      Calendario._selectedDate = null;
+      document.querySelectorAll('.ministro-chip').forEach(c => c.classList.remove('active'));
+      const si = document.getElementById('search-input');
+      if (si) si.value = '';
+      Render.allFilters();
+      Render.drawerFilters();
+      Calendario.render('cal');
+      Calendario.render('d-cal');
+      Render.timeline();
+    });
+
     // ---- Meta tags dinámicos por medida al compartir ----
     // Se actualizan en Modal.openDetalle, no necesitan listener adicional
 
@@ -1402,6 +1461,7 @@ function init() {
   }
   Theme.init();          // 1. Aplicar tema antes de renderizar (evita flash)
   Render.heroStats();    // 2. Contadores del hero
+  Render.ultimaMedida(); // 2b. Banner última medida
   Render.estadisticas(); // 3. Panel de stats + gráfico de dona
   Render.allFilters();   // 4. Botones de filtro sidebar
   Render.drawerFilters();// 4b. Botones de filtro drawer
