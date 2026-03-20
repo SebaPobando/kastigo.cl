@@ -275,5 +275,23 @@ const eventosGubernamentales = [
         tipo: "Decreto",
         estado_seguimiento: "ejecutada",
         fuente: { medio: "BioBioChile", url: "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/19/gobierno-reingresa-decreto-y-contraloria-da-luz-verde-a-la-proteccion-de-la-ranita-de-darwin.shtml" }
+    },
+    {
+        id: 30,
+        fecha: "2026-03-19",
+        titulo: "Gobierno confirmó ingreso de proyecto Mepco al Congreso",
+        descripcion: "Tras reunirse con los presidentes del Senado y la Cámara, el gobierno confirmó que ingresará entre el lunes y martes un proyecto de ley para modificar el Mecanismo de Estabilización de Precios de los Combustibles (Mepco), ante el alza del petróleo por el conflicto entre EEUU e Irán.",
+        categoria: "Economía",
+        tipo: "Proyecto",
+        fuente: { medio: "Cooperativa", url: "https://www.cooperativa.cl/noticias/pais/politica/camara-baja/gobierno-ingresara-proyecto-con-cambios-al-mepco-a-inicios-de-la-proxima/2026-03-19/175313.html" }
+    },
+    {
+        id: 31,
+        fecha: "2026-03-19",
+        titulo: "Quiroz eleva a US$200 millones semanales el costo fiscal del Mepco",
+        descripcion: "\"No vamos a esperar a que la fortuna dé vuelta las cosas mientras gastamos 200 millones de dólares por semana\", declaró el ministro de Hacienda Jorge Quiroz, elevando la estimación anterior de US$50 millones al referirse al costo fiscal del Mepco ante el alza del petróleo.",
+        categoria: "Economía",
+        tipo: "Declaración Polémica",
+        fuente: { medio: "Radio U. de Chile", url: "https://radio.uchile.cl/2026/03/19/quiroz-insiste-en-ajustes-al-mepco-resistencia-de-la-oposicion-proyecta-dificil-tramitacion-en-el-congreso/" }
     }
 ]
