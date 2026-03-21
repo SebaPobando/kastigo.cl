@@ -21,6 +21,29 @@
 'use strict';
 
 /* ============================================================
+   PWA INSTALL PROMPT
+   Captura el evento beforeinstallprompt y lo usa al hacer
+   click en el botón de instalación del header.
+   Solo funciona en Chrome/Android — en iOS Safari se oculta.
+   ============================================================ */
+let _pwaInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  _pwaInstallPrompt = e;
+  // Mostrar botón solo cuando el navegador confirma que se puede instalar
+  const btn = document.getElementById('btn-install');
+  if (btn) btn.classList.remove('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  // Ocultar botón una vez instalada
+  const btn = document.getElementById('btn-install');
+  if (btn) btn.classList.add('hidden');
+  _pwaInstallPrompt = null;
+});
+
+/* ============================================================
    MÓDULO 1: SANITIZACIÓN
    Protege contra ataques XSS al insertar datos en el DOM.
    Principio: nunca usar innerHTML con datos del usuario.
@@ -1359,6 +1382,17 @@ const Events = {
         }
         Render.timeline();
       });
+    });
+
+    // ---- Botón instalar PWA ----
+    document.getElementById('btn-install')?.addEventListener('click', async () => {
+      if (!_pwaInstallPrompt) return;
+      _pwaInstallPrompt.prompt();
+      const { outcome } = await _pwaInstallPrompt.userChoice;
+      if (outcome === 'accepted') {
+        document.getElementById('btn-install')?.classList.add('hidden');
+      }
+      _pwaInstallPrompt = null;
     });
 
     // ---- Scroll to top ----

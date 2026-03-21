@@ -293,5 +293,23 @@ const eventosGubernamentales = [
         categoria: "Economía",
         tipo: "Declaración Polémica",
         fuente: { medio: "Radio U. de Chile", url: "https://radio.uchile.cl/2026/03/19/quiroz-insiste-en-ajustes-al-mepco-resistencia-de-la-oposicion-proyecta-dificil-tramitacion-en-el-congreso/" }
+    },
+    {
+        id: 32,
+        fecha: "2026-03-16",
+        titulo: "Gobierno ingresa 20 urgencias legislativas al Congreso",
+        descripcion: "La Segpres ingresó al Congreso un paquete de 20 proyectos de ley con distintos niveles de urgencia: 3 con discusión inmediata (tipificar ingreso clandestino, incorporar Gendarmería a Fuerzas de Orden, y crear Subsistema de Inteligencia Económica), 13 con suma urgencia y 4 con urgencia simple.",
+        categoria: "Seguridad",
+        tipo: "Administrativo",
+        fuente: { medio: "BioBioChile", url: "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/16/segpres-ingresa-primeras-urgencias-legislativas-con-dos-iniciativas-de-boric-con-discusion-inmediata.shtml" }
+    },
+    {
+        id: 33,
+        fecha: "2026-03-19",
+        titulo: "Quiroz anuncia ampliación del DFL2 y paquete de vivienda",
+        descripcion: "El ministro de Hacienda Jorge Quiroz anunció la ampliación del DFL2 de dos a tres o más viviendas de hasta 90 m2, con un impuesto único estimado en 5%, como parte del paquete de reactivación del mercado inmobiliario que acompaña la propuesta de eliminar el IVA a la vivienda por 12 meses.",
+        categoria: "Vivienda",
+        tipo: "Declaración",
+        fuente: { medio: "BioBioChile", url: "https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/03/19/mercado-de-la-vivienda-quiroz-compromete-ampliacion-del-subsidio-al-dividendo-y-extension-del-dfl2.shtml" }
     }
 ]
