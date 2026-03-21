@@ -337,5 +337,14 @@ const eventosGubernamentales = [
         "categoria": "Vivienda",
         "tipo": "Declaración",
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/03/19/mercado-de-la-vivienda-quiroz-compromete-ampliacion-del-subsidio-al-dividendo-y-extension-del-dfl2.shtml" }
+    },
+    {
+        id: 34,
+        fecha: "2026-03-16",
+        titulo: "MINVU extiende prórroga de permisos de edificación a 30 meses",
+        descripcion: "El Ministerio de Vivienda publicó en el Diario Oficial un decreto que amplía de 18 a 30 meses la prórroga extraordinaria de permisos de edificación para proyectos que no han podido iniciar obras. La medida beneficia aproximadamente 430 proyectos equivalentes a cerca de 60.000 viviendas.",
+        categoria: "Vivienda",
+        tipo: "Decreto",
+        fuente: { medio: "Diario Financiero", url: "https://www.df.cl/empresas/construccion/es-oficial-minvu-extiende-prorroga-de-permisos-de-edificacion-y-da-nuevo" }
     }
 ]
