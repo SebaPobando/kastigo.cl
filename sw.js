@@ -4,7 +4,7 @@
  *             Network-first para data.js (siempre fresco).
  */
 
-const CACHE_NAME = 'kastigo-v13';
+const CACHE_NAME = 'kastigo-v14';
 const CACHE_STATIC = [
   '/',
   '/index.html',

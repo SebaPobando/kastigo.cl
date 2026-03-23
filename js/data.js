@@ -2,13 +2,13 @@
 
 /**
  * js/data.js — Base de Datos Maestra de Kastigo.cl
- * Cronología: 11 al 18 de marzo de 2026
+ * Cronología: 11 al 23 de marzo de 2026
  *
  * POLÍTICA EDITORIAL:
  * - descripcion: hechos objetivos verificables con fuente citada
  *
  * POLÍTICA DE URLs: cada URL fue verificada en resultados de búsqueda reales.
- * Total de eventos: 29
+ * Total de eventos: 39
  */
 
 const eventosGubernamentales = [
@@ -167,6 +167,15 @@ const eventosGubernamentales = [
     },
     {
         "id": 18,
+        "fecha": "2026-03-16",
+        "titulo": "MINVU extiende prórroga de permisos de edificación a 30 meses",
+        "descripcion": "El Ministerio de Vivienda publicó en el Diario Oficial un decreto que amplía de 18 a 30 meses la prórroga extraordinaria de permisos de edificación para proyectos que no han podido iniciar obras. La medida beneficia aproximadamente 430 proyectos equivalentes a cerca de 60.000 viviendas.",
+        "categoria": "Vivienda",
+        "tipo": "Decreto",
+        "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/empresas/construccion/es-oficial-minvu-extiende-prorroga-de-permisos-de-edificacion-y-da-nuevo" }
+    },
+    {
+        "id": 19,
         "fecha": "2026-03-17",
         "titulo": "Gobierno retira 43 decretos ambientales de Contraloría",
         "descripcion": "El Ministerio de Medio Ambiente retiró 43 decretos supremos aún en trámite ante la Contraloría, incluyendo creación de parques nacionales, normas de emisión y la protección del pingüino de Humboldt como monumento natural.",
@@ -175,7 +184,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/17/ministerio-del-medio-ambiente-retira-43-decretos-del-gobierno-anterior-incluye-creacion-de-parques.shtml" }
     },
     {
-        "id": 19,
+        "id": 20,
         "fecha": "2026-03-17",
         "titulo": "Gobierno retira proyecto de Negociación Colectiva Multinivel del Congreso",
         "descripcion": "El Ejecutivo retiró de tramitación legislativa el proyecto que buscaba fortalecer la negociación sindical por rama de actividad económica. La CUT declaró que el gobierno \"notifica a los trabajadores que van a gobernar sin diálogo\".",
@@ -184,7 +193,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/presidente-kast/gobierno-de-kast-retiro-proyecto-de-negociacion-ramal-del-congreso/2026-03-17/114124.html" }
     },
     {
-        "id": 20,
+        "id": 21,
         "fecha": "2026-03-17",
         "titulo": "Corte restablece temporalmente el permiso ambiental de Dominga",
         "descripcion": "La Corte de Apelaciones de Santiago restableció provisoriamente el permiso ambiental del proyecto minero-portuario Dominga, paralizando la resolución del CIUDEN que lo había rechazado en 2021.",
@@ -194,7 +203,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/economia/sectores-productivos/mineria/corte-restablecio-temporalmente-el-permiso-ambiental-para-dominga/2026-03-17/111125.html" }
     },
     {
-        "id": 21,
+        "id": 22,
         "fecha": "2026-03-17",
         "titulo": "Kast advierte a deudores del CAE que pueden ser publicados",
         "descripcion": "\"¿Quieren aparecer publicados? No solo nosotros podemos hacerlo, puede ser cualquier persona que lo solicite\", advirtió el Presidente Kast a deudores del CAE que no pagan pudiendo hacerlo.",
@@ -203,7 +212,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "T13", "url": "https://www.t13.cl/noticia/politica/kast-llama-deudores-del-cae-ponerse-al-dia-advierte-ustedes-quieren-aparecer-pu-17-3-2026" }
     },
     {
-        "id": 22,
+        "id": 23,
         "fecha": "2026-03-17",
         "titulo": "Kast: negociación ramal \"no es urgente hoy día\"",
         "descripcion": "\"Hoy tenemos más de 850 mil personas sin trabajo formal. ¿La negociación ramal es urgente hoy día? Nosotros creemos que no\", afirmó Kast desde Antofagasta al defender el retiro del proyecto sindical.",
@@ -212,7 +221,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/03/17/presidente-kast-defiende-retiro-de-decretos-ambientales-y-negociacion-ramal-no-es-urgente-hoy-dia/" }
     },
     {
-        "id": 23,
+        "id": 24,
         "fecha": "2026-03-17",
         "titulo": "Kast defiende retiro de decretos: \"Chile debe volver a ser un país confiable\"",
         "descripcion": "\"Nosotros queremos hacernos responsables de que Chile vuelva a ser un país confiable\", declaró Kast al responder las críticas por el retiro de 43 decretos ambientales, añadiendo que \"ayer vimos el efecto positivo de una máquina excavadora\".",
@@ -221,7 +230,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/17/kast-y-retiro-de-decretos-ambientales-ayer-vimos-el-efecto-positivo-de-una-maquina-excavadora.shtml" }
     },
     {
-        "id": 24,
+        "id": 25,
         "fecha": "2026-03-17",
         "titulo": "Senado despacha a ley reforma constitucional de Gendarmería",
         "descripcion": "Con 41 votos a favor, el Senado aprobó la reforma constitucional que incorpora a Gendarmería a las Fuerzas de Orden y Seguridad Pública, trasladándola del Ministerio de Justicia al de Seguridad. El gobierno había otorgado discusión inmediata a la iniciativa.",
@@ -230,7 +239,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/17/senado-despacha-reforma-que-incorpora-a-gendarmeria-dentro-de-las-fuerzas-de-orden-y-seguridad.shtml" }
     },
     {
-        "id": 25,
+        "id": 26,
         "fecha": "2026-03-17",
         "titulo": "Gobierno retira Plan Nacional de Derechos Humanos de Contraloría",
         "descripcion": "El ministro de Justicia Fernando Rabat confirmó el retiro del Tercer Plan Nacional de Derechos Humanos 2026-2029 desde la Contraloría, argumentando que la nueva administración debe revisarlo antes de reingresarlo. El plan contemplaba 175 medidas en cinco ejes estratégicos.",
@@ -239,7 +248,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/dd-hh/gobierno-retiro-de-contraloria-el-proyecto-de-plan-nacional-de-derechos/2026-03-17/191357.html" }
     },
     {
-        "id": 26,
+        "id": 27,
         "fecha": "2026-03-18",
         "titulo": "247 organizaciones alertan por retrocesos ambientales del gobierno",
         "descripcion": "247 organizaciones socioambientales y científicas firmaron una carta alertando por el retiro de 43 decretos ambientales, que incluyen normas de calidad del aire, regulaciones industriales y protección del pingüino de Humboldt.",
@@ -248,7 +257,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/18/247-organizaciones-y-cientos-de-particulares-firman-carta-alertando-retrocesos-ambientales-de-kast.shtml" }
     },
     {
-        "id": 27,
+        "id": 28,
         "fecha": "2026-03-18",
         "titulo": "Suma Urgencia al proyecto de Control de Identidad desde los 14 años",
         "descripcion": "El Ejecutivo otorgó Suma Urgencia al proyecto de ley que amplía las facultades de control preventivo de identidad a menores de 14 años y reduce los plazos para el control de detención.",
@@ -257,7 +266,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "T13", "url": "https://www.t13.cl/noticia/politica/los-detalles-primeros-proyectos-seguridad-kast-puso-urgencia-congreso-16-3-2026" }
     },
     {
-        "id": 28,
+        "id": 29,
         "fecha": "2026-03-18",
         "titulo": "García Ruminot advierte medidas fiscales serán \"muy dolorosas\"",
         "descripcion": "\"Van a obligar a tomar medidas que van a ser para muchas familias, lo más probable que muy, muy dolorosas\", declaró el ministro de la Segpres, José García Ruminot, al referirse al ajuste fiscal y a la eventual modificación del Mepco.",
@@ -266,7 +275,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/pulso/noticia/gobierno-apunta-a-medidas-que-van-a-ser-muy-dolorosas-para-muchas-familias-por-situacion-fiscal-de-chile/" }
     },
     {
-        "id": 29,
+        "id": 30,
         "fecha": "2026-03-18",
         "titulo": "Gobierno anuncia revisión y posible modificación del Mepco",
         "descripcion": "El Ejecutivo confirmó que estudia cambios al Mecanismo de Estabilización de Precios de los Combustibles (Mepco), que cuesta al fisco cerca de US$50 millones por semana. El ministro Quiroz anunció que presentará una propuesta en los próximos días.",
@@ -275,7 +284,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/consumidores/combustibles/gobierno-estima-anunciar-cambios-al-mepco-a-mas-tardar-la-proxima/2026-03-18/140612.html" }
     },
     {
-        "id": 30,
+        "id": 31,
         "fecha": "2026-03-18",
         "titulo": "Medio Ambiente suspende sitios prioritarios de biodiversidad",
         "descripcion": "La ministra Francisca Toledo resolvió suspender el proceso de determinación de sitios prioritarios para la conservación de la biodiversidad en el marco de la Ley N°21.600 del SBAP, citando casi 10.000 observaciones técnicas y jurídicas pendientes.",
@@ -284,7 +293,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Emol", "url": "https://www.emol.com/noticias/Nacional/2026/03/18/1194616/revision-proyectos-retiro-gobierno-kast.html" }
     },
     {
-        "id": 31,
+        "id": 32,
         "fecha": "2026-03-18",
         "titulo": "Gobierno retira veto a Ley Integral de Personas Mayores",
         "descripcion": "El Ejecutivo anunció el retiro del veto sustitutivo que la administración Boric presentó en febrero al proyecto de Ley Integral de las Personas Mayores y Promoción del Envejecimiento Digno, Activo y Saludable, dejándola lista para ser promulgada.",
@@ -293,7 +302,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/18/gobierno-quita-veto-a-proyecto-de-ley-integral-de-personas-mayores-presentado-por-administracion-boric.shtml" }
     },
     {
-        "id": 32,
+        "id": 33,
         "fecha": "2026-03-18",
         "titulo": "Ministerio de Energía retira 5 decretos del sector eléctrico",
         "descripcion": "El Ministerio de Energía solicitó a la Contraloría retirar los decretos supremos N°32, 46, 53 y 54 de 2025 y el N°1 de 2026, relativos a la operación del sistema eléctrico, transmisión y generación de pequeña escala.",
@@ -302,7 +311,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/03/18/ministerio-de-energia-no-se-queda-atras-retiro-de-contraloria-5-decretos-de-administracion-boric/" }
     },
     {
-        "id": 33,
+        "id": 34,
         "fecha": "2026-03-19",
         "titulo": "Gobierno reingresa decreto de conservación de Ranitas de Darwin",
         "descripcion": "El Ministerio del Medio Ambiente reingresó el Decreto N°38 que aprueba el Plan RECOGE de recuperación y conservación de las Ranitas de Darwin (Rhinoderma darwinii y Rhinoderma rufum), un día después de haberlo retirado junto a otros 42 decretos ambientales. La Contraloría tomó razón el mismo 19 de marzo.",
@@ -312,7 +321,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/19/gobierno-reingresa-decreto-y-contraloria-da-luz-verde-a-la-proteccion-de-la-ranita-de-darwin.shtml" }
     },
     {
-        "id": 34,
+        "id": 35,
         "fecha": "2026-03-19",
         "titulo": "Gobierno confirmó ingreso de proyecto Mepco al Congreso",
         "descripcion": "Tras reunirse con los presidentes del Senado y la Cámara, el gobierno confirmó que ingresará entre el lunes y martes un proyecto de ley para modificar el Mecanismo de Estabilización de Precios de los Combustibles (Mepco), ante el alza del petróleo por el conflicto entre EEUU e Irán.",
@@ -321,7 +330,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/politica/camara-baja/gobierno-ingresara-proyecto-con-cambios-al-mepco-a-inicios-de-la-proxima/2026-03-19/175313.html" }
     },
     {
-        "id": 35,
+        "id": 36,
         "fecha": "2026-03-19",
         "titulo": "Quiroz eleva a US$200 millones semanales el costo fiscal del Mepco",
         "descripcion": "\"No vamos a esperar a que la fortuna dé vuelta las cosas mientras gastamos 200 millones de dólares por semana\", declaró el ministro de Hacienda Jorge Quiroz, elevando la estimación anterior de US$50 millones al referirse al costo fiscal del Mepco ante el alza del petróleo.",
@@ -330,7 +339,7 @@ const eventosGubernamentales = [
         "fuente": { "medio": "Radio U. de Chile", "url": "https://radio.uchile.cl/2026/03/19/quiroz-insiste-en-ajustes-al-mepco-resistencia-de-la-oposicion-proyecta-dificil-tramitacion-en-el-congreso/" }
     },
     {
-        "id": 36,
+        "id": 37,
         "fecha": "2026-03-19",
         "titulo": "Quiroz anuncia ampliación del DFL2 y paquete de vivienda",
         "descripcion": "El ministro de Hacienda Jorge Quiroz anunció la ampliación del DFL2 de dos a tres o más viviendas de hasta 90 m2, con un impuesto único estimado en 5%, como parte del paquete de reactivación del mercado inmobiliario que acompaña la propuesta de eliminar el IVA a la vivienda por 12 meses.",
@@ -339,12 +348,21 @@ const eventosGubernamentales = [
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/03/19/mercado-de-la-vivienda-quiroz-compromete-ampliacion-del-subsidio-al-dividendo-y-extension-del-dfl2.shtml" }
     },
     {
-        id: 34,
-        fecha: "2026-03-16",
-        titulo: "MINVU extiende prórroga de permisos de edificación a 30 meses",
-        descripcion: "El Ministerio de Vivienda publicó en el Diario Oficial un decreto que amplía de 18 a 30 meses la prórroga extraordinaria de permisos de edificación para proyectos que no han podido iniciar obras. La medida beneficia aproximadamente 430 proyectos equivalentes a cerca de 60.000 viviendas.",
-        categoria: "Vivienda",
-        tipo: "Decreto",
-        fuente: { medio: "Diario Financiero", url: "https://www.df.cl/empresas/construccion/es-oficial-minvu-extiende-prorroga-de-permisos-de-edificacion-y-da-nuevo" }
+        "id": 38,
+        "fecha": "2026-03-21",
+        "titulo": "Gobierno decide modificar el Mepco por decreto administrativo",
+        "descripcion": "El gobierno confirmó que modificará el Mecanismo de Estabilización de Precios de los Combustibles (Mepco) mediante decreto administrativo, descartando la vía legislativa. Al Congreso ingresarán proyectos de ley focalizados en subsidiar la parafina y el transporte público ante el alza del petróleo por el conflicto en Medio Oriente.",
+        "categoria": "Economía",
+        "tipo": "Decreto",
+        "fuente": { "medio": "Radio U. de Chile", "url": "https://radio.uchile.cl/2026/03/21/nunez-confirma-gobierno-modificara-el-mepco-por-decreto-para-frenar-alza-de-combustibles/" }
+    },
+    {
+        "id": 39,
+        "fecha": "2026-03-22",
+        "titulo": "Gobierno prepara proyectos de ley para parafina y transporte público",
+        "descripcion": "El Ejecutivo anunció el ingreso a la Cámara de Diputados de proyectos de ley para subsidiar el precio de la parafina y contener alzas en el transporte público, como medidas complementarias a la modificación del Mepco que se realizará por decreto. El ingreso se confirmó para el lunes o martes de la semana siguiente.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/21/senadora-nunez-rn-el-gobierno-ya-decidio-modificar-el-mepco-por-decreto.shtml" }
     }
 ]
