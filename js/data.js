@@ -364,5 +364,32 @@ const eventosGubernamentales = [
         "categoria": "Economía",
         "tipo": "Proyecto",
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/21/senadora-nunez-rn-el-gobierno-ya-decidio-modificar-el-mepco-por-decreto.shtml" }
+    },
+    {
+        "id": 40,
+        "fecha": "2026-03-23",
+        "titulo": "Hacienda publica decreto que modifica parámetro del Mepco",
+        "descripcion": "El Ministerio de Hacienda publicó en el Diario Oficial un decreto que amplía de dos a cuatro semanas el período de cálculo del precio de paridad de importación de los combustibles, primer ajuste técnico al Mepco. El cambio rige a partir del jueves 26 de marzo.",
+        "categoria": "Economía",
+        "tipo": "Decreto",
+        "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/economia-y-politica/macro/ad-portas-de-anuncio-de-kast-de-alzas-en-los-combustibles-hacienda" }
+    },
+    {
+        "id": 41,
+        "fecha": "2026-03-23",
+        "titulo": "Quiroz anuncia alza histórica: bencina sube $370 y diésel $580 por litro",
+        "descripcion": "El ministro de Hacienda Jorge Quiroz anunció que a partir del jueves 26 de marzo la gasolina de 93 subirá $370 por litro y el diésel $580, el mayor ajuste de precios de combustibles de la historia reciente en Chile. El alza es consecuencia directa del conflicto en Medio Oriente que elevó el barril de petróleo sobre US$100.",
+        "categoria": "Economía",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/consumidores/combustibles/cambios-al-mepco-bencinas-subiran-370-pesos-y-diesel-tendra-alza-de-580/2026-03-23/203943.html" }
+    },
+    {
+        "id": 42,
+        "fecha": "2026-03-23",
+        "titulo": "Gobierno lanza Plan Chile Sale Adelante con 7 medidas de protección",
+        "descripcion": "El Ejecutivo anunció el plan \"Chile Sale Adelante\" con siete medidas para contener el impacto del alza de combustibles: congelamiento de tarifas del Sistema RED hasta diciembre 2026, contención del transporte público en regiones, precio de parafina congelado bajo $1.000 por litro durante otoño e invierno, proyecto de ley de discusión inmediata para refinanciar el Fondo de Estabilización del Petróleo a US$60 millones, y subvención de $100.000 mensuales por hasta 6 meses para taxistas.",
+        "categoria": "Economía",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/economia-y-politica/macro/370-por-litro-en-gasolina-de-93-y-580-en-diesel-combustibles-anotaran" }
     }
 ]
