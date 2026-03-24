@@ -377,11 +377,11 @@ const eventosGubernamentales = [
     {
         "id": 41,
         "fecha": "2026-03-23",
-        "titulo": "Quiroz anuncia alza histórica: bencina sube $370 y diésel $580 por litro",
-        "descripcion": "El ministro de Hacienda Jorge Quiroz anunció que a partir del jueves 26 de marzo la gasolina de 93 subirá $370 por litro y el diésel $580, el mayor ajuste de precios de combustibles de la historia reciente en Chile. El alza es consecuencia directa del conflicto en Medio Oriente que elevó el barril de petróleo sobre US$100.",
-        "categoria": "Economía",
-        "tipo": "Declaración Polémica",
-        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/consumidores/combustibles/cambios-al-mepco-bencinas-subiran-370-pesos-y-diesel-tendra-alza-de-580/2026-03-23/203943.html" }
+        "titulo": "Gobierno anuncia Plan Integral de Recuperación para macrozona sur",
+        "descripcion": "El gobierno anunció un Plan Integral de Recuperación para La Araucanía y el Biobío que contempla infraestructura digital, agua potable, control de rutas, vivienda y reactivación económica, a presentarse durante la gira presidencial del miércoles 25. El plan incluye una hoja de ruta para el retiro gradual de las Fuerzas Armadas de la zona.",
+        "categoria": "Seguridad",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/23/kast-apuesta-por-extender-estado-de-excepcion-mientras-alistan-retiro-gradual-de-ffaa-en-la-macrozona.shtml" }
     },
     {
         "id": 42,
@@ -391,5 +391,23 @@ const eventosGubernamentales = [
         "categoria": "Economía",
         "tipo": "Administrativo",
         "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/economia-y-politica/macro/370-por-litro-en-gasolina-de-93-y-580-en-diesel-combustibles-anotaran" }
+    },
+    {
+        "id": 43,
+        "fecha": "2026-03-23",
+        "titulo": "Kast solicita primera renovación del Estado de Excepción en macrozona sur",
+        "descripcion": "El Ejecutivo envió al Congreso la primera solicitud de renovación del Estado de Excepción Constitucional de Emergencia en La Araucanía y las provincias de Arauco y Biobío bajo la administración Kast, vigente de forma casi ininterrumpida desde octubre de 2021. La Cámara votará el martes y el Senado el miércoles.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/el-primer-test-de-kast-la-renovacion-del-estado-de-excepcion-en-la-araucania-y-el-biobio/" }
+    },
+    {
+        "id": 44,
+        "fecha": "2026-03-23",
+        "titulo": "Quiroz anuncia alza histórica: bencina sube $370 y diésel $580 por litro",
+        "descripcion": "El ministro de Hacienda Jorge Quiroz anunció que a partir del jueves 26 de marzo la gasolina de 93 subirá $370 por litro y el diésel $580, el mayor ajuste de precios de combustibles de la historia reciente en Chile. El alza es consecuencia directa del conflicto en Medio Oriente que elevó el barril de petróleo sobre US$100.",
+        "categoria": "Economía",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/consumidores/combustibles/cambios-al-mepco-bencinas-subiran-370-pesos-y-diesel-tendra-alza-de-580/2026-03-23/203943.html" }
     }
 ]
