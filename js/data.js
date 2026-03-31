@@ -409,5 +409,77 @@ const eventosGubernamentales = [
         "categoria": "Economía",
         "tipo": "Declaración Polémica",
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/consumidores/combustibles/cambios-al-mepco-bencinas-subiran-370-pesos-y-diesel-tendra-alza-de-580/2026-03-23/203943.html" }
+    },
+    {
+        "id": 45,
+        "fecha": "2026-03-24",
+        "titulo": "Cancillería retira apoyo de Chile a candidatura de Bachelet en la ONU",
+        "descripcion": "La Cancillería emitió un comunicado informando que Chile retira el patrocinio a la candidatura de la expresidenta Michelle Bachelet como secretaria general de la ONU, argumentando que la dispersión de candidaturas latinoamericanas y diferencias con actores relevantes hacen \"inviable esta candidatura\". Chile se abstendrá de apoyar a otro candidato si Bachelet continúa.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Emol", "url": "https://www.emol.com/noticias/Nacional/2026/03/24/1195209/kast-retira-apoyo-chile-bachelet.html" }
+    },
+    {
+        "id": 46,
+        "fecha": "2026-03-25",
+        "titulo": "Contraloría oficia a Sedini por publicación \"Estado en quiebra\"",
+        "descripcion": "La contralora Dorothy Pérez ofició a la ministra Mara Sedini exigiéndole en cinco días hábiles informar sobre los recursos públicos, personal involucrado y sustento fáctico de publicaciones oficiales en redes sociales que calificaban al Estado como \"en la quiebra\". El ministro Quiroz se desmarcó del término declarando que \"jamás ocuparía una palabra como esa\".",
+        "categoria": "Política",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/consumidores/combustibles/un-estado-en-quiebra-gobierno-borro-publicacion-y-contraloria-oficio/2026-03-25/114457.html" }
+    },
+    {
+        "id": 47,
+        "fecha": "2026-03-25",
+        "titulo": "Congreso aprueba primera prórroga del Estado de Excepción bajo Kast",
+        "descripcion": "La Cámara (122-19) y el Senado (40-1) aprobaron la primera solicitud del gobierno de Kast para renovar el Estado de Excepción Constitucional de Emergencia en La Araucanía y las provincias de Arauco y Biobío, extendiéndolo por 30 días a partir del 27 de marzo.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/congreso-aprueba-primera-prorroga-del-estado-de-excepcion-en-la-macrozona-sur-bajo-el-gobierno-de-kast/" }
+    },
+    {
+        "id": 48,
+        "fecha": "2026-03-26",
+        "titulo": "Kast promulga Ley de Emergencia Energética Chile Sale Adelante",
+        "descripcion": "Kast firmó el decreto de promulgación de la Ley de Emergencia Energética, aprobada por unanimidad en el Congreso, que incluye congelamiento de tarifas RED hasta diciembre 2026, bono mensual de $100.000 por seis meses a taxistas y colectivos, aumento del FEPP en US$60 millones y modificación del impuesto específico a combustibles.",
+        "categoria": "Economía",
+        "tipo": "Ley",
+        "fuente": { "medio": "Radio U. de Chile", "url": "https://radio.uchile.cl/2026/03/26/presidente-kast-promulga-ley-energetica-es-la-respuesta-a-una-emergencia/" }
+    },
+    {
+        "id": 49,
+        "fecha": "2026-03-26",
+        "titulo": "Kast llama a no dañar el transporte público durante manifestaciones",
+        "descripcion": "\"No afectemos más a la patria de lo que ya está afectada; si alguien quiere manifestar su malestar, que no use el transporte público, sobre todo el Metro, para manifestarse\", declaró Kast al promulgar la Ley de Emergencia Energética, en medio de protestas en Santiago por el alza de combustibles.",
+        "categoria": "Política",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "T13", "url": "https://www.t13.cl/noticia/politica/presidente-kast-promulga-ley-emergencia-energetica-medio-alza-combustibles-26-3-2026" }
+    },
+    {
+        "id": 50,
+        "fecha": "2026-03-28",
+        "titulo": "Hacienda instruye a Tesorería iniciar cobro a deudores del CAE",
+        "descripcion": "El Ministerio de Hacienda instruyó a la Tesorería General de la República iniciar notificaciones de cobro a deudores morosos del CAE con ingresos superiores a $5 millones mensuales desde la primera semana de abril. Se identificaron 1.800 personas con una deuda promedio de $11 millones, con posibilidad de descuentos desde cuentas bancarias y embargos.",
+        "categoria": "Economía",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/28/gobierno-notificara-a-deudores-del-cae-con-altos-ingresos-no-descartan-cobros-desde-cuentas-bancarias.shtml" }
+    },
+    {
+        "id": 51,
+        "fecha": "2026-03-30",
+        "titulo": "Gobierno retira decreto que implementa nueva Ley de Adopción",
+        "descripcion": "El Ejecutivo solicitó a la Contraloría el retiro del Decreto Supremo N°2 de 2026 del Ministerio de Desarrollo Social, que aprueba el reglamento de la Ley de Adopción (Ley 21.760), dejando su implementación en pausa. La ministra Wulf sostuvo que \"en nada estamos retrocediendo\".",
+        "categoria": "Social",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/30/gobierno-de-kast-ordena-retirar-decreto-que-implementaba-la-nueva-ley-de-adopcion.shtml" }
+    },
+    {
+        "id": 52,
+        "fecha": "2026-03-31",
+        "titulo": "Kast justifica destitución de directora de SernamEG en tratamiento de cáncer",
+        "descripcion": "\"Es un hecho lamentable, porque afecta la parte humana de una persona. Pero nosotros tenemos que asumir con responsabilidad lo que es la gestión de un gobierno que vela por el bien de todos los chilenos\", declaró Kast al ser consultado por la solicitud de renuncia no voluntaria de la directora del SernamEG, quien se encontraba en tratamiento oncológico.",
+        "categoria": "Social",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/31/kast-justifica-salida-de-directora-de-sernameg-con-cancer-hemos-encontrado-situaciones-complejas.shtml" }
     }
 ]
