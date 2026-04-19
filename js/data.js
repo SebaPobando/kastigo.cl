@@ -481,5 +481,59 @@ const eventosGubernamentales = [
         "categoria": "Social",
         "tipo": "Declaración Polémica",
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/03/31/kast-justifica-salida-de-directora-de-sernameg-con-cancer-hemos-encontrado-situaciones-complejas.shtml" }
+    },
+    {
+        "id": 53,
+        "fecha": "2026-04-06",
+        "titulo": "Kast se reúne con Milei en primera gira internacional",
+        "descripcion": "En su primer viaje oficial al exterior, Kast se reunió con el presidente argentino Javier Milei en la Casa Rosada para abordar comercio, energía, seguridad y el caso de Galvarino Apablaza. En la declaración conjunta, Chile reafirmó los \"legítimos derechos de soberanía\" de Argentina sobre las Islas Malvinas y sus espacios marítimos.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "T13", "url": "https://www.t13.cl/noticia/politica/gobierno-kast-islas-malvinas-reune-milei-su-primer-viaje-6-4-2026" }
+    },
+    {
+        "id": 54,
+        "fecha": "2026-04-07",
+        "titulo": "Kast envía dos proyectos de ley de seguridad escolar al Congreso",
+        "descripcion": "Tras el asesinato de la inspectora María Victoria Reyes en Calama, Kast firmó y envió al Congreso el proyecto \"Escuelas Protegidas\" —que permite revisión de mochilas, prohibición de ocultamiento facial y sanciones disciplinarias— y otro que agrega nuevos agravantes penales para delitos cometidos en recintos educacionales.",
+        "categoria": "Seguridad",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/07/kast-firma-proyectos-de-seguridad-en-colegios-con-modificacion-al-codigo-penal-y-revision-de-mochilas.shtml" }
+    },
+    {
+        "id": 55,
+        "fecha": "2026-04-10",
+        "titulo": "Contraloría investiga almuerzo privado de Kast en La Moneda",
+        "descripcion": "La Contraloría otorgó 10 días hábiles a la Presidencia para responder por un almuerzo realizado el 10 de abril en los salones de La Moneda, donde Kast recibió a excompañeros de Derecho de la UC. El organismo fiscalizador busca determinar si se usaron recursos públicos en la actividad privada.",
+        "categoria": "Política",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/14/contraloria-da-10-dias-habiles-a-presidencia-para-responder-por-almuerzo-de-kast.shtml" }
+    },
+    {
+        "id": 56,
+        "fecha": "2026-04-15",
+        "titulo": "Kast anuncia en cadena nacional Ley de Reconstrucción y Desarrollo Económico",
+        "descripcion": "En su primera cadena nacional, Kast presentó el Proyecto de Ley de Reconstrucción y Desarrollo Económico con más de 40 medidas en cinco ejes: competitividad tributaria, empleo formal, facilitación ambiental, certeza jurídica y contención del gasto. Fijó meta de crecimiento del 4% anual al 2030 y anunció el primer vuelo de expulsión de migrantes irregulares para el día siguiente.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/15/rebaja-de-impuestos-y-credito-al-empleo-formal-las-claves-del-plan-de-reconstruccion-de-kast.shtml" }
+    },
+    {
+        "id": 57,
+        "fecha": "2026-04-15",
+        "titulo": "Gobierno activa alerta sanitaria oncológica",
+        "descripcion": "El gobierno activó una alerta sanitaria oncológica para enfrentar con urgencia el retraso en la atención de pacientes con cáncer en listas de espera GES y No GES. Kast anunció la medida durante su primera cadena nacional.",
+        "categoria": "Social",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/15/kast-destaca-en-cadena-nacional-menos-ingresos-irregulares-y-primer-vuelo-de-muchos-con-expulsados.shtml" }
+    },
+    {
+        "id": 58,
+        "fecha": "2026-04-16",
+        "titulo": "Primer vuelo de expulsión de migrantes irregulares bajo Kast",
+        "descripcion": "Un Boeing 737 de la FACh despegó desde la Base Aérea Pudahuel a las 07:30 horas con 40 extranjeros expulsados: 26 por medidas administrativas y 14 por orden judicial. Los deportados incluían 17 bolivianos, 4 ecuatorianos y 19 colombianos, todos con delitos asociados.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/15/gobierno-de-kast-inicia-este-jueves-expulsion-con-primer-vuelo-de-inmigrantes-irregulares.shtml" }
     }
 ]
