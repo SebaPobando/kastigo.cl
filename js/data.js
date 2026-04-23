@@ -535,5 +535,14 @@ const eventosGubernamentales = [
         "categoria": "Seguridad",
         "tipo": "Administrativo",
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/15/gobierno-de-kast-inicia-este-jueves-expulsion-con-primer-vuelo-de-inmigrantes-irregulares.shtml" }
+    },
+    {
+        "id": 59,
+        "fecha": "2026-04-17",
+        "titulo": "Gobierno ingresa Ley de Reconstrucción y Desarrollo Económico al Congreso",
+        "descripcion": "El Ejecutivo ingresó formalmente a la Cámara de Diputados el proyecto de ley de Reconstrucción y Desarrollo Económico y Social, la denominada \"ley miscelánea\", con más de 40 medidas en cinco ejes: competitividad tributaria, empleo formal, facilitación ambiental, certeza jurídica y contención del gasto. El presidente Alessandri (UDI) confirmó que pasará por más de una comisión.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "El Dínamo", "url": "https://www.eldinamo.cl/politica/2026/04/20/ley-reconstruccion-chile-vamos-desordena-diseno-de-kast/" }
     }
 ]
