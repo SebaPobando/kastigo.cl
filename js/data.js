@@ -544,5 +544,59 @@ const eventosGubernamentales = [
         "categoria": "Economía",
         "tipo": "Proyecto",
         "fuente": { "medio": "El Dínamo", "url": "https://www.eldinamo.cl/politica/2026/04/20/ley-reconstruccion-chile-vamos-desordena-diseno-de-kast/" }
+    },
+    {
+        "id": 60,
+        "fecha": "2026-04-22",
+        "titulo": "Kast firma y despacha Ley de Reconstrucción al Congreso",
+        "descripcion": "El Presidente Kast firmó en La Moneda el proyecto de Ley de Reconstrucción Nacional y Desarrollo Económico y lo despachó formalmente a la Comisión de Hacienda de la Cámara de Diputados. El oficialismo contaría con el apoyo del PNL y algunos diputados del PDG para alcanzar 78 votos en la votación general.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Meganoticias", "url": "https://www.meganoticias.cl/nacional/520098-kast-enviara-congreso-proyecto-reconstruccion-nacional-hoy-miercoles-22-04-2026.html" }
+    },
+    {
+        "id": 61,
+        "fecha": "2026-04-22",
+        "titulo": "Presidencia anuncia recorte propio de $706 millones para dar ejemplo de austeridad",
+        "descripcion": "La Presidencia de la República confirmó que preparaba su propio ajuste presupuestario de $706 millones, enfocado en reducción de personal y costos de actividades y despliegues del jefe de Estado, incluyendo giras, ceremonias y eventos oficiales, como gesto de coherencia con el discurso de austeridad del gobierno.",
+        "categoria": "Economía",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/23/los-recortes-llegan-a-presidencia-kast-prepara-reduccion-enfocada-en-personal-y-actividades-oficiales.shtml" }
+    },
+    {
+        "id": 62,
+        "fecha": "2026-04-23",
+        "titulo": "Registro Civil emite circular que restringe nacionalidad a hijos de migrantes",
+        "descripcion": "El Servicio de Registro Civil publicó la Circular N°014, que instruye a los oficiales civiles inscribir como \"hijo de extranjero transeúnte\" a recién nacidos cuyos padres tengan permanencia transitoria, limitando el acceso automático a la nacionalidad chilena. Expertos advirtieron vicios de constitucionalidad y riesgo de apatridia.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/04/23/transeuntes-registro-civil-reafirma-criterio-para-inscribir-a-hijos-de-extranjeros-sin-residencia.shtml" }
+    },
+    {
+        "id": 63,
+        "fecha": "2026-04-24",
+        "titulo": "Hacienda filtra oficio con propuesta de eliminar 142 programas sociales",
+        "descripcion": "Se conoció un documento interno del Ministerio de Hacienda que propone a los ministerios descontinuar o recortar 142 programas sociales para el Presupuesto 2027, con un ahorro proyectado de US$5.400 millones hasta 2031, afectando salud, educación, niñez, cultura y pueblos indígenas. Kast en campaña había prometido \"no cortar ningún beneficio social que hoy exista\".",
+        "categoria": "Economía",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/04/24/las-promesas-de-campana-del-presidente-kast-que-se-caen-con-propuesta-de-recorte-social-de-quiroz/" }
+    },
+    {
+        "id": 64,
+        "fecha": "2026-04-29",
+        "titulo": "Quiroz firma decreto de recorte de $32.721 millones a Desarrollo Social",
+        "descripcion": "El ministro de Hacienda Jorge Quiroz firmó un decreto que concreta una reducción presupuestaria de $32.721 millones al Ministerio de Desarrollo Social, afectando programas de infancia, juventud, pueblos indígenas y discapacidad, incluyendo el ajuar del sistema Chile Crece Contigo.",
+        "categoria": "Social",
+        "tipo": "Decreto",
+        "fuente": { "medio": "El Dínamo", "url": "https://www.eldinamo.cl/pais/2026/04/29/recortes-en-programas-de-desarrollo-social-como-se-ejecutara-la-reduccion-de-32-721-millones-y-la-controversia-que-vuelve-a-complicar-al-gobierno/" }
+    },
+    {
+        "id": 65,
+        "fecha": "2026-04-30",
+        "titulo": "Kast anuncia Plan Ruta Austral con inversión histórica de $800 mil millones",
+        "descripcion": "Desde la Región de Aysén, Kast presentó el plan \"Ruta Austral: Soberanía que Conecta\", con una inversión de $800.393 millones del MOP para 2026-2030 en la Carretera Austral, quintuplicando el promedio histórico de inversión. El plan contempla la pavimentación definitiva de 150 km y 23 proyectos de conectividad vial, marítima y lacustre.",
+        "categoria": "Economía",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Radio U. de Chile", "url": "https://radio.uchile.cl/2026/05/01/kast-anuncia-inversion-historica-de-800-393-millones-para-la-carretera-austral/" }
     }
 ]

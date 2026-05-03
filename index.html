@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
-  <link rel="stylesheet" href="css/widgets.css?v=12.1" />
+  <link rel="stylesheet" href="css/widgets.css?v=16" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
@@ -47,7 +47,7 @@
     "name": "Kastigo — Registro de Medidas Gubernamentales Chile 2026",
     "description": "Base de datos ciudadana con hechos verificados sobre decretos, leyes y políticas del gobierno de Chile.",
     "url": "https://kastigo.cl/",
-    "dateModified": "2026-03-18",
+    "dateModified": "2026-05-03",
     "inLanguage": "es-CL",
     "license": "https://creativecommons.org/licenses/by-nc/4.0/",
     "publisher": { "@type": "Organization", "name": "Colectivo Kastigo", "url": "https://kastigo.cl" }
@@ -59,12 +59,13 @@
   {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": "Retiro de 43 decretos de protección ambiental por el gobierno de Chile",
-    "datePublished": "2026-03-17",
-    "description": "El Ejecutivo retiró de Contraloría 43 decretos ambientales.",
+    "headline": "Gobierno de Kast: registro de medidas, decretos y declaraciones desde marzo 2026",
+    "datePublished": "2026-03-11",
+    "dateModified": "2026-05-03",
+    "description": "Base de datos ciudadana con más de 65 medidas verificadas del gobierno de Chile.",
     "author": { "@type": "Organization", "name": "Colectivo Kastigo" },
     "publisher": { "@type": "Organization", "name": "Kastigo", "url": "https://kastigo.cl" },
-    "about": { "@type": "Thing", "name": "Política ambiental Chile 2026" }
+    "about": { "@type": "Thing", "name": "Gobierno de Chile 2026" }
   }
   </script>
 
@@ -79,7 +80,7 @@
   <!-- Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=12.1" />
+  <link rel="stylesheet" href="css/styles.css?v=16" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -112,6 +113,10 @@
         <button class="nav-btn btn-install hidden" id="btn-install" aria-label="Instalar app">
           📲 <span class="install-label">Instalar</span>
         </button>
+        <a href="https://ko-fi.com/kastigo" target="_blank" rel="noopener noreferrer" class="nav-btn nav-btn-cafe"
+          aria-label="Invitar un café">
+          ☕ <span class="install-label">Invítame un Café</span>
+        </a>
         <button class="nav-btn btn-theme-toggle" id="btn-theme-toggle" aria-label="Cambiar tema">
           <span class="theme-icon-sun" aria-hidden="true">☀️</span>
           <span class="theme-icon-moon" aria-hidden="true">🌙</span>
@@ -134,7 +139,7 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span>Actualizado · <time datetime="2026-03-18">Marzo 2026</time></span>
+        <span>Actualizado · <time datetime="2026-03-18">Mayo 2026</time></span>
       </div>
       <h1 class="hero-title" id="hero-title">Cada medida.<br /><em>Registrada.</em></h1>
       <p class="hero-subtitle">Registro de medidas del gobierno de Chile. Hechos verificados con fuentes periodísticas.
@@ -255,6 +260,10 @@
           <button class="ministro-chip" data-nombre="García Ruminot">García R.</button>
           <button class="ministro-chip" data-nombre="Ejército">Ejército</button>
           <button class="ministro-chip" data-nombre="Congreso">Congreso</button>
+          <button class="ministro-chip" data-nombre="Poduje">Poduje</button>
+          <button class="ministro-chip" data-nombre="Arrau">Arrau</button>
+          <button class="ministro-chip" data-nombre="Rabat">Rabat</button>
+          <button class="ministro-chip" data-nombre="Sedini">Sedini</button>
         </div>
       </section>
 
@@ -393,6 +402,9 @@
 
       <!-- ACCIONES DEL MODAL -->
       <div class="modal-action-row">
+        <a href="https://ko-fi.com/kastigo" target="_blank" rel="noopener noreferrer" class="btn-cafe-modal">
+          ☕ Invítame un café
+        </a>
         <button class="btn-compartir" id="btn-compartir" aria-label="Compartir esta medida">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             aria-hidden="true">
@@ -549,9 +561,9 @@
   </script>
 
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js?v=12.1"></script>
-  <script src="js/app.js?v=12.1"></script>
-  <script src="js/widgets.js?v=12.1"></script>
+  <script src="js/data.js?v=16"></script>
+  <script src="js/app.js?v=16"></script>
+  <script src="js/widgets.js?v=16"></script>
 </body>
 
 </html>

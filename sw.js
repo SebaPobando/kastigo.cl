@@ -4,7 +4,7 @@
  *             Network-first para data.js (siempre fresco).
  */
 
-const CACHE_NAME = 'kastigo-v15.2';
+const CACHE_NAME = 'kastigo-v16.0';
 const CACHE_STATIC = [
   '/',
   '/index.html',
@@ -15,8 +15,8 @@ const CACHE_STATIC = [
   '/assets/img/logo.png',
   '/assets/img/og-image.jpg',
   '/manifest.json',
-  'https: //cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
-  'https: //fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap'
+  'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
+  'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap'
 ];
 
 // Instalar: cachear assets estáticos

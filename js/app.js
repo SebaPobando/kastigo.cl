@@ -923,24 +923,9 @@ const Calendario = {
    */
   init() {
     // Encontrar el mes con más eventos para abrirlo por defecto
-    const monthCount = eventosGubernamentales.reduce((acc, ev) => {
-      const key = ev.fecha.slice(0, 7); // "YYYY-MM"
-      acc[key] = (acc[key] || 0) + 1;
-      return acc;
-    }, {});
-
-    const topMonth = Object.entries(monthCount)
-      .sort((a, b) => b[1] - a[1])[0];
-
-    if (topMonth) {
-      const [y, m] = topMonth[0].split('-').map(Number);
-      this._year = y;
-      this._month = m - 1;
-    } else {
-      const now = new Date();
-      this._year = now.getFullYear();
-      this._month = now.getMonth();
-    }
+    const now = new Date();
+    this._year = now.getFullYear();
+    this._month = now.getMonth();
 
     this.render('cal');
     this.render('d-cal');
