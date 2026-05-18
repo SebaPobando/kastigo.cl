@@ -3065,3 +3065,64 @@ button {
     font-size: 0.9rem;
   }
 }
+
+/* ============================================================
+   TANDA 1: NUEVAS FEATURES
+   ============================================================ */
+
+/* Badge NUEVO en tarjetas */
+.badge-nuevo {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--rojo);
+  color: #FFFFFF;
+  animation: nuevoPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes nuevoPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Botón Solo Polémicas */
+.tl-ctrl-polemica {
+  background: #FFF0E4;
+  border-color: rgba(212, 98, 10, 0.3);
+  color: #D4620A;
+}
+
+.tl-ctrl-polemica:hover,
+.tl-ctrl-polemica.active {
+  background: #D4620A;
+  border-color: #D4620A;
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .tl-ctrl-polemica {
+  background: rgba(212, 98, 10, 0.15);
+  color: #E8913A;
+}
+
+[data-theme="dark"] .tl-ctrl-polemica.active {
+  background: #D4620A;
+  color: #FFFFFF;
+}
+
+/* Hero contador tiempo real — fuente monoespaciada para que no salte */
+#hero-dias {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.02em;
+}

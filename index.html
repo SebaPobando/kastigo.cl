@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
-  <link rel="stylesheet" href="css/widgets.css?v=16" />
+  <link rel="stylesheet" href="css/widgets.css?v=17" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
@@ -80,7 +80,7 @@
   <!-- Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=16" />
+  <link rel="stylesheet" href="css/styles.css?v=17" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -157,7 +157,7 @@
         <div class="hero-stat-divider" aria-hidden="true"></div>
         <div class="hero-stat">
           <span class="hero-stat-num" id="hero-dias">0</span>
-          <span class="hero-stat-label">días</span>
+          <span class="hero-stat-label">en el poder</span>
         </div>
       </div>
     </div>
@@ -285,6 +285,10 @@
       <div class="timeline-header">
         <h2 class="timeline-title" id="timeline-h">Línea de Tiempo</h2>
         <div class="timeline-controls">
+          <button class="tl-ctrl-btn tl-ctrl-polemica" id="btn-polemica"
+            aria-label="Mostrar solo declaraciones polémicas" title="Solo polémicas">
+            🔥 Solo polémicas
+          </button>
           <span class="timeline-order" id="orden-label">↓ Más reciente primero</span>
           <button class="tl-ctrl-btn" id="btn-orden" aria-label="Cambiar orden" title="Ordenar por categoría / fecha">⇅
             Ordenar</button>
@@ -515,6 +519,10 @@
           <button class="ministro-chip" data-nombre="García Ruminot">García R.</button>
           <button class="ministro-chip" data-nombre="Ejército">Ejército</button>
           <button class="ministro-chip" data-nombre="Congreso">Congreso</button>
+          <button class="ministro-chip" data-nombre="Poduje">Poduje</button>
+          <button class="ministro-chip" data-nombre="Arrau">Arrau</button>
+          <button class="ministro-chip" data-nombre="Rabat">Rabat</button>
+          <button class="ministro-chip" data-nombre="Sedini">Sedini</button>
         </div>
       </section>
 
@@ -561,9 +569,9 @@
   </script>
 
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js?v=16"></script>
-  <script src="js/app.js?v=16"></script>
-  <script src="js/widgets.js?v=16"></script>
+  <script src="js/data.js?v=17"></script>
+  <script src="js/app.js?v=17"></script>
+  <script src="js/widgets.js?v=17"></script>
 </body>
 
 </html>

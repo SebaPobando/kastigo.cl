@@ -239,8 +239,9 @@ const Filtrado = {
     filtroCategoria: 'Todos',
     filtroTipo: 'Todos',
     busqueda: '',
-    filtroMinistroBusqueda: '',  // búsqueda rápida por nombre de actor
-    orden: 'fecha',              // 'fecha' | 'categoria'
+    filtroMinistroBusqueda: '',
+    soloPolemicas: false,        // ← agregar esta línea
+    orden: 'fecha',
   },
 
   /**
@@ -263,6 +264,8 @@ const Filtrado = {
         e.descripcion.toLowerCase().includes(qm) ||
         false;
       return porCat && porTipo && porTexto && porMinistro;
+      const porPolemica = !this.state.soloPolemicas || e.tipo === 'Declaración Polémica';
+      return porCat && porTipo && porTexto && porMinistro && porPolemica;
     });
 
     if (orden === 'categoria') {
@@ -988,9 +991,15 @@ const Render = {
 
   /** Renderiza el banner de última medida. */
   ultimaMedida() {
+    // Prioriza eventos con destacada: true, si no el más reciente
+    const destacada = eventosGubernamentales.find(e => e.destacada === true);
     const sorted = [...eventosGubernamentales].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-    const last = sorted[0];
+    const last = destacada || sorted[0];
     if (!last) return;
+
+    const labelEl = document.querySelector('.ultima-medida-label');
+    if (labelEl) labelEl.textContent = destacada ? '⭐ Medida de la semana:' : 'Última medida:';
+
     const btn = document.getElementById('ultima-medida-titulo');
     const fecha = document.getElementById('ultima-medida-fecha');
     if (btn) {
@@ -1010,9 +1019,20 @@ const Render = {
     const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
     set('hero-total', eventosGubernamentales.length);
     set('hero-categorias', cats);
-    const inicio = new Date(2026, 2, 11);
-    const dias = Math.floor((new Date() - inicio) / (1000 * 60 * 60 * 24)) + 1;
-    set('hero-dias', dias);
+
+    // Contador en tiempo real
+    const inicio = new Date(2026, 2, 11, 0, 0, 0);
+    const actualizarContador = () => {
+      const ahora = new Date();
+      const diff = ahora - inicio;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const el = document.getElementById('hero-dias');
+      if (el) el.textContent = `${dias}d ${horas}h ${minutos}m`;
+    };
+    actualizarContador();
+    setInterval(actualizarContador, 30000); // actualiza cada 30 segundos
   },
 
   /** Renderiza el panel de estadísticas con el gráfico y la lista. */
@@ -1222,6 +1242,17 @@ const Render = {
       top.appendChild(tipoBadge);
       top.appendChild(dateEl);
 
+      // Badge "Nuevo" si el evento tiene menos de 7 días
+      const hoy = new Date();
+      const fechaEv = new Date(...ev.fecha.split('-').map(Number).map((n, i) => i === 1 ? n - 1 : n));
+      const diasDesde = Math.floor((hoy - fechaEv) / 86400000);
+      if (diasDesde <= 7) {
+        const nuevoBadge = document.createElement('span');
+        nuevoBadge.className = 'badge-nuevo';
+        nuevoBadge.textContent = 'NUEVO';
+        top.appendChild(nuevoBadge);
+      }
+
       const h3 = document.createElement('h3');
       h3.className = 'card-title';
       h3.textContent = ev.titulo;
@@ -1275,6 +1306,14 @@ const Render = {
    ============================================================ */
 const Events = {
   init() {
+
+    document.getElementById('btn-polemica')?.addEventListener('click', () => {
+      const btn = document.getElementById('btn-polemica');
+      Filtrado.state.soloPolemicas = !Filtrado.state.soloPolemicas;
+      btn?.classList.toggle('active', Filtrado.state.soloPolemicas);
+      btn.textContent = Filtrado.state.soloPolemicas ? '🔥 Todas las medidas' : '🔥 Solo polémicas';
+      Render.timeline();
+    });
 
     // ---- Disclaimer bar ----
     document.getElementById('disclaimer-close')?.addEventListener('click', () => {
@@ -1393,6 +1432,9 @@ const Events = {
 
     // ---- Limpiar filtros desde banner ----
     document.getElementById('filtros-activos-limpiar')?.addEventListener('click', () => {
+      Filtrado.state.soloPolemicas = false;
+      document.getElementById('btn-polemica')?.classList.remove('active');
+      document.getElementById('btn-polemica').textContent = '🔥 Solo polémicas';
       Filtrado.state.filtroCategoria = 'Todos';
       Filtrado.state.filtroTipo = 'Todos';
       Filtrado.state.busqueda = '';
@@ -1406,6 +1448,7 @@ const Events = {
       Calendario.render('cal');
       Calendario.render('d-cal');
       Render.timeline();
+
     });
 
     // ---- Meta tags dinámicos por medida al compartir ----
@@ -1450,6 +1493,9 @@ const Events = {
 
     // Drawer reset all
     document.getElementById('drawer-reset')?.addEventListener('click', () => {
+      Filtrado.state.soloPolemicas = false;
+      document.getElementById('btn-polemica')?.classList.remove('active');
+      document.getElementById('btn-polemica').textContent = '🔥 Solo polémicas';
       Filtrado.state.filtroCategoria = 'Todos';
       Filtrado.state.filtroTipo = 'Todos';
       Filtrado.state.busqueda = '';

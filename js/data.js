@@ -597,6 +597,144 @@ const eventosGubernamentales = [
         "descripcion": "Desde la Región de Aysén, Kast presentó el plan \"Ruta Austral: Soberanía que Conecta\", con una inversión de $800.393 millones del MOP para 2026-2030 en la Carretera Austral, quintuplicando el promedio histórico de inversión. El plan contempla la pavimentación definitiva de 150 km y 23 proyectos de conectividad vial, marítima y lacustre.",
         "categoria": "Economía",
         "tipo": "Administrativo",
+        "destacada": true,
         "fuente": { "medio": "Radio U. de Chile", "url": "https://radio.uchile.cl/2026/05/01/kast-anuncia-inversion-historica-de-800-393-millones-para-la-carretera-austral/" }
+    },
+    {
+        "id": 66,
+        "fecha": "2026-05-01",
+        "titulo": "Kast declara \"emergencia laboral\" en acto del Día del Trabajo y polemiza por nombre de la fecha",
+        "descripcion": "En el Hospital del Trabajador ACHS, en Providencia, Kast encabezó la conmemoración oficial declarando que Chile enfrenta \"una emergencia laboral\", citando más de 900.000 personas sin trabajo formal y 2,5 millones en la informalidad. El telón de fondo decía \"Día del Trabajo\", lo que generó críticas de parlamentarios del Frente Amplio y PPD que reclamaron que la denominación tradicional es \"Día del Trabajador\". El Código del Trabajo, en su artículo 35, establece textualmente \"Día Nacional del Trabajo\".",
+        "categoria": "Laboral",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/presidente-kast/dia-de-los-trabajadores-presidente-kast-alerta-emergencia-laboral-en/2026-05-01/103716.html" }
+    },
+    {
+        "id": 67,
+        "fecha": "2026-05-05",
+        "titulo": "Encuentro \"Presidente Presente\" en Puerto Montt con 1.095 vecinos",
+        "descripcion": "Kast realizó el cuarto encuentro ciudadano \"Presidente Presente\" en la Empresa Portuaria de Puerto Montt, con la participación de 1.095 vecinos. La actividad coincidió con manifestaciones de unas 50 personas que pidieron un puente entre Puntilla Tenglo e isla Tenglo y protestaron por el alza de pasajes. Durante la jornada, Kast cuestionó el financiamiento público a investigaciones académicas señalando que \"a veces 100, 500 millones para una investigación que termina en un libro precioso\" sin generar empleo.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/region-de-los-lagos/2026/05/05/presidente-kast-arriba-a-puerto-montt-en-medio-de-manifestaciones-de-vecinos-y-trabajadores-portuarios.shtml" }
+    },
+    {
+        "id": 68,
+        "fecha": "2026-05-06",
+        "titulo": "Consejo Fiscal Autónomo expone reparos a la megarreforma ante Comisión de Hacienda",
+        "descripcion": "El Consejo Fiscal Autónomo (CFA) expuso ante la Comisión de Hacienda de la Cámara una serie de advertencias sobre los riesgos fiscales de la megarreforma, principalmente respecto a que la rebaja del impuesto de primera categoría no sería compensada por el crecimiento económico proyectado. En la misma sesión, el exministro Mario Marcel estimó que cerrar la brecha fiscal requeriría cerca de US$8.600 millones, cifra que aumentaría a US$10.000 millones al incorporar el costo de la reforma.",
+        "categoria": "Economía",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Nuevo Poder", "url": "https://www.nuevopoder.cl/marcel-cuestiona-ante-comision-real-costo-fiscal-de-la-megareforma-y-propone-cambios/" }
+    },
+    {
+        "id": 69,
+        "fecha": "2026-05-06",
+        "titulo": "Kast lidera encuentro con más de 130 alcaldes de oficialismo en La Moneda",
+        "descripcion": "El Mandatario encabezó en La Moneda una reunión con más de 130 alcaldes de oficialismo en el contexto del proyecto de Ley de Reconstrucción Nacional. Una segunda reunión separada con alcaldes de oposición fue convocada para el 13 de mayo, en medio de tensiones por el artículo de la megarreforma que exime del pago de contribuciones a mayores de 65 años en su primera vivienda y el impacto estimado de US$130 millones en el Fondo Común Municipal.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/nacional/noticia/megarreforma-kast-toma-las-riendas-del-flanco-municipal-y-cita-a-alcaldes-progresistas-por-el-fin-de-las-contribuciones/" }
+    },
+    {
+        "id": 70,
+        "fecha": "2026-05-07",
+        "titulo": "Comisión de Hacienda aprueba en general la megarreforma con votos del oficialismo",
+        "descripcion": "La Comisión de Hacienda de la Cámara aprobó la idea de legislar el proyecto de Ley de Reconstrucción y Desarrollo Económico y Social con ocho votos del oficialismo a favor, cuatro en contra de la oposición de centroizquierda y una abstención del Partido de la Gente. La iniciativa contempla la rebaja gradual del impuesto corporativo del 27% al 23% y un crédito al empleo formal. El gobierno aspira a que sea aprobada antes de septiembre.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Infobae", "url": "https://www.infobae.com/america/agencias/2026/05/07/megarreforma-de-kast-pasa-primer-filtro-en-comision-parlamentaria-con-votos-oficialistas/" }
+    },
+    {
+        "id": 71,
+        "fecha": "2026-05-07",
+        "titulo": "Kast desde Costa Rica abre puerta al uso de decretos si megarreforma no avanza",
+        "descripcion": "Durante una actividad oficial en Costa Rica por el cambio de mando presidencial, Kast señaló: \"Hay situaciones donde el Gobierno puede tomar ciertas determinaciones por decreto\". Reconoció que parte de las modificaciones requieren tramitación parlamentaria, pero enfatizó que el Ejecutivo seguirá utilizando todas las facultades legales disponibles. La declaración fue interpretada como una señal de presión al Congreso ante el incierto escenario de votación en sala.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "24 Horas", "url": "https://www.24horas.cl/actualidad/politica/kast-valora-avance-de-la-megareforma-y-explica-uso-de-decretos" }
+    },
+    {
+        "id": 72,
+        "fecha": "2026-05-07",
+        "titulo": "Subsecretaría de Prevención del Delito crea Observatorio de Secuestros",
+        "descripcion": "La Subsecretaría de Prevención del Delito formalizó la creación del Observatorio de Secuestros, una nueva instancia destinada a fortalecer la prevención, análisis estadístico y coordinación interinstitucional frente al delito de secuestro extorsivo, vinculado en su mayoría a facciones del Tren de Aragua. Según la BIPE de la PDI, los secuestros en la Región Metropolitana pasaron de 19 anuales en 2021 a 63 en 2025, de los cuales 37 fueron extorsivos.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Gob.cl", "url": "https://www.gob.cl/noticias/alerta-sanitaria-oncologica-primer-reporte-atenciones-resueltas/" }
+    },
+    {
+        "id": 73,
+        "fecha": "2026-05-08",
+        "titulo": "Segundo vuelo de expulsión: 40 migrantes irregulares deportados a Colombia, Haití y República Dominicana",
+        "descripcion": "Un Boeing 737 de la FACh despegó a las 4:30 horas desde el Grupo 10 trasladando 40 personas extranjeras expulsadas: 21 administrativas y 19 judiciales. De ellas, 24 colombianas, 9 haitianas y 7 dominicanas. La ruta cubrió Santiago, Iquique, Bogotá, Puerto Príncipe y Santo Domingo, marcando la reanudación de deportaciones hacia Haití, que no se realizaban desde 2024.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "estado_seguimiento": "ejecutada",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/05/08/gobierno-de-kast-concreta-segunda-expulsion-con-40-migrantes-irregulares-y-retoma-vuelos-a-haiti.shtml" }
+    },
+    {
+        "id": 74,
+        "fecha": "2026-05-08",
+        "titulo": "Corte de Valdivia declara inadmisible querella por Ley de Seguridad del Estado en caso Lincolao",
+        "descripcion": "La Corte de Apelaciones de Valdivia acogió un recurso de amparo presentado por la Defensoría Penal Pública y declaró inadmisible la ampliación de la querella del Ministerio de Seguridad Pública, que invocaba la Ley de Seguridad del Estado contra los tres estudiantes formalizados por la agresión a la ministra de Ciencia Ximena Lincolao ocurrida el 8 de abril en la UACh. El tribunal argumentó falta de legitimación activa del Gobierno.",
+        "categoria": "Política",
+        "tipo": "Administrativo",
+        "estado_seguimiento": "bloqueada",
+        "fuente": { "medio": "Emol", "url": "https://www.emol.com/noticias/Nacional/2026/05/08/1199505/desestiman-ampliacion-querella-agresion-lincolao.html" }
+    },
+    {
+        "id": 75,
+        "fecha": "2026-05-11",
+        "titulo": "Kast entrega Gracia Presidencial al Séptimo Hijo en La Moneda",
+        "descripcion": "Kast entregó a la familia Silva Cueto la Gracia Presidencial al Séptimo Hijo, beneficio del Fondo ORASMI dependiente de la Subsecretaría del Interior. La destinataria fue Romina Elizabeth Silva Cueto, séptima hija de una familia de diez hermanos. La gracia consiste en un aporte económico de 10 UF y un reconocimiento simbólico, y mantiene una tradición institucional de más de 50 años.",
+        "categoria": "Social",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Diario El America", "url": "https://elamerica.cl/2026/05/12/presidente-jose-antonio-kast-entrega-gracia-presidencial-al-septimo-hijo/" }
+    },
+    {
+        "id": 76,
+        "fecha": "2026-05-11",
+        "titulo": "Kast defiende recorte del 3% en consejo de gabinete a dos meses de asumir",
+        "descripcion": "En un consejo de gabinete en La Moneda, Kast destacó el esfuerzo del Ejecutivo de recortar en un 3% los presupuestos en casi todos los ministerios y pidió a sus ministros comenzar a preparar la Cuenta Pública del 1 de junio. Respondiendo a la polémica por un eventual ajuste al programa de alimentación escolar, sostuvo que \"si usamos bien los recursos podemos dar más cobertura\" y admitió que en el instructivo \"quizás la frase se puede modificar\".",
+        "categoria": "Economía",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/economia-y-politica/politica/kast-pide-a-ministros-preparar-la-cuenta-publica-del-1-de-junio-y-defiende" }
+    },
+    {
+        "id": 77,
+        "fecha": "2026-05-13",
+        "titulo": "Kast califica como \"metáfora\" su promesa de campaña de expulsar 300 mil migrantes el primer día",
+        "descripcion": "En el aniversario 75 de la Cámara Chilena de la Construcción, Kast afirmó: \"Algunos dicen: llevan 60 días y usted dijo que el primer día iba a expulsar a 300 mil migrantes. Es una metáfora. Si alguien creyó que en un día vamos a expulsar a 300 mil, entendió mal el mensaje\". Al día siguiente matizó: \"Quizás la palabra era hipérbole, no metáfora\". La promesa había aparecido en debates, panfletos y una cuenta regresiva antes del 11 de marzo.",
+        "categoria": "Seguridad",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/05/13/presidente-kast-dice-que-su-promesa-de-expulsar-300-mil-migrantes-el-primer-dia-era-solo-una-metafora.shtml" }
+    },
+    {
+        "id": 78,
+        "fecha": "2026-05-13",
+        "titulo": "Kast se reúne con más de 100 alcaldes de oposición tras impasse por exclusiones",
+        "descripcion": "En el Salón Montt Varas, Kast sostuvo encuentro con alcaldes de oposición liderados por Macarena Ripamonti, Tomás Vodanovic, Karina Delfino, Claudia Pizarro y Miguel Concha. La reunión comenzó con disculpas públicas de Kast tras los reclamos del alcalde de Puente Alto Matías Toledo y otros independientes que acusaron no haber sido convocados. El Presidente sostuvo: \"La crisis no la pueden pagar los que tienen menos, pero para que no lo paguen al país le tiene que ir bien\". Los alcaldes entregaron una carta con seis demandas, incluyendo freno al alza de combustibles y rechazo a la exención de contribuciones.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/presidente-kast/kast-se-reunio-con-alcaldes-de-oposicion-en-la-moneda/2026-05-13/195340.html" }
+    },
+    {
+        "id": 79,
+        "fecha": "2026-05-14",
+        "titulo": "Comisión de Hacienda aprueba en particular la megarreforma tras sesión de 14 horas",
+        "descripcion": "Pasadas las 5 AM del jueves, la Comisión de Hacienda despachó en particular el proyecto de Ley de Reconstrucción Nacional tras procesar cerca de 2.000 indicaciones, en su mayoría de la oposición. Se aprobó la rebaja gradual del impuesto de primera categoría del 27% al 23% para grandes empresas, con respaldo del PNL, Republicanos, UDI, RN y parte del PDG. La DC se abstuvo; PPD, FA y PC votaron en contra. También se aprobó elevar el Fondo de Reconstrucción de $800 mil millones a $1,2 billones. El proyecto pasa a las comisiones de Trabajo y Medio Ambiente antes de votarse en sala el 20 de mayo.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Ex-Ante", "url": "https://www.ex-ante.cl/cronica-la-maratonica-comision-de-hacienda-donde-el-tsunami-de-indicaciones-opositoras-se-evaporo/" }
+    },
+    {
+        "id": 80,
+        "fecha": "2026-05-15",
+        "titulo": "Kast firma proyecto de ley que simplifica el régimen de patentes mineras",
+        "descripcion": "En Copiapó, Kast junto al biministro de Economía y Minería Daniel Mas firmó el proyecto de ley que simplifica el sistema de amparo del Código de Minería, reduce cargas administrativas y entrega mayores certezas a productores. En la misma gira, participó del anuncio de inversión de US$3.000 millones del proyecto Lobo Marte de la minera canadiense Kinross, que contempla operación de 21 años en Copiapó y Tierra Amarilla. El proyecto está en evaluación ambiental.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Prensa Presidencia", "url": "https://prensa.presidencia.cl/comunicado.aspx?id=328908" }
     }
 ]
