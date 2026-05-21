@@ -736,5 +736,90 @@ const eventosGubernamentales = [
         "categoria": "Economía",
         "tipo": "Proyecto",
         "fuente": { "medio": "Prensa Presidencia", "url": "https://prensa.presidencia.cl/comunicado.aspx?id=328908" }
+    },
+    {
+        "id": 81,
+        "fecha": "2026-05-16",
+        "titulo": "Steinert reconoce que no esperaba exigencia de plan de seguridad formal",
+        "descripcion": "La ministra de Seguridad Trinidad Steinert reconoció públicamente que no esperaba que el Congreso le exigiera un plan formal, estructurado y por escrito en materia de seguridad. La declaración generó cuestionamientos transversales, incluyendo del alcalde de Maipú Tomás Vodanovic, quien sostuvo que \"ya no estamos para retóricas\". El presidente de la UDI Guillermo Ramírez salió a respaldar al gobierno indicando que la hoja de ruta sería presentada en la Cuenta Pública del 1 de junio.",
+        "categoria": "Seguridad",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/05/17/oficialismo-pone-fecha-al-plan-de-seguridad-del-gobierno-y-piden-no-usarlo-para-disputa-politica.shtml" }
+    },
+    {
+        "id": 82,
+        "fecha": "2026-05-18",
+        "titulo": "Comisión de Trabajo aprueba megarreforma pero rechaza cambios al Sence",
+        "descripcion": "La Comisión de Trabajo de la Cámara de Diputados aprobó la megarreforma del gobierno, pero el Ejecutivo no consiguió los votos para reponer los cambios al sistema de franquicia tributaria del Sence, medida ya rechazada previamente en Hacienda. Se logró un acuerdo respecto al artículo que endurece sanciones por uso indebido de licencias médicas en el sector público, estableciendo que incumplir el reposo constituirá falta grave al principio de probidad con posible destitución.",
+        "categoria": "Laboral",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "CIPER Chile", "url": "https://www.ciperchile.cl/2026/05/18/radar-18-05-26/" }
+    },
+    {
+        "id": 83,
+        "fecha": "2026-05-19",
+        "titulo": "Kast realiza el primer cambio de gabinete más rápido desde el retorno a la democracia",
+        "descripcion": "A 69 días de asumir, Kast solicitó la renuncia a las ministras Trinidad Steinert (Seguridad Pública) y Mara Sedini (Segegob). Martín Arrau pasó de Obras Públicas al Ministerio de Seguridad. Louis de Grange asumió como biministro de Transportes y Obras Públicas. Claudio Alvarado, ministro del Interior, asumió adicionalmente la Segegob convirtiéndose en biministro y vocero. \"No esperaba ni era lo que tenía pensado para esta etapa del gobierno, pero en base al sentido de urgencia que tiene el país (...) es necesario hacer este ajuste\", declaró Kast. La encuesta Cadem del 17 de mayo había mostrado la aprobación del Presidente cayendo 4 puntos a 36%.",
+        "categoria": "Política",
+        "tipo": "Administrativo",
+        "destacada": true,
+        "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/economia-y-politica/gobierno/primer-cambio-de-gabinete-del-gobierno-de-kast-salen-las-ministras" }
+    },
+    {
+        "id": 84,
+        "fecha": "2026-05-19",
+        "titulo": "Cámara cierra primera jornada de debate de la megarreforma con 114 intervenciones",
+        "descripcion": "La Cámara de Diputados desarrolló una primera jornada de debate de casi ocho horas sobre la Ley Miscelánea con 114 intervenciones. El ministro de Hacienda Jorge Quiroz defendió la iniciativa señalando que el Ejecutivo esperaba aprobarla \"en todas sus partes\" en los mismos términos en que salió de la Comisión de Hacienda, salvo dos cláusulas ya retiradas: la del Sence y la del expediente digital. La votación en general y particular se fijó para el día siguiente.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/05/19/camara-cierra-tensa-primera-jornada-por-megarreforma-de-kast-manana-se-vota-en-general-y-particular/" }
+    },
+    {
+        "id": 85,
+        "fecha": "2026-05-20",
+        "titulo": "Cámara aprueba la megarreforma y la despacha al Senado",
+        "descripcion": "La Sala de la Cámara aprobó en general la Ley de Reconstrucción Nacional con 90 votos a favor, 59 en contra y una abstención. Al oficialismo se sumaron los votos del PDG e independientes como René Alinco. En la votación en particular se aprobó la rebaja del impuesto corporativo del 27% al 23%, la eliminación de contribuciones para mayores de 65 años en su primera vivienda, la invariabilidad tributaria por 25 años y la reintegración tributaria. Se rechazaron los cambios al Sence, a la Ley de Propiedad Intelectual y la flexibilización de licitaciones del MOP. El gobierno calificó el resultado como un \"respaldo histórico\".",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "destacada": true,
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/camara-de-diputados-despacha-al-senado-megarreforma-se-aprueba-corazon-y-oposicion-apuesta-a-reservas-de-constitucionalidad/" }
+    },
+    {
+        "id": 86,
+        "fecha": "2026-05-20",
+        "titulo": "Cámara aprueba Sala Cuna Universal y Quiroz anuncia reserva de constitucionalidad",
+        "descripcion": "Durante la votación de la megarreforma, la Cámara aprobó el artículo 9 bis sobre Sala Cuna Universal con 82 votos a favor, 48 en contra y 24 abstenciones, tras una indicación opositora del Frente Amplio. La norma obliga a los empleadores a otorgar salas cunas anexas. El ministro de Hacienda Jorge Quiroz hizo reserva de constitucionalidad y anunció que el gobierno recurrirá al Tribunal Constitucional, argumentando que la norma \"contraviene nuestra Constitución y la potestad del Ejecutivo en materia de administración del Estado y responsabilidad por las finanzas públicas\".",
+        "categoria": "Social",
+        "tipo": "Declaración Polémica",
+        "estado_seguimiento": "bloqueada",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/05/20/camara-aprueba-en-particular-el-megaproyecto-de-reconstruccion-nacional-y-lo-despacha-al-senado.shtml" }
+    },
+    {
+        "id": 87,
+        "fecha": "2026-05-20",
+        "titulo": "Cámara rechaza artículo 8 de la megarreforma sobre propiedad intelectual",
+        "descripcion": "Durante la votación particular de la megarreforma, la Cámara rechazó por 104 votos en contra, 43 a favor (todos del oficialismo) y 7 abstenciones el Artículo 8, que permitía reproducir y distribuir obras sin autorización ni pago a su autor a escala masiva. La norma había sido replicada textualmente de una propuesta presentada por el gobierno de Gabriel Boric en 2024 y requería al menos 78 votos para su aprobación.",
+        "categoria": "Cultura",
+        "tipo": "Proyecto",
+        "estado_seguimiento": "bloqueada",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/camara-de-diputados-despacha-al-senado-megarreforma-se-aprueba-corazon-y-oposicion-apuesta-a-reservas-de-constitucionalidad/" }
+    },
+    {
+        "id": 88,
+        "fecha": "2026-05-21",
+        "titulo": "Kast encabeza su primer 21 de mayo y llama a \"recuperar el amor por Chile\"",
+        "descripcion": "En su primera ceremonia oficial por el Día de las Glorias Navales como jefe de Estado, Kast encabezó el desfile cívico-militar en la Plaza Sotomayor de Valparaíso con más de 2 mil efectivos de las Fuerzas Armadas y de Orden. Tras el desfile lanzó \"un llamado a todos los líderes políticos a que recuperemos ese amor por Chile\". Esta versión incluyó el regreso de las bandas instrumentales de todas las ramas de las Fuerzas Armadas y Carabineros, incluyendo delegaciones de la Escuela Naval, el Ejército, la Fuerza Aérea y la Academia Politécnica Naval.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "T13", "url": "https://www.t13.cl/noticia/politica/mensaje-presidente-kast-desfile-21-mayo-llamado-lideres-politicos-recuperemos-amor-21-5-2026" }
+    },
+    {
+        "id": 89,
+        "fecha": "2026-05-21",
+        "titulo": "Oposición anticipa críticas a la Cuenta Pública del 1 de junio por \"promesas incumplidas\"",
+        "descripcion": "A diez días de la primera Cuenta Pública de Kast ante el Congreso, parlamentarios de oposición anticiparon cuestionamientos al balance de los primeros meses de gobierno. El senador PS Juan Luis Castro señaló que \"el balance tiene de dulce y agraz\". La diputada FA Lorena Fries pidió que el Presidente \"pusiera en el centro el sistema de Sala Cuna\". La Cuenta Pública coincide con la postergación de la votación del reajuste al salario mínimo, debate que se retomará durante la primera semana de junio.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/05/21/oposicion-espera-primera-cuenta-publica-de-kast-con-criticas-a-la-gestion-y-a-promesas-incumplidas.shtml" }
     }
 ]
