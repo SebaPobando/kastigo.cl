@@ -1,68 +1,86 @@
 <!DOCTYPE html>
-<html lang="es-CL">
+<html lang="es-CL" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
 
   <title>Kastigo · Monitor Ciudadano de Medidas Gubernamentales Chile 2026</title>
   <meta name="description"
-    content="Plataforma independiente de tecnología cívica que registra, categoriza y fiscaliza las medidas del gobierno de Chile. Hechos verificados e interpretación ciudadana." />
+    content="Sitio independiente que centraliza las medidas del gobierno de Chile con link directo a cada fuente periodística original." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Colectivo Kastigo" />
   <meta name="keywords"
-    content="monitor ciudadano chile, fiscalización gobierno, transparencia chile, medidas gobierno 2026, tecnología cívica, hechos verificados" />
+    content="monitor ciudadano chile, medidas gobierno chile 2026, transparencia chile, registro gubernamental, hechos verificados" />
   <link rel="canonical" href="https://kastigo.cl/" />
   <link rel="icon" href="assets/img/logo.png" type="image/png" />
+  <link rel="shortcut icon" href="assets/img/logo.png" />
+  <link rel="apple-touch-icon" href="assets/img/logo.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="css/widgets.css?v=19" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kastigo.cl/" />
   <meta property="og:title" content="Kastigo · Monitor Ciudadano de Chile" />
   <meta property="og:description"
-    content="Hechos verificados e interpretación ciudadana sobre las medidas del gobierno. Datos públicos para trabajadores de Chile." />
-  <meta property="og:image" content="https://kastigo.cl/assets/img/og-image.jpg" />
+    content="Centralizamos las medidas del gobierno de Chile con link directo a cada fuente periodística original." />
+  <meta property="og:image" content="https://kastigo.cl/assets/img/og-image.png" />
   <meta property="og:locale" content="es_CL" />
   <meta property="og:site_name" content="Kastigo" />
 
   <!-- TWITTER CARD -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta property="fb:app_id" content="123456789" />
   <meta name="twitter:site" content="@kastigo_cl" />
   <meta name="twitter:title" content="Kastigo · Monitor Ciudadano Chile 2026" />
-  <meta name="twitter:description" content="Plataforma cívica independiente. Hechos y análisis sobre el poder." />
-  <meta name="twitter:image" content="https://kastigo.cl/assets/img/og-image.jpg" />
+  <meta name="twitter:description"
+    content="Centralizamos las medidas del gobierno de Chile con link directo a cada fuente periodística original." />
+  <meta name="twitter:image" content="https://kastigo.cl/assets/img/og-image.png" />
 
-  <!-- JSON-LD: DataFeed AIO -->
+  <!-- JSON-LD: Data AIO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "DataFeed",
     "name": "Kastigo — Registro de Medidas Gubernamentales Chile 2026",
-    "description": "Base de datos ciudadana con hechos verificados e interpretaciones sobre decretos, leyes y políticas del gobierno de Chile.",
+    "description": "Base de datos ciudadana con hechos verificados sobre decretos, leyes y políticas del gobierno de Chile.",
     "url": "https://kastigo.cl/",
-    "dateModified": "2026-03-17",
+    "dateModified": "2026-05-03",
     "inLanguage": "es-CL",
     "license": "https://creativecommons.org/licenses/by-nc/4.0/",
     "publisher": { "@type": "Organization", "name": "Colectivo Kastigo", "url": "https://kastigo.cl" }
   }
   </script>
 
-  <!-- JSON-LD: NewsArticle Sample -->
+  <!-- JSON-LD: NewsArticle -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": "Retiro de 43 decretos de protección ambiental por el gobierno de Chile",
-    "datePublished": "2026-03-17",
-    "description": "El Ejecutivo retiró de Contraloría 43 decretos ambientales y el plan de DD.HH.",
+    "headline": "Gobierno de Kast: registro de medidas, decretos y declaraciones desde marzo 2026",
+    "datePublished": "2026-03-11",
+    "dateModified": "2026-05-03",
+    "description": "Base de datos ciudadana con más de 65 medidas verificadas del gobierno de Chile.",
     "author": { "@type": "Organization", "name": "Colectivo Kastigo" },
     "publisher": { "@type": "Organization", "name": "Kastigo", "url": "https://kastigo.cl" },
-    "about": { "@type": "Thing", "name": "Política ambiental Chile 2026" }
+    "about": { "@type": "Thing", "name": "Gobierno de Chile 2026" }
   }
   </script>
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0B1F3A" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Kastigo" />
+
+  <!-- Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css?v=19" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -92,9 +110,26 @@
         <span class="independent-badge">INDEPENDIENTE</span>
       </div>
       <nav class="header-nav" aria-label="Navegación principal">
+        <button class="nav-btn btn-install hidden" id="btn-install" aria-label="Instalar app">
+          📲 <span class="install-label">Instalar</span>
+        </button>
+        <a href="https://ko-fi.com/kastigo" target="_blank" rel="noopener noreferrer" class="nav-btn nav-btn-cafe"
+          aria-label="Invitar un café">
+          ☕ <span class="install-label">Invítame un Café</span>
+        </a>
+        <button class="nav-btn btn-theme-toggle" id="btn-theme-toggle" aria-label="Cambiar tema">
+          <span class="theme-icon-sun" aria-hidden="true">☀️</span>
+          <span class="theme-icon-moon" aria-hidden="true">🌙</span>
+        </button>
         <button class="nav-btn" id="btn-quienes">Quiénes Somos</button>
-        <a href="https://ko-fi.com/kastigo" class="nav-btn nav-btn-cafe" target="_blank" rel="noopener noreferrer">☕
-          Invítame un café</a>
+        <button class="nav-btn btn-hamburger" id="btn-filtros" aria-label="Abrir filtros" aria-expanded="false"
+          aria-controls="drawer-filtros">
+          <span class="hamburger-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="hamburger-label">Filtros</span>
+          <span class="btn-filtros-badge" id="filtros-badge" style="display:none">0</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -104,10 +139,11 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span>Actualizado · <time datetime="2026-03-17">Marzo 2026</time></span>
+        <span>Actualizado · <time datetime="2026-03-18">Mayo 2026</time></span>
       </div>
       <h1 class="hero-title" id="hero-title">Cada medida.<br /><em>Registrada.</em></h1>
-      <p class="hero-subtitle">Hechos verificados e interpretación ciudadana. Sin filtros corporativos.</p>
+      <p class="hero-subtitle">Registro de medidas del gobierno de Chile. Hechos verificados con fuentes periodísticas.
+      </p>
       <div class="hero-stats">
         <div class="hero-stat">
           <span class="hero-stat-num" id="hero-total">0</span>
@@ -115,13 +151,13 @@
         </div>
         <div class="hero-stat-divider" aria-hidden="true"></div>
         <div class="hero-stat">
-          <span class="hero-stat-num" id="hero-confirmados">0</span>
-          <span class="hero-stat-label">confirmadas</span>
+          <span class="hero-stat-num" id="hero-categorias">0</span>
+          <span class="hero-stat-label">categorías</span>
         </div>
         <div class="hero-stat-divider" aria-hidden="true"></div>
         <div class="hero-stat">
-          <span class="hero-stat-num" id="hero-categorias">0</span>
-          <span class="hero-stat-label">categorías</span>
+          <span class="hero-stat-num" id="hero-dias">0</span>
+          <span class="hero-stat-label">en el poder</span>
         </div>
       </div>
     </div>
@@ -130,17 +166,54 @@
     </div>
   </section>
 
-  <!-- LEYENDA DE CERTEZA -->
+  <!-- ÚLTIMA MEDIDA DESTACADA -->
+  <div class="ultima-medida-bar" id="ultima-medida-bar" role="note" aria-label="Última medida registrada">
+    <span class="ultima-medida-label">Última medida:</span>
+    <button class="ultima-medida-titulo" id="ultima-medida-titulo" aria-label="Ver última medida">—</button>
+    <span class="ultima-medida-fecha" id="ultima-medida-fecha"></span>
+  </div>
+
+  <!-- LEYENDA -->
   <div class="leyenda-bar" role="note" aria-label="Leyenda de indicadores">
-    <span class="leyenda-title">Indicadores:</span>
-    <span class="certeza-badge certeza-confirmado">● Confirmado</span>
-    <span class="certeza-badge certeza-reportado">● Reportado</span>
-    <span class="certeza-badge certeza-desarrollo">● En Desarrollo</span>
+    <span class="leyenda-title">Tipos de medida:</span>
     <span class="tipo-badge tipo-ley">Ley</span>
     <span class="tipo-badge tipo-decreto">Decreto</span>
     <span class="tipo-badge tipo-declaracion">Declaración</span>
     <span class="tipo-badge tipo-proyecto">Proyecto</span>
+    <span class="tipo-badge tipo-declaracion-polemica">Declaración Polémica</span>
   </div>
+
+  <!-- SEGUIMIENTO DE MEDIDAS (desplegable, cerrado por defecto) -->
+  <section class="promesas-section" id="promesas-container">
+    <div class="promesas-inner">
+
+      <button class="promesas-toggle" id="promesas-toggle" aria-expanded="false" aria-controls="promesas-body">
+        <div class="promesas-toggle-left">
+          <h2 class="promesas-title" id="promesas-heading">Seguimiento de Medidas</h2>
+          <span class="promesas-subtitle">Estado de ejecución · Datos desde fuentes verificadas</span>
+        </div>
+        <span class="promesas-toggle-icon" aria-hidden="true">▼</span>
+      </button>
+
+      <div class="promesas-body hidden" id="promesas-body">
+        <p class="seg-disclaimer">
+          ℹ️ Este panel muestra el estado de ejecución de cada medida registrada.
+          El estado se determina a partir de fuentes periodísticas verificadas, sin valoración política.
+          <strong>Ejecutada</strong>: implementada según las fuentes.
+          <strong>En Proceso</strong>: en tramitación o desarrollo.
+        </p>
+        <div class="promesas-summary" id="promesas-summary" role="list" aria-label="Resumen de medidas por estado">
+        </div>
+        <div class="promesas-barra-container">
+          <p class="promesas-barra-label">Distribución del total de medidas</p>
+          <div class="promesas-barra" id="promesas-barra" role="img" aria-label="Barra de distribución de medidas">
+          </div>
+        </div>
+        <ol class="promesas-lista" id="promesas-lista" aria-label="Lista de medidas del gobierno"></ol>
+      </div>
+
+    </div>
+  </section>
 
   <!-- MAIN -->
   <main class="main-layout" id="main-content">
@@ -160,31 +233,41 @@
         <button class="cal-reset-btn hidden" id="cal-reset">✕ Limpiar fecha</button>
       </section>
 
-      <section class="panel" aria-labelledby="stats-h">
+      <!-- ESTADÍSTICAS + GRÁFICO -->
+      <section class="panel panel-stats" aria-labelledby="stats-h">
         <h2 class="panel-title" id="stats-h">Estadísticas</h2>
         <div class="stats-total-row">
           <span class="stats-big-num" id="stats-total">0</span>
           <span class="stats-big-label">total</span>
         </div>
-        <div id="stats-grid" role="list"></div>
-      </section>
-
-      <section class="panel" aria-labelledby="search-h">
-        <h2 class="panel-title" id="search-h">Buscar</h2>
-        <div class="search-wrapper" role="search">
-          <label for="search-input" class="sr-only">Buscar medidas</label>
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            aria-hidden="true">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input type="search" id="search-input" class="search-input" placeholder="Buscar…" maxlength="200"
-            autocomplete="off" spellcheck="false" />
-          <button class="search-clear" id="search-clear" aria-label="Limpiar">✕</button>
+        <div class="chart-wrapper" aria-label="Gráfico de distribución por categoría">
+          <canvas id="chart-categorias" role="img" aria-label="Distribución de medidas por categoría"></canvas>
         </div>
-        <p class="search-count" id="search-count" aria-live="polite"></p>
+        <div id="stats-grid" role="list" aria-label="Lista de estadísticas por categoría"></div>
       </section>
 
+
+
+      <!-- ACTORES / MINISTROS -->
+      <section class="panel" aria-labelledby="ministros-h">
+        <h2 class="panel-title" id="ministros-h">Actores</h2>
+        <p class="panel-hint">Filtra medidas por actor principal</p>
+        <div class="ministros-chips" role="group" aria-label="Filtro por actor">
+          <button class="ministro-chip" data-nombre="Kast">Kast</button>
+          <button class="ministro-chip" data-nombre="Quiroz">Quiroz</button>
+          <button class="ministro-chip" data-nombre="Mas">D. Mas</button>
+          <button class="ministro-chip" data-nombre="Toledo">Toledo</button>
+          <button class="ministro-chip" data-nombre="García Ruminot">García R.</button>
+          <button class="ministro-chip" data-nombre="Ejército">Ejército</button>
+          <button class="ministro-chip" data-nombre="Congreso">Congreso</button>
+          <button class="ministro-chip" data-nombre="Poduje">Poduje</button>
+          <button class="ministro-chip" data-nombre="Arrau">Arrau</button>
+          <button class="ministro-chip" data-nombre="Rabat">Rabat</button>
+          <button class="ministro-chip" data-nombre="Sedini">Sedini</button>
+        </div>
+      </section>
+
+      <!-- FILTROS -->
       <section class="panel" aria-labelledby="filter-h">
         <h2 class="panel-title" id="filter-h">Categoría</h2>
         <div class="filter-buttons" id="filter-cat" role="group" aria-label="Filtro categoría"></div>
@@ -195,19 +278,45 @@
         <div class="filter-buttons" id="filter-tipo" role="group" aria-label="Filtro tipo"></div>
       </section>
 
-      <section class="panel" aria-labelledby="filter-certeza-h">
-        <h2 class="panel-title" id="filter-certeza-h">Certeza</h2>
-        <div class="filter-buttons" id="filter-certeza" role="group" aria-label="Filtro certeza"></div>
-      </section>
-
     </aside>
 
     <!-- TIMELINE -->
     <section class="timeline-section" aria-labelledby="timeline-h">
       <div class="timeline-header">
         <h2 class="timeline-title" id="timeline-h">Línea de Tiempo</h2>
-        <span class="timeline-order">↓ Más reciente primero</span>
+        <div class="timeline-controls">
+          <button class="tl-ctrl-btn tl-ctrl-polemica" id="btn-polemica"
+            aria-label="Mostrar solo declaraciones polémicas" title="Solo polémicas">
+            🔥 Solo polémicas
+          </button>
+          <span class="timeline-order" id="orden-label">↓ Más reciente primero</span>
+          <button class="tl-ctrl-btn" id="btn-orden" aria-label="Cambiar orden" title="Ordenar por categoría / fecha">⇅
+            Ordenar</button>
+          <button class="tl-ctrl-btn" id="btn-compact" aria-label="Vista compacta" title="Vista compacta / expandida">⊟
+            Compactar</button>
+        </div>
       </div>
+      <!-- BANNER FILTROS ACTIVOS -->
+      <div class="filtros-activos-bar hidden" id="filtros-activos-bar" role="status" aria-live="polite">
+        <span class="filtros-activos-texto" id="filtros-activos-texto"></span>
+        <button class="filtros-activos-limpiar" id="filtros-activos-limpiar" aria-label="Limpiar filtros">✕
+          Limpiar</button>
+      </div>
+
+      <!-- BUSCADOR INLINE — visible en móvil sobre las medidas -->
+      <div class="timeline-search-bar" role="search">
+        <label for="search-input" class="sr-only">Buscar medidas</label>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="search" id="search-input" class="search-input" placeholder="Buscar medidas…" maxlength="200"
+          autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Limpiar">✕</button>
+      </div>
+      <p class="search-count" id="search-count" aria-live="polite"></p>
+
       <ol class="timeline-track" id="timeline-track" aria-label="Medidas gubernamentales"></ol>
       <div class="empty-state hidden" id="empty-state" role="status" aria-live="polite">
         <span aria-hidden="true">🔍</span>
@@ -231,12 +340,6 @@
     </div>
   </div>
 
-  <!-- FAB CAFÉ -->
-  <a href="https://ko-fi.com/kastigo" class="fab-cafe" target="_blank" rel="noopener noreferrer"
-    aria-label="Apoyar con un café">
-    ☕ <span>Invítame un café</span>
-  </a>
-
   <!-- MODAL: QUIÉNES SOMOS -->
   <div class="modal-overlay hidden" id="modal-quienes" role="dialog" aria-modal="true" aria-labelledby="mq-title">
     <div class="modal-box">
@@ -244,22 +347,23 @@
       <div class="modal-accent-bar accent-gradient"></div>
       <h2 class="modal-title" id="mq-title">Quiénes Somos</h2>
       <p class="modal-text">
-        Somos un colectivo ciudadano de profesionales y estudiantes de ingeniería dedicados a la transparencia
-        gubernamental.
-        <strong>Kastigo</strong> nace como una herramienta de fiscalización basada en datos públicos para garantizar el
-        derecho
-        a la información de las y los trabajadores de Chile. Operamos de forma autónoma y autofinanciada por la
-        comunidad.
+        <strong>Kastigo</strong> es un sitio independiente que centraliza y organiza información sobre las medidas
+        del gobierno de Chile publicadas en medios periodísticos verificados.
+      </p>
+      <p class="modal-text" style="margin-top:0.6rem">
+        No somos un medio de comunicación ni un colectivo político. No generamos contenido propio: reproducimos
+        y organizamos hechos ya publicados por medios periodísticos, con link directo a cada fuente original.
+      </p>
+      <p class="modal-text" style="margin-top:0.6rem">
+        Nuestro objetivo es facilitar el acceso a información pública dispersa en distintos medios,
+        en un solo lugar y de forma organizada.
       </p>
       <div class="modal-divider"></div>
       <div class="modal-disclaimer-box">
         <strong>⚠️ Aviso:</strong> Este sitio <strong>no es oficial</strong> del Gobierno de Chile ni de ninguna
-        institución del Estado.
-        Es un ejercicio legítimo de libertad de expresión y acceso a la información pública (Art. 19 N°12 CPR · Ley N°
-        20.285).
+        institución del Estado. Es un ejercicio legítimo de libertad de expresión y acceso a la información pública
+        (Art. 19 N°12 CPR · Ley N° 20.285).
       </div>
-      <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal" target="_blank" rel="noopener noreferrer">☕ Invítame un
-        café</a>
     </div>
   </div>
 
@@ -270,7 +374,6 @@
 
       <div class="modal-meta-row">
         <span class="modal-tipo-badge" id="md-tipo"></span>
-        <span class="modal-certeza-badge" id="md-certeza"></span>
         <span class="modal-cat-badge" id="md-cat"></span>
       </div>
 
@@ -285,7 +388,7 @@
             <path d="M9 12l2 2 4-4" />
             <circle cx="12" cy="12" r="10" />
           </svg>
-          Descripción · Hechos verificados
+          Descripción
         </div>
         <p class="modal-text" id="md-desc"></p>
         <a class="modal-source-link" id="md-fuente" href="#" target="_blank" rel="noopener noreferrer">
@@ -299,24 +402,29 @@
         </a>
       </div>
 
-      <!-- BLOQUE ANÁLISIS -->
-      <div class="modal-block modal-block-analisis">
-        <div class="modal-block-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+
+
+      <!-- ACCIONES DEL MODAL -->
+      <div class="modal-action-row">
+        <a href="https://ko-fi.com/kastigo" target="_blank" rel="noopener noreferrer" class="btn-cafe-modal">
+          ☕ Invítame un café
+        </a>
+        <button class="btn-compartir" id="btn-compartir" aria-label="Compartir esta medida">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             aria-hidden="true">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
           </svg>
-          Análisis Crítico · Interpretación ciudadana
-        </div>
-        <p class="modal-text modal-text-analisis" id="md-interpretacion"></p>
-        <p class="modal-analisis-disclaimer">Esta sección refleja opiniones de sectores de la sociedad civil, no hechos
-          verificados.</p>
+          <span id="btn-compartir-text">Compartir</span>
+        </button>
       </div>
 
-      <a href="https://ko-fi.com/kastigo" class="btn-cafe-modal btn-cafe-modal-sm" target="_blank"
-        rel="noopener noreferrer">☕ Invítame un café</a>
+      <div class="share-toast hidden" id="share-toast" role="status" aria-live="polite">
+        ✅ ¡Link copiado al portapapeles!
+      </div>
     </div>
   </div>
 
@@ -326,28 +434,46 @@
       <button class="modal-close" data-modal="modal-terminos" aria-label="Cerrar">✕</button>
       <h2 class="modal-title" id="mt-title">Términos y Condiciones</h2>
 
-      <h3 class="modal-section-h">1. Exención de Responsabilidad</h3>
+      <h3 class="modal-section-h">1. Naturaleza del Sitio y Exención de Responsabilidad</h3>
       <p class="modal-text">Kastigo es un sitio <strong>no oficial</strong> operado por ciudadanos particulares en
-        ejercicio de la libertad de expresión (Art. 19 N°12 CPR) y el derecho de acceso a la información pública (Ley N°
-        20.285). La información publicada proviene de medios verificados y fuentes públicas. No garantizamos
-        exhaustividad ni asumimos responsabilidad por errores en las fuentes citadas.</p>
+        ejercicio de la libertad de expresión (Art. 19 N°12 CPR) y el derecho de acceso a la información pública
+        (Ley N° 20.285).</p>
+      <p class="modal-text" style="margin-top:0.6rem">Kastigo es un <strong>agregador de información</strong>: reproduce
+        y organiza hechos ya publicados por medios periodísticos independientes, con link directo a cada fuente
+        original.
+        <strong>No generamos contenido propio ni emitimos opiniones editoriales.</strong> La responsabilidad primaria
+        sobre el contenido recae en los medios de comunicación originales.
+      </p>
+      <p class="modal-text" style="margin-top:0.6rem">No garantizamos exhaustividad ni asumimos responsabilidad
+        por errores contenidos en las fuentes citadas. El usuario es responsable del uso que haga de esta información.
+      </p>
 
-      <h3 class="modal-section-h">2. Hechos e Interpretaciones</h3>
-      <p class="modal-text">La Plataforma distingue claramente entre <strong>Hechos</strong> (información pública
-        verificable) e <strong>Interpretaciones</strong> (análisis y opiniones de sectores de la sociedad civil y
-        autores). <strong>El usuario es responsable del uso que haga de esta información.</strong></p>
-
-      <h3 class="modal-section-h">3. No Afiliación Gubernamental</h3>
+      <h3 class="modal-section-h">2. No Afiliación Gubernamental ni Partidaria</h3>
       <p class="modal-text">Este sitio <strong>no tiene ningún tipo de afiliación, relación ni respaldo</strong> del
-        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político ni organización estatal.</p>
+        Gobierno de Chile, La Moneda, ningún ministerio, servicio público, partido político, organización estatal
+        ni grupo de interés privado. Opera de forma completamente independiente.</p>
 
-      <h3 class="modal-section-h">4. Política de Datos</h3>
-      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics, tiempo de
-        sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
-          individuales.</strong> Podrán ser utilizados para análisis interno y eventualmente comercializados a terceros
-        para financiar la operación. Al navegar este sitio, aceptas esta política.</p>
+      <h3 class="modal-section-h">3. Personas Mencionadas</h3>
+      <p class="modal-text">Las personas nombradas en este sitio son <strong>funcionarios públicos actuando en el
+          ejercicio de sus cargos</strong>. Su mención se enmarca en el legítimo ejercicio del derecho a la información
+        sobre actos de la función pública, protegido por la Ley N° 20.285 y el Art. 8° de la Constitución.</p>
 
-      <h3 class="modal-section-h">5. Propiedad Intelectual</h3>
+      <h3 class="modal-section-h">4. Rectificaciones y Contacto</h3>
+      <p class="modal-text">Kastigo se compromete a corregir errores factuales verificables. Para solicitudes de
+        corrección, rectificación o eliminación de contenido, escribir a:
+        <strong><a href="/cdn-cgi/l/email-protection#640f0517100d030b0708240309050d084a070b09"><span
+              class="__cf_email__"
+              data-cfemail="f79c9684839e9098949bb7909a969e9bd994989a">[email&#160;protected]</span></a></strong>. Las
+        solicitudes
+        serán evaluadas dentro de un plazo de 5 días hábiles.
+      </p>
+
+      <h3 class="modal-section-h">5. Política de Datos</h3>
+      <p class="modal-text">Kastigo puede recopilar métricas de navegación anónimas (páginas visitadas, clics,
+        tiempo de sesión). <strong>Estos datos son agregados, anonimizados y no permiten identificar usuarios
+          individuales.</strong> Al navegar este sitio, aceptas esta política.</p>
+
+      <h3 class="modal-section-h">6. Propiedad Intelectual</h3>
       <p class="modal-text">Contenido editorial propio publicado bajo <a
           href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"
           class="text-link">Creative Commons BY-NC 4.0</a>. Las fuentes citadas son propiedad de sus respectivos medios.
@@ -372,7 +498,80 @@
     </div>
   </footer>
 
-  <script src="js/app.js"></script>
+  <!-- DRAWER: FILTROS (hamburguesa) -->
+  <div class="drawer-overlay hidden" id="drawer-overlay" aria-hidden="true"></div>
+  <aside class="drawer-filtros hidden" id="drawer-filtros" role="dialog" aria-modal="true"
+    aria-labelledby="drawer-title">
+    <div class="drawer-header">
+      <h2 class="drawer-title" id="drawer-title">Filtros</h2>
+      <button class="drawer-close" id="drawer-close" aria-label="Cerrar filtros">✕</button>
+    </div>
+    <div class="drawer-body">
+
+      <!-- ACTORES -->
+      <section class="drawer-section" aria-labelledby="d-actores-h">
+        <h3 class="drawer-section-title" id="d-actores-h">Actor</h3>
+        <div class="ministros-chips" role="group" aria-label="Filtro por actor" id="d-actor-chips">
+          <button class="ministro-chip" data-nombre="Kast">Kast</button>
+          <button class="ministro-chip" data-nombre="Quiroz">Quiroz</button>
+          <button class="ministro-chip" data-nombre="Mas">D. Mas</button>
+          <button class="ministro-chip" data-nombre="Toledo">Toledo</button>
+          <button class="ministro-chip" data-nombre="García Ruminot">García R.</button>
+          <button class="ministro-chip" data-nombre="Ejército">Ejército</button>
+          <button class="ministro-chip" data-nombre="Congreso">Congreso</button>
+          <button class="ministro-chip" data-nombre="Poduje">Poduje</button>
+          <button class="ministro-chip" data-nombre="Arrau">Arrau</button>
+          <button class="ministro-chip" data-nombre="Rabat">Rabat</button>
+          <button class="ministro-chip" data-nombre="Sedini">Sedini</button>
+        </div>
+      </section>
+
+      <!-- CATEGORÍA -->
+      <section class="drawer-section" aria-labelledby="d-cat-h">
+        <h3 class="drawer-section-title" id="d-cat-h">Categoría</h3>
+        <div class="filter-buttons" id="d-filter-cat" role="group" aria-label="Filtro categoría"></div>
+      </section>
+
+      <!-- TIPO -->
+      <section class="drawer-section" aria-labelledby="d-tipo-h">
+        <h3 class="drawer-section-title" id="d-tipo-h">Tipo</h3>
+        <div class="filter-buttons" id="d-filter-tipo" role="group" aria-label="Filtro tipo"></div>
+      </section>
+
+      <!-- CALENDARIO -->
+      <section class="drawer-section" aria-labelledby="d-cal-h">
+        <h3 class="drawer-section-title" id="d-cal-h">Calendario</h3>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" id="d-cal-prev" aria-label="Mes anterior">‹</button>
+          <span class="cal-month-label" id="d-cal-month-label"></span>
+          <button class="cal-nav-btn" id="d-cal-next" aria-label="Mes siguiente">›</button>
+        </div>
+        <div class="cal-grid" id="d-cal-grid" role="grid" aria-label="Calendario de medidas"></div>
+        <button class="cal-reset-btn hidden" id="d-cal-reset">✕ Limpiar fecha</button>
+      </section>
+
+      <!-- LIMPIAR TODO -->
+      <button class="drawer-reset-btn" id="drawer-reset">✕ Limpiar todos los filtros</button>
+    </div>
+  </aside>
+
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top-btn hidden" id="scroll-top-btn" aria-label="Volver arriba">↑</button>
+
+  <!-- SERVICE WORKER -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => { });
+      });
+    }
+  </script>
+
+  <!-- Datos primero, luego lógica -->
+  <script src="js/data.js?v=19"></script>
+  <script src="js/app.js?v=19"></script>
+  <script src="js/widgets.js?v=19"></script>
 </body>
 
 </html>
