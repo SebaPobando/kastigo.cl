@@ -440,3 +440,110 @@
         margin-left: 0;
     }
 }
+
+
+/* ============================================================
+   V20 · CAPA PREMIUM — Seguimiento de Medidas
+   Lectura instantánea de estados: punto de color en cada badge,
+   tarjetas-resumen con relieve, barra con remate redondeado.
+   ============================================================ */
+
+/* ---- Tarjetas resumen: relieve y hover ---- */
+.prom-stat-item {
+    border-radius: var(--radio-lg);
+    border-left-width: 4px;
+    transition: transform 0.2s var(--ease-spring, ease), box-shadow 0.2s ease;
+}
+
+.prom-stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-md);
+}
+
+.prom-stat-num {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---- Barra de distribución: pastilla redondeada ---- */
+.promesas-barra {
+    height: 12px;
+    border-radius: 999px;
+}
+
+.promesa-barra-seg:hover {
+    filter: brightness(1.12);
+}
+
+/* ---- Badges de estado: punto indicador + lectura inmediata ---- */
+.promesa-estado-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+}
+
+.promesa-estado-badge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+/* ---- Ítems de la lista: hover y foco accesible ---- */
+.promesa-item {
+    border-radius: var(--radio);
+    border-left-width: 4px;
+}
+
+.promesa-item:hover {
+    box-shadow: var(--sombra-md);
+    transform: translateX(4px);
+}
+
+.promesa-item:focus-within {
+    box-shadow: var(--ring, 0 0 0 3px rgba(31, 91, 163, 0.45));
+}
+
+.promesa-fuente:focus-visible {
+    outline: none;
+    box-shadow: var(--ring, 0 0 0 3px rgba(31, 91, 163, 0.45));
+    border-radius: 6px;
+}
+
+/* ---- Toggle: affordance más clara ---- */
+.promesas-toggle {
+    border-radius: var(--radio) var(--radio) 0 0;
+}
+
+.promesas-toggle:focus-visible {
+    outline: none;
+    box-shadow: var(--ring, 0 0 0 3px rgba(31, 91, 163, 0.45));
+}
+
+.promesas-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 50%;
+    background: var(--bg-panel);
+}
+
+/* ---- Contraste AA del estado "Bloqueada" en claro ---- */
+.seg-badge-bloqueada {
+    background: #E8EAF0;
+    color: #3E4A5C;
+}
+
+/* ---- Movimiento reducido ---- */
+@media (prefers-reduced-motion: reduce) {
+
+    .prom-stat-item:hover,
+    .promesa-item:hover {
+        transform: none;
+    }
+}

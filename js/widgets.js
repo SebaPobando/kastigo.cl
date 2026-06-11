@@ -87,6 +87,10 @@ const Seguimiento = {
         const barraContainer = document.getElementById('promesas-barra');
         if (barraContainer && stats.total > 0) {
             barraContainer.innerHTML = '';
+            // Resumen accesible de toda la barra para lectores de pantalla
+            barraContainer.setAttribute('aria-label',
+                `Distribución de ${stats.total} medidas: ${stats.ejecutadas} ejecutadas, ` +
+                `${stats.enProceso} en proceso, ${stats.bloqueadas} bloqueadas, ${stats.revertidas} revertidas`);
             const segmentos = [
                 { pct: (stats.ejecutadas / stats.total) * 100, clase: 'barra-cumplida', label: 'Ejecutadas' },
                 { pct: (stats.enProceso / stats.total) * 100, clase: 'barra-proceso', label: 'En Proceso' },
@@ -105,9 +109,11 @@ const Seguimiento = {
         }
 
         // ---- Lista de medidas ----
+        // DocumentFragment: con 100+ medidas, insertar nodo a nodo en el DOM
+        // vivo provoca un reflow por ítem. El fragment lo reduce a uno solo.
         const lista = document.getElementById('promesas-lista');
         if (!lista) return;
-        lista.innerHTML = '';
+        const frag = document.createDocumentFragment();
 
         const ordenEstado = { 'ejecutada': 0, 'en-proceso': 1, 'bloqueada': 2, 'revertida': 3 };
         const ordenadas = [...eventosGubernamentales].sort((a, b) => {
@@ -158,10 +164,12 @@ const Seguimiento = {
 
             const fuenteLink = document.createElement('a');
             fuenteLink.className = 'promesa-fuente';
-            fuenteLink.href = evento.fuente.url;
+            // Sanitize está disponible: app.js se carga antes que widgets.js
+            fuenteLink.href = (typeof Sanitize !== 'undefined') ? Sanitize.url(evento.fuente.url) : '#';
             fuenteLink.target = '_blank';
             fuenteLink.rel = 'noopener noreferrer';
             fuenteLink.textContent = `${evento.fuente.medio} →`;
+            fuenteLink.setAttribute('aria-label', `Ver fuente en ${evento.fuente.medio}: ${evento.titulo}`);
 
             meta.appendChild(catBadge);
             meta.appendChild(estadoBadge);
@@ -173,8 +181,11 @@ const Seguimiento = {
 
             li.appendChild(icono);
             li.appendChild(content);
-            lista.appendChild(li);
+            frag.appendChild(li);
         });
+
+        // Inserción atómica: un solo reflow para toda la lista
+        lista.replaceChildren(frag);
     },
 
     init() {

@@ -8,7 +8,8 @@
  * - descripcion: hechos objetivos verificables con fuente citada
  *
  * POLÍTICA DE URLs: cada URL fue verificada en resultados de búsqueda reales.
- * Total de eventos: 39
+ * Cronología: 11 de marzo al 10 de junio de 2026
+ * Total de eventos: 104
  */
 
 const eventosGubernamentales = [
@@ -821,5 +822,143 @@ const eventosGubernamentales = [
         "categoria": "Política",
         "tipo": "Declaración",
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/05/21/oposicion-espera-primera-cuenta-publica-de-kast-con-criticas-a-la-gestion-y-a-promesas-incumplidas.shtml" }
+    },
+    {
+        "id": 90,
+        "fecha": "2026-05-18",
+        "titulo": "Cámara aprueba prórroga del Estado de Excepción tras acuerdo por más atribuciones a las FF.AA.",
+        "descripcion": "La Cámara de Diputados aprobó con 112 votos a favor, 20 en contra y 11 abstenciones la prórroga del Estado de Excepción Constitucional de Emergencia en La Araucanía y las provincias de Arauco y Biobío. El Ejecutivo logró la mayoría tras comprometer cuatro cambios: un proyecto de ley que otorga a las Fuerzas Armadas facultades de control de identidad, registros y detenciones en flagrancia; un mando unificado con un solo Jefe de la Defensa Nacional para ambas regiones; el despliegue del MOP junto a la Fuerza Militar del Trabajo en caminos rurales sin mantención desde 2018; y el fortalecimiento del trabajo policial en la macrozona sur.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Emol", "url": "https://www.emol.com/noticias/Nacional/2026/05/18/1200373/estado-de-excepcion.html" }
+    },
+    {
+        "id": 91,
+        "fecha": "2026-05-24",
+        "titulo": "Tercer vuelo de expulsión: 80 extranjeros deportados en el primer vuelo comercial exclusivo",
+        "descripcion": "El gobierno concretó su tercer vuelo de expulsión con la salida de 80 personas hacia Bolivia y Colombia, la primera vez bajo esta administración que se utiliza un avión comercial íntegramente destinado a expulsados, con escoltas de la PDI. El subsecretario del Interior Máximo Pavez destacó que \"en 40 días han salido tres vuelos de expulsión\" con 160 personas hacia cinco países. En lo que va de 2026 se registran 780 expulsiones (683 administrativas y 97 judiciales) y 2.446 salidas voluntarias, en su mayoría de ciudadanos venezolanos.",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "estado_seguimiento": "ejecutada",
+        "fuente": { "medio": "Emol", "url": "https://www.emol.com/noticias/Nacional/2026/05/24/1200833/nuevo-vuelo-expulsiones.html" }
+    },
+    {
+        "id": 92,
+        "fecha": "2026-05-25",
+        "titulo": "Quiroz acusa \"error\" de más de US$10 mil millones en proyección de deuda del gobierno anterior",
+        "descripcion": "Al presentar el Informe de Finanzas Públicas del primer trimestre, el ministro de Hacienda Jorge Quiroz y el director de Presupuestos José Pablo Gómez acusaron \"errores aritméticos e inconsistencias técnicas\" en la proyección de deuda bruta 2026-2030 del último IFP del gobierno de Boric, equivalentes a más de US$10 mil millones, lo que llevaría la deuda a superar el límite prudente de 45% del PIB en 2028. El exministro Nicolás Grau descartó el error y acusó a Quiroz de ignorar el efecto del tipo de cambio, la inflación y el PIB nominal en el cálculo.",
+        "categoria": "Economía",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/pulso/noticia/quiroz-acusa-error-de-mas-us10-mil-millones-en-proyeccion-de-deuda-publica-2026-2030-en-ultimo-informe-del-gobierno-de-boric/" }
+    },
+    {
+        "id": 93,
+        "fecha": "2026-05-26",
+        "titulo": "Decretos ambientales retirados de Contraloría siguen congelados a dos meses del retiro",
+        "descripcion": "A más de dos meses del retiro de 43 decretos ambientales desde la Contraloría, la mayoría sigue sin ser reingresada, incluyendo el que declara monumento natural al pingüino de Humboldt y los que crean los parques nacionales Las Parinas y Lagunas Bravas. El gobierno ha sostenido que los decretos están en revisión técnica, mientras organizaciones científicas y ambientales alertan sobre riesgos para la política ambiental chilena por la paralización de estas protecciones.",
+        "categoria": "Medio Ambiente",
+        "tipo": "Administrativo",
+        "estado_seguimiento": "bloqueada",
+        "fuente": { "medio": "The Clinic", "url": "https://www.theclinic.cl/2026/05/26/del-pinguino-de-humboldt-a-juan-fernandez-los-decretos-ambientales-que-siguen-congelados-tras-ser-retirados-de-contraloria-por-el-gobierno-de-kast/" }
+    },
+    {
+        "id": 94,
+        "fecha": "2026-05-29",
+        "titulo": "Desempleo llega a 9,1%, el más alto en casi cinco años, y gobierno apunta a \"estancamiento\"",
+        "descripcion": "El INE informó que la tasa de desocupación del trimestre febrero-abril alcanzó 9,1% a nivel nacional y 9,7% en la Región Metropolitana, la cifra más alta en casi cinco años, con cerca de 950 mil personas sin trabajo. El biministro de Economía Daniel Mas calificó la situación como \"un auténtico drama social\". El gobierno atribuyó las cifras al estancamiento económico heredado, mientras la oposición recordó que el Ejecutivo prometió en campaña la creación acelerada de empleos formales.",
+        "categoria": "Economía",
+        "tipo": "Declaración",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/05/29/gobierno-lamenta-desempleo-de-91-y-apunta-a-estancamiento-economico/" }
+    },
+    {
+        "id": 95,
+        "fecha": "2026-06-01",
+        "titulo": "Kast realiza su primera Cuenta Pública: seguridad como eje, fusión de ministerios y bono por hijo",
+        "descripcion": "En un discurso de 2 horas y 24 minutos ante el Congreso Pleno en Valparaíso, Kast rindió su primera Cuenta Pública a 82 días de gobierno. Anunció la fusión del Ministerio del Interior con la Segegob, un Plan de Inspección Total contra la corrupción, un Registro Nacional de Vándalos, un Plan Retorno para migrantes irregulares, una ayuda de $30 mil por niño, un nuevo sistema de Sala Cuna Universal y la modernización del sistema tarifario eléctrico. Admitió que \"los últimos indicadores de crecimiento y desempleo son muy negativos\" y que el estado de la economía \"es incluso más complejo de lo que se podía prever\".",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "destacada": true,
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/bbcl-explica/bbcl-explica-notas/2026/06/01/todas-las-promesas-y-anuncios-hechos-por-jose-antonio-kast-durante-la-cuenta-publica-2026.shtml" }
+    },
+    {
+        "id": 96,
+        "fecha": "2026-06-01",
+        "titulo": "Imacec de abril cae 1,2%: cuarta baja consecutiva y Quiroz la califica de \"mala noticia\"",
+        "descripcion": "El Banco Central informó que el Imacec de abril cayó 1,2% en doce meses, el cuarto mes consecutivo sin cifras positivas, explicado principalmente por el desplome de la minería con una caída de 5,4% en la producción de cobre. El ministro de Hacienda Jorge Quiroz calificó el dato como una \"mala noticia\" y sostuvo que \"este es el país que recibimos\", atribuyendo el deterioro a la administración anterior. Economistas advirtieron que el resultado complica la meta oficial de crecer 4% anual al 2030.",
+        "categoria": "Economía",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/06/01/el-ano-2026-no-repunta-actividad-economica-cae-por-cuarto-mes-seguido.shtml" }
+    },
+    {
+        "id": 97,
+        "fecha": "2026-06-01",
+        "titulo": "Cuenta Pública divide al Congreso: \"convocante\" para el oficialismo, \"sin plan\" para la oposición",
+        "descripcion": "El biministro Claudio Alvarado valoró la Cuenta Pública como \"convocante\" y aseguró que el mensaje buscó proyectar acuerdos en seguridad, economía y política social. Desde la oposición se cuestionó la falta de plazos, recursos y claridad en la implementación: Franco Parisi (PDG) dijo que el discurso \"deja con sabor a poco\" por no especificar objetivos ni recursos, y la diputada Nathalie Castillo (PC) acusó \"más promesas que certezas\". Parlamentarias del Frente Amplio consideraron insuficientes los anuncios frente al alza del costo de la vida.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Radio U. de Chile", "url": "https://radio.uchile.cl/2026/06/01/convocante-vs-sin-plan-oficialismo-defiende-cuenta-publica-y-oposicion-acusa-falta-de-plazos-recursos-y-ejecucion/" }
+    },
+    {
+        "id": 98,
+        "fecha": "2026-06-02",
+        "titulo": "Megarreforma inicia su trámite en el Senado bajo tensiones por aumento de deuda pública",
+        "descripcion": "El proyecto de Ley de Reconstrucción Nacional y Desarrollo Económico ingresó al Senado para su segundo trámite legislativo, en medio de tensiones por el aumento de la deuda pública. La senadora Paulina Vodanovic (PS) anunció que su sector votará en contra de la idea de legislar, lamentando que el gobierno no separara la reconstrucción de la reforma tributaria. El punto más controvertido sigue siendo la rebaja del Impuesto de Primera Categoría del 27% al 23% con invariabilidad tributaria por 25 años.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/politica/agenda-legislativa/megarreforma-inicia-su-tramite-en-el-senado-bajo-tensiones-por-aumento/2026-06-02/193403.html" }
+    },
+    {
+        "id": 99,
+        "fecha": "2026-06-07",
+        "titulo": "Kast anuncia desde Chacalluta proyectos para retener migrantes hasta 180 días y penalizar su traslado",
+        "descripcion": "Desde el complejo fronterizo Chacalluta en Arica, Kast anunció dos proyectos de ley para endurecer el control migratorio: una reforma constitucional que amplía la retención administrativa de extranjeros con decreto de expulsión desde 5 hasta 60 días, prorrogables hasta 180 con revisiones judiciales, y una modificación al Código Penal que tipifica como delito el traslado de indocumentados dentro del territorio nacional. El gobierno precisó que la retención es una sanción administrativa y no penal; en la oposición advirtieron que el plazo de 180 días genera dudas sobre derechos fundamentales.",
+        "categoria": "Seguridad",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/seguridad-ciudadana/planes-antidelincuencia/desde-la-frontera-kast-anuncio-dos-proyectos-de-ley-para-endurecer-el/2026-06-07/191510.html" }
+    },
+    {
+        "id": 100,
+        "fecha": "2026-06-08",
+        "titulo": "Kast emplaza al Senado por megarreforma: \"La nación votó por este proyecto político\"",
+        "descripcion": "En entrevista con radio Cappissima de Arica, Kast defendió la megarreforma ante la incertidumbre de su votación en el Senado y pidió que \"se reconozca que una mayoría de la nación votó por este proyecto político que me toca encabezar\". Desafió a los detractores a presentar \"otra fórmula para generar trabajo e inversión\" y criticó reformas tributarias, educacionales y laborales de administraciones anteriores que, a su juicio, dejaron \"a casi un millón de personas sin trabajo\". La oposición acusa falta de diálogo en la tramitación.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/politica/agenda-legislativa/presidente-kast-emplazo-al-senado-por-megarreforma-la-nacion-voto-por/2026-06-08/105120.html" }
+    },
+    {
+        "id": 101,
+        "fecha": "2026-06-09",
+        "titulo": "\"Plan Arrau\": gobierno alista seis proyectos de seguridad y migración con suma urgencia",
+        "descripcion": "El ministro de Seguridad Martín Arrau detalló un paquete de seis proyectos de ley que ingresarán al Congreso con suma urgencia a fines de junio: la reforma constitucional de retención de migrantes, la penalización del ingreso y salida irregular por pasos no habilitados, la extensión de la flagrancia de 12 a 24 horas, el juicio oral en ausencia, el Registro Nacional de Vándalos e Incivilidades y el fortalecimiento de la carrera funcionaria de Carabineros. El plan contempla además \"descongelar\" otros 22 proyectos y crear Centros de Retención Administrativa. El senador Daniel Núñez (PC) advirtió que las medidas \"van a saturar las cárceles chilenas\" y senadores de ambos sectores alertaron sobre una posible \"inflación legislativa\".",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/06/09/plan-arrau-gobierno-acelera-ofensiva-migratoria-y-de-seguridad-con-seis-proyectos-urgentes/" }
+    },
+    {
+        "id": 102,
+        "fecha": "2026-06-09",
+        "titulo": "Quiroz admite que no habrá equilibrio fiscal durante este gobierno",
+        "descripcion": "El ministro de Hacienda Jorge Quiroz reconoció que el gobierno no alcanzará el equilibrio fiscal durante el actual mandato, lo que fue señalado como el incumplimiento de una promesa de campaña de Kast, quien había comprometido ordenar las cuentas públicas en su período. El gobierno argumentó que el deterioro fiscal heredado y la caída de la actividad económica hacen inviable la meta original en el plazo comprometido.",
+        "categoria": "Economía",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/06/09/no-se-cumple-promesa-de-campana-de-kast-quiroz-dice-que-no-habra-equilibrio-fiscal-en-este-gobierno/" }
+    },
+    {
+        "id": 103,
+        "fecha": "2026-06-09",
+        "titulo": "Comisión de Hacienda del Senado despacha reajuste del salario mínimo a $553.553",
+        "descripcion": "La Comisión de Hacienda del Senado aprobó el proyecto de reajuste del salario mínimo y lo dejó listo para su votación en Sala. La propuesta eleva el monto a $553.553 con efecto retroactivo al 1 de mayo y establece que desde el 1 de enero de 2027 se reajustará según la variación acumulada del IPC. La CUT decidió no firmar un acuerdo con el gobierno argumentando que el reajuste es insuficiente frente al alza del costo de la vida, y reiteró su aspiración de avanzar hacia un \"salario vital\".",
+        "categoria": "Laboral",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Diario Financiero", "url": "https://www.df.cl/economia-y-politica/laboral-personas/comision-de-hacienda-del-senado-despacha-salario-minimo-y-lo-deja-listo" }
+    },
+    {
+        "id": 104,
+        "fecha": "2026-06-10",
+        "titulo": "Encuesta CEP: 34% aprueba y 52% desaprueba la gestión de Kast en su primera medición",
+        "descripcion": "La Encuesta CEP N°96, aplicada entre abril y mayo a 1.469 personas en 122 comunas, mostró que el 34% aprueba y el 52% desaprueba la forma en que Kast conduce su gobierno, en la primera medición del centro de estudios desde su llegada a La Moneda. Un 67% declaró tener poca o ninguna confianza en que el Presidente cumpla sus compromisos de campaña. En el oficialismo destacaron que las cifras superan las del expresidente Boric al dejar el cargo (33% de aprobación), mientras en la oposición las leyeron como una señal de desgaste temprano.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/06/10/desaprobacion-al-presidente-kast-llega-a-52-y-aprobacion-al-34-segun-encuesta-cep.shtml" }
     }
 ]

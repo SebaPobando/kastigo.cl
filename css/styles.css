@@ -3126,3 +3126,299 @@ button {
   font-size: 1.4rem !important;
   letter-spacing: 0.02em;
 }
+
+
+/* ============================================================
+   ============================================================
+   V20 · CAPA PREMIUM (Mobile-First)
+   Tipografía fluida · sombras difuminadas · micro-interacciones
+   skeleton loaders · calendario refinado · a11y (focus-visible)
+   Esta capa va al FINAL del archivo: sobreescribe con la misma
+   especificidad sin tocar las reglas históricas de arriba.
+   ============================================================
+   ============================================================ */
+
+/* ---- 1. Tokens fluidos y de profundidad ---- */
+:root {
+  /* Tipografía fluida: mínimo móvil → preferido → tope desktop */
+  --fs-hero: clamp(2.5rem, 1.4rem + 5.5vw, 4.6rem);
+  --fs-h2: clamp(1.3rem, 1.05rem + 1.2vw, 1.95rem);
+  --fs-card-title: clamp(0.98rem, 0.92rem + 0.3vw, 1.16rem);
+  --fs-body: clamp(0.84rem, 0.8rem + 0.2vw, 0.94rem);
+  --fs-micro: clamp(0.6rem, 0.58rem + 0.1vw, 0.68rem);
+
+  /* Radios más generosos */
+  --radio: 10px;
+  --radio-lg: 16px;
+
+  /* Sombras difuminadas en dos capas (ambient + key light) */
+  --sombra-sm: 0 1px 2px rgba(11, 31, 58, 0.05), 0 2px 10px rgba(11, 31, 58, 0.06);
+  --sombra-md: 0 4px 12px rgba(11, 31, 58, 0.07), 0 14px 36px rgba(11, 31, 58, 0.10);
+  --sombra-lg: 0 12px 28px rgba(11, 31, 58, 0.12), 0 36px 90px rgba(11, 31, 58, 0.16);
+
+  /* Anillo de foco accesible (contraste AA sobre claro y oscuro) */
+  --ring: 0 0 0 3px rgba(31, 91, 163, 0.45);
+
+  /* Curva estándar de micro-interacciones */
+  --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --sombra-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.3);
+  --sombra-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 14px 36px rgba(0, 0, 0, 0.45);
+  --sombra-lg: 0 12px 28px rgba(0, 0, 0, 0.5), 0 36px 90px rgba(0, 0, 0, 0.6);
+  --ring: 0 0 0 3px rgba(91, 157, 232, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --sombra-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.3);
+    --sombra-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 14px 36px rgba(0, 0, 0, 0.45);
+    --sombra-lg: 0 12px 28px rgba(0, 0, 0, 0.5), 0 36px 90px rgba(0, 0, 0, 0.6);
+    --ring: 0 0 0 3px rgba(91, 157, 232, 0.55);
+  }
+}
+
+/* ---- 2. Tipografía fluida aplicada ---- */
+.hero-title {
+  font-size: var(--fs-hero);
+}
+
+.timeline-title,
+.promesas-title {
+  font-size: var(--fs-h2);
+}
+
+.card-title {
+  font-size: var(--fs-card-title);
+}
+
+.card-desc,
+.modal-text {
+  font-size: var(--fs-body);
+}
+
+/* ---- 3. Foco visible global (navegación por teclado) ---- */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radio);
+}
+
+.timeline-card:focus-visible,
+.cal-day:focus-visible {
+  outline: none;
+  box-shadow: var(--ring), var(--sombra-md);
+}
+
+/* ---- 4. Skeleton Loader (carga inicial + filtrado) ---- */
+.skeleton-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radio-lg);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--sombra-sm);
+  pointer-events: none;
+}
+
+.sk-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sk-row-footer {
+  margin-top: 0.85rem;
+}
+
+.sk-line {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--bg-input);
+}
+
+/* Shimmer: barrido de luz de izquierda a derecha */
+.sk-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: translateX(-100%);
+  animation: skShimmer 1.4s ease-in-out infinite;
+}
+
+[data-theme="dark"] .sk-line::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .sk-line::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+  }
+}
+
+@keyframes skShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.sk-badge {
+  width: 92px;
+  height: 18px;
+  border-radius: 20px;
+}
+
+.sk-date {
+  width: 110px;
+  height: 12px;
+}
+
+.sk-title {
+  width: 78%;
+  height: 20px;
+  margin-top: 0.9rem;
+}
+
+.sk-text {
+  width: 100%;
+  height: 12px;
+  margin-top: 0.55rem;
+}
+
+.sk-text-short {
+  width: 62%;
+}
+
+.sk-cta {
+  width: 80px;
+  height: 12px;
+}
+
+/* ---- 5. Tarjetas timeline: micro-interacciones ---- */
+.timeline-card {
+  border-radius: var(--radio-lg);
+  transition: transform 0.25s var(--ease-spring),
+    box-shadow 0.25s var(--ease-spring),
+    border-color 0.2s ease;
+  will-change: transform;
+}
+
+.timeline-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-md);
+}
+
+.timeline-card:active {
+  transform: translateY(-1px) scale(0.995);
+  transition-duration: 0.08s;
+}
+
+/* ---- 6. Botones y chips: respuesta táctil ---- */
+.filter-btn,
+.tl-ctrl-btn,
+.nav-btn,
+.ministro-chip,
+.cal-nav-btn,
+.cal-reset-btn,
+.btn-compartir,
+.btn-cafe-modal {
+  transition: transform 0.15s var(--ease-spring),
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filter-btn:active,
+.tl-ctrl-btn:active,
+.nav-btn:active,
+.ministro-chip:active,
+.cal-nav-btn:active,
+.cal-reset-btn:active {
+  transform: scale(0.95);
+}
+
+.filter-btn:hover,
+.ministro-chip:hover {
+  box-shadow: var(--sombra-sm);
+}
+
+/* ---- 7. Calendario premium ---- */
+.cal-grid {
+  gap: 4px;
+}
+
+.cal-day {
+  border-radius: 9px;
+  font-size: 0.78rem;
+  min-height: 32px;
+  /* target táctil más cómodo en móvil */
+}
+
+.cal-day.cal-has-events {
+  box-shadow: inset 0 0 0 1px rgba(31, 91, 163, 0.12);
+}
+
+.cal-day.cal-has-events:hover {
+  transform: translateY(-1px) scale(1.06);
+  box-shadow: var(--sombra-sm);
+}
+
+.cal-day.cal-today {
+  font-weight: 700;
+}
+
+.cal-day.cal-today::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--azul-claro);
+}
+
+.cal-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+}
+
+/* ---- 8. Paneles del sidebar: profundidad sutil ---- */
+.panel {
+  border-radius: var(--radio-lg);
+  transition: box-shadow 0.25s ease;
+}
+
+.panel:hover {
+  box-shadow: var(--sombra-sm);
+}
+
+/* ---- 9. Modales: entrada más suave ---- */
+.modal-box {
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+/* ---- 10. Movimiento reducido: a11y vestibular ---- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .sk-line::after {
+    animation: none;
+  }
+}

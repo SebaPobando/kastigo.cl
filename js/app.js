@@ -261,9 +261,7 @@ const Filtrado = {
         e.descripcion.toLowerCase().includes(q);
       const porMinistro = !qm ||
         e.titulo.toLowerCase().includes(qm) ||
-        e.descripcion.toLowerCase().includes(qm) ||
-        false;
-      return porCat && porTipo && porTexto && porMinistro;
+        e.descripcion.toLowerCase().includes(qm);
       const porPolemica = !this.state.soloPolemicas || e.tipo === 'Declaración Polémica';
       return porCat && porTipo && porTexto && porMinistro && porPolemica;
     });
@@ -983,17 +981,63 @@ const Calendario = {
 
 
 /* ============================================================
+   MÓDULO 9B: SKELETON LOADER
+   Tarjetas fantasma que se muestran durante la carga inicial
+   y al aplicar filtros, evitando saltos de layout (CLS) y
+   comunicando estado de carga (aria-busy).
+   El markup es 100% estático → innerHTML es seguro aquí.
+   ============================================================ */
+const Skeleton = {
+
+  COUNT: 6,
+
+  /** Crea una tarjeta skeleton individual. */
+  _card() {
+    const li = document.createElement('li');
+    li.className = 'skeleton-card';
+    li.setAttribute('aria-hidden', 'true');
+    li.innerHTML = `
+      <div class="sk-row">
+        <span class="sk-line sk-badge"></span>
+        <span class="sk-line sk-date"></span>
+      </div>
+      <span class="sk-line sk-title"></span>
+      <span class="sk-line sk-text"></span>
+      <span class="sk-line sk-text sk-text-short"></span>
+      <div class="sk-row sk-row-footer">
+        <span class="sk-line sk-badge"></span>
+        <span class="sk-line sk-cta"></span>
+      </div>`;
+    return li;
+  },
+
+  /**
+   * Rellena el track con skeletons y marca la región como ocupada.
+   * @param {HTMLElement} track — contenedor de la línea de tiempo
+   */
+  fill(track) {
+    if (!track) return;
+    track.setAttribute('aria-busy', 'true');
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < this.COUNT; i++) frag.appendChild(this._card());
+    track.replaceChildren(frag);
+  }
+};
+
+
+/* ============================================================
    MÓDULO 10: RENDER
    Construye el DOM dinámicamente desde los datos.
    Principio: siempre textContent para datos del usuario (anti-XSS).
+   Rendimiento: DocumentFragment + replaceChildren = 1 solo reflow.
    ============================================================ */
 const Render = {
 
   /** Renderiza el banner de última medida. */
   ultimaMedida() {
-    // Prioriza eventos con destacada: true, si no el más reciente
-    const destacada = eventosGubernamentales.find(e => e.destacada === true);
+    // Prioriza la medida destacada MÁS RECIENTE, si no el último evento
     const sorted = [...eventosGubernamentales].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    const destacada = sorted.find(e => e.destacada === true);
     const last = destacada || sorted[0];
     if (!last) return;
 
@@ -1112,7 +1156,7 @@ const Render = {
         Filtrado.state[stateKey] = val;
         this.allFilters();    // re-renderizar sidebar filters
         this.drawerFilters(); // re-renderizar drawer filters
-        this.timeline();
+        this.timelineDeferred();
       });
 
       container.appendChild(btn);
@@ -1131,6 +1175,16 @@ const Render = {
     this._buildFilterGroup('d-filter-tipo', Utils.unique('tipo'), 'filtroTipo', Utils.countBy('tipo'));
   },
 
+  /**
+   * Muestra el skeleton loader y difiere el render real al
+   * siguiente frame: el usuario ve feedback inmediato y el
+   * trabajo pesado de DOM no bloquea la interacción.
+   */
+  timelineDeferred() {
+    Skeleton.fill(document.getElementById('timeline-track'));
+    requestAnimationFrame(() => requestAnimationFrame(() => this.timeline()));
+  },
+
   /** Renderiza la línea de tiempo con los eventos filtrados. */
   timeline() {
     const track = document.getElementById('timeline-track');
@@ -1147,7 +1201,8 @@ const Render = {
     if (ordenLabel) ordenLabel.textContent = labelMap[orden] || '↓ Más reciente';
 
     if (!eventos.length) {
-      track.innerHTML = '';
+      track.replaceChildren();
+      track.setAttribute('aria-busy', 'false');
       empty.classList.remove('hidden');
       if (countEl) countEl.textContent = 'Sin resultados';
       return;
@@ -1160,7 +1215,9 @@ const Render = {
         : '';
     }
 
-    track.innerHTML = '';
+    // Fragment: todas las tarjetas se construyen fuera del DOM vivo
+    // y se insertan en una sola operación (un único reflow).
+    const frag = document.createDocumentFragment();
 
     // Update hamburger badge count
     const activeFiltersArr = [
@@ -1216,7 +1273,7 @@ const Render = {
         sep.className = 'timeline-week-sep';
         sep.setAttribute('aria-hidden', 'true');
         sep.textContent = orden === 'categoria' ? ev.categoria : getWeekLabel(groupKey);
-        track.appendChild(sep);
+        frag.appendChild(sep);
       }
 
 
@@ -1225,7 +1282,9 @@ const Render = {
       li.setAttribute('role', 'button');
       li.setAttribute('tabindex', '0');
       li.setAttribute('aria-label', `Ver detalle: ${ev.titulo}`);
-      li.style.animationDelay = `${index * 0.04}s`;
+      // Stagger solo en las primeras 12 tarjetas: con 100+ eventos,
+      // un delay lineal dejaría las últimas invisibles por segundos.
+      li.style.animationDelay = `${Math.min(index, 12) * 0.04}s`;
 
       const top = document.createElement('div');
       top.className = 'card-top';
@@ -1293,8 +1352,12 @@ const Render = {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
       });
 
-      track.appendChild(li);
+      frag.appendChild(li);
     });
+
+    // Inserción atómica: reemplaza skeletons/tarjetas anteriores
+    track.replaceChildren(frag);
+    track.setAttribute('aria-busy', 'false');
   }
 };
 
@@ -1311,8 +1374,9 @@ const Events = {
       const btn = document.getElementById('btn-polemica');
       Filtrado.state.soloPolemicas = !Filtrado.state.soloPolemicas;
       btn?.classList.toggle('active', Filtrado.state.soloPolemicas);
+      btn?.setAttribute('aria-pressed', String(Filtrado.state.soloPolemicas));
       btn.textContent = Filtrado.state.soloPolemicas ? '🔥 Todas las medidas' : '🔥 Solo polémicas';
-      Render.timeline();
+      Render.timelineDeferred();
     });
 
     // ---- Disclaimer bar ----
@@ -1331,11 +1395,14 @@ const Events = {
     const searchInput = document.getElementById('search-input');
     const searchClear = document.getElementById('search-clear');
 
+    // Debounce: evita re-renderizar la lista completa en cada tecla.
+    let searchTimer = null;
     searchInput?.addEventListener('input', () => {
       // Sanitizar el input antes de usarlo como filtro
       Filtrado.state.busqueda = Sanitize.searchInput(searchInput.value);
       searchClear?.classList.toggle('visible', Filtrado.state.busqueda.length > 0);
-      Render.timeline();
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => Render.timelineDeferred(), 160);
     });
 
     searchClear?.addEventListener('click', () => {
@@ -1343,7 +1410,7 @@ const Events = {
       Filtrado.state.busqueda = '';
       searchClear.classList.remove('visible');
       searchInput?.focus();
-      Render.timeline();
+      Render.timelineDeferred();
     });
 
     // ---- Botón Compartir (Web Share API) ----
@@ -1381,19 +1448,31 @@ const Events = {
     document.getElementById('btn-compact')?.addEventListener('click', () => {
       const btn = document.getElementById('btn-compact');
       const isCompact = document.body.classList.toggle('timeline-compact');
-      if (btn) btn.textContent = isCompact ? '⊞ Expandir' : '⊟ Compactar';
-      Render.timeline();
+      if (btn) {
+        btn.textContent = isCompact ? '⊞ Expandir' : '⊟ Compactar';
+        btn.setAttribute('aria-pressed', String(isCompact));
+      }
+      Render.timelineDeferred();
     });
 
     // ---- Toggle orden: fecha-desc → fecha-asc → categoria → fecha-desc ----
     document.getElementById('btn-orden')?.addEventListener('click', () => {
       const ciclo = { 'fecha': 'fecha-asc', 'fecha-asc': 'categoria', 'categoria': 'fecha' };
       Filtrado.state.orden = ciclo[Filtrado.state.orden] || 'fecha';
-      Render.timeline();
+      Render.timelineDeferred();
     });
 
     // ---- Chips de ministros/actores ----
-    document.querySelectorAll('.ministro-chip').forEach(chip => {
+    // Helper a11y: sincroniza aria-pressed con el estado visual de TODOS los chips
+    const syncChipsAria = () => {
+      document.querySelectorAll('.ministro-chip').forEach(c =>
+        c.setAttribute('aria-pressed', String(c.classList.contains('active'))));
+    };
+    syncChipsAria(); // estado inicial
+
+    // Solo chips del SIDEBAR: los del drawer tienen su propio listener
+    // más abajo (antes se duplicaban y el toggle se anulaba a sí mismo).
+    document.querySelectorAll('.sidebar .ministro-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         const nombre = chip.dataset.nombre;
         const yaActivo = chip.classList.contains('active');
@@ -1404,7 +1483,8 @@ const Events = {
           chip.classList.add('active');
           Filtrado.state.filtroMinistroBusqueda = nombre;
         }
-        Render.timeline();
+        syncChipsAria();
+        Render.timelineDeferred();
       });
     });
 
@@ -1447,7 +1527,7 @@ const Events = {
       Render.drawerFilters();
       Calendario.render('cal');
       Calendario.render('d-cal');
-      Render.timeline();
+      Render.timelineDeferred();
 
     });
 
@@ -1487,7 +1567,9 @@ const Events = {
         if (!yaActivo) {
           document.querySelectorAll(`.ministro-chip[data-nombre="${nombre}"]`).forEach(c => c.classList.add('active'));
         }
-        Render.timeline();
+        document.querySelectorAll('.ministro-chip').forEach(c =>
+          c.setAttribute('aria-pressed', String(c.classList.contains('active'))));
+        Render.timelineDeferred();
       });
     });
 
@@ -1508,7 +1590,7 @@ const Events = {
       Render.drawerFilters();
       Calendario.render('cal');
       Calendario.render('d-cal');
-      Render.timeline();
+      Render.timelineDeferred();
     });
   }
 };
@@ -1529,7 +1611,7 @@ function init() {
   Render.estadisticas(); // 3. Panel de stats + gráfico de dona
   Render.allFilters();   // 4. Botones de filtro sidebar
   Render.drawerFilters();// 4b. Botones de filtro drawer
-  Render.timeline();     // 5. Línea de tiempo
+  Render.timelineDeferred();     // 5. Línea de tiempo
   Calendario.init();     // 6. Calendario interactivo (sidebar + drawer)
   Events.init();         // 7. Todos los event listeners
   DeepLink.init();       // 8. Último: procesar hash de la URL (requiere que el DOM esté listo)
