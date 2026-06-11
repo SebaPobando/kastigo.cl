@@ -228,11 +228,202 @@ const Utils = {
 
 
 /* ============================================================
+   MÓDULO 3B: GLOSARIO CÍVICO
+   Detecta términos técnicos en las descripciones y los envuelve
+   en <abbr> con tooltip CSS (data-def). Anti-XSS: el texto se
+   inserta SIEMPRE con createTextNode/textContent, nunca innerHTML.
+   Solo se anota la PRIMERA aparición de cada término por texto
+   para no saturar la lectura.
+   ============================================================ */
+const Glosario = {
+
+  // Definiciones, indexadas por término en minúsculas
+  TERMINOS: {
+    'suma urgencia': 'Clasificación que obliga al Congreso a despachar un proyecto de ley en un plazo de 15 días.',
+    'discusión inmediata': 'Urgencia máxima: el Congreso debe discutir y votar el proyecto en solo 6 días.',
+    'urgencia simple': 'El Congreso dispone de 30 días para despachar el proyecto de ley.',
+    'decreto supremo': 'Norma dictada por el Presidente o sus ministros sin pasar por el Congreso.',
+    'toma de razón': 'Trámite en que la Contraloría revisa la legalidad de un decreto antes de que entre en vigencia.',
+    'contraloría': 'Contraloría General de la República: órgano autónomo que fiscaliza la legalidad de los actos del Estado.',
+    'estado de excepción': 'Régimen constitucional que permite restringir libertades y desplegar a las Fuerzas Armadas en una zona.',
+    'cuenta pública': 'Mensaje del 1 de junio en que el Presidente rinde cuentas de su gestión ante el Congreso Pleno.',
+    'tribunal constitucional': 'Órgano que controla que las leyes y normas respeten la Constitución.',
+    'mepco': 'Mecanismo de Estabilización de Precios de los Combustibles: fondo que suaviza las alzas semanales de bencinas y diésel.',
+    'imacec': 'Índice Mensual de Actividad Económica: estimación anticipada del PIB que publica el Banco Central.',
+    'cae': 'Crédito con Aval del Estado: préstamo para estudios superiores garantizado por el fisco.',
+    'seia': 'Sistema de Evaluación de Impacto Ambiental: evalúa los proyectos de inversión antes de autorizar su construcción.',
+    'idea de legislar': 'Primera votación de un proyecto: el Congreso decide si está dispuesto a discutirlo en detalle.',
+    'ley miscelánea': 'Proyecto que agrupa muchas materias distintas en una sola ley.',
+    'invariabilidad tributaria': 'Garantía legal de que las reglas de impuestos no cambiarán durante un período determinado.',
+    'reserva de constitucionalidad': 'Advertencia formal de que una norma podría ser impugnada ante el Tribunal Constitucional.'
+  },
+
+  // Variantes textuales a detectar (exact-case para evitar falsos
+  // positivos: "CAE" en mayúsculas nunca colisiona con el verbo "cae")
+  VARIANTES: [
+    'Suma Urgencia', 'suma urgencia',
+    'Discusión Inmediata', 'discusión inmediata',
+    'Urgencia Simple', 'urgencia simple',
+    'Decreto Supremo', 'decreto supremo',
+    'Toma de Razón', 'toma de razón',
+    'Contraloría',
+    'Estado de Excepción', 'estado de excepción',
+    'Cuenta Pública',
+    'Tribunal Constitucional',
+    'Mepco', 'MEPCO',
+    'Imacec', 'IMACEC',
+    'CAE', 'SEIA',
+    'idea de legislar',
+    'ley miscelánea', 'Ley Miscelánea',
+    'invariabilidad tributaria',
+    'reserva de constitucionalidad'
+  ],
+
+  _regex: undefined,
+
+  /**
+   * Compila (una sola vez) la regex de detección.
+   * Lookbehind/lookahead Unicode evita coincidencias dentro de
+   * otras palabras. Si el navegador no soporta lookbehind,
+   * cae con gracia a "sin glosario" (try/catch).
+   * @returns {RegExp|null}
+   */
+  _buildRegex() {
+    if (this._regex !== undefined) return this._regex;
+    try {
+      const escaped = [...this.VARIANTES]
+        .sort((a, b) => b.length - a.length) // términos largos primero
+        .map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      this._regex = new RegExp(
+        `(?<![\\p{L}\\p{N}])(?:${escaped.join('|')})(?![\\p{L}\\p{N}])`, 'gu'
+      );
+    } catch {
+      this._regex = null; // navegador antiguo: texto plano
+    }
+    return this._regex;
+  },
+
+  /**
+   * Convierte un texto en un DocumentFragment donde la primera
+   * aparición de cada término queda envuelta en <abbr> con tooltip.
+   * @param {string} text
+   * @returns {DocumentFragment}
+   */
+  annotate(text) {
+    const frag = document.createDocumentFragment();
+    const re = this._buildRegex();
+    if (!re || typeof text !== 'string') {
+      frag.appendChild(document.createTextNode(text || ''));
+      return frag;
+    }
+
+    re.lastIndex = 0;
+    const seen = new Set();
+    let last = 0;
+    let m;
+
+    while ((m = re.exec(text)) !== null) {
+      const term = m[0];
+      const def = this.TERMINOS[term.toLowerCase()];
+      if (!def || seen.has(term.toLowerCase())) continue;
+      seen.add(term.toLowerCase());
+
+      // Texto plano antes del término
+      frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+
+      // Término anotado
+      const abbr = document.createElement('abbr');
+      abbr.className = 'glosario-term';
+      abbr.textContent = term;
+      abbr.setAttribute('data-def', def);
+      abbr.setAttribute('tabindex', '0');
+      abbr.setAttribute('aria-label', `${term}: ${def}`);
+      // El término vive dentro de tarjetas clicables: detener la
+      // propagación evita abrir el modal al consultar el glosario.
+      abbr.addEventListener('click', e => { e.stopPropagation(); abbr.focus(); });
+      abbr.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+      });
+      frag.appendChild(abbr);
+
+      last = m.index + term.length;
+    }
+
+    frag.appendChild(document.createTextNode(text.slice(last)));
+    return frag;
+  },
+
+  /**
+   * Rellena un elemento con el texto anotado (reemplaza contenido).
+   * @param {HTMLElement} el
+   * @param {string} text
+   */
+  fill(el, text) {
+    if (!el) return;
+    el.replaceChildren(this.annotate(text));
+  }
+};
+
+
+/* ============================================================
+   MÓDULO 3C: OPEN DATA (Exportación CSV)
+   Convierte eventosGubernamentales a CSV plano (RFC 4180) y
+   fuerza la descarga vía Blob. Sin librerías externas.
+   BOM UTF-8 incluido para que Excel respete tildes y eñes.
+   ============================================================ */
+const OpenData = {
+
+  /** Escapa un valor CSV: comillas dobles si contiene , " ; o saltos. */
+  _esc(v) {
+    const s = String(v ?? '');
+    return /[",;\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  },
+
+  /** Serializa el dataset completo a CSV. */
+  toCSV() {
+    const headers = ['id', 'fecha', 'titulo', 'descripcion', 'categoria', 'tipo', 'estado_seguimiento', 'fuente_medio', 'fuente_url'];
+    const rows = eventosGubernamentales.map(e => [
+      e.id, e.fecha, e.titulo, e.descripcion, e.categoria, e.tipo,
+      e.estado_seguimiento || 'en-proceso',
+      e.fuente.medio, e.fuente.url
+    ].map(v => this._esc(v)).join(','));
+    // BOM (U+FEFF): Excel detecta UTF-8 y muestra bien los acentos
+    return String.fromCharCode(0xFEFF) + headers.join(',') + '\r\n' + rows.join('\r\n');
+  },
+
+  /** Genera el Blob y dispara la descarga del archivo. */
+  descargar() {
+    const blob = new Blob([this.toCSV()], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'kastigo-datos-abiertos.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    // Micro-feedback en el botón
+    const btn = document.getElementById('btn-csv');
+    if (btn && !btn.dataset.busy) {
+      btn.dataset.busy = '1';
+      const original = btn.textContent;
+      btn.textContent = '✅ Archivo descargado';
+      setTimeout(() => { btn.textContent = original; delete btn.dataset.busy; }, 2200);
+    }
+  }
+};
+
+
+/* ============================================================
    MÓDULO 4: FILTRADO
    Combina todos los filtros activos y devuelve los eventos
    que cumplen con todos ellos simultáneamente.
    ============================================================ */
 const Filtrado = {
+
+  // Paso de la paginación visual (botón "Cargar más")
+  PASO_VISUAL: 20,
 
   // Estado compartido de todos los filtros activos
   state: {
@@ -240,8 +431,19 @@ const Filtrado = {
     filtroTipo: 'Todos',
     busqueda: '',
     filtroMinistroBusqueda: '',
-    soloPolemicas: false,        // ← agregar esta línea
+    soloPolemicas: false,
     orden: 'fecha',
+    limiteVisual: 20,            // cuántas medidas se materializan en el DOM
+  },
+
+  /**
+   * Vuelve la paginación visual al inicio.
+   * Se invoca cada vez que cambia CUALQUIER filtro (búsqueda,
+   * categoría, tipo, actor, polémicas) para no dejar al usuario
+   * mirando la página 5 de un resultado nuevo.
+   */
+  resetLimite() {
+    this.state.limiteVisual = this.PASO_VISUAL;
   },
 
   /**
@@ -430,7 +632,8 @@ const Modal = {
 
     // Textos principales
     setText('md-title', evento.titulo);
-    setText('md-desc', evento.descripcion);
+    // Descripción con glosario cívico (DOM seguro, sin innerHTML)
+    Glosario.fill(document.getElementById('md-desc'), evento.descripcion);
     setText('md-fuente-medio', `Fuente: ${evento.fuente.medio}`);
 
     // URL de la fuente (validada)
@@ -626,6 +829,9 @@ const ChartModule = {
   // Referencia a la instancia del gráfico (para destruirlo si hay que redibujar)
   _instance: null,
 
+  // Instancia del gráfico de transparencia de fuentes
+  _instanceFuentes: null,
+
   // Paleta de colores alineada con la identidad visual de Kastigo
   COLORES: [
     '#1A7A4A', // Medio Ambiente
@@ -710,6 +916,88 @@ const ChartModule = {
           duration: 800,
           easing: 'easeInOutQuart'
         }
+      }
+    });
+
+    // Gráfico de transparencia de fuentes (se redibuja junto al
+    // principal, así el toggle de tema actualiza ambos a la vez)
+    this.renderFuentes(isDark);
+  },
+
+  /**
+   * Gráfico de barras horizontales: cuántas medidas aporta cada
+   * medio periodístico. Transparencia editorial en un vistazo.
+   * @param {boolean} isDark — heredado del render principal
+   */
+  renderFuentes(isDark) {
+    const canvas = document.getElementById('chart-fuentes');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    // Conteo por medio, ordenado descendente; top 8 + "Otros"
+    const conteo = eventosGubernamentales.reduce((acc, e) => {
+      acc[e.fuente.medio] = (acc[e.fuente.medio] || 0) + 1;
+      return acc;
+    }, {});
+    const ordenados = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
+    const top = ordenados.slice(0, 8);
+    const resto = ordenados.slice(8).reduce((sum, [, n]) => sum + n, 0);
+    if (resto > 0) top.push(['Otros', resto]);
+
+    const labels = top.map(([medio]) => medio);
+    const data = top.map(([, n]) => n);
+    const textColor = isDark ? '#8A9AB5' : '#526075';
+    const gridColor = isDark ? 'rgba(138, 154, 181, 0.12)' : 'rgba(82, 96, 117, 0.12)';
+
+    if (this._instanceFuentes) {
+      this._instanceFuentes.destroy();
+      this._instanceFuentes = null;
+    }
+
+    this._instanceFuentes = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          data,
+          backgroundColor: '#1F5BA3',
+          hoverBackgroundColor: '#C8001E',
+          borderRadius: 5,
+          barThickness: 12,
+        }]
+      },
+      options: {
+        indexAxis: 'y', // barras horizontales
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: isDark ? '#1E2D45' : '#0B1F3A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#8A9AB5',
+            padding: 10,
+            cornerRadius: 8,
+            callbacks: {
+              label(ctx) {
+                const total = eventosGubernamentales.length;
+                const pct = Math.round((ctx.parsed.x / total) * 100);
+                return ` ${ctx.parsed.x} medida${ctx.parsed.x !== 1 ? 's' : ''} (${pct}%)`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { color: textColor, font: { size: 10 }, precision: 0 },
+            grid: { color: gridColor }
+          },
+          y: {
+            ticks: { color: textColor, font: { size: 10 } },
+            grid: { display: false }
+          }
+        },
+        animation: { duration: 700, easing: 'easeInOutQuart' }
       }
     });
   }
@@ -1154,6 +1442,7 @@ const Render = {
 
       btn.addEventListener('click', () => {
         Filtrado.state[stateKey] = val;
+        Filtrado.resetLimite(); // nuevo filtro → paginación al inicio
         this.allFilters();    // re-renderizar sidebar filters
         this.drawerFilters(); // re-renderizar drawer filters
         this.timelineDeferred();
@@ -1193,6 +1482,9 @@ const Render = {
     if (!track || !empty) return;
 
     const eventos = Filtrado.get();
+    // Paginación visual: solo los primeros `limiteVisual` eventos se
+    // materializan como nodos. El resto espera al botón "Cargar más".
+    const visibles = eventos.slice(0, Filtrado.state.limiteVisual);
     const compact = document.body.classList.contains('timeline-compact');
     const orden = Filtrado.state.orden;
 
@@ -1204,6 +1496,7 @@ const Render = {
       track.replaceChildren();
       track.setAttribute('aria-busy', 'false');
       empty.classList.remove('hidden');
+      document.getElementById('btn-cargar-mas')?.classList.add('hidden');
       if (countEl) countEl.textContent = 'Sin resultados';
       return;
     }
@@ -1265,7 +1558,7 @@ const Render = {
 
     let lastGroup = null;
 
-    eventos.forEach((ev, index) => {
+    visibles.forEach((ev, index) => {
       const groupKey = orden === 'categoria' ? ev.categoria : getWeekKey(ev.fecha);
       if (groupKey !== lastGroup) {
         lastGroup = groupKey;
@@ -1340,7 +1633,9 @@ const Render = {
       if (!compact) {
         const p = document.createElement('p');
         p.className = 'card-desc';
-        p.textContent = ev.descripcion;
+        // Glosario cívico: anota términos técnicos con tooltip.
+        // El fragment se construye fuera del DOM vivo → cero reflows extra.
+        p.appendChild(Glosario.annotate(ev.descripcion));
         li.appendChild(p);
       }
 
@@ -1358,6 +1653,16 @@ const Render = {
     // Inserción atómica: reemplaza skeletons/tarjetas anteriores
     track.replaceChildren(frag);
     track.setAttribute('aria-busy', 'false');
+
+    // Botón "Cargar más": visible solo si quedan medidas por mostrar
+    const btnMas = document.getElementById('btn-cargar-mas');
+    if (btnMas) {
+      const restantes = eventos.length - visibles.length;
+      btnMas.classList.toggle('hidden', restantes <= 0);
+      if (restantes > 0) {
+        btnMas.textContent = `↓ Cargar más medidas (${restantes} restante${restantes !== 1 ? 's' : ''})`;
+      }
+    }
   }
 };
 
@@ -1373,6 +1678,7 @@ const Events = {
     document.getElementById('btn-polemica')?.addEventListener('click', () => {
       const btn = document.getElementById('btn-polemica');
       Filtrado.state.soloPolemicas = !Filtrado.state.soloPolemicas;
+      Filtrado.resetLimite();
       btn?.classList.toggle('active', Filtrado.state.soloPolemicas);
       btn?.setAttribute('aria-pressed', String(Filtrado.state.soloPolemicas));
       btn.textContent = Filtrado.state.soloPolemicas ? '🔥 Todas las medidas' : '🔥 Solo polémicas';
@@ -1382,6 +1688,17 @@ const Events = {
     // ---- Disclaimer bar ----
     document.getElementById('disclaimer-close')?.addEventListener('click', () => {
       document.getElementById('disclaimer-bar')?.remove();
+    });
+
+    // ---- Open Data: descargar CSV ----
+    document.getElementById('btn-csv')?.addEventListener('click', () => OpenData.descargar());
+
+    // ---- Cargar más medidas (paginación visual) ----
+    // Re-render directo (sin skeleton): el usuario ya está mirando la
+    // lista y un flash de carga aquí sería ruido visual innecesario.
+    document.getElementById('btn-cargar-mas')?.addEventListener('click', () => {
+      Filtrado.state.limiteVisual += Filtrado.PASO_VISUAL;
+      Render.timeline();
     });
 
     // ---- Toggle de tema claro/oscuro ----
@@ -1400,6 +1717,7 @@ const Events = {
     searchInput?.addEventListener('input', () => {
       // Sanitizar el input antes de usarlo como filtro
       Filtrado.state.busqueda = Sanitize.searchInput(searchInput.value);
+      Filtrado.resetLimite(); // nueva búsqueda → paginación al inicio
       searchClear?.classList.toggle('visible', Filtrado.state.busqueda.length > 0);
       clearTimeout(searchTimer);
       searchTimer = setTimeout(() => Render.timelineDeferred(), 160);
@@ -1408,6 +1726,7 @@ const Events = {
     searchClear?.addEventListener('click', () => {
       if (searchInput) searchInput.value = '';
       Filtrado.state.busqueda = '';
+      Filtrado.resetLimite();
       searchClear.classList.remove('visible');
       searchInput?.focus();
       Render.timelineDeferred();
@@ -1483,6 +1802,7 @@ const Events = {
           chip.classList.add('active');
           Filtrado.state.filtroMinistroBusqueda = nombre;
         }
+        Filtrado.resetLimite(); // nuevo actor → paginación al inicio
         syncChipsAria();
         Render.timelineDeferred();
       });
@@ -1512,6 +1832,7 @@ const Events = {
 
     // ---- Limpiar filtros desde banner ----
     document.getElementById('filtros-activos-limpiar')?.addEventListener('click', () => {
+      Filtrado.resetLimite();
       Filtrado.state.soloPolemicas = false;
       document.getElementById('btn-polemica')?.classList.remove('active');
       document.getElementById('btn-polemica').textContent = '🔥 Solo polémicas';
@@ -1564,6 +1885,7 @@ const Events = {
         const yaActivo = chip.classList.contains('active');
         document.querySelectorAll('.ministro-chip').forEach(c => c.classList.remove('active'));
         Filtrado.state.filtroMinistroBusqueda = yaActivo ? '' : nombre;
+        Filtrado.resetLimite(); // nuevo actor → paginación al inicio
         if (!yaActivo) {
           document.querySelectorAll(`.ministro-chip[data-nombre="${nombre}"]`).forEach(c => c.classList.add('active'));
         }
@@ -1575,6 +1897,7 @@ const Events = {
 
     // Drawer reset all
     document.getElementById('drawer-reset')?.addEventListener('click', () => {
+      Filtrado.resetLimite();
       Filtrado.state.soloPolemicas = false;
       document.getElementById('btn-polemica')?.classList.remove('active');
       document.getElementById('btn-polemica').textContent = '🔥 Solo polémicas';
