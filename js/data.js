@@ -2,14 +2,14 @@
 
 /**
  * js/data.js — Base de Datos Maestra de Kastigo.cl
- * Cronología: 11 al 23 de marzo de 2026
+ * Cronología: 11 de marzo al 22 de junio de 2026
  *
  * POLÍTICA EDITORIAL:
  * - descripcion: hechos objetivos verificables con fuente citada
  *
  * POLÍTICA DE URLs: cada URL fue verificada en resultados de búsqueda reales.
- * Cronología: 11 de marzo al 10 de junio de 2026
- * Total de eventos: 104
+ * Cronología: 11 de marzo al 22 de junio de 2026
+ * Total de eventos: 108
  */
 
 const eventosGubernamentales = [
@@ -960,5 +960,41 @@ const eventosGubernamentales = [
         "categoria": "Política",
         "tipo": "Declaración",
         "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/06/10/desaprobacion-al-presidente-kast-llega-a-52-y-aprobacion-al-34-segun-encuesta-cep.shtml" }
+    },
+    {
+        "id": 105,
+        "fecha": "2026-06-16",
+        "titulo": "Senado despacha a ley el reajuste del salario mínimo a $553.553",
+        "descripcion": "El Senado despachó a ley el proyecto que reajusta el ingreso mínimo mensual a $553.553, un alza de $14.553 (2,7%) con efecto retroactivo al 1 de mayo de 2026, que también incrementa la asignación familiar y maternal y el subsidio familiar. Como ninguna de las indicaciones fue aprobada, el proyecto no debió volver a la Cámara de Diputados. El ministro del Trabajo, Tomás Rau, valoró el respaldo y adelantó un segundo reajuste el 1 de enero de 2027 para compensar el IPC del año; la CUT había restado su firma al acuerdo por considerar el monto insuficiente frente al alza del costo de la vida.",
+        "categoria": "Laboral",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/economia/sueldo-minimo/senado-despacho-ley-que-fija-aumento-de-14-553-pesos-para-el-salario/2026-06-16/195904.html" }
+    },
+    {
+        "id": 106,
+        "fecha": "2026-06-17",
+        "titulo": "Comisión de Hacienda del Senado aprueba en general la megarreforma de Reconstrucción",
+        "descripcion": "La Comisión de Hacienda del Senado aprobó por mayoría la idea de legislar del proyecto de Reconstrucción Nacional y Desarrollo Económico y Social, la \"megarreforma\" del gobierno que rebaja el Impuesto de Primera Categoría del 27% al 23% y agiliza la permisología, dejándolo listo para su votación general en la Sala. El oficialismo defendió la iniciativa como motor de inversión y empleo, mientras la senadora Paulina Vodanovic (PS) reiteró el rechazo de su sector por mezclar la reconstrucción con la reforma tributaria y por el aumento de la deuda pública.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Meganoticias", "url": "https://www.meganoticias.cl/nacional/524893-comision-hacienda-senado-aprueba-proyecto-reconstruccion-nacional-desarrollo-17-06-2026.html" }
+    },
+    {
+        "id": 107,
+        "fecha": "2026-06-19",
+        "titulo": "Kast hace balance de sus primeros 100 días en su quinto consejo de gabinete",
+        "descripcion": "Al cumplir 100 días de gobierno, Kast encabezó su quinto consejo de gabinete y calificó el período como \"bastante intenso\". El Ejecutivo difundió un balance oficial que destaca una reducción de 11,7% en homicidios y femicidios entre el 16 de marzo y el 7 de junio respecto a igual período de 2025, además de 23 mensajes presidenciales y urgencias a más de un centenar de iniciativas. La oposición y diversos analistas cuestionaron que varias promesas de campaña —como el equilibrio fiscal y la baja de precios— no se han cumplido en el plazo comprometido.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/kast-encabeza-su-quinto-consejo-de-gabinete-y-hace-balance-de-sus-primeros-100-dias-han-sido-bastante-intensos/" }
+    },
+    {
+        "id": 108,
+        "fecha": "2026-06-21",
+        "titulo": "Encuestas a 100 días: Criteria y Cadem muestran desaprobación mayoritaria de Kast",
+        "descripcion": "Dos sondeos publicados al cumplirse 100 días de gobierno reflejaron un escenario adverso para el Ejecutivo. Según Criteria, la aprobación de Kast se situó en 39% y la desaprobación en 51%, con un 49% que considera que el gobierno \"fue peor de lo esperado\" frente a un 14% que lo evalúa mejor. La encuesta Cadem, en tanto, midió 44% de aprobación y 53% de desaprobación. En el oficialismo relativizaron las cifras apelando a la dureza del escenario heredado, mientras la oposición las interpretó como una señal de desgaste temprano.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/politica/encuestas/a-100-dias-de-kast-casi-la-mitad-dice-que-gobierno-fue-peor-de-lo/2026-06-21/121440.html" }
     }
 ]
