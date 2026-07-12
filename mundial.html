@@ -91,11 +91,15 @@
     }
 
     @keyframes mundial-spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .mundial-eyebrow .ball { animation: none; }
+      .mundial-eyebrow .ball {
+        animation: none;
+      }
     }
 
     .mundial-title {
@@ -135,7 +139,10 @@
       color: #fff;
     }
 
-    .mundial-window-pill strong { color: var(--amarillo); font-weight: 500; }
+    .mundial-window-pill strong {
+      color: var(--amarillo);
+      font-weight: 500;
+    }
 
     .mundial-hero-stripe {
       position: absolute;
@@ -145,10 +152,21 @@
       z-index: 2;
     }
 
-    .mundial-hero-stripe span { flex: 1; }
-    .mundial-hero-stripe span:nth-child(1) { background: var(--azul-claro); }
-    .mundial-hero-stripe span:nth-child(2) { background: var(--blanco); }
-    .mundial-hero-stripe span:nth-child(3) { background: var(--rojo); }
+    .mundial-hero-stripe span {
+      flex: 1;
+    }
+
+    .mundial-hero-stripe span:nth-child(1) {
+      background: var(--azul-claro);
+    }
+
+    .mundial-hero-stripe span:nth-child(2) {
+      background: var(--blanco);
+    }
+
+    .mundial-hero-stripe span:nth-child(3) {
+      background: var(--rojo);
+    }
 
     /* Marca de agua: balón grande decorativo */
     .mundial-hero-watermark {
@@ -198,8 +216,13 @@
       margin: 0 0 0.7rem;
     }
 
-    .mundial-contexto p:last-child { margin-bottom: 0; }
-    .mundial-contexto strong { color: var(--text-primary); }
+    .mundial-contexto p:last-child {
+      margin-bottom: 0;
+    }
+
+    .mundial-contexto strong {
+      color: var(--text-primary);
+    }
 
     .mundial-nota {
       margin-top: 1rem;
@@ -295,7 +318,10 @@
       transition: var(--trans);
     }
 
-    .mundial-chip:hover { border-color: var(--azul-claro); color: var(--text-primary); }
+    .mundial-chip:hover {
+      border-color: var(--azul-claro);
+      color: var(--text-primary);
+    }
 
     .mundial-chip[aria-pressed="true"] {
       background: var(--azul);
@@ -345,12 +371,21 @@
     }
 
     @keyframes m-fade {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .m-card { animation: none; }
+      .m-card {
+        animation: none;
+      }
     }
 
     .m-card:hover {
@@ -384,11 +419,30 @@
     }
 
     /* Colores de tipo (alineados con la identidad Kastigo) */
-    .t-ley { background: rgba(26, 122, 74, 0.14); color: var(--verde); }
-    .t-decreto { background: rgba(31, 91, 163, 0.14); color: var(--azul-claro); }
-    .t-declaracion { background: rgba(82, 96, 117, 0.16); color: var(--gris-texto); }
-    .t-proyecto { background: rgba(245, 166, 35, 0.18); color: var(--naranja); }
-    .t-polemica { background: rgba(200, 0, 30, 0.12); color: var(--rojo); }
+    .t-ley {
+      background: rgba(26, 122, 74, 0.14);
+      color: var(--verde);
+    }
+
+    .t-decreto {
+      background: rgba(31, 91, 163, 0.14);
+      color: var(--azul-claro);
+    }
+
+    .t-declaracion {
+      background: rgba(82, 96, 117, 0.16);
+      color: var(--gris-texto);
+    }
+
+    .t-proyecto {
+      background: rgba(245, 166, 35, 0.18);
+      color: var(--naranja);
+    }
+
+    .t-polemica {
+      background: rgba(200, 0, 30, 0.12);
+      color: var(--rojo);
+    }
 
     .m-card-date {
       font-family: 'DM Mono', monospace;
@@ -438,8 +492,14 @@
       font-weight: 500;
     }
 
-    .m-cta .arrow { transition: transform 0.2s; display: inline-block; }
-    .m-card:hover .m-cta .arrow { transform: translateX(4px); }
+    .m-cta .arrow {
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+
+    .m-card:hover .m-cta .arrow {
+      transform: translateX(4px);
+    }
 
     /* Skeleton loader */
     .m-skeleton {
@@ -460,7 +520,9 @@
     }
 
     @keyframes sk-shimmer {
-      to { background-position: -200% 0; }
+      to {
+        background-position: -200% 0;
+      }
     }
 
     .mundial-empty {
@@ -493,7 +555,10 @@
       transition: var(--trans);
     }
 
-    .mundial-back a:hover { border-color: var(--azul-claro); background: var(--azul-suave); }
+    .mundial-back a:hover {
+      border-color: var(--azul-claro);
+      background: var(--azul-suave);
+    }
 
     /* Enlace de la barra superior de navegación (destacado) */
     .nav-btn-mundial {
@@ -544,7 +609,8 @@
   <section class="mundial-hero" aria-labelledby="mundial-h1">
     <span class="mundial-hero-watermark" aria-hidden="true">⚽</span>
     <div class="mundial-hero-inner">
-      <span class="mundial-eyebrow"><span class="ball" aria-hidden="true">⚽</span> Especial · Copa Mundial FIFA 2026</span>
+      <span class="mundial-eyebrow"><span class="ball" aria-hidden="true">⚽</span> Especial · Copa Mundial FIFA
+        2026</span>
       <h1 class="mundial-title" id="mundial-h1">Lo que se decidió<br /><em>mientras mirábamos el Mundial.</em></h1>
       <p class="mundial-subtitle">
         Mientras la atención del país estaba puesta en la pelota, el gobierno siguió tomando decisiones.
@@ -606,9 +672,21 @@
     <div class="mundial-filtros" id="mundial-filtros" role="group" aria-label="Filtrar por categoría"></div>
 
     <ol class="mundial-track" id="mundial-track" aria-label="Medidas del gobierno durante el Mundial" aria-busy="true">
-      <li class="m-skeleton"><div class="sk-line" style="width:30%"></div><div class="sk-line" style="width:85%"></div><div class="sk-line" style="width:70%"></div></li>
-      <li class="m-skeleton"><div class="sk-line" style="width:30%"></div><div class="sk-line" style="width:85%"></div><div class="sk-line" style="width:70%"></div></li>
-      <li class="m-skeleton"><div class="sk-line" style="width:30%"></div><div class="sk-line" style="width:85%"></div><div class="sk-line" style="width:70%"></div></li>
+      <li class="m-skeleton">
+        <div class="sk-line" style="width:30%"></div>
+        <div class="sk-line" style="width:85%"></div>
+        <div class="sk-line" style="width:70%"></div>
+      </li>
+      <li class="m-skeleton">
+        <div class="sk-line" style="width:30%"></div>
+        <div class="sk-line" style="width:85%"></div>
+        <div class="sk-line" style="width:70%"></div>
+      </li>
+      <li class="m-skeleton">
+        <div class="sk-line" style="width:30%"></div>
+        <div class="sk-line" style="width:85%"></div>
+        <div class="sk-line" style="width:70%"></div>
+      </li>
     </ol>
 
     <div class="mundial-empty hidden" id="mundial-empty" role="status" aria-live="polite">
@@ -674,7 +752,7 @@
   </footer>
 
   <!-- Datos primero, luego lógica de esta página -->
-  <script src="js/data.js?v=24"></script>
+  <script src="js/data.js?v=26"></script>
   <script>
     (function () {
       'use strict';
