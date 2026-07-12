@@ -2162,13 +2162,25 @@ button {
     display: none;
   }
 
-  .nav-btn:not(.btn-theme-toggle):not(.btn-hamburger) {
+  .nav-btn:not(.btn-theme-toggle):not(.btn-hamburger):not(.nav-btn-cafe):not(.nav-btn-mundial) {
     display: none;
+  }
+
+  /* Mantener visibles en móvil el café y el acceso a la sección Mundial */
+  .nav-btn-cafe,
+  .nav-btn-mundial {
+    display: inline-flex !important;
+    align-items: center;
   }
 
   .nav-btn-cafe {
     padding: 0.4rem 0.85rem;
     font-size: 0.78rem;
+  }
+
+  .nav-btn-mundial {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.9rem;
   }
 
   .btn-theme-toggle {
