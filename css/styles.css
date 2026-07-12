@@ -3670,3 +3670,13 @@ button {
     transform: none;
   }
 }
+/* Enlace destacado a la seccion Especial Mundial */
+.nav-btn-mundial {
+  background: var(--rojo);
+  color: #fff;
+  border-color: var(--rojo);
+}
+.nav-btn-mundial:hover {
+  background: var(--rojo-medio);
+  border-color: var(--rojo-medio);
+}

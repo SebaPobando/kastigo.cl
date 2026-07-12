@@ -2,14 +2,14 @@
 
 /**
  * js/data.js — Base de Datos Maestra de Kastigo.cl
- * Cronología: 11 de marzo al 22 de junio de 2026
+ * Cronología: 11 de marzo al 12 de julio de 2026
  *
  * POLÍTICA EDITORIAL:
  * - descripcion: hechos objetivos verificables con fuente citada
  *
  * POLÍTICA DE URLs: cada URL fue verificada en resultados de búsqueda reales.
- * Cronología: 11 de marzo al 22 de junio de 2026
- * Total de eventos: 108
+ * Cronología: 11 de marzo al 12 de julio de 2026
+ * Total de eventos: 116
  */
 
 const eventosGubernamentales = [
@@ -996,5 +996,101 @@ const eventosGubernamentales = [
         "categoria": "Política",
         "tipo": "Declaración",
         "fuente": { "medio": "Cooperativa", "url": "https://www.cooperativa.cl/noticias/pais/politica/encuestas/a-100-dias-de-kast-casi-la-mitad-dice-que-gobierno-fue-peor-de-lo/2026-06-21/121440.html" }
+    },
+    {
+        "id": 109,
+        "fecha": "2026-06-24",
+        "titulo": "Senado aprueba en general la megarreforma y la envía a comisión para su discusión en particular",
+        "descripcion": "El Senado aprobó en general el proyecto de Reconstrucción Nacional y Desarrollo Económico y Social —la \"megarreforma\" del gobierno— con 26 votos a favor, 23 en contra y una abstención (la del senador Pedro Araya, PPD). El proyecto, que rebaja el impuesto de primera categoría y agiliza la permisología, volvió a la Comisión de Hacienda para su votación en particular, artículo por artículo. El oficialismo la defendió como motor de inversión y empleo, mientras sectores de oposición cuestionaron mezclar la reconstrucción con la rebaja tributaria y el aumento de la deuda pública.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": {
+            "medio": "BioBioChile",
+            "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/06/24/aprueban-megarreforma-en-su-segundo-tramite-volvera-a-hacienda-para-su-discusion-en-particular.shtml"
+        }
+    },
+    {
+        "id": 110,
+        "fecha": "2026-06-25",
+        "titulo": "Gobierno se abre a ajustes en la megarreforma pero afirma que no cederá \"en lo económico\"",
+        "descripcion": "Tras el triunfo en la votación general, el gobierno señaló que estaba dispuesto a introducir ajustes al proyecto durante su discusión en particular, pero adelantó que no cedería en el núcleo económico de la iniciativa: la rebaja del impuesto corporativo y los incentivos a la inversión. La oposición advirtió que los cambios ofrecidos eran insuficientes y reiteró sus reparos por el costo fiscal de la reforma y su impacto en la recaudación.",
+        "categoria": "Economía",
+        "tipo": "Declaración",
+        "fuente": {
+            "medio": "BioBioChile",
+            "url": "https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/06/25/que-viene-ahora-la-megarreforma-de-kast-logro-su-primer-triunfo-y-debera-sortear-ajustes-clave.shtml"
+        }
+    },
+    {
+        "id": 111,
+        "fecha": "2026-07-05",
+        "titulo": "Oficialismo presiona por la aprobación de la megarreforma y tensiona a la oposición",
+        "descripcion": "A pocos días de la votación decisiva, el oficialismo intensificó la presión para aprobar la megarreforma en una negociación que fragmentó a la oposición: mientras un sector se abría a respaldar partes del proyecto, otro mantenía su rechazo por la rebaja tributaria y su impacto en la recaudación fiscal. El gobierno sostuvo que la reforma es indispensable para reactivar la inversión y el empleo.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": {
+            "medio": "Radio U. de Chile",
+            "url": "https://radio.uchile.cl/2026/07/05/oficialismo-presiona-por-aprobacion-de-megarreforma-y-fragmenta-a-la-oposicion-en-el-senado/"
+        }
+    },
+    {
+        "id": 112,
+        "fecha": "2026-07-07",
+        "titulo": "Presidenta del Senado fija para el 15 de julio la votación final de la megarreforma",
+        "descripcion": "La presidenta del Senado, Paulina Núñez (RN), anunció que la megarreforma se votará en la Sala el miércoles 15 de julio \"hasta su total despacho\", es decir, hasta aprobar o rechazar la totalidad de los artículos sin importar cuánto se extienda la jornada. \"Si hay que quedarse hasta la madrugada de esa jornada, así va a ser\", afirmó. La definición ordenó el cronograma tras semanas de negociaciones en las comisiones.",
+        "categoria": "Política",
+        "tipo": "Administrativo",
+        "fuente": {
+            "medio": "La Tercera",
+            "url": "https://www.latercera.com/politica/noticia/senado-pone-fecha-a-votacion-de-la-megarreforma-sera-el-15-de-julio-y-hasta-total-despacho/"
+        }
+    },
+    {
+        "id": 113,
+        "fecha": "2026-07-09",
+        "titulo": "Acuerdo Gobierno-PPD reestructura la invariabilidad tributaria de la megarreforma",
+        "descripcion": "El gobierno y la bancada PPD acordaron modificar el mecanismo de invariabilidad tributaria del proyecto: en lugar de un beneficio general, la estabilidad impositiva se otorgaría de forma escalonada según el monto de la inversión —10 años para proyectos entre US$50 y US$100 millones, 15 años hasta US$350 millones y hasta 20 años sobre ese monto—, con una sobretasa permanente de 1,5 puntos al impuesto corporativo para quienes accedan al régimen. El acuerdo fijó además reglas específicas para proyectos mineros y el royalty. El oficialismo lo presentó como un balance entre certeza para invertir y recaudación; críticos cuestionaron el alcance de las garantías otorgadas a las grandes inversiones.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": {
+            "medio": "BioBioChile",
+            "url": "https://www.biobiochile.cl/noticias/bbcl-explica/bbcl-explica-notas/2026/07/09/que-significa-y-como-entender-el-nuevo-acuerdo-sobre-invariabilidad-tributaria-en-la-megarreforma.shtml"
+        }
+    },
+    {
+        "id": 114,
+        "fecha": "2026-07-09",
+        "titulo": "Expresidente Frei defiende la megarreforma: \"No nos estamos tirando a la piscina sin agua\"",
+        "descripcion": "El expresidente Eduardo Frei Ruiz-Tagle salió a respaldar públicamente la megarreforma del gobierno, afirmando que el país necesita reactivar la inversión y que la iniciativa cuenta con resguardos: \"No nos estamos tirando a la piscina sin agua\". Su apoyo, proveniente de un sector históricamente distante de Kast, fue leído como una señal de transversalidad por el oficialismo, mientras parte de la oposición mantuvo sus reparos al costo fiscal y a la rebaja del impuesto a las empresas.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": {
+            "medio": "El Mostrador",
+            "url": "https://www.elmostrador.cl/noticias/pais/2026/07/09/frei-sale-en-defensa-de-la-megarreforma-de-kast-no-nos-estamos-tirando-a-la-piscina-sin-agua/"
+        }
+    },
+    {
+        "id": 115,
+        "fecha": "2026-07-10",
+        "titulo": "Gobierno amplía la rebaja del impuesto a las empresas del 23% al 22%",
+        "descripcion": "Mediante indicaciones de último momento a la megarreforma, el gobierno amplió la rebaja del impuesto de primera categoría —pagado por las empresas— desde el 23% previsto originalmente a un 22% (hoy es 27%), con una reducción escalonada en tres años. El Ejecutivo y gremios empresariales defendieron la medida como incentivo al crecimiento y la inversión, acercando la tasa al promedio OCDE. En paralelo, las mismas indicaciones acotaron el crédito tributario al empleo y sumaron una sobretasa de 1,5 puntos para quienes accedan a la invariabilidad tributaria. Sectores de oposición advirtieron por la menor recaudación en un contexto de déficit fiscal.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": {
+            "medio": "BioBioChile",
+            "url": "https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/07/10/megarreforma-gobierno-amplia-baja-del-impuesto-a-las-empresas-hasta-el-22.shtml"
+        }
+    },
+    {
+        "id": 116,
+        "fecha": "2026-07-10",
+        "titulo": "Kast lanza el plan \"Modo Empleo\" ante el desempleo más alto en cinco años",
+        "descripcion": "El Presidente Kast anunció la puesta en marcha del plan \"Modo Empleo\" tras conocerse que la desocupación subió a 9,4% en el trimestre marzo-mayo, la más alta en cinco años. \"El empleo deja de ser tarea de un solo ministerio y pasa a ser la prioridad de todo el país\", señaló el Mandatario, quien convocó a municipios, gobernadores y empresas a coordinar acciones a través de una Mesa Interministerial por el Empleo. La oposición y algunos analistas cuestionaron que el alza del desempleo coincide con el ajuste fiscal y el recorte de dotación pública impulsados por el propio gobierno.",
+        "categoria": "Laboral",
+        "tipo": "Administrativo",
+        "fuente": {
+            "medio": "24 Horas",
+            "url": "https://www.24horas.cl/actualidad/economia/presidente-kast-modo-empleo-medidas-trabajo"
+        }
     }
 ]
