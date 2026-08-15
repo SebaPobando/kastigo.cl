@@ -4,16 +4,18 @@
  *             Network-first para data.js (siempre fresco).
  */
 
-const CACHE_NAME = 'kastigo-v25.0';
+const CACHE_NAME = 'kastigo-v26.0';
 const CACHE_STATIC = [
   '/',
   '/index.html',
   '/mundial.html',
   '/404.html',
+  '/gabinete.html',
   '/css/styles.css',
   '/css/widgets.css',
   '/js/app.js',
   '/js/widgets.js',
+  '/js/gabinete.js',
   '/assets/img/logo.png',
   '/assets/img/og-image.jpg',
   '/manifest.json',

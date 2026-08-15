@@ -331,6 +331,11 @@ button {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  /* Con Gabinete y Mundial el menú ya no cabe de una línea en tablet:
+     que envuelva en vez de empujar el ancho de la página. */
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: 0;
 }
 
 .nav-btn {
@@ -558,6 +563,11 @@ button {
   gap: 0.6rem;
   font-size: 0.72rem;
   transition: background 0.3s ease;
+  /* body es flex: sin esto la barra se dimensiona a su contenido mínimo
+     y desborda a lo ancho en móvil en vez de envolver. */
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .leyenda-title {
@@ -3108,10 +3118,15 @@ button {
   }
 }
 
-@media (max-width: 620px) {
+/* Con dos secciones más en el menú, las etiquetas dejan de caber
+   bastante antes de 620px. */
+@media (max-width: 900px) {
   .install-label {
     display: none;
   }
+}
+
+@media (max-width: 620px) {
 
   .btn-install {
     padding: 0.42rem 0.65rem;
@@ -3719,4 +3734,96 @@ button {
 .nav-btn-mundial:hover {
   background: var(--rojo-medio);
   border-color: var(--rojo-medio);
+}
+
+/* ============================================================
+   RESUMEN DE GABINETE (portada)
+   Bloque compacto que enlaza a gabinete.html.
+   ============================================================ */
+.gab-resumen {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 3vw, 2rem);
+  flex-wrap: wrap;
+  max-width: 1320px;
+  margin: 0 auto;
+  /* body es flex: sin min-width:0 el bloque no se encoge y desborda en móvil */
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.9rem clamp(1rem, 4vw, 2rem);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  text-decoration: none;
+  transition: var(--trans);
+}
+
+.gab-resumen:hover {
+  background: var(--bg-input);
+}
+
+.gab-resumen-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1 1 240px;
+}
+
+.gab-resumen-titulo {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 1.02rem;
+  color: var(--text-primary);
+}
+
+.gab-resumen-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.gab-resumen-cifras {
+  display: flex;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
+}
+
+.gab-resumen-cifra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.gab-resumen-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.65rem;
+  color: var(--rojo);
+}
+
+.gab-resumen-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.gab-resumen-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--azul-claro);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .gab-resumen {
+    gap: 0.7rem;
+  }
+
+  .gab-resumen-cta {
+    display: none;
+  }
 }

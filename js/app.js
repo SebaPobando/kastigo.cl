@@ -1347,6 +1347,37 @@ const Skeleton = {
 const Render = {
 
   /**
+   * Rellena el bloque de resumen del gabinete de la portada.
+   *
+   * Los datos viven en js/gabinete.js. Si ese archivo no se cargó, la función
+   * simplemente no hace nada y el bloque queda con sus guiones: la portada no
+   * debe romperse por una sección secundaria.
+   */
+  gabineteResumen() {
+    if (typeof cambiosGabinete === 'undefined' ||
+      typeof salidasSubsecretarios === 'undefined' ||
+      typeof salidasSeremis === 'undefined') return;
+
+    // Un ministro que cambia de cartera (Arrau: Obras Públicas → Seguridad)
+    // no salió del gobierno, así que no se cuenta como salida.
+    const salieron = new Set();
+    cambiosGabinete.forEach(c => {
+      if (!cambiosGabinete.some(o => o.entra === c.sale)) salieron.add(c.sale);
+    });
+
+    const seremis = salidasSeremis.filter(s => !s.traslado).length;
+    const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+
+    set('gab-r-ministros', salieron.size);
+    set('gab-r-subs', salidasSubsecretarios.length);
+    set('gab-r-seremis', seremis);
+
+    const total = salieron.size + salidasSubsecretarios.length + seremis;
+    const sub = document.getElementById('gab-resumen-sub');
+    if (sub) sub.textContent = `${total} autoridades han dejado el cargo desde marzo`;
+  },
+
+  /**
    * Pone la fecha del hero ("Actualizado · …") a partir del último evento
    * registrado, en vez de dejarla escrita a mano en el HTML —que es como
    * terminó diciendo "Junio 2026" en pleno agosto.
@@ -2021,6 +2052,7 @@ function init() {
   Render.ultimaMedida(); // 2b. Banner última medida
   Render.actorChips();   // 2c. Chips de actores (oculta los que no tienen datos)
   Render.fechaActualizacion(); // 2d. Fecha del hero desde el último evento
+  Render.gabineteResumen();    // 2e. Resumen del gabinete (enlaza a gabinete.html)
   Render.estadisticas(); // 3. Panel de stats + gráfico de dona
   Render.allFilters();   // 4. Botones de filtro sidebar
   Render.drawerFilters();// 4b. Botones de filtro drawer

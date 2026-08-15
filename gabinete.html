@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es-CL" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>Kastigo · Quién entra y quién sale del gobierno de Chile 2026</title>
+  <meta name="description"
+    content="Registro de la composición del gabinete de Kast y de todas las autoridades que han dejado el cargo desde marzo de 2026: ministros, subsecretarios y seremis, con la fuente periodística de cada salida." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Colectivo Kastigo" />
+  <meta name="keywords"
+    content="gabinete kast, ministros chile 2026, renuncias gobierno chile, seremis renuncia, cambio de gabinete chile" />
+  <link rel="canonical" href="https://kastigo.cl/gabinete.html" />
+  <link rel="icon" href="assets/img/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/img/logo.png" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kastigo.cl/gabinete.html" />
+  <meta property="og:title" content="Kastigo · Quién entra y quién sale del gobierno" />
+  <meta property="og:description"
+    content="El gabinete cartera por cartera y todas las autoridades que han dejado el cargo desde marzo de 2026, con fuente periodística." />
+  <meta property="og:image" content="https://kastigo.cl/assets/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:site_name" content="Kastigo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kastigo · Quién entra y quién sale del gobierno" />
+  <meta name="twitter:description"
+    content="El gabinete cartera por cartera y todas las salidas de autoridades desde marzo de 2026." />
+  <meta name="twitter:image" content="https://kastigo.cl/assets/img/og-image.jpg" />
+
+  <meta name="theme-color" content="#0B1F3A" />
+
+  <!-- Aplica el tema guardado antes de pintar (evita parpadeo) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('kastigo-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css?v=26" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Estilos propios de la sección Gabinete (variables heredadas de styles.css) -->
+  <style>
+    .gab-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(2.4rem, 8vw, 4.4rem) 1.2rem clamp(2rem, 6vw, 3rem);
+      background: linear-gradient(160deg, #0B1F3A 0%, #12294A 60%, #0B1F3A 100%);
+      color: #fff;
+    }
+
+    .gab-hero-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .gab-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8FA8C8;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .gab-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 1.02;
+      margin: 0.7rem 0 0;
+      letter-spacing: -0.02em;
+    }
+
+    .gab-title em {
+      font-style: italic;
+      color: #E23E4E;
+    }
+
+    .gab-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      color: #C3D0E2;
+      max-width: 62ch;
+      margin-top: 0.9rem;
+      line-height: 1.6;
+      font-size: clamp(0.9rem, 2.4vw, 1rem);
+    }
+
+    .gab-hero-stripe {
+      display: flex;
+      height: 4px;
+      margin-top: 2rem;
+    }
+
+    .gab-hero-stripe span {
+      flex: 1;
+    }
+
+    .gab-hero-stripe span:nth-child(1) {
+      background: #1F5BA3;
+    }
+
+    .gab-hero-stripe span:nth-child(2) {
+      background: #F2F3F6;
+    }
+
+    .gab-hero-stripe span:nth-child(3) {
+      background: #C8102E;
+    }
+
+    /* ---- Cifras ---- */
+    /* body es flex (styles.css), así que sus hijos necesitan min-width:0
+       para poder encogerse: sin eso el grid impone su ancho mínimo de
+       contenido y la página desborda a lo ancho en móvil. */
+    .gab-hero,
+    .gab-stats,
+    .gab-wrap {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .gab-stats {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: clamp(1.6rem, 4vw, 2.4rem) 1.2rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .gab-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.1rem 1rem;
+      text-align: center;
+    }
+
+    .gab-stat-num {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 6vw, 2.9rem);
+      line-height: 1;
+      color: var(--rojo);
+    }
+
+    .gab-stat-label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    /* ---- Contenedor general ---- */
+    .gab-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: clamp(1.8rem, 5vw, 3rem) 1.2rem 3rem;
+    }
+
+    .gab-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 2.4rem 0 0.4rem;
+      border-bottom: 2px solid var(--azul);
+      padding-bottom: 0.5rem;
+    }
+
+    .gab-section-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(1.25rem, 4vw, 1.8rem);
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .gab-section-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    .gab-nota {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      background: var(--bg-input);
+      border-left: 3px solid var(--azul-claro);
+      border-radius: 0 8px 8px 0;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0 0;
+    }
+
+    /* ---- Grilla de carteras ---- */
+    .gab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(265px, 100%), 1fr));
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .gab-cartera {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .gab-cartera.cambio {
+      border-left: 3px solid var(--rojo);
+    }
+
+    .gab-cartera-nombre {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .gab-titular {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .gab-cartera-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.15rem;
+    }
+
+    .gab-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.16rem 0.5rem;
+      border-radius: 20px;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .gab-pill-original {
+      background: rgba(46, 139, 87, 0.12);
+      color: #2E8B57;
+      border-color: rgba(46, 139, 87, 0.3);
+    }
+
+    .gab-pill-cambio {
+      background: rgba(200, 16, 46, 0.1);
+      color: var(--rojo);
+      border-color: rgba(200, 16, 46, 0.28);
+    }
+
+    .gab-pill-bi {
+      background: rgba(94, 58, 158, 0.12);
+      color: #5E3A9E;
+      border-color: rgba(94, 58, 158, 0.28);
+    }
+
+    [data-theme="dark"] .gab-pill-original {
+      background: rgba(46, 139, 87, 0.2);
+      color: #63C48C;
+    }
+
+    [data-theme="dark"] .gab-pill-bi {
+      background: rgba(94, 58, 158, 0.25);
+      color: #A07ED4;
+    }
+
+    .gab-anterior {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+    }
+
+    .gab-anterior s {
+      opacity: 0.75;
+    }
+
+    /* ---- Relevos ministeriales ---- */
+    .gab-relevos {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .gab-relevo {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--rojo);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .gab-relevo-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .gab-relevo-fecha {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    .gab-relevo-cartera {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border-radius: 20px;
+      background: var(--azul);
+      color: #fff;
+    }
+
+    .gab-flujo {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .gab-sale {
+      color: var(--rojo);
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+      opacity: 0.85;
+    }
+
+    .gab-flecha {
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .gab-entra {
+      color: #2E8B57;
+    }
+
+    [data-theme="dark"] .gab-entra {
+      color: #63C48C;
+    }
+
+    .gab-relevo-motivo {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0.55rem 0 0.6rem;
+    }
+
+    /* ---- Filtros ---- */
+    .gab-filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+
+    .gab-filtro {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      padding: 0.34rem 0.8rem;
+      border-radius: 20px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--trans);
+    }
+
+    .gab-filtro:hover {
+      border-color: var(--azul-claro);
+      color: var(--azul-claro);
+    }
+
+    .gab-filtro.active {
+      background: var(--azul);
+      color: #fff;
+      border-color: var(--azul);
+    }
+
+    .gab-filtro-count {
+      margin-left: 0.35rem;
+      opacity: 0.6;
+    }
+
+    /* ---- Tabla de salidas ---- */
+    .gab-salidas {
+      list-style: none;
+      padding: 0;
+      margin: 1.2rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .gab-salida {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 0.2rem 1rem;
+      align-items: start;
+    }
+
+    .gab-salida-fecha {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      padding-top: 0.15rem;
+      white-space: nowrap;
+    }
+
+    .gab-salida-nombre {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.96rem;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .gab-salida-cargo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.03em;
+      margin-top: 0.15rem;
+    }
+
+    .gab-salida-motivo {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 0.4rem;
+    }
+
+    .gab-salida-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .gab-fuente {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--azul-claro);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .gab-fuente:hover {
+      border-bottom-color: var(--azul-claro);
+    }
+
+    .gab-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.16rem 0.5rem;
+      border-radius: 20px;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .gab-aviso {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.16rem 0.5rem;
+      border-radius: 20px;
+      background: rgba(212, 98, 10, 0.12);
+      color: #B35A0A;
+      border: 1px solid rgba(212, 98, 10, 0.3);
+    }
+
+    [data-theme="dark"] .gab-aviso {
+      background: rgba(212, 98, 10, 0.22);
+      color: #E8913A;
+    }
+
+    .gab-vacio {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .gab-back {
+      text-align: center;
+      margin-top: 2.6rem;
+    }
+
+    .gab-back a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      text-decoration: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 24px;
+      background: var(--azul);
+      color: #fff;
+      display: inline-block;
+    }
+
+    @media (max-width: 560px) {
+      .gab-salida {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
+      }
+
+      .gab-salida-fecha {
+        padding-top: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- AVISO NO OFICIAL -->
+  <div class="disclaimer-bar" role="alert">
+    <span>⚠️ Sitio <strong>NO oficial</strong> del gobierno · Plataforma ciudadana independiente · No somos afiliados al
+      Estado</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="header-brand">
+        <a href="index.html" class="brand-link" aria-label="Kastigo inicio">
+          <img src="assets/img/logo.png" alt="Kastigo" class="brand-logo" width="44" height="44" />
+          <div class="brand-text">
+            <span class="brand-name">KASTIGO</span>
+            <span class="brand-tagline">Monitor Ciudadano · Chile</span>
+          </div>
+        </a>
+        <span class="independent-badge">INDEPENDIENTE</span>
+      </div>
+      <nav class="header-nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-btn" aria-label="Ir al inicio">← Inicio</a>
+        <a href="https://ko-fi.com/kastigo" target="_blank" rel="noopener noreferrer" class="nav-btn nav-btn-cafe"
+          aria-label="Invitar un café">
+          ☕ <span class="install-label">Invítame un Café</span>
+        </a>
+        <button class="nav-btn btn-theme-toggle" id="btn-theme-toggle" aria-label="Cambiar tema">
+          <span class="theme-icon-sun" aria-hidden="true">☀️</span>
+          <span class="theme-icon-moon" aria-hidden="true">🌙</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="gab-hero" aria-labelledby="gab-h1">
+    <div class="gab-hero-inner">
+      <span class="gab-eyebrow">Seguimiento · Gabinete y autoridades</span>
+      <h1 class="gab-title" id="gab-h1">Quién entra.<br /><em>Quién sale.</em></h1>
+      <p class="gab-subtitle">
+        La composición del gabinete cartera por cartera y todas las autoridades que han dejado el cargo
+        desde el 11 de marzo de 2026. Cada salida con su fecha, el motivo informado por la prensa
+        y el link a la nota original.
+      </p>
+    </div>
+    <div class="gab-hero-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+  </section>
+
+  <!-- CIFRAS -->
+  <div class="gab-stats" role="list" aria-label="Resumen de salidas">
+    <div class="gab-stat" role="listitem">
+      <span class="gab-stat-num" id="stat-ministros">—</span>
+      <span class="gab-stat-label">ministros han salido</span>
+    </div>
+    <div class="gab-stat" role="listitem">
+      <span class="gab-stat-num" id="stat-subs">—</span>
+      <span class="gab-stat-label">subsecretarios</span>
+    </div>
+    <div class="gab-stat" role="listitem">
+      <span class="gab-stat-num" id="stat-seremis">—</span>
+      <span class="gab-stat-label">seremis</span>
+    </div>
+    <div class="gab-stat" role="listitem">
+      <span class="gab-stat-num" id="stat-total">—</span>
+      <span class="gab-stat-label">autoridades en total</span>
+    </div>
+    <div class="gab-stat" role="listitem">
+      <span class="gab-stat-num" id="stat-noasumio">—</span>
+      <span class="gab-stat-label">no alcanzaron a asumir</span>
+    </div>
+  </div>
+
+  <main class="gab-wrap" id="main-content">
+
+    <!-- EL GABINETE -->
+    <div class="gab-section-head">
+      <h2 class="gab-section-title">El gabinete hoy</h2>
+      <span class="gab-section-sub" id="sub-carteras"></span>
+    </div>
+    <p class="gab-nota">
+      Las 24 carteras con las que partió el gobierno el 11 de marzo de 2026. Las marcadas en rojo
+      cambiaron de titular. <strong>Biministro</strong> significa que una misma persona encabeza
+      dos ministerios a la vez: Daniel Mas lo hace desde el primer día en Economía y Minería, y
+      la figura se extendió a otras dos carteras en el cambio de mayo.
+    </p>
+    <div class="gab-grid" id="gab-grid"></div>
+
+    <!-- RELEVOS -->
+    <div class="gab-section-head">
+      <h2 class="gab-section-title">Relevos ministeriales</h2>
+      <span class="gab-section-sub" id="sub-relevos"></span>
+    </div>
+    <ol class="gab-relevos" id="gab-relevos"></ol>
+
+    <!-- SALIDAS -->
+    <div class="gab-section-head">
+      <h2 class="gab-section-title">Subsecretarios y seremis</h2>
+      <span class="gab-section-sub" id="sub-salidas"></span>
+    </div>
+    <p class="gab-nota">
+      Los medios no coinciden en el total, porque cada uno decide distinto si contar a quienes
+      alcanzaron a ser nombrados pero nunca asumieron. Al 29 de julio, Emol contabilizó 36 autoridades,
+      Mala Espina Check 38 y T13 24. Acá se listan las personas identificadas con nombre y fuente,
+      y los casos especiales van marcados: <span class="gab-aviso">no asumió</span> cuando el
+      nombramiento se revirtió antes de la asunción, y <span class="gab-aviso">traslado</span> cuando
+      la persona no dejó el gobierno sino que cambió de cargo. El motivo reproduce lo publicado por la
+      prensa; cuando la razón oficial fue "motivos personales", eso es lo que se consigna.
+    </p>
+    <div class="gab-filtros" id="gab-filtros" role="group" aria-label="Filtrar salidas"></div>
+    <ol class="gab-salidas" id="gab-salidas"></ol>
+    <p class="gab-vacio hidden" id="gab-vacio" role="status" aria-live="polite">
+      No hay salidas con ese criterio.
+    </p>
+
+    <div class="gab-back">
+      <a href="index.html">← Volver al registro de medidas</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Kastigo" class="footer-logo" width="34" height="34" loading="lazy" />
+        <span class="footer-name">KASTIGO</span>
+      </div>
+      <p class="footer-disclaimer">Sitio <strong>no oficial</strong> · Plataforma ciudadana independiente · No somos el
+        gobierno de Chile</p>
+      <nav class="footer-nav" aria-label="Pie de página">
+        <a class="footer-link" href="index.html">Registro completo</a>
+      </nav>
+      <p class="footer-copy">© 2026 Colectivo Kastigo · Datos públicos para ciudadanos libres</p>
+    </div>
+  </footer>
+
+  <script src="js/gabinete.js?v=26"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---- Tema (mismo comportamiento que el resto del sitio) ---- */
+      var STORAGE_KEY = 'kastigo-theme';
+      var themeBtn = document.getElementById('btn-theme-toggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var actual = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          var next = actual === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { }
+        });
+      }
+
+      /* ---- Utilidades ---- */
+      function fmtFecha(iso) {
+        var p = iso.split('-').map(Number);
+        return new Date(p[0], p[1] - 1, p[2]).toLocaleDateString('es-CL', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        });
+      }
+
+      // Siempre textContent para los datos: nada de innerHTML con contenido variable.
+      function el(tag, cls, texto) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (texto !== undefined && texto !== null) n.textContent = texto;
+        return n;
+      }
+
+      /* ---- Datos derivados ---- */
+      // Última persona que ocupó cada cartera, según los relevos registrados.
+      var relevoPorCartera = {};
+      cambiosGabinete.forEach(function (c) {
+        var prev = relevoPorCartera[c.cartera];
+        if (!prev || c.fecha >= prev.fecha) relevoPorCartera[c.cartera] = c;
+      });
+
+      var ministrosSalidos = {};
+      cambiosGabinete.forEach(function (c) {
+        // Arrau sale de Obras Públicas pero sigue en el gabinete: no cuenta como salida.
+        var sigueEnGabinete = cambiosGabinete.some(function (o) { return o.entra === c.sale; });
+        if (!sigueEnGabinete) ministrosSalidos[c.sale] = true;
+      });
+      var totalMinistros = Object.keys(ministrosSalidos).length;
+
+      var seremisReales = salidasSeremis.filter(function (s) { return !s.traslado; });
+      var noAsumieron = salidasSeremis.filter(function (s) { return s.asumio === false; }).length;
+      var totalAutoridades = totalMinistros + salidasSubsecretarios.length + seremisReales.length;
+
+      /* ---- Cifras ---- */
+      function set(id, v) { var n = document.getElementById(id); if (n) n.textContent = v; }
+      set('stat-ministros', totalMinistros);
+      set('stat-subs', salidasSubsecretarios.length);
+      set('stat-seremis', seremisReales.length);
+      set('stat-total', totalAutoridades);
+      set('stat-noasumio', noAsumieron);
+
+      /* ---- Grilla de carteras ---- */
+      var grid = document.getElementById('gab-grid');
+      var conCambio = 0;
+
+      gabineteInicial.forEach(function (c) {
+        var relevo = relevoPorCartera[c.cartera];
+        var card = el('div', 'gab-cartera' + (relevo ? ' cambio' : ''));
+        card.appendChild(el('span', 'gab-cartera-nombre', c.cartera));
+        card.appendChild(el('span', 'gab-titular', relevo ? relevo.entra : c.titular));
+
+        var meta = el('div', 'gab-cartera-meta');
+        if (relevo) {
+          conCambio++;
+          meta.appendChild(el('span', 'gab-pill gab-pill-cambio', 'cambió ' + fmtFecha(relevo.fecha)));
+        } else {
+          meta.appendChild(el('span', 'gab-pill gab-pill-original', 'desde el 11 mar'));
+        }
+        if (c.biministerio || (relevo && relevo.biministerio)) {
+          meta.appendChild(el('span', 'gab-pill gab-pill-bi', 'biministro'));
+        }
+        card.appendChild(meta);
+
+        if (relevo) {
+          var ant = el('p', 'gab-anterior');
+          ant.appendChild(document.createTextNode('Antes: '));
+          var s = document.createElement('s');
+          s.textContent = relevo.sale;
+          ant.appendChild(s);
+          card.appendChild(ant);
+        }
+        grid.appendChild(card);
+      });
+
+      set('sub-carteras', gabineteInicial.length + ' carteras · ' + conCambio + ' con cambio de titular');
+
+      /* ---- Relevos ---- */
+      var relevos = document.getElementById('gab-relevos');
+      var ordenados = cambiosGabinete.slice().sort(function (a, b) {
+        return b.fecha < a.fecha ? -1 : b.fecha > a.fecha ? 1 : 0;
+      });
+
+      ordenados.forEach(function (c) {
+        var li = el('li', 'gab-relevo');
+
+        var top = el('div', 'gab-relevo-top');
+        top.appendChild(el('span', 'gab-relevo-cartera', c.cartera));
+        top.appendChild(el('time', 'gab-relevo-fecha', fmtFecha(c.fecha)));
+        li.appendChild(top);
+
+        var flujo = el('div', 'gab-flujo');
+        flujo.appendChild(el('span', 'gab-sale', c.sale));
+        flujo.appendChild(el('span', 'gab-flecha', '→'));
+        flujo.appendChild(el('span', 'gab-entra', c.entra));
+        li.appendChild(flujo);
+
+        li.appendChild(el('p', 'gab-relevo-motivo', c.motivo));
+
+        var a = el('a', 'gab-fuente', c.fuente.medio + ' →');
+        a.href = c.fuente.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        li.appendChild(a);
+
+        relevos.appendChild(li);
+      });
+
+      set('sub-relevos', cambiosGabinete.length + ' relevos en ' + Object.keys(relevoPorCartera).length + ' carteras');
+
+      /* ---- Salidas de subsecretarios y seremis ---- */
+      var todas = []
+        .concat(salidasSubsecretarios.map(function (s) { var o = Object.assign({}, s); o.nivel = 'Subsecretarios'; return o; }))
+        .concat(salidasSeremis.map(function (s) { var o = Object.assign({}, s); o.nivel = 'Seremis'; return o; }))
+        .sort(function (a, b) { return a.fecha < b.fecha ? 1 : a.fecha > b.fecha ? -1 : 0; });
+
+      var filtroActivo = 'Todas';
+      var lista = document.getElementById('gab-salidas');
+      var vacio = document.getElementById('gab-vacio');
+
+      function pinta() {
+        lista.innerHTML = '';
+        var visibles = todas.filter(function (s) {
+          return filtroActivo === 'Todas' || s.nivel === filtroActivo || s.categoria === filtroActivo;
+        });
+
+        vacio.classList.toggle('hidden', visibles.length > 0);
+        set('sub-salidas', visibles.length + ' de ' + todas.length + ' registradas');
+
+        visibles.forEach(function (s) {
+          var li = el('li', 'gab-salida');
+          li.appendChild(el('time', 'gab-salida-fecha', fmtFecha(s.fecha)));
+
+          var cuerpo = el('div');
+          cuerpo.appendChild(el('span', 'gab-salida-nombre', s.nombre));
+
+          var cargo = s.cargo + (s.region ? ' · ' + s.region : '');
+          cuerpo.appendChild(el('div', 'gab-salida-cargo', cargo));
+          cuerpo.appendChild(el('p', 'gab-salida-motivo', s.motivo));
+
+          var meta = el('div', 'gab-salida-meta');
+          meta.appendChild(el('span', 'gab-cat', s.categoria));
+          if (s.asumio === false) meta.appendChild(el('span', 'gab-aviso', 'no asumió'));
+          if (s.traslado) meta.appendChild(el('span', 'gab-aviso', 'traslado'));
+
+          var a = el('a', 'gab-fuente', s.fuente.medio + ' →');
+          a.href = s.fuente.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          meta.appendChild(a);
+
+          cuerpo.appendChild(meta);
+          li.appendChild(cuerpo);
+          lista.appendChild(li);
+        });
+      }
+
+      // Filtros: primero por nivel, después por motivo (ordenados por frecuencia).
+      var cont = document.getElementById('gab-filtros');
+      var porCat = {};
+      todas.forEach(function (s) { porCat[s.categoria] = (porCat[s.categoria] || 0) + 1; });
+
+      var opciones = [
+        { label: 'Todas', n: todas.length },
+        { label: 'Subsecretarios', n: salidasSubsecretarios.length },
+        { label: 'Seremis', n: salidasSeremis.length }
+      ].concat(Object.keys(porCat)
+        .sort(function (a, b) { return porCat[b] - porCat[a]; })
+        .map(function (k) { return { label: k, n: porCat[k] }; }));
+
+      opciones.forEach(function (op) {
+        var b = el('button', 'gab-filtro' + (op.label === 'Todas' ? ' active' : ''));
+        b.type = 'button';
+        b.setAttribute('aria-pressed', op.label === 'Todas' ? 'true' : 'false');
+        b.appendChild(document.createTextNode(op.label));
+        b.appendChild(el('span', 'gab-filtro-count', op.n));
+        b.addEventListener('click', function () {
+          filtroActivo = op.label;
+          cont.querySelectorAll('.gab-filtro').forEach(function (o) {
+            var on = o === b;
+            o.classList.toggle('active', on);
+            o.setAttribute('aria-pressed', String(on));
+          });
+          pinta();
+        });
+        cont.appendChild(b);
+      });
+
+      pinta();
+    })();
+  </script>
+</body>
+
+</html>

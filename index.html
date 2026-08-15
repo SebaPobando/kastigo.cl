@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png" />
-  <link rel="stylesheet" href="css/widgets.css?v=25" />
+  <link rel="stylesheet" href="css/widgets.css?v=26" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
@@ -84,7 +84,7 @@
   <!-- Chart.js desde CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/styles.css?v=25" />
+  <link rel="stylesheet" href="css/styles.css?v=26" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -125,6 +125,8 @@
           <span class="theme-icon-sun" aria-hidden="true">☀️</span>
           <span class="theme-icon-moon" aria-hidden="true">🌙</span>
         </button>
+        <a href="gabinete.html" class="nav-btn" aria-label="Seguimiento del gabinete: quién entra y quién sale">🏛️
+          <span class="install-label">Gabinete</span></a>
         <a href="mundial.html" class="nav-btn nav-btn-mundial" aria-label="Especial: el gobierno durante el Mundial">⚽
           <span class="install-label">Durante el Mundial</span></a>
         <button class="nav-btn" id="btn-quienes">Quiénes Somos</button>
@@ -189,6 +191,29 @@
     <span class="tipo-badge tipo-proyecto">Proyecto</span>
     <span class="tipo-badge tipo-declaracion-polemica">Declaración Polémica</span>
   </div>
+
+  <!-- RESUMEN GABINETE — enlaza a la página completa -->
+  <a class="gab-resumen" href="gabinete.html" aria-label="Ver el seguimiento completo del gabinete">
+    <div class="gab-resumen-texto">
+      <span class="gab-resumen-titulo">Quién entra y quién sale</span>
+      <span class="gab-resumen-sub" id="gab-resumen-sub">Gabinete y autoridades que han dejado el cargo</span>
+    </div>
+    <div class="gab-resumen-cifras" role="list">
+      <div class="gab-resumen-cifra" role="listitem">
+        <span class="gab-resumen-num" id="gab-r-ministros">—</span>
+        <span class="gab-resumen-label">ministros</span>
+      </div>
+      <div class="gab-resumen-cifra" role="listitem">
+        <span class="gab-resumen-num" id="gab-r-subs">—</span>
+        <span class="gab-resumen-label">subsecretarios</span>
+      </div>
+      <div class="gab-resumen-cifra" role="listitem">
+        <span class="gab-resumen-num" id="gab-r-seremis">—</span>
+        <span class="gab-resumen-label">seremis</span>
+      </div>
+    </div>
+    <span class="gab-resumen-cta" aria-hidden="true">Ver detalle →</span>
+  </a>
 
   <!-- SEGUIMIENTO DE MEDIDAS (desplegable, cerrado por defecto) -->
   <section class="promesas-section" id="promesas-container">
@@ -599,9 +624,10 @@
   </script>
 
   <!-- Datos primero, luego lógica -->
-  <script src="js/data.js?v=25"></script>
-  <script src="js/app.js?v=25"></script>
-  <script src="js/widgets.js?v=25"></script>
+  <script src="js/data.js?v=26"></script>
+  <script src="js/gabinete.js?v=26"></script>
+  <script src="js/app.js?v=26"></script>
+  <script src="js/widgets.js?v=26"></script>
 </body>
 
 </html>
