@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es-CL" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Página no encontrada · Kastigo</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" href="assets/img/logo.png" type="image/png" />
+  <meta name="theme-color" content="#0B1F3A" />
+
+  <!-- Aplica el tema guardado antes de pintar (evita parpadeo) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('kastigo-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css?v=25" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    .e404-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.25rem;
+      gap: 0.35rem;
+    }
+
+    .e404-logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1.25rem;
+    }
+
+    .e404-code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 16vw, 8rem);
+      line-height: 0.9;
+      color: var(--rojo, #C8102E);
+      letter-spacing: 0.02em;
+    }
+
+    .e404-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 5vw, 2.1rem);
+      color: var(--text-primary);
+      margin-top: 0.5rem;
+    }
+
+    .e404-text {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-secondary);
+      max-width: 44ch;
+      margin: 0.75rem auto 1.75rem;
+      line-height: 1.6;
+    }
+
+    .e404-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      text-decoration: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 24px;
+      background: var(--azul, #0B1F3A);
+      color: #fff;
+      border: 1.5px solid transparent;
+      transition: var(--trans, 0.2s ease);
+    }
+
+    .e404-btn:hover {
+      opacity: 0.88;
+    }
+
+    .e404-stripe {
+      display: flex;
+      width: 120px;
+      height: 4px;
+      margin-top: 2.5rem;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .e404-stripe span {
+      flex: 1;
+    }
+
+    .e404-stripe span:nth-child(1) {
+      background: #0B1F3A;
+    }
+
+    .e404-stripe span:nth-child(2) {
+      background: #F2F3F6;
+    }
+
+    .e404-stripe span:nth-child(3) {
+      background: #C8102E;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="e404-wrap">
+    <img src="assets/img/logo.png" alt="Kastigo" class="e404-logo" width="60" height="60" />
+    <p class="e404-code">404</p>
+    <h1 class="e404-title">Esta página no está registrada</h1>
+    <p class="e404-text">
+      El enlace que seguiste no existe o cambió de dirección. Las medidas siguen todas
+      en la línea de tiempo.
+    </p>
+    <a class="e404-btn" href="/">← Volver al registro</a>
+    <div class="e404-stripe" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </main>
+</body>
+
+</html>

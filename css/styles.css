@@ -642,6 +642,13 @@ button {
   color: #526075;
 }
 
+/* Administrativo: es el tipo más frecuente del registro y antes se pintaba
+   igual que Decreto, así que eran indistinguibles. Ahora tiene tono propio. */
+.tipo-administrativo {
+  background: #E4EEF5;
+  color: #3B6079;
+}
+
 .tipo-declaracion {
   background: #FFF0E4;
   color: #D4620A;
@@ -679,6 +686,11 @@ button {
   color: #8A9AB5;
 }
 
+[data-theme="dark"] .tipo-administrativo {
+  background: rgba(59, 96, 121, 0.28);
+  color: #86B4D2;
+}
+
 [data-theme="dark"] .tipo-declaracion {
   background: rgba(212, 98, 10, 0.25);
   color: #E8913A;
@@ -698,6 +710,11 @@ button {
   html:not([data-theme="light"]) .tipo-decreto {
     background: rgba(82, 96, 117, 0.25);
     color: #8A9AB5;
+  }
+
+  html:not([data-theme="light"]) .tipo-administrativo {
+    background: rgba(59, 96, 121, 0.28);
+    color: #86B4D2;
   }
 
   html:not([data-theme="light"]) .tipo-declaracion {
@@ -2542,6 +2559,17 @@ button {
   border-color: var(--azul-claro);
   color: var(--azul-claro);
   background: rgba(31, 91, 163, 0.08);
+}
+
+/* Contador de medidas dentro del chip de actor */
+.chip-count {
+  margin-left: 0.4rem;
+  opacity: 0.55;
+  font-size: 0.9em;
+}
+
+.ministro-chip.active .chip-count {
+  opacity: 0.8;
 }
 
 .ministro-chip.active {

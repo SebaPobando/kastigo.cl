@@ -206,7 +206,7 @@ const Utils = {
       'Decreto': 'tipo-decreto',
       'Declaración': 'tipo-declaracion',
       'Proyecto': 'tipo-proyecto',
-      'Administrativo': 'tipo-decreto',  // reutiliza estilo decreto
+      'Administrativo': 'tipo-administrativo',
       'Declaración Polémica': 'tipo-declaracion-polemica',
     };
     return map[tipo] || 'tipo-decreto';
@@ -446,6 +446,33 @@ const Filtrado = {
     this.state.limiteVisual = this.PASO_VISUAL;
   },
 
+  // Caché de expresiones regulares por actor (se construyen una sola vez)
+  _actorRegexCache: {},
+
+  /**
+   * ¿El evento menciona a este actor?
+   *
+   * Antes esto era un includes() suelto y "Mas" matcheaba con normas,
+   * programas, reformas, masiva, ramas y mismas. Ahora exigimos que el
+   * nombre aparezca como palabra completa: nada de letras pegadas antes
+   * ni después. \b de JS no sirve porque considera á/é/í/ó/ú/ñ como
+   * separadores, así que usamos lookarounds explícitos.
+   *
+   * @param {Object} evento — evento de eventosGubernamentales
+   * @param {string} nombre — nombre del actor, ya en minúsculas
+   * @returns {boolean}
+   */
+  _mencionaActor(evento, nombre) {
+    let re = this._actorRegexCache[nombre];
+    if (!re) {
+      const letras = 'a-záéíóúüñ0-9';
+      const escapado = nombre.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      re = new RegExp(`(^|[^${letras}])${escapado}([^${letras}]|$)`, 'i');
+      this._actorRegexCache[nombre] = re;
+    }
+    return re.test(evento.titulo) || re.test(evento.descripcion);
+  },
+
   /**
    * Devuelve el array filtrado y ordenado.
    * @returns {Array}
@@ -461,9 +488,7 @@ const Filtrado = {
       const porTexto = !q ||
         e.titulo.toLowerCase().includes(q) ||
         e.descripcion.toLowerCase().includes(q);
-      const porMinistro = !qm ||
-        e.titulo.toLowerCase().includes(qm) ||
-        e.descripcion.toLowerCase().includes(qm);
+      const porMinistro = !qm || Filtrado._mencionaActor(e, qm);
       const porPolemica = !this.state.soloPolemicas || e.tipo === 'Declaración Polémica';
       return porCat && porTipo && porTexto && porMinistro && porPolemica;
     });
@@ -1321,11 +1346,74 @@ const Skeleton = {
    ============================================================ */
 const Render = {
 
+  /**
+   * Pone la fecha del hero ("Actualizado · …") a partir del último evento
+   * registrado, en vez de dejarla escrita a mano en el HTML —que es como
+   * terminó diciendo "Junio 2026" en pleno agosto.
+   */
+  fechaActualizacion() {
+    const el = document.getElementById('hero-actualizado');
+    if (!el || !eventosGubernamentales.length) return;
+    const ultima = eventosGubernamentales
+      .map(e => e.fecha)
+      .sort()
+      .pop();
+    const [y, m, d] = ultima.split('-').map(Number);
+    const fecha = new Date(y, m - 1, d);
+    const mes = fecha.toLocaleDateString('es-CL', { month: 'long' });
+    el.setAttribute('datetime', ultima);
+    el.textContent = `${mes.charAt(0).toUpperCase()}${mes.slice(1)} ${y}`;
+  },
+
+  /**
+   * Oculta los chips de actores que no tienen ni una sola medida asociada
+   * y les pone el número de coincidencias a los que sí.
+   *
+   * Los chips están escritos a mano en el HTML, así que con el tiempo alguno
+   * queda sin datos (Poduje llevaba tiempo devolviendo cero resultados) o
+   * aparece un actor nuevo. Esto se recalcula solo en cada carga.
+   */
+  actorChips() {
+    document.querySelectorAll('.ministro-chip').forEach(chip => {
+      const nombre = (chip.dataset.nombre || '').toLowerCase();
+      if (!nombre) return;
+      const n = eventosGubernamentales.filter(e => Filtrado._mencionaActor(e, nombre)).length;
+      if (n === 0) {
+        chip.classList.add('hidden');
+        chip.setAttribute('aria-hidden', 'true');
+        chip.tabIndex = -1;
+        return;
+      }
+      chip.classList.remove('hidden');
+      chip.removeAttribute('aria-hidden');
+      chip.tabIndex = 0;
+      if (!chip.querySelector('.chip-count')) {
+        const c = document.createElement('span');
+        c.className = 'chip-count';
+        c.textContent = n;
+        chip.appendChild(c);
+      } else {
+        chip.querySelector('.chip-count').textContent = n;
+      }
+    });
+  },
+
   /** Renderiza el banner de última medida. */
   ultimaMedida() {
-    // Prioriza la medida destacada MÁS RECIENTE, si no el último evento
+    // Prioriza la medida destacada MÁS RECIENTE, si no el último evento.
+    // Pero una destacada caduca: el flag es manual y si nadie lo mueve el
+    // banner termina anunciando "Medida de la semana" con algo de hace tres
+    // meses. Pasados los DIAS_VIGENCIA_DESTACADA volvemos al último evento.
+    const DIAS_VIGENCIA_DESTACADA = 14;
     const sorted = [...eventosGubernamentales].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-    const destacada = sorted.find(e => e.destacada === true);
+    const candidata = sorted.find(e => e.destacada === true);
+    const diasDesde = ev => {
+      const [y, m, d] = ev.fecha.split('-').map(Number);
+      return Math.floor((new Date() - new Date(y, m - 1, d)) / 86400000);
+    };
+    const destacada = candidata && diasDesde(candidata) <= DIAS_VIGENCIA_DESTACADA
+      ? candidata
+      : null;
     const last = destacada || sorted[0];
     if (!last) return;
 
@@ -1931,6 +2019,8 @@ function init() {
   Theme.init();          // 1. Aplicar tema antes de renderizar (evita flash)
   Render.heroStats();    // 2. Contadores del hero
   Render.ultimaMedida(); // 2b. Banner última medida
+  Render.actorChips();   // 2c. Chips de actores (oculta los que no tienen datos)
+  Render.fechaActualizacion(); // 2d. Fecha del hero desde el último evento
   Render.estadisticas(); // 3. Panel de stats + gráfico de dona
   Render.allFilters();   // 4. Botones de filtro sidebar
   Render.drawerFilters();// 4b. Botones de filtro drawer

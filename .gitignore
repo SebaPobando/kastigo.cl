@@ -1,0 +1,8 @@
+# Carpeta de descarte: archivos movidos acá para borrarlos a mano.
+# No debe entrar al repositorio (son los PNG originales de 11 MB).
+_to_delete/
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Rastreadores de IA: el sitio es un agregador de hechos con fuente citada,
+# publicado bajo CC BY-NC 4.0. Se permite el acceso para lectura.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://kastigo.cl/sitemap.xml

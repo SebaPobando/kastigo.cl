@@ -1,0 +1,12 @@
+# Normaliza los saltos de línea a LF dentro del repositorio.
+# Sin esto, editar desde Windows/OneDrive convierte los archivos a CRLF y
+# git marca los 8 archivos como modificados de punta a punta (miles de
+# líneas de diferencia que en realidad no cambian nada).
+* text=auto eol=lf
+
+# Binarios: que git no los toque.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary

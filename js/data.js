@@ -2,14 +2,13 @@
 
 /**
  * js/data.js — Base de Datos Maestra de Kastigo.cl
- * Cronología: 11 de marzo al 12 de julio de 2026
+ * Cronología: 11 de marzo al 14 de agosto de 2026
  *
  * POLÍTICA EDITORIAL:
  * - descripcion: hechos objetivos verificables con fuente citada
  *
  * POLÍTICA DE URLs: cada URL fue verificada en resultados de búsqueda reales.
- * Cronología: 11 de marzo al 12 de julio de 2026
- * Total de eventos: 116
+ * Total de eventos: 128
  */
 
 const eventosGubernamentales = [
@@ -1092,5 +1091,116 @@ const eventosGubernamentales = [
             "medio": "24 Horas",
             "url": "https://www.24horas.cl/actualidad/economia/presidente-kast-modo-empleo-medidas-trabajo"
         }
+    },
+    {
+        "id": 117,
+        "fecha": "2026-07-12",
+        "titulo": "Séptimo vuelo de expulsión: 2026 suma 1.174 extranjeros expulsados",
+        "descripcion": "El Gobierno concretó el séptimo vuelo de expulsión del año, con 40 extranjeros trasladados a Colombia (20), Bolivia (13) y Ecuador (7) en un Boeing 737-300 de la Fuerza Aérea, acompañados por 41 funcionarios policiales. Del total, 28 correspondieron a expulsiones administrativas y 12 a órdenes judiciales. Con este operativo, las expulsiones materializadas durante 2026 llegaron a 1.174. El subsecretario del Interior Máximo Pavez señaló que \"los resultados hablan por sí solos; con decisión, capacidad de gestión y mucha capacidad operativa estamos materializando las órdenes de expulsión de acuerdo a la ley\".",
+        "categoria": "Seguridad",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/07/12/gobierno-realiza-septimo-vuelo-de-expulsion-2026-ya-suma-1-174-extranjeros-expulsados.shtml" }
+    },
+    {
+        "id": 118,
+        "fecha": "2026-07-16",
+        "titulo": "Senado despacha la megarreforma y la envía a tercer trámite",
+        "descripcion": "En una sesión que se extendió hasta la madrugada, el Senado despachó el proyecto de Reconstrucción Nacional y Reactivación Económica, aprobando la rebaja del impuesto corporativo, la invariabilidad tributaria y la exención de contribuciones para mayores de 65 años. El proyecto pasó a tercer trámite en la Cámara de Diputados. El ministro de Hacienda Jorge Quiroz declaró: \"Es un día importante para Chile. Este proyecto llegó al Congreso hace tres meses con una misión muy clara, darle a nuestro país las herramientas para progresar, crear empleo y reconstruir lo que el fuego destruyó en Biobío y Ñuble\".",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "fuente": { "medio": "Meganoticias", "url": "https://www.meganoticias.cl/nacional/527060-senado-despacha-proyecto-reconstruccion-nacional-megarreforma-administracion-kast-16-07-2026.html" }
+    },
+    {
+        "id": 119,
+        "fecha": "2026-07-21",
+        "titulo": "Cámara despacha la megarreforma a ley y rechaza el artículo de Sala Cuna",
+        "descripcion": "La Cámara aprobó en tercer trámite las modificaciones del Senado con 85 votos a favor y 59 en contra, despachando el grueso del proyecto para convertirse en ley. Quedaron aprobadas la rebaja gradual del Impuesto de Primera Categoría del 27% al 23%, la exención de IVA en viviendas nuevas, el derecho al \"olvido\" bancario, la ampliación de la franquicia tributaria del Sence al 0,7% de la planilla anual y la indemnización a privados ante la revocación de una Resolución de Calificación Ambiental. El artículo 31 sobre Sala Cuna fue rechazado por 75 votos contra 70. La norma sobre compensaciones a municipios por la exención de contribuciones obtuvo 76 votos de los 78 requeridos y pasó a comisión mixta.",
+        "categoria": "Economía",
+        "tipo": "Proyecto",
+        "estado_seguimiento": "ejecutada",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/megarreforma-es-despachada-en-tercer-tramite-en-la-camara-y-pasa-a-comision-mixta/" }
+    },
+    {
+        "id": 120,
+        "fecha": "2026-07-28",
+        "titulo": "Squella (Republicanos) propone incorporar capital privado a Codelco",
+        "descripcion": "El presidente del Partido Republicano, Arturo Squella, planteó incorporar capital privado a Codelco mediante la venta de parte de la empresa o de alguna de sus divisiones, argumentando que permitiría obtener recursos financieros sin perder necesariamente el control estatal. La propuesta, formulada días después de la aprobación de la megarreforma económica, abrió una discusión pública que el Ejecutivo debió salir a acotar.",
+        "categoria": "Economía",
+        "tipo": "Declaración Polémica",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/07/28/gobierno-frena-al-partido-republicano-y-descarta-privatizar-codelco/" }
+    },
+    {
+        "id": 121,
+        "fecha": "2026-07-28",
+        "titulo": "Gobierno descarta privatizar Codelco pero evalúa vender activos \"prescindibles\"",
+        "descripcion": "El biministro de Economía y Minería, Daniel Mas, descartó avanzar en un proceso de privatización de Codelco y señaló que el Ejecutivo solo evalúa desprenderse de bienes considerados prescindibles dentro de las filiales de la empresa. \"Tenemos la opinión de vender algunos bienes que son prescindibles, que no estamos por privatizar\", declaró, agregando que \"el foco debe ser la eficiencia, el buen uso de los recursos, y que Codelco sea una empresa competitiva, a la altura de las compañías privadas\". El presidente de Codelco, Bernardo Fontaine, afirmó que la empresa \"seguirá siendo cien por ciento estatal\".",
+        "categoria": "Economía",
+        "tipo": "Declaración",
+        "fuente": { "medio": "La Tercera", "url": "https://www.latercera.com/politica/noticia/gobierno-descarta-privatizar-codelco-y-apuesta-por-vender-activos-prescindibles-de-sus-filiales/" }
+    },
+    {
+        "id": 122,
+        "fecha": "2026-07-29",
+        "titulo": "36 autoridades han dejado el Gobierno en poco más de cuatro meses",
+        "descripcion": "Un balance de las salidas del Gobierno contabilizó 36 autoridades que han abandonado sus cargos desde el 11 de marzo: 2 ministros, 5 subsecretarios y 29 seremis. Entre las razones registradas figuran 18 salidas por motivos personales o no explicitados, 8 por controversias y denuncias —incluyendo publicaciones en redes sociales, acusaciones de acoso laboral y presuntos delitos sexuales—, 5 por incumplimiento de requisitos formales del cargo, 3 por conflictos de gestión interna y 2 por resultados positivos en test de drogas.",
+        "categoria": "Política",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "Emol", "url": "https://www.emol.com/noticias/Nacional/2026/07/29/1206941/salidas-renuncias-autoridades-gobierno-kast.html" }
+    },
+    {
+        "id": 123,
+        "fecha": "2026-08-02",
+        "titulo": "Pulso Ciudadano: aprobación de Kast cae a 25,6%, su nivel más bajo",
+        "descripcion": "La encuesta Pulso Ciudadano de Activa Research registró una aprobación de 25,6% para el Presidente Kast, una caída de más de tres puntos respecto de la medición anterior y el nivel más bajo desde que asumió. La desaprobación alcanzó un 58,9%, su registro más alto del periodo. El sondeo también midió un 62,3% de rechazo a la eventual privatización de Codelco.",
+        "categoria": "Política",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/02/pulso-ciudadano-aprobacion-de-kast-se-desploma-al-25-6-y-desaprobacion-alcanza-historico-589.shtml" }
+    },
+    {
+        "id": 124,
+        "fecha": "2026-08-05",
+        "titulo": "Kast anuncia en cadena nacional su megarreforma en seguridad: \"Seremos implacables\"",
+        "descripcion": "En cadena nacional a las 21:00 horas, Kast presentó la Agenda contra el Crimen Organizado y el Terrorismo (ACOT), un paquete de cerca de 30 proyectos de ley que se propuso aprobar antes de Navidad, estructurado en cuatro ejes: mantener el despliegue policial en 50 barrios críticos y perseguir a cómplices y testaferros; ampliar la flagrancia de 12 a 24 horas y reforzar el control fronterizo con zanjas, drones y monitoreo tecnológico; dar protección legal a policías en legítima defensa y tipificar las barricadas como delito con penas agravadas; y una reforma constitucional que consagre la seguridad como deber estatal, con la pertenencia a organizaciones criminales como delito autónomo y un régimen penitenciario especial para narcotraficantes. \"Seremos implacables. No habrá excusas ni treguas\", afirmó. En el balance citó una baja de 18,7% en homicidios, 45% en secuestros y 86,5% en ingresos irregulares por fronteras al 26 de julio.",
+        "categoria": "Seguridad",
+        "tipo": "Declaración",
+        "destacada": true,
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/05/presidente-kast-anuncia-en-cadena-nacional-su-megarreforma-en-seguridad.shtml" }
+    },
+    {
+        "id": 125,
+        "fecha": "2026-08-10",
+        "titulo": "Gobierno autoriza a Codelco a capitalizar el 100% de sus utilidades de 2025",
+        "descripcion": "El biministro de Economía y Minería, Daniel Mas, informó que el Ejecutivo autorizó a Codelco a capitalizar la totalidad de sus utilidades del ejercicio 2025 —US$2.423 millones— sin que el Estado retire porcentaje alguno. Desde 2022 la empresa podía reinvertir solo el 30%. La medida busca fortalecer el patrimonio de la compañía, que cerró 2025 con una deuda de US$25 mil millones, y proteger su clasificación crediticia sin aumentar el endeudamiento. \"Hoy marcamos un hito histórico e inédito. El Presidente ha tomado la decisión fiscal, patrimonial y política de autorizar a Codelco a capitalizar el 100% de las utilidades correspondientes al ejercicio 2025\", declaró Mas.",
+        "categoria": "Economía",
+        "tipo": "Administrativo",
+        "estado_seguimiento": "ejecutada",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/economia/negocios-y-empresas/2026/08/10/gobierno-revela-que-codelco-capitalizara-el-100-de-sus-utilidades-de-2025.shtml" }
+    },
+    {
+        "id": 126,
+        "fecha": "2026-08-12",
+        "titulo": "Trabajadores de Chuquicamata piden a Kast claridad sobre el futuro de Codelco",
+        "descripcion": "El Sindicato Chuquicamata presentó una propuesta de siete puntos dirigida al Presidente, pidiendo mantener Codelco 100% estatal, evitar la venta parcial o total de activos, establecer un plan permanente de capitalización, priorizar inversiones, recuperar capacidades productivas, impulsar la fundición y refinería y actualizar la ley orgánica de la empresa. Los trabajadores reconocieron que el Gobierno ha negado intenciones privatizadoras, pero manifestaron preocupación por la evaluación de venta de activos \"prescindibles\" y la postergación de inversiones, advirtiendo que \"esta aparente contradicción merece ser despejada\".",
+        "categoria": "Laboral",
+        "tipo": "Declaración",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/economia/negocios-y-empresas/2026/08/12/trabajadores-de-chuquicamata-piden-claridad-a-kast-sobre-si-codelco-se-privatiza-o-no.shtml" }
+    },
+    {
+        "id": 127,
+        "fecha": "2026-08-14",
+        "titulo": "Natalia Duco deja el Ministerio del Deporte tras polémica por uso de vehículo fiscal",
+        "descripcion": "La ministra del Deporte, Natalia Duco, dejó el cargo luego de la controversia por el uso de un vehículo fiscal fuera del horario laboral: un video del 23 de abril la mostró en una celebración con asado y karaoke junto a su equipo, actividad que el ministerio había reportado a la Contraloría como una \"reunión de trabajo\". Su gestión ya acumulaba cuestionamientos por diferencias con el Instituto Nacional de Deportes respecto de la autorización de conciertos, dudas sobre la candidatura de Chile a los Juegos Olímpicos de la Juventud y declaraciones sobre las prioridades de la cartera.",
+        "categoria": "Política",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "El Mostrador", "url": "https://www.elmostrador.cl/noticias/pais/2026/08/14/kast-realizara-este-viernes-nuevo-cambio-de-gabinete-tras-salida-de-natalia-duco/" }
+    },
+    {
+        "id": 128,
+        "fecha": "2026-08-14",
+        "titulo": "Kast designa a Francisco Riveros como nuevo ministro del Deporte",
+        "descripcion": "El Presidente Kast designó al abogado independiente Francisco Riveros Cantuarias como ministro del Deporte en reemplazo de Natalia Duco. Riveros fue gerente general del club Palestino, jefe jurídico de la Corporación Santiago 2023, asesor del Gobierno y representante de la Presidencia en el comité del Plan Auditoría Total. En la ceremonia Kast agradeció a Duco su \"compromiso, lealtad y trabajo incansable\" y apuntó a un problema estructural del sector: \"En paralelo tenemos el Ministerio del Deporte. Y no siempre esos organismos conversan y hay muchas disputas\", en referencia a la relación con el Instituto Nacional de Deportes.",
+        "categoria": "Política",
+        "tipo": "Administrativo",
+        "fuente": { "medio": "BioBioChile", "url": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/14/presidente-kast-designa-a-francisco-riveros-como-nuevo-ministro-de-deportes.shtml" }
     }
 ]
